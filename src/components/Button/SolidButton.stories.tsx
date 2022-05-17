@@ -7,13 +7,13 @@ export default {
 	title: 'Component/Button/SolidButton',
 } as ComponentMeta<typeof SolidButton>;
 export function Active() {
-	return <SolidButton onClick={() => {}} label="이메일 인증" state="active" />;
+	return <SolidButton onClick={() => {}} label="이메일 인증" btnState="active" />;
 }
 
 export function InActive() {
-	return <SolidButton onClick={() => {}} label="이메일 인증" state="inactive" />;
+	return <SolidButton onClick={() => {}} label="이메일 인증" btnState="inactive" />;
 }
 
 export function Pressed() {
-	return <SolidButton onClick={() => {}} label="이메일 인증" state="pressed" />;
+	return <SolidButton onClick={() => {}} label="이메일 인증" btnState="pressed" />;
 }
