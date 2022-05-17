@@ -1,6 +1,9 @@
 module.exports = {
 	content: ['./src/**/*.tsx', './public/index.html'],
 	theme: {
+		fontFamily: {
+			appleSDGothicNeo: ['AppleSDGothicNeo', 'Noto Sans KR', 'sans - serif'],
+		},
 		extend: {
 			colors: {
 				primaryOrange: {
