@@ -31,6 +31,7 @@ module.exports = {
 					100: '#FFE8E8',
 					200: '#FF6B6B',
 				},
+				borderGray: '#E7E7E7',
 				borderOrange: '#FF8A00',
 				statesRed: '#FF1523',
 				statesOrange: '#FF8A00',
