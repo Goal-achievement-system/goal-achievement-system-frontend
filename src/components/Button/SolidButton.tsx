@@ -8,7 +8,7 @@ enum BgColor {
 	gray = 'bg-[#e6e6e6]',
 }
 enum TextColor {
-	white = 'text-white',
+	white = 'text-primaryWhite',
 	gray = 'text-[#898989]',
 }
 export interface Props {
@@ -31,13 +31,11 @@ function SolidButton({ label, onClick, btnState }: Props) {
 		<button
 			type="button"
 			onClick={onClick}
-			className={`flex flex-row justify-center items-center gap-[10px] rounded-[8px]  w-[585px] h-[70px]  mb-[38px] ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center gap-[10px] rounded-[8px]  w-[585px] h-[70px]  mb-[38px] ${getBgColor(
 				btnState
 			)}`}
 		>
-			<span className={`glow text-xl font-semibold not-italic whitespace-nowrap ${getTextColor(btnState)} `}>
-				{label}
-			</span>
+			<span className={`glow-0  not-italic whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
 		</button>
 	);
 }
