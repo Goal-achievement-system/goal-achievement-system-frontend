@@ -5,25 +5,25 @@ type BtnStates = 'active' | 'inactive' | 'pressed';
 enum BgColor {
 	orange200 = 'bg-primaryOrange-200',
 	orange300 = 'bg-primaryOrange-300',
-	gray = 'bg-[#e6e6e6]',
+	gray100 = 'bg-[#e6e6e6]',
 }
 enum TextColor {
 	white = 'text-primaryWhite',
-	gray = 'text-[#898989]',
+	gray200 = 'text-[#898989]',
 }
 export interface Props {
 	label: string;
 	onClick: () => void;
 	btnState: BtnStates;
 }
-function SolidButton({ label, onClick, btnState }: Props) {
+function SubmitButton({ label, onClick, btnState }: Props) {
 	const getBgColor = useCallback((state: BtnStates): BgColor => {
 		if (state === 'active') return BgColor.orange200;
 		if (state === 'pressed') return BgColor.orange300;
-		return BgColor.gray;
+		return BgColor.gray100;
 	}, []);
 	const getTextColor = useCallback((state: BtnStates): TextColor => {
-		if (state === 'inactive') return TextColor.gray;
+		if (state === 'inactive') return TextColor.gray200;
 		return TextColor.white;
 	}, []);
 
@@ -31,13 +31,13 @@ function SolidButton({ label, onClick, btnState }: Props) {
 		<button
 			type="button"
 			onClick={onClick}
-			className={`flex flex-row grow-0 justify-center items-center gap-[10px] rounded-[8px]  w-[585px] h-[70px]  mb-[38px] ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center  rounded-[8px]  w-full py-[22px]  ${getBgColor(
 				btnState
 			)}`}
 		>
-			<span className={`glow-0  not-italic whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
+			<span className={`glow-0  not-italic  whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
 		</button>
 	);
 }
 
-export default React.memo(SolidButton);
+export default React.memo(SubmitButton);
