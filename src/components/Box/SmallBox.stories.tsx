@@ -1,5 +1,6 @@
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
+import { Goal } from 'types/goal';
 import SmallBox from './SmallBox';
 
 const tempData = {
@@ -16,20 +17,23 @@ const tempData = {
 export default {
 	component: SmallBox,
 	title: 'Component/Box/SmallBox',
+	argTypes: {
+		goal: { control: 'object' },
+	},
 } as ComponentMeta<typeof SmallBox>;
 
-export function Success() {
-	return <SmallBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'success' }} />;
-}
+const Template: ComponentStory<typeof SmallBox> = (args) => {
+	return <SmallBox onClick={() => {}} goal={{ ...args.goal }} />;
+};
 
-export function Fail() {
-	return <SmallBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'fail' }} />;
-}
+export const Success = Template.bind({});
+Success.args = { goal: { ...tempData, verificationResult: 'success' } };
 
-export function Hold() {
-	return <SmallBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'hold' }} />;
-}
+export const Fail = Template.bind({});
+Fail.args = { goal: { ...tempData, verificationResult: 'fail' } };
 
-export function Ongoing() {
-	return <SmallBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'ongoing' }} />;
-}
+export const Hold = Template.bind({});
+Hold.args = { goal: { ...tempData, verificationResult: 'hold' } };
+
+export const Ongoing = Template.bind({});
+Ongoing.args = { goal: { ...tempData, verificationResult: 'ongoing' } };
