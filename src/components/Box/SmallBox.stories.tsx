@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Goal } from 'types/goal';
 import SmallBox from './SmallBox';
 
 const tempData = {
@@ -9,7 +8,7 @@ const tempData = {
 	category: '작업',
 	goalName: 'Box Component 완성',
 	content: '골키퍼 Box Component UI UX 구현하기',
-	limitDate: new Date(2022, 4, 25),
+	limitDate: new Date(2022, 5, 25),
 	money: 10000,
 	reward: 'high',
 };
