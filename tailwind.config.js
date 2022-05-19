@@ -5,6 +5,9 @@ module.exports = {
 			appleSDGothicNeo: ['AppleSDGothicNeo', 'Noto Sans KR', 'sans - serif'],
 		},
 		extend: {
+			screens: {
+				pc: '360px',
+			},
 			colors: {
 				primaryOrange: {
 					100: '#FFEEDB',
