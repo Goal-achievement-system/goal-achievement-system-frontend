@@ -1,19 +1,35 @@
-import { ComponentMeta } from '@storybook/react';
+/* eslint-disable func-names */
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
-import SubmitButton from './SubmitButton';
+import SubmitButton, { Props } from './SubmitButton';
 
 export default {
 	component: SubmitButton,
 	title: 'Component/Button/SubmitButton',
-} as ComponentMeta<typeof SubmitButton>;
-export function Active() {
-	return <SubmitButton onClick={() => {}} label="이메일 인증" btnState="active" />;
-}
+} as Meta;
 
-export function InActive() {
-	return <SubmitButton onClick={() => {}} label="이메일 인증" btnState="inactive" />;
-}
+const Template: Story<Props> = function (args: Props) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <SubmitButton {...args} />;
+};
 
-export function Pressed() {
-	return <SubmitButton onClick={() => {}} label="이메일 인증" btnState="pressed" />;
-}
+export const Active = Template.bind({});
+Active.args = {
+	onClick: () => {},
+	label: '이메일 인증',
+	btnState: 'active',
+};
+
+export const InActive = Template.bind({});
+InActive.args = {
+	onClick: () => {},
+	label: '이메일 인증',
+	btnState: 'inactive',
+};
+
+export const Pressed = Template.bind({});
+Pressed.args = {
+	onClick: () => {},
+	label: '이메일 인증',
+	btnState: 'pressed',
+};
