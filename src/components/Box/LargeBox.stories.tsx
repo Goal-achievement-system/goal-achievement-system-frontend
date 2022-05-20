@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import LargeBox from './LargeBox';
 
@@ -22,5 +22,5 @@ export default {
 } as ComponentMeta<typeof LargeBox>;
 
 export function Default() {
-	return <LargeBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'success' }} />;
+	return <LargeBox goal={{ ...tempData, verificationResult: 'success' }} />;
 }

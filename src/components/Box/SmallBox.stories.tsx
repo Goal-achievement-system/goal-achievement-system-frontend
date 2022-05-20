@@ -21,8 +21,9 @@ export default {
 	},
 } as ComponentMeta<typeof SmallBox>;
 
-const Template: ComponentStory<typeof SmallBox> = (args) => {
-	return <SmallBox onClick={() => {}} goal={{ ...args.goal }} />;
+const Template: ComponentStory<typeof SmallBox> = function Template(args) {
+	const { goal } = args;
+	return <SmallBox goal={goal} />;
 };
 
 export const Success = Template.bind({});
