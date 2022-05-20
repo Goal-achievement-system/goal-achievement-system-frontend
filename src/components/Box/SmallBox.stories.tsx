@@ -1,35 +1,38 @@
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import SmallBox from './SmallBox';
 
-const tempData = {
-	goalId: 1,
-	memberEmail: '',
-	category: '작업',
-	goalName: 'Box Component 완성',
-	content: '골키퍼 Box Component UI UX 구현하기',
-	limitDate: new Date(2022, 4, 25),
-	money: 10000,
-	reward: 'high',
-};
-
 export default {
-	component: SmallBox,
 	title: 'Component/Box/SmallBox',
+	component: SmallBox,
 } as ComponentMeta<typeof SmallBox>;
 
-export function Success() {
-	return <SmallBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'success' }} />;
-}
+/* eslint-disable-next-line react/jsx-props-no-spreading, react/function-component-definition */
+const Template: ComponentStory<typeof SmallBox> = (args) => <SmallBox {...args} />;
 
-export function Fail() {
-	return <SmallBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'fail' }} />;
-}
+export const Primary = Template.bind({});
+Primary.args = {
+	goal: {
+		goalId: 1,
+		memberEmail: '',
+		category: '취미',
+		goalName: '목표인증 텍스트',
+		content: '목표 내용',
+		limitDate: new Date(2022, 5, 25),
+		money: 10000,
+		reward: 'high',
+		verificationResult: 'ongoing',
+	},
+};
 
-export function Hold() {
-	return <SmallBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'hold' }} />;
-}
+export const Success = Template.bind({});
+/* eslint-disable-next-line  @typescript-eslint/no-non-null-assertion */
+Success.args = { goal: { ...Primary.args.goal!, verificationResult: 'success' } };
 
-export function Ongoing() {
-	return <SmallBox onClick={() => {}} goal={{ ...tempData, verificationResult: 'ongoing' }} />;
-}
+export const Fail = Template.bind({});
+/* eslint-disable-next-line  @typescript-eslint/no-non-null-assertion */
+Fail.args = { goal: { ...Primary.args.goal!, verificationResult: 'fail' } };
+
+export const Hold = Template.bind({});
+/* eslint-disable-next-line  @typescript-eslint/no-non-null-assertion */
+Hold.args = { goal: { ...Primary.args.goal!, verificationResult: 'hold' } };

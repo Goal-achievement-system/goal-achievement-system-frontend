@@ -4,10 +4,9 @@ import { getDday } from '../../utils/common';
 
 export interface Props {
 	goal: Goal;
-	onClick: () => void;
 }
 
-function SmallBox({ goal, onClick }: Props) {
+function SmallBox({ goal }: Props) {
 	const getGoalState = () => {
 		switch (goal.verificationResult) {
 			case 'success':
