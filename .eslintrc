@@ -12,6 +12,7 @@
     "createDefaultProgram": true
   },
   "rules": {
+    "react/require-default-props": "off",
     "prettier/prettier":[
       "error",{
         "endOfLine":"auto"
