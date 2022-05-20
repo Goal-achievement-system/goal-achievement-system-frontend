@@ -1,11 +1,12 @@
+/* eslint-disable func-names */
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import Input from './TextInput';
+import TextInput from './TextInput';
 
 export default {
 	title: 'Component/Input/TextInput',
-	component: Input,
+	component: TextInput,
 	argTypes: {
 		focusColor: {
 			options: ['primaryOrange200', 'primaryOrange300'],
@@ -16,25 +17,25 @@ export default {
 			control: { type: 'radio' },
 		},
 	},
-} as ComponentMeta<typeof Input>;
+} as ComponentMeta<typeof TextInput>;
 
-const Template: ComponentStory<typeof Input> = function Template(args) {
-	const { id, placeholder, size, focusColor, value } = args;
-	return <Input id={id} placeholder={placeholder} size={size} focusColor={focusColor} value={value} />;
+const Template: ComponentStory<typeof TextInput> = function (args) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <TextInput {...args} />;
 };
 
 export const BeforeTyping = Template.bind({});
 BeforeTyping.args = {
 	id: 'example',
-	placeholder: '입력 전',
 	size: 'middle',
+	value: '',
+	placeholder: '입력 전',
 	focusColor: 'primaryOrange200',
 };
 
 export const CompeleteTyping = Template.bind({});
 CompeleteTyping.args = {
-	id: 'example',
-	size: 'middle',
+	...BeforeTyping.args,
 	value: '내용 입력 완료',
 };
 

@@ -2,3 +2,30 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 40px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    margin: 1px 0;
+    border-radius: 100vh;
+    
+    background: #E7E7E7;
+    background-clip: padding-box;
+    border: 17px solid rgba(0, 0, 0, 0);
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 100vh;
+    background-clip: padding-box;
+    border: 17px solid rgba(0, 0, 0, 0);
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #8B8B8B;
+    background-clip: padding-box;
+    border: 17px solid rgba(0, 0, 0, 0);
+  }
+}
