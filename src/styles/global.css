@@ -55,7 +55,7 @@ span {
    
 }
 
-@media screen and (max-width: 360px) { 
+/* @media screen and (max-width: 360px) { 
     body,
     button,
     input,
@@ -64,4 +64,4 @@ span {
     textarea {
         font-size: 12px;
     }
-}
+} */

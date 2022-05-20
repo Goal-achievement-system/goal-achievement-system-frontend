@@ -7,10 +7,8 @@ export default {
 	component: LargeBox,
 } as ComponentMeta<typeof LargeBox>;
 
-const Template: ComponentStory<typeof LargeBox> = function (args) {
-	/* eslint-disable-next-line react/jsx-props-no-spreading */
-	return <LargeBox {...args} />;
-};
+/* eslint-disable-next-line react/jsx-props-no-spreading, react/function-component-definition */
+const Template: ComponentStory<typeof LargeBox> = (args) => <LargeBox {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {

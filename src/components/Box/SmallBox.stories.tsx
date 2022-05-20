@@ -7,10 +7,8 @@ export default {
 	component: SmallBox,
 } as ComponentMeta<typeof SmallBox>;
 
-const Template: ComponentStory<typeof SmallBox> = function (args) {
-	/* eslint-disable-next-line react/jsx-props-no-spreading */
-	return <SmallBox {...args} />;
-};
+/* eslint-disable-next-line react/jsx-props-no-spreading, react/function-component-definition */
+const Template: ComponentStory<typeof SmallBox> = (args) => <SmallBox {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
