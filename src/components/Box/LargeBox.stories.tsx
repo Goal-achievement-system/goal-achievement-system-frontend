@@ -1,26 +1,28 @@
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import LargeBox from './LargeBox';
 
-const tempData = {
-	goalId: 1,
-	memberEmail: '',
-	category: '작업',
-	goalName: 'Box Component 완성',
-	content: '골키퍼 Box Component UI UX 구현하기',
-	limitDate: new Date(2022, 5, 25),
-	money: 10000,
-	reward: 'high',
-};
-
 export default {
-	component: LargeBox,
 	title: 'Component/Box/LargeBox',
-	argTypes: {
-		goal: { control: 'object' },
-	},
+	component: LargeBox,
 } as ComponentMeta<typeof LargeBox>;
 
-export function Default() {
-	return <LargeBox goal={{ ...tempData, verificationResult: 'success' }} />;
-}
+const Template: ComponentStory<typeof LargeBox> = function (args) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <LargeBox {...args} />;
+};
+
+export const Primary = Template.bind({});
+Primary.args = {
+	goal: {
+		goalId: 1,
+		memberEmail: '',
+		category: '취미',
+		goalName: '목표인증 텍스트',
+		content: '목표 내용',
+		limitDate: new Date(2022, 5, 25),
+		money: 10000,
+		reward: 'high',
+		verificationResult: 'ongoing',
+	},
+};

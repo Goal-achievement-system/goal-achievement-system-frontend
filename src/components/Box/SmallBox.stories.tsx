@@ -2,38 +2,39 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import SmallBox from './SmallBox';
 
-const tempData = {
-	goalId: 1,
-	memberEmail: '',
-	category: '작업',
-	goalName: 'Box Component 완성',
-	content: '골키퍼 Box Component UI UX 구현하기',
-	limitDate: new Date(2022, 5, 25),
-	money: 10000,
-	reward: 'high',
-};
-
 export default {
-	component: SmallBox,
 	title: 'Component/Box/SmallBox',
-	argTypes: {
-		goal: { control: 'object' },
-	},
+	component: SmallBox,
 } as ComponentMeta<typeof SmallBox>;
 
-const Template: ComponentStory<typeof SmallBox> = function Template(args) {
-	const { goal } = args;
-	return <SmallBox goal={goal} />;
+const Template: ComponentStory<typeof SmallBox> = function (args) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <SmallBox {...args} />;
+};
+
+export const Primary = Template.bind({});
+Primary.args = {
+	goal: {
+		goalId: 1,
+		memberEmail: '',
+		category: '취미',
+		goalName: '목표인증 텍스트',
+		content: '목표 내용',
+		limitDate: new Date(2022, 5, 25),
+		money: 10000,
+		reward: 'high',
+		verificationResult: 'ongoing',
+	},
 };
 
 export const Success = Template.bind({});
-Success.args = { goal: { ...tempData, verificationResult: 'success' } };
+/* eslint-disable-next-line  @typescript-eslint/no-non-null-assertion */
+Success.args = { goal: { ...Primary.args.goal!, verificationResult: 'success' } };
 
 export const Fail = Template.bind({});
-Fail.args = { goal: { ...tempData, verificationResult: 'fail' } };
+/* eslint-disable-next-line  @typescript-eslint/no-non-null-assertion */
+Fail.args = { goal: { ...Primary.args.goal!, verificationResult: 'fail' } };
 
 export const Hold = Template.bind({});
-Hold.args = { goal: { ...tempData, verificationResult: 'hold' } };
-
-export const Ongoing = Template.bind({});
-Ongoing.args = { goal: { ...tempData, verificationResult: 'ongoing' } };
+/* eslint-disable-next-line  @typescript-eslint/no-non-null-assertion */
+Hold.args = { goal: { ...Primary.args.goal!, verificationResult: 'hold' } };
