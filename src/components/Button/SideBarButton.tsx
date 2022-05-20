@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 
-enum BgColor {
-	orange = 'bg-primaryOrange-200',
-	gray = 'bg-[#f3f3f3]',
-	black = 'bg-primaryBlack-500',
+enum Color {
+	orange = 'primaryOrange-200',
+	gray = '[#f3f3f3]',
+	black = 'primaryBlack-500',
 }
 type BgColorTypes = 'orange' | 'black' | 'gray';
 export interface Props {
@@ -14,16 +14,16 @@ export interface Props {
 }
 
 function SideBarButton({ label = '', onClick, bgColor, children }: Props) {
-	const getBgColor = useCallback((type: BgColorTypes): BgColor => {
-		if (type === 'orange') return BgColor.orange;
-		if (type === 'black') return BgColor.black;
-		return BgColor.gray;
+	const getBgColor = useCallback((type: BgColorTypes): Color => {
+		if (type === 'orange') return Color.orange;
+		if (type === 'black') return Color.black;
+		return Color.gray;
 	}, []);
 	return (
 		<button
 			type="button"
 			onClick={onClick}
-			className={`flex flex-row grow-0 justify-center items-center rounded-[8px]  w-full p-[16px] ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center rounded-[8px]  w-full p-[16px] bg-${getBgColor(
 				bgColor
 			)}`}
 		>

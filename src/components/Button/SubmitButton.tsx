@@ -2,40 +2,39 @@ import React, { useCallback } from 'react';
 
 type BtnStates = 'active' | 'inactive' | 'pressed';
 
-enum BgColor {
-	orange200 = 'bg-primaryOrange-200',
-	orange300 = 'bg-primaryOrange-300',
-	gray100 = 'bg-[#e6e6e6]',
+enum Color {
+	orange200 = 'primaryOrange-200',
+	orange300 = 'primaryOrange-300',
+	white = 'primaryWhite',
+	gray100 = '[#e6e6e6]',
+	gray200 = '[#898989]',
 }
-enum TextColor {
-	white = 'text-primaryWhite',
-	gray200 = 'text-[#898989]',
-}
+
 export interface Props {
 	label: string;
 	onClick: () => void;
 	btnState: BtnStates;
 }
 function SubmitButton({ label, onClick, btnState }: Props) {
-	const getBgColor = useCallback((state: BtnStates): BgColor => {
-		if (state === 'active') return BgColor.orange200;
-		if (state === 'pressed') return BgColor.orange300;
-		return BgColor.gray100;
+	const getBgColor = useCallback((state: BtnStates): Color => {
+		if (state === 'active') return Color.orange200;
+		if (state === 'pressed') return Color.orange300;
+		return Color.gray100;
 	}, []);
-	const getTextColor = useCallback((state: BtnStates): TextColor => {
-		if (state === 'inactive') return TextColor.gray200;
-		return TextColor.white;
+	const getTextColor = useCallback((state: BtnStates): Color => {
+		if (state === 'inactive') return Color.gray200;
+		return Color.white;
 	}, []);
 
 	return (
 		<button
 			type="button"
 			onClick={onClick}
-			className={`flex flex-row grow-0 justify-center items-center  rounded-[8px]  w-full py-[22px]  ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center  rounded-[8px]  w-full py-[22px]  bg-${getBgColor(
 				btnState
 			)}`}
 		>
-			<span className={`glow-0  not-italic  whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
+			<span className={`glow-0  not-italic  whitespace-nowrap text-${getTextColor(btnState)} `}>{label}</span>
 		</button>
 	);
 }
