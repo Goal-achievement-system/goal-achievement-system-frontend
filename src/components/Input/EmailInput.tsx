@@ -25,6 +25,11 @@ interface Props {
 	onClick: () => void;
 }
 
+/* Goal
+ - error message 를 알려주는 ui 추가
+ - enum Color 를 Color만 받게 변경
+*/
+
 export default function EmailInput({ id, value, focusColor, size, confirmState, onClick }: Props) {
 	const getWidth = (name: SizeType) => Size[name] || '';
 	const getFocusColor = (name: ColorType) => Color[name] || '';
