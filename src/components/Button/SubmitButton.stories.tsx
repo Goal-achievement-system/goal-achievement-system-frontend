@@ -1,14 +1,14 @@
 /* eslint-disable func-names */
-import { Meta, Story } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 import SubmitButton, { Props } from './SubmitButton';
 
 export default {
 	component: SubmitButton,
 	title: 'Component/Button/SubmitButton',
-} as Meta;
+} as ComponentMeta<typeof SubmitButton>;
 
-const Template: Story<Props> = function (args: Props) {
+const Template: ComponentStory<typeof SubmitButton> = function (args: Props) {
 	/* eslint-disable-next-line react/jsx-props-no-spreading */
 	return <SubmitButton {...args} />;
 };

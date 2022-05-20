@@ -1,14 +1,14 @@
 /* eslint-disable func-names */
-import { Meta, Story } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 import ObtionButton, { Props } from './ObtionButton';
 
 export default {
 	component: ObtionButton,
 	title: 'Component/Button/ObtionButton',
-} as Meta;
+} as ComponentMeta<typeof ObtionButton>;
 
-const Template: Story<Props> = function (args: Props) {
+const Template: ComponentStory<typeof ObtionButton> = function (args: Props) {
 	/* eslint-disable-next-line react/jsx-props-no-spreading */
 	return <ObtionButton {...args} />;
 };

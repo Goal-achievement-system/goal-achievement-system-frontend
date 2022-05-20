@@ -1,14 +1,14 @@
 /* eslint-disable func-names */
-import { Meta, Story } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 import SideBarButton, { Props } from './SideBarButton';
 
 export default {
 	component: SideBarButton,
 	title: 'Component/Button/SideBarButton',
-} as Meta;
+} as ComponentMeta<typeof SideBarButton>;
 
-const Template: Story<Props> = function (args: Props) {
+const Template: ComponentStory<typeof SideBarButton> = function (args: Props) {
 	/* eslint-disable-next-line react/jsx-props-no-spreading */
 	return <SideBarButton {...args} />;
 };

@@ -1,14 +1,14 @@
 /* eslint-disable func-names */
-import { Meta, Story } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 import FilterButton, { Props } from './FilterButton';
 
 export default {
 	component: FilterButton,
 	title: 'Component/Button/FilterButton',
-} as Meta;
+} as ComponentMeta<typeof FilterButton>;
 
-const Template: Story<Props> = function (args: Props) {
+const Template: ComponentStory<typeof FilterButton> = function (args: Props) {
 	/* eslint-disable-next-line react/jsx-props-no-spreading */
 	return <FilterButton {...args} />;
 };
