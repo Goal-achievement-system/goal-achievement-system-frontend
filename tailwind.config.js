@@ -41,5 +41,6 @@ module.exports = {
 			},
 		},
 	},
+	/* eslint-disable global-require */
 	plugins: [require('@tailwindcss/line-clamp')],
 };
