@@ -1,4 +1,22 @@
-#### Solid Button 스토리북 사용 후기
+#### 골키퍼 - front
+---
+#### 목표 성취 시스템 goal-keeper 만드는 중 ⛏️⛏️
+---
 
-![Hnet com-image (2)](https://user-images.githubusercontent.com/74299317/168923477-b738b448-861e-4be0-82ae-6cc0e4a3a131.gif)
+#### ✔️ Todos
 
+##### 공통 컴포넌트
+
+- [x] button 
+- [x] input 
+- [x] box 
+- [ ] header 
+- [ ] modal
+
+##### 페이지
+
+- [ ] login/sign up 
+- [ ] home
+- [ ]  
+- [ ] 
+- [ ] 
