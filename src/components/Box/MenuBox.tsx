@@ -7,7 +7,7 @@ export interface Props {
 
 function MenuBox({ member }: Props) {
 	return (
-		<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden">
+		<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white">
 			<div className="border-b-[1px] border-borderGray pb-[16px] mb-[16px]">
 				{member ? (
 					<>
