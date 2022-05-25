@@ -13,6 +13,7 @@ login : "/login"
 sign-up : "/sign-up"
 */
 function App() {
+	console.log(Path.login);
 	return (
 		<div className="App">
 			<Router>
@@ -21,15 +22,9 @@ function App() {
 					// Switch -> Routes 로 바뀐듯 합니다
 				}
 				<Routes>
-					<Route path={Path.home}>
-						<Home />
-					</Route>
-					<Route path={Path.login}>
-						<Login />
-					</Route>
-					<Route path={Path.signUp}>
-						<SignUp />
-					</Route>
+					<Route path={Path.home} element={<Home />} />
+					<Route path={Path.login} element={<Login />} />
+					<Route path={Path.signUp} element={<SignUp />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>

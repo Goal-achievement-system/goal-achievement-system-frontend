@@ -2,7 +2,7 @@
 const Path = {
 	home: '/',
 	login: '/login',
-	signUp: 'sign-up',
+	signUp: '/sign-up',
 };
 
 export default Path;
