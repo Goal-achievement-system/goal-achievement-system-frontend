@@ -32,13 +32,13 @@ function SubmitButton({ label, onClick, btnState }: Props) {
 
 	return (
 		<button
-			type="button"
+			type="submit"
 			onClick={onClick}
-			className={`flex flex-row grow-0 justify-center items-center  rounded-[8px]  w-full py-[22px]  ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center h-[70px]  rounded-[8px]  w-full py-[22px]  ${getBgColor(
 				btnState
 			)}`}
 		>
-			<span className={`glow-0  not-italic  whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
+			<span className={`glow-0  not-italic text-[22px] whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
 		</button>
 	);
 }
