@@ -1,12 +1,17 @@
-import MenuBox from 'components/Box/MenuBox';
-import SmallBox from 'components/Box/SmallBox';
 import React from 'react';
+import MenuBox from '../../components/Box/MenuBox';
+import SmallBox from '../../components/Box/SmallBox';
+import { Member } from '../../types/member';
 
-function HomeView() {
+export interface Props {
+	member: Member | null;
+}
+
+function HomeView({ member }: Props) {
 	return (
 		<div className="min-w-[360px] pc:w-[1200px] pc:flex my-0 mx-auto p-[20px] pc:p-12 pc:box-content">
 			<div className="hidden pc:block mr-[30px]">
-				<MenuBox member={null} />
+				<MenuBox member={member} />
 			</div>
 			<div className="flex-1">
 				<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] bg-primaryOrange-200">
