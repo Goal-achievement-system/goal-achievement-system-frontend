@@ -6,12 +6,12 @@ enum BgColor {
 	orange200 = 'bg-primaryOrange-200',
 	orange300 = 'bg-primaryOrange-300',
 
-	gray100 = 'bg-[#e6e6e6]',
+	gray100 = 'bg-primaryGray-100',
 }
 enum TextColor {
 	white = 'text-primaryWhite',
 
-	gray200 = 'text-[#898989]',
+	gray200 = 'text-primaryGray-200',
 }
 
 export interface Props {

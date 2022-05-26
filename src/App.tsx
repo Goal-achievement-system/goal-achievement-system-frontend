@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // 경로 잘못 입력 방지를 위한 파일
 import Path from 'utils/path';
 import Home from 'pages/Home';
-import Login from 'pages/Login/LoginView';
+import Login from 'pages/Login/LoginContainer';
 import NotFound from 'pages/NotFound';
 /*
 routes

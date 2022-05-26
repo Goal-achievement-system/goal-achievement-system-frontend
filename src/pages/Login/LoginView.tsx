@@ -2,6 +2,8 @@
 import React from 'react';
 import SubmitButton from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
+import Path from 'utils/path';
+import { Link } from 'react-router-dom';
 
 function LoginView() {
 	return (
@@ -12,27 +14,27 @@ function LoginView() {
 
 				<img className="w-[310px] h-[96px]" src="../image/text/slogan.png" alt="slogan" />
 			</div>
-			<div className="w-[585px] ">
-				<form>
-					<h1 className="text-[22px] font-[800]">로그인</h1>
 
-					<label htmlFor="email">
-						이메일 <span className="text-primaryOrange-200">*</span>
-					</label>
-					<TextInput id="email" placeholder="이메일 주소" value="email" size="middle" focusColor="primaryOrange200" />
-					<label htmlFor="password">
-						비밀번호 <span className="text-primaryOrange-200">*</span>
-					</label>
-					<TextInput
-						id="password"
-						placeholder="비밀번호"
-						value="password"
-						size="middle"
-						focusColor="primaryOrange200"
-					/>
-					<SubmitButton label="로그인" onClick={() => {}} btnState="inactive" />
-				</form>
-			</div>
+			<form className="w-[585px] flex flex-col items-start justify-end">
+				<h1 className=" text-[36px] font-[800] mb-[76px]">로그인</h1>
+
+				<label htmlFor="email" className="mb-[16px] font-semibold text-[20px]">
+					이메일 <span className="text-primaryOrange-200 font-semibold">*</span>
+				</label>
+				<TextInput id="email" placeholder="이메일 주소" value="email" size="middle" focusColor="primaryOrange200" />
+				<label htmlFor="password" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
+					비밀번호 <span className="text-primaryOrange-200 font-semibold ">*</span>
+				</label>
+
+				<TextInput id="password" placeholder="비밀번호" value="password" size="middle" focusColor="primaryOrange200" />
+				<div className="flex justify-between w-full  mb-[27px] mt-[186px]">
+					<span className="text-[20px] font-semibold text-primaryGray-200">비밀번호를 잊으셨나요?</span>
+					<span className="text-[20px] font-semibold text-primaryOrange-200">
+						회원이 아직 아니신가요? <Link to={Path.signUp}>회원가입</Link>
+					</span>
+				</div>
+				<SubmitButton label="로그인" onClick={() => {}} btnState="inactive" />
+			</form>
 		</div>
 	);
 }
