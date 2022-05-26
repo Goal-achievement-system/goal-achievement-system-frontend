@@ -34,7 +34,7 @@ function SubmitButton({ label, onClick, btnState }: Props) {
 		<button
 			type="button"
 			onClick={onClick}
-			className={`flex flex-row grow-0 justify-center items-center  rounded-[8px]  w-full py-[22px]  ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center  rounded-[8px] h-[70px]  w-full py-[22px]  ${getBgColor(
 				btnState
 			)}`}
 		>
