@@ -1,14 +1,17 @@
+/* eslint-disable func-names */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import LargeBox from './LargeBox';
+import LargeBox, { Props } from './LargeBox';
 
 export default {
 	title: 'Component/Box/LargeBox',
 	component: LargeBox,
 } as ComponentMeta<typeof LargeBox>;
 
-/* eslint-disable-next-line react/jsx-props-no-spreading, react/function-component-definition */
-const Template: ComponentStory<typeof LargeBox> = (args) => <LargeBox {...args} />;
+const Template: ComponentStory<typeof LargeBox> = function (args: Props) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <LargeBox {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

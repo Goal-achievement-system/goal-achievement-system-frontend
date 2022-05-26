@@ -29,7 +29,7 @@ function HomeView({ member }: Props) {
 					</button>
 				</div>
 				<ul className="flex flex-wrap gap-x-[16px] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
-					{[0, 1, 2, 3, 4, 5].map((item, idx) => (
+					{[0, 1, 2, 3, 4, 5].map((item) => (
 						<li key={item}>
 							<SmallBox
 								goal={{
