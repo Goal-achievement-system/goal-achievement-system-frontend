@@ -1,14 +1,17 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+/* eslint-disable func-names */
 import React from 'react';
-import Home from './HomeView';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import Home, { Props } from './HomeView';
 
 export default {
 	title: 'Pages/Home',
 	component: Home,
 } as ComponentMeta<typeof Home>;
 
-/* eslint-disable-next-line react/jsx-props-no-spreading, react/function-component-definition */
-const Template: ComponentStory<typeof Home> = (args) => <Home {...args} />;
+const Template: ComponentStory<typeof Home> = function (args: Props) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <Home {...args} />;
+};
 
 export const Logout = Template.bind({});
 Logout.args = {

@@ -13,7 +13,6 @@ login : "/login"
 sign-up : "/sign-up"
 */
 function App() {
-	console.log(Path.login);
 	return (
 		<div className="App">
 			<Router>

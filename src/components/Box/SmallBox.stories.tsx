@@ -1,14 +1,17 @@
+/* eslint-disable func-names */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import SmallBox from './SmallBox';
+import SmallBox, { Props } from './SmallBox';
 
 export default {
 	title: 'Component/Box/SmallBox',
 	component: SmallBox,
 } as ComponentMeta<typeof SmallBox>;
 
-/* eslint-disable-next-line react/jsx-props-no-spreading, react/function-component-definition */
-const Template: ComponentStory<typeof SmallBox> = (args) => <SmallBox {...args} />;
+const Template: ComponentStory<typeof SmallBox> = function (args: Props) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <SmallBox {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
