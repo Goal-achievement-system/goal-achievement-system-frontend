@@ -93,6 +93,7 @@ export default function PerformInput({
 	};
 
 	const handleFocus = () => {
+		if (type !== 'email' && type !== 'password') return;
 		setIsOpenGuide(true);
 	};
 
