@@ -102,9 +102,11 @@ export default function PerformInput({
 
 	return (
 		<div className={`email-input-wrap w-${width}`}>
-			<label htmlFor={label} className="w-full m-[8px] inline-block">
-				{label}
-			</label>
+			{label && (
+				<label htmlFor={label} className="w-full m-[8px] inline-block">
+					{label}
+				</label>
+			)}
 			<div className="relative w-full">
 				<input
 					id={label}
