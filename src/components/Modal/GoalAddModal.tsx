@@ -12,7 +12,7 @@ export default function GoalAddModal() {
 
 	return (
 		<div
-			className={`${className.size} ${className.translate} border-2 text-left pc:p-[72px] p-[26px] rounded-2xl relative  bg-modalGray overflow-auto`}
+			className={`${className.size} ${className.translate} text-left pc:p-[72px] p-[26px] rounded-2xl relative  bg-modalGray overflow-auto`}
 		>
 			<div className="pc:mb-[52px] mb-[16px]">
 				<div className="pc:mb-[30px] mb-[8px] font-[600]">인증 사진</div>

@@ -17,7 +17,7 @@ export default function GoalModal({ goal }: Props) {
 
 	return (
 		<div
-			className={`${className.size} ${className.translate} border-2 text-left pc:p-[72px] p-[24px] border-borderGray rounded-2xl relativ bg-modalGray overflow-auto`}
+			className={`${className.size} ${className.translate} text-left pc:p-[72px] p-[24px] border-borderGray rounded-2xl relativ bg-modalGray overflow-auto`}
 		>
 			<div className="modal-tops pc:space-y-[72px] flex flex-col space-y-[20px]">
 				<div>
@@ -31,10 +31,10 @@ export default function GoalModal({ goal }: Props) {
 			<div className="modal-middle border-b-2 border-b-borderGray pc:mt-[26px] pc:mb-[30px] my-[20px]" />
 			<div className="flex flex-col modal-bottom pc:space-y-[35px] space-y-[21px]">
 				<div className="flex items-center justify-between">
-					<div className="">
+					<div className="line-clamp-1">
 						<h2>{goal.goalName}</h2>
 					</div>
-					<div className="flex pc:space-x-[16px] overflow-auto">
+					<div className="min-w-[100px] flex pc:space-x-[16px] space-x-[10px] overflow-auto">
 						<FilterButton label="# 취미" isSelected={false} onClick={() => {}} />
 						<div className="p-[4px] pc:p-[16px] bg-buttonRed-100 rounded-[4px] pc:rounded-[8px] text-buttonRed-200 flex items-center">
 							0/10회

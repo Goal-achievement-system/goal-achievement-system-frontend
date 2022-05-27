@@ -18,7 +18,8 @@ function Home() {
 	};
 	return (
 		<BaseTemplate Modal={<GoalPopUp goal={goal} />}>
-			<div>children</div>
+			{/* <BaseTemplate Modal={<GoalAddPopUp />}> */}
+			<div>모달창 열기</div>
 		</BaseTemplate>
 	);
 }
