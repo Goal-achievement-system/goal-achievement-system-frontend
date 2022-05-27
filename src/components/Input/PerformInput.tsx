@@ -103,7 +103,7 @@ export default function PerformInput({
 	return (
 		<div className={`email-input-wrap w-${width}`}>
 			{label && (
-				<label htmlFor={label} className="w-full m-[8px] inline-block">
+				<label htmlFor={label} className="w-full my-[12px] inline-block">
 					{label}
 				</label>
 			)}
@@ -112,7 +112,7 @@ export default function PerformInput({
 					id={label}
 					type={type}
 					placeholder={placeholder}
-					className={`w-full p-6 border-2 rounded-xl focus:outline-none ${getFocusColor()}
+					className={`w-full p-[24px] border-2 rounded-xl focus:outline-none ${getFocusColor()}
 					`}
 					onChange={handleChange}
 					onFocus={handleFocus}
@@ -121,7 +121,7 @@ export default function PerformInput({
 				{buttonTitle && (
 					<button
 						type="button"
-						className={`absolute pc:min-w-[86px] pc:min-h-[42px] p-2 rounded-xl right-6 top-1/2 -translate-y-1/2 ${getButtonColor()}`}
+						className={`absolute pc:min-w-[86px] pc:min-h-[42px] py-[12px] px-[14px] rounded-xl right-[12px] top-1/2 -translate-y-1/2 ${getButtonColor()}`}
 						onMouseDown={handleMouseDown}
 					>
 						{isConfirm ? `${subButtonTitle || buttonTitle}` : `${buttonTitle}`}

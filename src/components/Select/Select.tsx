@@ -18,7 +18,7 @@ export default function Select({ options, isFocus, value, onMouseDown, onFocus }
 	const createOptions = (list: Option[]) => {
 		const optionList = list.map((option: Option) => {
 			return (
-				<li key={option.id} className="px-6 py-4 text-left whitespace-nowrap text-ellipsis overflow-hidden">
+				<li key={option.id} className="px-6 py-4 overflow-hidden text-left whitespace-nowrap text-ellipsis">
 					{option.value}
 				</li>
 			);
@@ -29,9 +29,9 @@ export default function Select({ options, isFocus, value, onMouseDown, onFocus }
 	return (
 		<div className="dropdown w-[282px]">
 			<div className="select w-full h-[70px] border-2 border-primaryBlack-100 rounded-xl ">
-				<button type="button" className="flex justify-start items-center p-6 w-full" onFocus={onFocus}>
+				<button type="button" className="flex items-center justify-start w-full p-6" onFocus={onFocus}>
 					<div className="arrow">
-						<img className="max-w-[13px] max-h-[13px]" src="/Polygon.svg" alt="arrow" />
+						<img className="max-w-[13px] max-h-[13px]" src="/image/icon/polygon.svg" alt="arrow" />
 					</div>
 					<div className="selected max-w-[218px] pl-4 whitespace-nowrap text-ellipsis overflow-hidden">{value}</div>
 				</button>

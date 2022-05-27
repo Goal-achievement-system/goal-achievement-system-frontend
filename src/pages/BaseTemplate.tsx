@@ -9,6 +9,7 @@ interface TemplateProps {
 
 export default function BaseTemplate({ children, Modal }: TemplateProps) {
 	const modalRef = useRef<HTMLDivElement>(null);
+	// store 에서 관리하면 될 듯하다.
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	const handleClick = (e: React.BaseSyntheticEvent | MouseEvent) => {

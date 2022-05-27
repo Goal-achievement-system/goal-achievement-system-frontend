@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import Popup from 'components/Popup/Popup';
+import RouteModal from 'components/Modal/RouteModal';
 import useDetectClose from 'utils/useDetectClose';
 
 type Menu = {
@@ -52,7 +52,7 @@ export default function Header() {
 		<header className="w-full h-[86px] p-2 flex justify-between items-center">
 			<div className="basis-[312px] h-full flex items-center">
 				<Link className="" to="/">
-					<img className="" src="./img--logo.svg" alt="" />
+					<img className="" src="./image/icon/logo.svg" alt="" />
 				</Link>
 			</div>
 			<nav className="mr-auto ">
@@ -64,11 +64,11 @@ export default function Header() {
 						className="min-w-[35px] object-cover cursor-pointer"
 						onClick={(e) => handleClick(e, 0)}
 						aria-hidden
-						src="./icon--alarm.svg"
+						src="./image/icon/alarm.svg"
 						alt="alarm-icon"
 					/>
 					<div className="absolute right-0">
-						<Popup title="알림" isLogin isOpen={isOpen[0]} />
+						<RouteModal title="알림" isLogin isOpen={isOpen[0]} />
 					</div>
 				</div>
 				<div className="relative">
@@ -76,11 +76,11 @@ export default function Header() {
 						className="ml-[35px] min-w-[35px] object-cover cursor-pointer"
 						onClick={(e) => handleClick(e, 1)}
 						aria-hidden
-						src="./icon--my.svg"
+						src="./image/icon/my.svg"
 						alt="user-icon"
 					/>
 					<div className="absolute right-0">
-						<Popup title="개인정보 수정" isLogin isOpen={isOpen[1]} />
+						<RouteModal title="개인정보 수정" isLogin isOpen={isOpen[1]} />
 					</div>
 				</div>
 			</div>
