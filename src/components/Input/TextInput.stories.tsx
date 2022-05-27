@@ -7,16 +7,16 @@ import TextInput from './TextInput';
 export default {
 	title: 'Component/Input/TextInput',
 	component: TextInput,
-	argTypes: {
-		focusColor: {
-			options: ['primaryOrange200', 'primaryOrange300'],
-			control: { type: 'select' },
-		},
-		size: {
-			options: ['small', 'middle', 'large'],
-			control: { type: 'radio' },
-		},
-	},
+	// argTypes: {
+	// 	focusColor: {
+	// 		options: ['primaryOrange200', 'primaryOrange300'],
+	// 		control: { type: 'select' },
+	// 	},
+	// 	size: {
+	// 		options: ['small', 'middle', 'large'],
+	// 		control: { type: 'radio' },
+	// 	},
+	// },
 } as ComponentMeta<typeof TextInput>;
 
 const Template: ComponentStory<typeof TextInput> = function (args) {
@@ -24,19 +24,15 @@ const Template: ComponentStory<typeof TextInput> = function (args) {
 	return <TextInput {...args} />;
 };
 
-export const BeforeTyping = Template.bind({});
-BeforeTyping.args = {
-	id: 'example',
-	size: 'middle',
-	value: '',
-	placeholder: '입력 전',
-	focusColor: 'primaryOrange200',
+export const NonLabel = Template.bind({});
+NonLabel.args = {
+	placeholder: '텍스트를 입력해주세요',
 };
 
-export const CompeleteTyping = Template.bind({});
-CompeleteTyping.args = {
-	...BeforeTyping.args,
-	value: '내용 입력 완료',
+export const HaveLabel = Template.bind({});
+HaveLabel.args = {
+	...NonLabel.args,
+	label: '아이디',
 };
 
 //  Pseudo States (css 의사상태 전환)
