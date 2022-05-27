@@ -11,7 +11,7 @@ interface Props {
 	alarmList: Alarm[];
 }
 
-export default function AlarmPopup({ alarmList }: Props) {
+export default function AlarmModal({ alarmList }: Props) {
 	const alarms = alarmList.map((alarm: Alarm) => {
 		return (
 			<div key={alarm.date} className="w-full max-h-[97px] p-3 mb-2 border-2 rounded-xl">

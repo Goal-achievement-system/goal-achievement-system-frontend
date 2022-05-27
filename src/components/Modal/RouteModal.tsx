@@ -1,7 +1,7 @@
 import React from 'react';
 
-import AlarmPopup from './AlarmPopup';
-import UserProfilePopUp from './UserProfilePopup';
+import AlarmPopup from './AlarmModal';
+import UserProfilePopUp from './UserProfileModal';
 
 interface Props {
 	title: '개인정보 수정' | '알림';
@@ -45,7 +45,7 @@ const data = [
 	},
 ];
 
-export default function PopUp({ title, isLogin = false, alarmList = data, isOpen }: Props) {
+export default function RouteModal({ title, isLogin = false, alarmList = data, isOpen }: Props) {
 	if (!isLogin) {
 		return (
 			<div className={`w-[380px] max-h-[391px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
@@ -64,12 +64,12 @@ export default function PopUp({ title, isLogin = false, alarmList = data, isOpen
 
 	return (
 		<div className={`w-[380px] max-h-[391px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
-			<header className="">{title}</header>
+			<header className="font-[700]">{title}</header>
 			<div className="overflow-auto popup-body mt-7 mb-4 max-h-[270px]">
 				{title === '알림' ? <AlarmPopup alarmList={alarmList} /> : <UserProfilePopUp />}
 			</div>
 			<div className="text-right">
-				{title === '알림' && <img className="m-auto" src="./Frame 84.svg" alt="down-arrow" />}
+				{title === '알림' && <img className="m-auto" src="./image/icon/down-arrow.svg" alt="down-arrow" />}
 			</div>
 		</div>
 	);
