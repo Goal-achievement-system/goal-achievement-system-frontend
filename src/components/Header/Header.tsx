@@ -67,9 +67,7 @@ export default function Header() {
 						src="./image/icon/alarm.svg"
 						alt="alarm-icon"
 					/>
-					<div className="absolute right-0">
-						<RouteModal title="알림" isLogin isOpen={isOpen[0]} />
-					</div>
+					<RouteModal title="알림" isLogin isOpen={isOpen[0]} />
 				</div>
 				<div className="relative">
 					<img
@@ -79,9 +77,7 @@ export default function Header() {
 						src="./image/icon/my.svg"
 						alt="user-icon"
 					/>
-					<div className="absolute right-0">
-						<RouteModal title="개인정보 수정" isLogin isOpen={isOpen[1]} />
-					</div>
+					<RouteModal title="개인정보 수정" isLogin={false} isOpen={isOpen[1]} />
 				</div>
 			</div>
 		</header>

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import AlarmPopup from './AlarmModal';
 import UserProfilePopUp from './UserProfileModal';
 
@@ -48,28 +48,34 @@ const data = [
 export default function RouteModal({ title, isLogin = false, alarmList = data, isOpen }: Props) {
 	if (!isLogin) {
 		return (
-			<div className={`w-[380px] max-h-[391px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
-				<header className="">{title}</header>
-				<div className="overflow-auto popup-body mt-7 mb-4 max-h-[270px]">
-					<div className="py-10 text-center">로그인 후 이용해 주세요</div>
-				</div>
-				<div className="text-right">
-					<button type="button" className="text-right border-2">
-						로그인
-					</button>
+			<div className="absolute right-0">
+				<div className={`w-[380px] h-[226px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
+					<div className="font-[600]">{title}</div>
+					<div className="overflow-auto pc:m-auto pc:h-full max-h-[270px] flex flex-col space-y-[40px] justify-center items-center">
+						<div>로그인 후 이용할 수 있습니다.</div>
+						<div>
+							<Link to="/login">
+								<button type="button" className=" border-2 rounded-[8px] border-borderGray pc:px-[29px] pc:py-[15px]">
+									로그인
+								</button>
+							</Link>
+						</div>
+					</div>
 				</div>
 			</div>
 		);
 	}
 
 	return (
-		<div className={`w-[380px] max-h-[391px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
-			<header className="font-[700]">{title}</header>
-			<div className="overflow-auto popup-body mt-7 mb-4 max-h-[270px]">
-				{title === '알림' ? <AlarmPopup alarmList={alarmList} /> : <UserProfilePopUp />}
-			</div>
-			<div className="text-right">
-				{title === '알림' && <img className="m-auto" src="./image/icon/down-arrow.svg" alt="down-arrow" />}
+		<div className="absolute right-0">
+			<div className={`w-[380px] h-[391px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
+				<div className="font-[700]">{title}</div>
+				<div className="overflow-auto popup-body mt-7 mb-2 pc:max-h-[270px]">
+					{title === '알림' ? <AlarmPopup alarmList={alarmList} /> : <UserProfilePopUp />}
+				</div>
+				<div className="">
+					{title === '알림' && <img className="m-auto" src="./image/icon/down-arrow.svg" alt="down-arrow" />}
+				</div>
 			</div>
 		</div>
 	);
