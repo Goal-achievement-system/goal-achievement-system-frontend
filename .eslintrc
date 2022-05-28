@@ -12,6 +12,7 @@
     "createDefaultProgram": true
   },
   "rules": {
+    "no-param-reassign": 0,
     "react/require-default-props": "off",
     "prettier/prettier":[
       "error",{
