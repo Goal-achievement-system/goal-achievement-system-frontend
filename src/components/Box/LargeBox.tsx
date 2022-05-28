@@ -1,6 +1,7 @@
 import React from 'react';
 import { Goal } from 'types/goal';
 import { getDday } from '../../utils/common';
+import FilterButton from '../Button/FilterButton';
 
 export interface Props {
 	goal: Goal;

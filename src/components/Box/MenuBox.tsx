@@ -1,5 +1,6 @@
 import React from 'react';
 import { Member } from 'types/member';
+import SideBarButton from '../Button/SideBarButton';
 
 export interface Props {
 	member: Member | null;
@@ -55,50 +56,36 @@ function MenuBox({ member }: Props) {
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">목표등록현황</div>
 				{member &&
 					['4.1', '4.2'].map((item) => (
-						<div
-							key={`key_${item}`}
-							className="flex justify-between text-white w-full rounded-[8px] py-[16px] px-[14px] bg-primaryOrange-200 text-[16px] font-[500] leading-[19px] mb-[7px]"
-						>
-							<div>목표인증</div>
-							<div>📅 {item}</div>
+						<div className="mb-[7px]">
+							<SideBarButton key={`key_${item}`} onClick={() => {}} bgColor="orange">
+								<div className="flex justify-between w-full">
+									<span className="text-primaryWhite">목표인증</span>
+									<span className="text-primaryWhite">📅 {item}</span>
+								</div>
+							</SideBarButton>
 						</div>
 					))}
-				<button
-					type="button"
-					className="w-full rounded-[8px] py-[16px] px-[14px] bg-[#FAFAFA] text-[16px] font-[500] leading-[19px]"
-				>
-					목표등록 추가
-				</button>
+				<SideBarButton label="목표등록 추가" onClick={() => {}} bgColor="gray" />
 			</div>
 			<div className="mb-[30px]">
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">목표인증현황</div>
 				{member ? (
-					<div className="flex justify-between w-full rounded-[8px] py-[16px] px-[14px] bg-black text-white text-[16px] font-[500] leading-[19px]">
-						<div>목표인증 텍스트</div>
-						<div>0/10회</div>
-					</div>
+					<SideBarButton onClick={() => {}} bgColor="black">
+						<div className="flex justify-between w-full">
+							<span className="text-primaryWhite">목표인증 텍스트</span>
+							<span className="text-primaryWhite">4.1</span>
+						</div>
+					</SideBarButton>
 				) : (
-					<div className="w-full rounded-[8px] py-[16px] px-[14px] bg-[#FAFAFA] text-[16px] font-[500] leading-[19px]">
-						목표인증이 없습니다
-					</div>
+					<SideBarButton label="목표인증이 없습니다" onClick={() => {}} bgColor="gray" />
 				)}
 			</div>
 			<div>
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">내 목표머니</div>
 				<div className="text-[22px] font-[600] leading-[30px] mb-[4px]">0원</div>
 				<div className="flex gap-[10px]">
-					<button
-						type="button"
-						className="rounded-[8px] flex-1 p-[16px] text-[16px] font-[500] leading-[19px] bg-[#FAFAFA]"
-					>
-						충전
-					</button>
-					<button
-						type="button"
-						className="rounded-[8px] flex-1 p-[16px] text-[16px] font-[500] leading-[19px] bg-[#FAFAFA]"
-					>
-						이체
-					</button>
+					<SideBarButton label="충전" onClick={() => {}} bgColor="gray" />
+					<SideBarButton label="이체" onClick={() => {}} bgColor="gray" />
 				</div>
 			</div>
 		</div>
