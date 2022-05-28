@@ -50,15 +50,15 @@ export default function Header() {
 
 	return (
 		<header className="w-full h-[86px] p-2 flex justify-between items-center">
-			<div className="basis-[312px] h-full flex items-center">
+			<div className="pc:basis-[312px] h-full flex items-center">
 				<Link className="" to="/">
-					<img className="" src="./image/icon/logo.svg" alt="" />
+					<img className="pc:max-w-[157px] max-w-[112px]" src="./image/icon/logo.svg" alt="" />
 				</Link>
 			</div>
-			<nav className="mr-auto ">
+			<nav className="hidden mr-auto pc:block">
 				<ul className="flex">{menus}</ul>
 			</nav>
-			<div className="header-sub-menus flex basis-[120px]" aria-hidden ref={dropDownRef}>
+			<div className="header-sub-menus hidden pc:flex basis-[120px]" aria-hidden ref={dropDownRef}>
 				<div className="relative">
 					<img
 						className="min-w-[35px] object-cover cursor-pointer"
@@ -79,6 +79,11 @@ export default function Header() {
 					/>
 					<RouteModal title="개인정보 수정" isLogin={false} isOpen={isOpen[1]} />
 				</div>
+			</div>
+			<div className="block pc:hidden min-w-[16px] min-h-[12px]">
+				<button type="button">
+					<img className="w-full" src="image/icon/hamburger.svg" alt="hamburger" />
+				</button>
 			</div>
 		</header>
 	);
