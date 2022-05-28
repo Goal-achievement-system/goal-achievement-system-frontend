@@ -20,7 +20,7 @@ function SmallBox({ goal }: Props) {
 		}
 	};
 	return (
-		<div className="rounded-[8px] pc:rounded-[16px] w-[152px] pc:w-[277px] h-[150px] pc:h-[277px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden">
+		<div className="rounded-[8px] pc:rounded-[16px] w-[152px] pc:w-[277px] h-[150px] pc:h-[277px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden bg-white">
 			<div className="bg-buttonBlack-100 rounded-[8px] h-[68px] pc:h-[125px] mb-[8px] pc:mb-[16px] overflow-hidden">
 				{goal.verificationResult !== 'ongoing' && (
 					<div className="bg-[#000] bg-opacity-[80%] text-white text-[10px] pc:text-[16px] leading-[12px] pc:leading-[19px] font-[500] p-[5px] pc:p-[8px]">
