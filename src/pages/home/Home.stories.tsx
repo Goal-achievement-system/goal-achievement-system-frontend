@@ -1,16 +1,16 @@
 /* eslint-disable func-names */
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import MenuBox, { Props } from './MenuBox';
+import Home, { Props } from './HomeView';
 
 export default {
-	title: 'Component/Box/MenuBox',
-	component: MenuBox,
-} as ComponentMeta<typeof MenuBox>;
+	title: 'Pages/Home',
+	component: Home,
+} as ComponentMeta<typeof Home>;
 
-const Template: ComponentStory<typeof MenuBox> = function (args: Props) {
+const Template: ComponentStory<typeof Home> = function (args: Props) {
 	/* eslint-disable-next-line react/jsx-props-no-spreading */
-	return <MenuBox {...args} />;
+	return <Home {...args} />;
 };
 
 export const Logout = Template.bind({});

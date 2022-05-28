@@ -1,6 +1,7 @@
+/* eslint-disable func-names */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import ManageMenuBox from './ManageMenuBox';
+import ManageMenuBox, { Props } from './ManageMenuBox';
 
 export default {
 	title: 'Component/Box/ManageMenuBox',
@@ -13,8 +14,10 @@ export default {
 	},
 } as ComponentMeta<typeof ManageMenuBox>;
 
-/* eslint-disable-next-line react/jsx-props-no-spreading, react/function-component-definition */
-const Template: ComponentStory<typeof ManageMenuBox> = (args) => <ManageMenuBox {...args} />;
+const Template: ComponentStory<typeof ManageMenuBox> = function (args: Props) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <ManageMenuBox {...args} />;
+};
 
 export const Primary = Template.bind({});
 Primary.args = {

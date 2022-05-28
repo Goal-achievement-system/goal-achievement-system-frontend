@@ -21,12 +21,12 @@ function LoginView() {
 				<label htmlFor="email" className="mb-[16px] font-semibold text-[20px]">
 					이메일 <span className="text-primaryOrange-200 font-semibold">*</span>
 				</label>
-				<TextInput id="email" placeholder="이메일 주소" value="email" size="middle" focusColor="primaryOrange200" />
+				<TextInput placeholder="이메일 주소" />
 				<label htmlFor="password" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
 					비밀번호 <span className="text-primaryOrange-200 font-semibold ">*</span>
 				</label>
 
-				<TextInput id="password" placeholder="비밀번호" value="password" size="middle" focusColor="primaryOrange200" />
+				<TextInput placeholder="비밀번호" />
 				<div className="flex justify-between w-full  mb-[27px] mt-[186px]">
 					<span className="text-[20px] font-semibold text-primaryGray-200">비밀번호를 잊으셨나요?</span>
 					<span className="text-[20px] font-semibold text-primaryOrange-200">

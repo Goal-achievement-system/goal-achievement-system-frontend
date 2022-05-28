@@ -6,7 +6,7 @@ module.exports = {
 		},
 		extend: {
 			screens: {
-				pc: '360px',
+				pc: '361px',
 			},
 			colors: {
 				primaryOrange: {
