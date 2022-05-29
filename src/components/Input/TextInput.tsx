@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 interface Props {
 	placeholder: string;
 	label?: string;
-	setState?: () => void;
+	value?: string;
+	setState: Dispatch<SetStateAction<string>>;
 }
 
-export default function TextInput({ label, placeholder, setState }: Props) {
-	const handleBlur = () => {
-		// setState();
+export default function TextInput({ label, placeholder, value, setState }: Props) {
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setState(event?.currentTarget.value);
 	};
 
 	return (
@@ -22,7 +23,8 @@ export default function TextInput({ label, placeholder, setState }: Props) {
 				className="w-full p-6 my-2 border-2 rounded-xl focus:outline-none focus:border-primaryOrange-200"
 				id={label}
 				placeholder={placeholder}
-				onBlur={handleBlur}
+				value={value}
+				onChange={handleChange}
 			/>
 		</div>
 	);

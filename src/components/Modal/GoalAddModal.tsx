@@ -1,5 +1,4 @@
 import React from 'react';
-import FilterButton from 'components/Button/FilterButton';
 import OptionButton from 'components/Button/ObtionButton';
 import TextInput from 'components/Input/TextInput';
 import SubmitButton from 'components/Button/SubmitButton';
@@ -88,7 +87,7 @@ export default function GoalAddModal() {
 			</div>
 			<div className="pc:mb-[52px] mb-[16px]">
 				<div className="pc:mb-[30px] mb-[8px] font-[600]">인증내용</div>
-				<TextInput placeholder="목표 인증 게시글에 올릴 상세 내용을 작성하세요." />
+				<TextInput placeholder="목표 인증 게시글에 올릴 상세 내용을 작성하세요." setState={() => {}} />
 			</div>
 			<div>
 				<SubmitButton label="등록하기" onClick={() => {}} btnState="active" />
