@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import goalSlice from './goalSlice';
-import memberSlice from './memberSlice';
+import authSlice from 'store/slices/authSlice';
+import goalSlice from 'store/slices/goalSlice';
 
 const rootReducer = combineReducers({
 	goal: goalSlice.reducer,
-	member: memberSlice.reducer,
+	auth: authSlice.reducer,
 });
 
 export default rootReducer;

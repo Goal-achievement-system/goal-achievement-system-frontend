@@ -8,8 +8,6 @@ import Login from 'pages/Login/LoginContainer';
 import SignUp from 'pages/SignUp';
 import NotFound from 'pages/NotFound';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'store/slices';
 /*
 routes
 home : "/"
@@ -18,8 +16,6 @@ sign-up : "/sign-up"
 */
 
 function App() {
-	const member = useSelector((state: RootState) => state.member);
-
 	return (
 		<div className="App">
 			<Router>

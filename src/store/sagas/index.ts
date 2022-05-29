@@ -1,7 +1,7 @@
 import { all, fork } from 'redux-saga/effects';
 import goalSaga from './goalSaga';
-import loginSaga from './memberSaga';
+import authSaga from './authSaga';
 
 export default function* rootSaga() {
-	yield all([fork(goalSaga), fork(loginSaga)]);
+	yield all([fork(goalSaga), fork(authSaga)]);
 }

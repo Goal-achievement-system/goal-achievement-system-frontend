@@ -10,11 +10,12 @@ interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
 	email: string;
 	password: string;
+	error: string;
 	setEmail: React.Dispatch<React.SetStateAction<string>>;
 	setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function LoginView({ onSubmit, email, password, setEmail, setPassword }: Props) {
+function LoginView({ error, onSubmit, email, password, setEmail, setPassword }: Props) {
 	return (
 		<div className="pc:w-[1200px] my-0 mx-auto flex justify-between">
 			<div className="bg-primaryOrange-200 rounded-[16px] p-[55px] w-[481px] flex flex-col items-start ">
@@ -42,6 +43,7 @@ function LoginView({ onSubmit, email, password, setEmail, setPassword }: Props) 
 						회원이 아직 아니신가요? <Link to={Path.signUp}>회원가입</Link>
 					</span>
 				</div>
+				{error}
 				<SubmitButton label="로그인" onClick={() => {}} btnState="inactive" />
 			</form>
 		</div>

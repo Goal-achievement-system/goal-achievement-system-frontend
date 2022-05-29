@@ -10,6 +10,6 @@ const instance = axios.create({
   headers: {'X-Custom-Header': 'foobar'}
 });
 */
-client.defaults.baseURL = 'https://www.robinjoon.space/api/';
+client.defaults.baseURL = 'https://www.robinjoon.xyz/api/';
 
 export default client;
