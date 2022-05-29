@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import * as authAPI from 'api/authAPI';
 import LoginView from './LoginView';
 
 function LoginContainer() {

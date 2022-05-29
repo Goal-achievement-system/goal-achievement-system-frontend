@@ -7,23 +7,27 @@ import Home from 'pages/home/HomeContainer';
 import Login from 'pages/Login/LoginContainer';
 import SignUp from 'pages/SignUp';
 import NotFound from 'pages/NotFound';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'store/slices';
 /*
 routes
 home : "/"
 login : "/login"
 sign-up : "/sign-up"
 */
+
 function App() {
+	const member = useSelector((state: RootState) => state.member);
+
 	return (
 		<div className="App">
 			<Router>
-				{
-					// <Header />
-					// Switch -> Routes 로 바뀐듯 합니다
-				}
 				<Routes>
 					<Route path={Path.home} element={<Home />} />
+
 					<Route path={Path.login} element={<Login />} />
+
 					<Route path={Path.signUp} element={<SignUp />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>

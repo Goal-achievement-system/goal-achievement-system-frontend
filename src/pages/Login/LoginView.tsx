@@ -1,11 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import SubmitButton from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
 import Path from 'utils/path';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'store/slices';
+import memberSlice from 'store/slices/memberSlice';
+import isLoggedIn from 'utils/isLoggedIn';
 
 function LoginView() {
+	const member = useSelector((state: RootState) => state.member);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	useEffect(() => {
+		dispatch(memberSlice.actions.login({ email: 'example@e.com', password: 'password' }));
+		if (isLoggedIn()) navigate(Path.home);
+	}, [member, navigate, dispatch]);
 	return (
 		<div className="pc:w-[1200px] my-0 mx-auto flex justify-between">
 			<div className="bg-primaryOrange-200 rounded-[16px] p-[55px] w-[481px] flex flex-col items-start ">
