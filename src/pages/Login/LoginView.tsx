@@ -1,22 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React from 'react';
 import SubmitButton from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
+import { Link } from 'react-router-dom';
 import Path from 'utils/path';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'store/slices';
-import memberSlice from 'store/slices/memberSlice';
-import isLoggedIn from 'utils/isLoggedIn';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
-function LoginView() {
-	const member = useSelector((state: RootState) => state.member);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	useEffect(() => {
-		dispatch(memberSlice.actions.login({ email: 'example@e.com', password: 'password' }));
-		if (isLoggedIn()) navigate(Path.home);
-	}, [member, navigate, dispatch]);
+interface Props {
+	onSubmit: (event: React.SyntheticEvent) => void;
+	email: string;
+	password: string;
+	setEmail: React.Dispatch<React.SetStateAction<string>>;
+	setPassword: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function LoginView({ onSubmit, email, password, setEmail, setPassword }: Props) {
 	return (
 		<div className="pc:w-[1200px] my-0 mx-auto flex justify-between">
 			<div className="bg-primaryOrange-200 rounded-[16px] p-[55px] w-[481px] flex flex-col items-start ">
@@ -26,18 +24,18 @@ function LoginView() {
 				<img className="w-[310px] h-[96px]" src="../image/text/slogan.png" alt="slogan" />
 			</div>
 
-			<form className="w-[585px] flex flex-col items-start justify-end">
+			<form onSubmit={onSubmit} className="w-[585px] flex flex-col items-start justify-end">
 				<h1 className=" text-[36px] font-[800] mb-[76px]">로그인</h1>
 
 				<label htmlFor="email" className="mb-[16px] font-semibold text-[20px]">
 					이메일 <span className="text-primaryOrange-200 font-semibold">*</span>
 				</label>
-				<TextInput placeholder="이메일 주소" />
+				<TextInput placeholder="이메일 주소" value={email} setState={setEmail} />
 				<label htmlFor="password" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
 					비밀번호 <span className="text-primaryOrange-200 font-semibold ">*</span>
 				</label>
 
-				<TextInput placeholder="비밀번호" />
+				<TextInput placeholder="비밀번호" value={password} setState={setPassword} />
 				<div className="flex justify-between w-full  mb-[27px] mt-[186px]">
 					<span className="text-[20px] font-semibold text-primaryGray-200">비밀번호를 잊으셨나요?</span>
 					<span className="text-[20px] font-semibold text-primaryOrange-200">
