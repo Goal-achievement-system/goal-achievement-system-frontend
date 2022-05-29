@@ -2,7 +2,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import Select from './Select';
+import Select from '.';
 
 export interface Option {
 	id: number;

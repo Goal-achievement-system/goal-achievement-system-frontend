@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import SubmitButton from 'components/Button/SubmitButton';
-import TextInput from 'components/Input/TextInput';
+import PerformInput from 'components/Input/PerformInput';
+import Select from 'components/Select';
 import { Link } from 'react-router-dom';
 import Path from 'utils/path';
 
@@ -25,24 +26,24 @@ function SignUpView({ error, onSubmit, email, password, setEmail, setPassword }:
 			</div>
 
 			<form onSubmit={onSubmit} className="w-[585px] flex flex-col items-start justify-end">
-				<h1 className=" text-[36px] font-[800] mb-[76px]">로그인</h1>
-
+				<h1 className=" text-[36px] font-[800] mb-[76px]">회원가입</h1>
 				<label htmlFor="email" className="mb-[16px] font-semibold text-[20px]">
 					이메일 <span className="text-primaryOrange-200 font-semibold">*</span>
 				</label>
-				<TextInput placeholder="이메일 주소" value={email} setState={setEmail} />
+				<PerformInput type="email" placeholder="goalkeeper@gmail.com" />
 				<label htmlFor="password" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
 					비밀번호 <span className="text-primaryOrange-200 font-semibold ">*</span>
 				</label>
+				<PerformInput type="password" placeholder="비밀번호 (8자리 이상)" />
+				<PerformInput type="password" placeholder="비밀번호 확인" />
+				<label htmlFor="nickName" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
+					닉네임 <span className="text-primaryOrange-200 font-semibold ">*</span>
+				</label>
+				<PerformInput type="nickName" placeholder="닉네임을 작성해 주세요" />
+				<label htmlFor="nickName" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
+					선택사항
+				</label>
 
-				<TextInput placeholder="비밀번호" value={password} setState={setPassword} />
-				<div className="flex justify-between w-full  mb-[27px] mt-[186px]">
-					<span className="text-[20px] font-semibold text-primaryGray-200">비밀번호를 잊으셨나요?</span>
-					<span className="text-[20px] font-semibold text-primaryOrange-200">
-						회원이 아직 아니신가요? <Link to={Path.signUp}>회원가입</Link>
-					</span>
-				</div>
-				{error}
 				<SubmitButton label="로그인" onClick={() => {}} btnState="inactive" />
 			</form>
 		</div>
