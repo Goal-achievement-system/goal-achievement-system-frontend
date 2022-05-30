@@ -45,17 +45,16 @@ const options = [
 	},
 ];
 
-export const Focus = Template.bind({});
-Focus.args = {
+export const IsRequired = Template.bind({});
+IsRequired.args = {
+	label: '연령',
+	isRequired: true,
 	options,
-	isFocus: true,
 	value: '연 령',
-	onFocus: () => {},
-	onMouseDown: () => {},
 };
-export const Selected = Template.bind({});
-Selected.args = {
-	...Focus.args,
-	isFocus: false,
+export const NotRequired = Template.bind({});
+NotRequired.args = {
+	...IsRequired.args,
+	isRequired: false,
 	value: '20대',
 };
