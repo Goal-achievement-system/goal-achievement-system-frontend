@@ -2,7 +2,7 @@
 import React from 'react';
 import SubmitButton from 'components/Button/SubmitButton';
 import PerformInput from 'components/Input/PerformInput';
-import Select from 'components/Select';
+import Select, { Option } from 'components/Select';
 import { Link } from 'react-router-dom';
 import Path from 'utils/path';
 
@@ -14,7 +14,19 @@ interface Props {
 	setEmail: React.Dispatch<React.SetStateAction<string>>;
 	setPassword: React.Dispatch<React.SetStateAction<string>>;
 }
-
+const GenderObtion = [
+	{ id: 1, value: '남자' },
+	{ id: 2, value: '여자' },
+	{ id: 3, value: '없음' },
+] as Option[];
+const AgeObtion = [
+	{ id: 10, value: '10대' },
+	{ id: 20, value: '20대' },
+	{ id: 30, value: '30대' },
+	{ id: 40, value: '40대' },
+	{ id: 50, value: '50대' },
+	{ id: 60, value: '60대' },
+] as Option[];
 function SignUpView({ error, onSubmit, email, password, setEmail, setPassword }: Props) {
 	return (
 		<div className="pc:w-[1200px] my-0 mx-auto flex justify-between">
@@ -26,24 +38,24 @@ function SignUpView({ error, onSubmit, email, password, setEmail, setPassword }:
 			</div>
 
 			<form onSubmit={onSubmit} className="w-[585px] flex flex-col items-start justify-end">
-				<h1 className=" text-[36px] font-[800] mb-[76px]">회원가입</h1>
-				<label htmlFor="email" className="mb-[16px] font-semibold text-[20px]">
-					이메일 <span className="text-primaryOrange-200 font-semibold">*</span>
-				</label>
-				<PerformInput type="email" placeholder="goalkeeper@gmail.com" />
-				<label htmlFor="password" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
-					비밀번호 <span className="text-primaryOrange-200 font-semibold ">*</span>
-				</label>
-				<PerformInput type="password" placeholder="비밀번호 (8자리 이상)" />
+				<h1 className=" text-[36px] font-[800] mb-[50px]">회원가입</h1>
+
+				<PerformInput label="이메일" type="email" placeholder="goalkeeper@gmail.com" />
+				<div className=" mb-[30px]" />
+				<PerformInput label="비밀번호" type="password" placeholder="비밀번호 (8자리 이상)" />
+				<div className=" mb-[10px]" />
 				<PerformInput type="password" placeholder="비밀번호 확인" />
-				<label htmlFor="nickName" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
-					닉네임 <span className="text-primaryOrange-200 font-semibold ">*</span>
-				</label>
-				<PerformInput type="nickName" placeholder="닉네임을 작성해 주세요" />
+				<div className=" mb-[20px]" />
+				<PerformInput label="닉네임" type="nickName" placeholder="닉네임을 작성해 주세요" />
+				<div className=" mb-[10px]" />
 				<label htmlFor="nickName" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
 					선택사항
 				</label>
-
+				<div className="flex justify-between w-full">
+					<Select options={GenderObtion} isFocus={false} value="남자" onMouseDown={() => {}} onFocus={() => {}} />
+					<Select options={GenderObtion} isFocus={false} value="20대" onMouseDown={() => {}} onFocus={() => {}} />
+				</div>
+				<div className=" mb-[20px]" />
 				<SubmitButton label="로그인" onClick={() => {}} btnState="inactive" />
 			</form>
 		</div>
