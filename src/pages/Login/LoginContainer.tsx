@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import * as authAPI from 'api/authAPI';
-import isLoggedIn from 'utils/isLoggedIn';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store/slices';
 import Path from 'utils/path';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import authSlice from 'store/slices/authSlice';
 import LoginView from './LoginView';
-
-interface IFormInputs {
-	email: string;
-	password: string;
-}
 
 function LoginContainer() {
 	const [email, setEmail] = useState<string>('');

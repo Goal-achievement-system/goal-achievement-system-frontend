@@ -4,6 +4,7 @@ import { validateEmail, validatePassword } from '../../utils/common';
 interface Props {
 	type: string;
 	placeholder: string;
+	value: string;
 	label?: string;
 	buttonTitle?: string;
 	subButtonTitle?: string;
@@ -24,6 +25,7 @@ enum Color {
 export default function PerformInput({
 	label,
 	type,
+	value,
 	placeholder,
 	buttonTitle,
 	subButtonTitle,
@@ -102,9 +104,11 @@ export default function PerformInput({
 
 	return (
 		<div className={`email-input-wrap w-${width}`}>
-			<label htmlFor={label} className="w-full m-[8px] inline-block">
-				{label}
-			</label>
+			{label && (
+				<label htmlFor={label} className="block mb-[10px] font-semibold text-[20px]">
+					{label} <span className="text-primaryOrange-200 font-semibold">*</span>
+				</label>
+			)}
 			<div className="relative w-full">
 				<input
 					id={label}
@@ -115,6 +119,7 @@ export default function PerformInput({
 					onChange={handleChange}
 					onFocus={handleFocus}
 					onBlur={handleBlur}
+					value={value}
 				/>
 				{buttonTitle && (
 					<button

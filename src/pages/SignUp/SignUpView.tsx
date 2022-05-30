@@ -1,25 +1,19 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import SubmitButton from 'components/Button/SubmitButton';
 import PerformInput from 'components/Input/PerformInput';
+import { IFormState } from 'pages/SignUp/SignUpContainer';
 import Select, { Option } from 'components/Select';
-import { Link } from 'react-router-dom';
-import Path from 'utils/path';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
-	email: string;
-	password: string;
-	error: string;
-	setEmail: React.Dispatch<React.SetStateAction<string>>;
-	setPassword: React.Dispatch<React.SetStateAction<string>>;
+	formState: IFormState;
 }
-const GenderObtion = [
+const GenderOption = [
 	{ id: 1, value: '남자' },
 	{ id: 2, value: '여자' },
 	{ id: 3, value: '없음' },
 ] as Option[];
-const AgeObtion = [
+const AgeOption = [
 	{ id: 10, value: '10대' },
 	{ id: 20, value: '20대' },
 	{ id: 30, value: '30대' },
@@ -27,7 +21,8 @@ const AgeObtion = [
 	{ id: 50, value: '50대' },
 	{ id: 60, value: '60대' },
 ] as Option[];
-function SignUpView({ error, onSubmit, email, password, setEmail, setPassword }: Props) {
+
+function SignUpView({ onSubmit, formState }: Props) {
 	return (
 		<div className="pc:w-[1200px] my-0 mx-auto flex justify-between">
 			<div className="bg-primaryOrange-200 rounded-[16px] p-[55px] w-[481px] flex flex-col items-start ">
@@ -40,7 +35,7 @@ function SignUpView({ error, onSubmit, email, password, setEmail, setPassword }:
 			<form onSubmit={onSubmit} className="w-[585px] flex flex-col items-start justify-end">
 				<h1 className=" text-[36px] font-[800] mb-[50px]">회원가입</h1>
 
-				<PerformInput label="이메일" type="email" placeholder="goalkeeper@gmail.com" />
+				<PerformInput label="이메일" value={formState.name} type="email" placeholder="goalkeeper@gmail.com" />
 				<div className=" mb-[30px]" />
 				<PerformInput label="비밀번호" type="password" placeholder="비밀번호 (8자리 이상)" />
 				<div className=" mb-[10px]" />
@@ -52,8 +47,8 @@ function SignUpView({ error, onSubmit, email, password, setEmail, setPassword }:
 					선택사항
 				</label>
 				<div className="flex justify-between w-full">
-					<Select options={GenderObtion} isFocus={false} value="남자" onMouseDown={() => {}} onFocus={() => {}} />
-					<Select options={GenderObtion} isFocus={false} value="20대" onMouseDown={() => {}} onFocus={() => {}} />
+					<Select options={GenderOption} isFocus={false} value="남자" onMouseDown={() => {}} onFocus={() => {}} />
+					<Select options={AgeOption} isFocus={false} value="20대" onMouseDown={() => {}} onFocus={() => {}} />
 				</div>
 				<div className=" mb-[20px]" />
 				<SubmitButton label="로그인" onClick={() => {}} btnState="inactive" />
