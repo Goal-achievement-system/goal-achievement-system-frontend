@@ -7,40 +7,44 @@ import authSlice from 'store/slices/authSlice';
 import { Member } from 'types/member';
 import SignUpView from './SignUpView';
 
-export interface IFormState extends Member {
-	isFormValid: false;
+interface IFormState {
+	email: string;
+	password: string;
+	passwordCheck: string;
+	nickName: string;
+	sex: string;
+	age: number;
+	error: string;
 }
+
 const initialState: IFormState = {
 	email: '',
 	password: '',
+	passwordCheck: '',
 	nickName: '',
 	sex: 'MALE',
 	age: 20,
-	money: 0,
+	error: '',
 };
-const [formState, dispatch] = useReducer(formReducer, initialState);
-function formReducer(state, action) {
-	switch (action.type) {
-	}
+interface Action {
+	type: { name: string; value: string };
+}
+const [formState, formDispatch] = useReducer(formReducer, initialState);
+function formReducer(state: IFormState, action: Action) {
+	const { name, value } = action.type;
+	return { ...state, [name]: value };
 }
 function SignUpContainer() {
-	const [email, setEmail] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
-	const [error, setError] = useState<string>('');
 	const auth = useSelector((state: RootState) => state.auth);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const onSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
+		const { email, password, passwordCheck, nickName } = formState;
+		if (!email.trim() || !password.trim() || !passwordCheck.trim() || !nickName.trim()) return;
 
-		if (!email.trim() || !password.trim()) return;
-
-		dispatch(authSlice.actions.login({ email, password }));
+		dispatch(authSlice.actions.signUp({ email, password }));
 	};
-	useEffect(() => {
-		if (auth.isLoggedIn) navigate(Path.home);
-		else if (auth.hasError) setError('이메일 또는 패스워드가 잘못 입력되었습니다');
-	}, [auth, navigate]);
 
 	return <SignUpView error={error} onSubmit={onSubmit} formState={formState} />;
 }
