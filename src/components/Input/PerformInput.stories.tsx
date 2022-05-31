@@ -32,4 +32,5 @@ export const NonLabel = Template.bind({});
 NonLabel.args = {
 	type: 'email',
 	placeholder: 'email 을 입력해주세요',
+	isRequired: false,
 };

@@ -3,21 +3,25 @@ import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 interface Props {
 	placeholder: string;
 	label?: string;
+	isRequired?: boolean;
 	value?: string;
-	setState: Dispatch<SetStateAction<string>>;
+	onChange: Dispatch<SetStateAction<string>>;
 }
 
-export default function TextInput({ label, placeholder, value, setState }: Props) {
+export default function TextInput({ placeholder, label, isRequired = false, value, onChange }: Props) {
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setState(event?.currentTarget.value);
+		onChange(event?.currentTarget.value);
 	};
 
 	return (
 		<div className="w-full">
 			{label && (
-				<label htmlFor={label} className="w-full my-[8px] font-[600] inline-block">
-					{label}
-				</label>
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
+					<label htmlFor={label} className="font-semibold text-[20px]">
+						{label}
+					</label>
+					{isRequired && <span className="font-semibold text-primaryOrange-200 ">*</span>}
+				</div>
 			)}
 			<input
 				className="w-full p-6 my-2 border-2 rounded-xl focus:outline-none focus:border-primaryOrange-200"

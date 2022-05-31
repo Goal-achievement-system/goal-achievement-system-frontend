@@ -13,7 +13,7 @@ interface SelectProps {
 	onChange: Dispatch<SetStateAction<string>>;
 }
 
-export default function Select({ label, isRequired, options, value, onChange }: SelectProps) {
+export default function Select({ label, isRequired = false, options, value, onChange }: SelectProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const optionRef = useRef<HTMLDivElement>(null);
 	const optionList = options.map((option: Option) => (
@@ -50,10 +50,12 @@ export default function Select({ label, isRequired, options, value, onChange }: 
 	return (
 		<div>
 			{label && (
-				<label htmlFor="password" className="mb-[16px] mt-[30px] font-semibold text-[20px] inline-block">
-					{label}
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
+					<label htmlFor={label} className="font-semibold text-[20px]">
+						{label}
+					</label>
 					{isRequired && <span className="font-semibold text-primaryOrange-200 ">*</span>}
-				</label>
+				</div>
 			)}
 			<div className="dropdown w-[282px]" ref={optionRef}>
 				<div className="select w-full h-[70px] border-2 border-primaryBlack-100 rounded-xl ">

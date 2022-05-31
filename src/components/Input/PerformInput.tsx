@@ -5,12 +5,12 @@ interface Props {
 	type: string;
 	placeholder: string;
 	label?: string;
+	isRequired?: boolean;
 	buttonTitle?: string;
 	subButtonTitle?: string;
-	width?: string;
 	value?: string;
 	onClick?: () => void;
-	setState: Dispatch<SetStateAction<string>>;
+	onChange: Dispatch<SetStateAction<string>>;
 }
 
 enum Color {
@@ -24,15 +24,15 @@ enum Color {
 }
 
 export default function PerformInput({
-	label,
 	type,
 	placeholder,
+	label,
+	isRequired = false,
 	buttonTitle,
 	subButtonTitle,
-	width = 'full',
 	value,
 	onClick,
-	setState,
+	onChange,
 }: Props) {
 	const [isConfirm, setIsConfirm] = useState<boolean>(false);
 	const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -70,13 +70,13 @@ export default function PerformInput({
 		return '';
 	};
 
-	const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (isConfirm || !isCorrect) return;
 		setIsConfirm(!isConfirm);
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setState(e?.currentTarget.value);
+		onChange(e?.currentTarget.value);
 
 		if (type === 'email') {
 			setIsCorrect(validateEmail(e?.currentTarget.value));
@@ -98,11 +98,14 @@ export default function PerformInput({
 	};
 
 	return (
-		<div className={`email-input-wrap w-${width}`}>
+		<div className="w-full email-input-wrap">
 			{label && (
-				<label htmlFor={label} className="w-full my-[12px] inline-block">
-					{label}
-				</label>
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
+					<label htmlFor={label} className="font-semibold text-[20px]">
+						{label}
+					</label>
+					{isRequired && <span className="font-semibold text-primaryOrange-200 ">*</span>}
+				</div>
 			)}
 			<div className="relative w-full">
 				<input
@@ -120,7 +123,7 @@ export default function PerformInput({
 					<button
 						type="button"
 						className={`absolute pc:min-w-[86px] pc:min-h-[42px] py-[12px] px-[14px] rounded-xl right-[12px] top-1/2 -translate-y-1/2 ${getButtonColor()}`}
-						onMouseDown={handleMouseDown}
+						onClick={handleClick}
 					>
 						{isConfirm ? `${subButtonTitle || buttonTitle}` : `${buttonTitle}`}
 					</button>

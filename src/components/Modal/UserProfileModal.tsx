@@ -15,7 +15,7 @@ export default function UserProfileModal() {
 					buttonTitle="변경"
 					onClick={() => {}}
 					value={name}
-					setState={setName}
+					onChange={setName}
 				/>
 			</div>
 			<div className="input-wrap">
@@ -26,7 +26,7 @@ export default function UserProfileModal() {
 					buttonTitle="중복확인"
 					onClick={() => {}}
 					value={email}
-					setState={setEmail}
+					onChange={setEmail}
 				/>
 			</div>
 		</>
