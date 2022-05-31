@@ -60,11 +60,7 @@ function HomeView({ member }: Props) {
 								<CountUp start={0} end={2549} separator="," delay={0}>
 									{({ countUpRef }) => (
 										<div className="box-border rounded-[12px] font-[800] text-[30px] leading-[36px] text-white px-[25px] py-[10px] bg-primaryOrange-200 mx-[18px]">
-											<span
-												className="font-[800] text-[30px] leading-[36px] text-primaryOrange-200 text-white"
-												ref={countUpRef}
-											/>
-											개
+											<span className="font-[800] text-[30px] leading-[36px] text-white" ref={countUpRef} />개
 										</div>
 									)}
 								</CountUp>
