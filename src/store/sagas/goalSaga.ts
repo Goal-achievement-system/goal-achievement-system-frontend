@@ -20,10 +20,8 @@ function* loadGoalSaga(action: { payload: LoadGoalParam }) {
 
 	try {
 		const result: GoalListParams = yield call(API.loadGoaliLst, param);
-		console.log(result, 'result');
 		yield put(loadGoalListSuccess({ list: [] }));
 	} catch (error) {
-		console.log(error, 'error');
 		yield put(loadGoalListFailure(error));
 	}
 }
