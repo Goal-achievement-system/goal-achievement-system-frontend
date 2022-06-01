@@ -19,3 +19,15 @@ export const validateEmail = (target: string): boolean => {
 	const emailReg = /^[\w-]*@[a-zA-Z]*\.[a-zA-Z]{2,3}$/i;
 	return emailReg.test(target);
 };
+
+export const validatePassword = (target: string): boolean => {
+	// (?=.*[a-zA-Z])                 // 영문
+	// (?=.*?[A-Z])                   // 최소 한개의 대문자 영문
+	// (?=.*?[a-z])                   // 최소 한개의 소문자 영문
+	// (?=.*?[0-9])                   // 최소 한개의 숫자
+	// (?=.*?[#?!@$%^&*-])            // 최소 한개의 특수 문자
+	// .{8,13}												// 8 ~ 13
+
+	const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?+-])[a-zA-Z0-9!@#$%^&*?+-]{8,13}$/;
+	return passwordReg.test(target);
+};

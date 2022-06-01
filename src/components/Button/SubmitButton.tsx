@@ -1,22 +1,22 @@
 import React, { useCallback } from 'react';
 
-type BtnStates = 'active' | 'inactive' | 'pressed';
+export type BtnStates = 'active' | 'inactive' | 'pressed';
 
 enum BgColor {
 	orange200 = 'bg-primaryOrange-200',
 	orange300 = 'bg-primaryOrange-300',
 
-	gray100 = 'bg-[#e6e6e6]',
+	gray100 = 'bg-primaryGray-100',
 }
 enum TextColor {
 	white = 'text-primaryWhite',
 
-	gray200 = 'text-[#898989]',
+	gray200 = 'text-primaryGray-200',
 }
 
 export interface Props {
 	label: string;
-	onClick: () => void;
+	onClick?: () => void;
 	btnState: BtnStates;
 }
 function SubmitButton({ label, onClick, btnState }: Props) {
@@ -32,13 +32,13 @@ function SubmitButton({ label, onClick, btnState }: Props) {
 
 	return (
 		<button
-			type="button"
+			type="submit"
 			onClick={onClick}
-			className={`flex flex-row grow-0 justify-center items-center  rounded-[8px] h-[70px]  w-full py-[22px]  ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center h-[70px]  rounded-[8px]  w-full py-[22px]   ${getBgColor(
 				btnState
 			)}`}
 		>
-			<span className={`glow-0  not-italic  whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
+			<span className={`glow-0  not-italic text-[22px] whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
 		</button>
 	);
 }

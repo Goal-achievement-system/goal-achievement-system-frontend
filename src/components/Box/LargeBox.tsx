@@ -1,6 +1,7 @@
 import React from 'react';
 import { Goal } from 'types/goal';
 import { getDday } from '../../utils/common';
+import FilterButton from '../Button/FilterButton';
 
 export interface Props {
 	goal: Goal;
@@ -8,7 +9,7 @@ export interface Props {
 
 function SmallBox({ goal }: Props) {
 	return (
-		<div className="flex rounded-[8px] pc:rounded-[16px] w-[320px] pc:w-[891px] h-[96px] pc:h-[177px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden">
+		<div className="flex rounded-[8px] pc:rounded-[16px] w-[320px] pc:w-[891px] h-[96px] pc:h-[177px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden bg-white">
 			<div className="bg-buttonBlack-100 rounded-[8px] w-[135px] pc:w-[325px] h-[100%] mr-[16px] pc:mr-[32px] overflow-hidden" />
 			<div className="flex-1 flex justify-between flex-col">
 				<div>

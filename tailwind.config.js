@@ -6,7 +6,7 @@ module.exports = {
 		},
 		extend: {
 			screens: {
-				pc: '360px',
+				pc: '361px',
 			},
 			colors: {
 				primaryOrange: {
@@ -20,6 +20,10 @@ module.exports = {
 					300: '#A6A6A6',
 					400: '#8B8B8B',
 					500: '#000000',
+				},
+				primaryGray: {
+					100: '#E6E6E6',
+					200: '#898989',
 				},
 				primaryWhite: '#FFFFFF',
 				buttonBlack: {
@@ -38,6 +42,7 @@ module.exports = {
 				borderOrange: '#FF8A00',
 				statesRed: '#FF1523',
 				statesOrange: '#FF8A00',
+				modalGray: '#FAFAFA',
 			},
 		},
 	},

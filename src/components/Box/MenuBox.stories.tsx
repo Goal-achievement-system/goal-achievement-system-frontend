@@ -1,14 +1,17 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+/* eslint-disable func-names */
 import React from 'react';
-import MenuBox from './MenuBox';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import MenuBox, { Props } from './MenuBox';
 
 export default {
 	title: 'Component/Box/MenuBox',
 	component: MenuBox,
 } as ComponentMeta<typeof MenuBox>;
 
-/* eslint-disable-next-line react/jsx-props-no-spreading, react/function-component-definition */
-const Template: ComponentStory<typeof MenuBox> = (args) => <MenuBox {...args} />;
+const Template: ComponentStory<typeof MenuBox> = function (args: Props) {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <MenuBox {...args} />;
+};
 
 export const Logout = Template.bind({});
 Logout.args = {
