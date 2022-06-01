@@ -101,7 +101,7 @@ export default function PerformInput({
 	return (
 		<div className="w-full email-input-wrap">
 			{label && (
-				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px] ">
 					<label htmlFor={label} className="font-semibold text-[20px]">
 						{label}
 					</label>

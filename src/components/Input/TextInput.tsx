@@ -5,10 +5,12 @@ interface Props {
 	label?: string;
 	isRequired?: boolean;
 	value?: string;
-	onChange: Dispatch<SetStateAction<string>>;
+	isPassword?: boolean;
+	// 	onChange: Dispatch<SetStateAction<string>> | (curVar:string)=>void ;
+	onChange: (curVar: string) => void;
 }
 
-export default function TextInput({ placeholder, label, isRequired = false, value, onChange }: Props) {
+export default function TextInput({ isPassword, placeholder, label, isRequired = false, value, onChange }: Props) {
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		onChange(event?.currentTarget.value);
 	};
@@ -29,6 +31,7 @@ export default function TextInput({ placeholder, label, isRequired = false, valu
 				placeholder={placeholder}
 				value={value}
 				onChange={handleChange}
+				type={isPassword ? 'password' : 'text'}
 			/>
 		</div>
 	);

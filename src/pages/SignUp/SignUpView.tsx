@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import PerformInput from 'components/Input/PerformInput';
 import { IFormState, Action } from 'pages/SignUp/SignUpContainer';
@@ -32,16 +32,16 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 		return 'active';
 	};
 	return (
-		<div className="pc:w-[1200px] my-0 mx-auto flex justify-between">
-			<div className="bg-primaryOrange-200 rounded-[16px] p-[55px] w-[481px] flex flex-col items-start ">
+		<div className="pc:w-[1200px] h-[762px] my-0 mx-auto flex justify-between ">
+			<div className="bg-primaryOrange-200 rounded-[16px] p-[55px] w-[481px]  flex flex-col items-start ">
 				<img src="../image/banner/image1773.png" alt="banner" />
 				<img className="my-[57px] w-[157px] h-[34px]" src="../image/logo/img--logo.png" alt="logo" />
 
 				<img className="w-[310px] h-[96px]" src="../image/text/slogan.png" alt="slogan" />
 			</div>
 
-			<form onSubmit={onSubmit} className="w-[585px] flex flex-col items-start justify-end">
-				<h1 className=" text-[36px] font-[800] mb-[36px]">회원가입</h1>
+			<form onSubmit={onSubmit} className="w-[585px] h-full flex  flex-col items-start justify-between ">
+				<h1 className="text-[36px] font-[800] mb-[36px] ">회원가입</h1>
 
 				<PerformInput
 					label="이메일"
@@ -51,7 +51,7 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 					placeholder="goalkeeper@gmail.com"
 					onChange={(curVar: string) => formDispatch({ type: 'email', payload: curVar })}
 				/>
-				<div className=" mb-[15px]" />
+				<div className="mb-[20px]" />
 				<PerformInput
 					label="비밀번호"
 					isRequired
@@ -59,14 +59,14 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 					placeholder="비밀번호 (8자리 이상)"
 					onChange={(curVar: string) => formDispatch({ type: 'password', payload: curVar })}
 				/>
-				<div className=" mb-[10px]" />
+				<div className="mb-[10px]" />
 				<PerformInput
 					type="password"
 					isRequired
 					placeholder="비밀번호 확인"
 					onChange={(curVar: string) => formDispatch({ type: 'passwordCheck', payload: curVar })}
 				/>
-				<div className=" mb-[15px]" />
+				<div className="mb-[20px]" />
 				<PerformInput
 					label="닉네임"
 					isRequired
@@ -74,8 +74,8 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 					placeholder="닉네임을 작성해 주세요"
 					onChange={(curVar: string) => formDispatch({ type: 'nickName', payload: curVar })}
 				/>
-				<div className=" mb-[10px]" />
-				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
+				<div className="mb-[20px]" />
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px]">
 					<span className="font-semibold text-[20px]">선택사항</span>
 				</div>
 				<div className="flex justify-between w-full">
@@ -90,9 +90,10 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 						onChange={(curVar: string) => formDispatch({ type: 'age', payload: curVar })}
 					/>
 				</div>
-				<div className=" mb-[15px]" />
-				{error && <span>{error}</span>}
-				<SubmitButton label="로그인" btnState={getBtnState()} />
+				<div className="mt-[7px]">
+					<span className={` ${error ? 'text-red-400' : 'text-white'}`}>{error || 'errorZone'}</span>
+				</div>
+				<SubmitButton label="회원가입" btnState={getBtnState()} />
 			</form>
 		</div>
 	);

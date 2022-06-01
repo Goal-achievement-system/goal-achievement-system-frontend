@@ -13,7 +13,6 @@ export interface IFormState {
 	nickName: string;
 	sex: string;
 	age: string;
-	error: string;
 }
 
 const initialState: IFormState = {
@@ -23,11 +22,10 @@ const initialState: IFormState = {
 	nickName: '',
 	sex: '남자',
 	age: '20대',
-	error: '',
 };
-// type 명시하기
+
 export interface Action {
-	type: string;
+	type: 'email' | 'password' | 'passwordCheck' | 'nickName' | 'sex' | 'age';
 	payload: string;
 }
 function formReducer(state: IFormState, action: Action) {
@@ -35,11 +33,11 @@ function formReducer(state: IFormState, action: Action) {
 }
 
 function SignUpContainer() {
+	const [formState, formDispatch] = useReducer(formReducer, initialState);
+	const [error, setError] = useState<string>('');
 	const auth = useSelector((state: RootState) => state.auth);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [error, setError] = useState<string>('');
-	const [formState, formDispatch] = useReducer(formReducer, initialState);
 	const onSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		const { email, password, passwordCheck, nickName, age, sex } = formState;
@@ -47,7 +45,7 @@ function SignUpContainer() {
 		if (!email.trim() || !password.trim() || !passwordCheck.trim() || !nickName.trim()) return;
 		// eslint-disable-next-line no-nested-ternary
 		const sexTrans = sex === '없음' ? 'UNKNOWN' : sex === '남자' ? 'MALE' : 'FEMALE';
-		console.log({ email, password, nickName, sex: sexTrans, age: +`${age?.split('대')[0]}` });
+
 		dispatch(authSlice.actions.signUp({ email, password, nickName, sex: sexTrans, age: +`${age?.split('대')[0]}` }));
 	};
 	useEffect(() => {
