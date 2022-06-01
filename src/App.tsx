@@ -6,6 +6,7 @@ import Path from 'utils/path';
 import Home from 'pages/home/HomeContainer';
 import Login from 'pages/Login/LoginContainer';
 import SignUp from 'pages/SignUp/SignUpContainer';
+
 import NotFound from 'pages/NotFound';
 
 /*

@@ -42,6 +42,7 @@ module.exports = {
 				borderOrange: '#FF8A00',
 				statesRed: '#FF1523',
 				statesOrange: '#FF8A00',
+				modalGray: '#FAFAFA',
 			},
 		},
 	},
