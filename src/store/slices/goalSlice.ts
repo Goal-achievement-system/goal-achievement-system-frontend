@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GoalListParams, LoadGoalParam } from 'store/sagas/goalSaga';
 import { Goal } from 'types/goal';
 
-export interface GoalList {
+export interface InitialState {
 	list: Goal[];
 	isLoading: boolean;
 	error: null | string;
 }
 
-const initialState: GoalList = {
+const initialState: InitialState = {
 	list: [],
 	isLoading: false,
 	error: null,

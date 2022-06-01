@@ -16,6 +16,12 @@ const Template: ComponentStory<typeof Home> = function (args: Props) {
 export const Logout = Template.bind({});
 Logout.args = {
 	member: null,
+	goalCount: {
+		totalSuccessGoalCount: 600,
+		totalGoalCount: 1200,
+		totalOngoingGoalCount: 300,
+		totalFailGoalCount: 300,
+	},
 };
 
 export const Login = Template.bind({});
@@ -28,4 +34,5 @@ Login.args = {
 		age: 25,
 		money: 10000,
 	},
+	goalCount: null,
 };

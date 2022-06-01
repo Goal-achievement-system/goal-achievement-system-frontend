@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import goalSlice from 'store/slices/goalSlice';
 import { Goal } from 'types/goal';
@@ -20,10 +21,8 @@ function* loadGoalSaga(action: { payload: LoadGoalParam }) {
 
 	try {
 		const result: GoalListParams = yield call(API.loadGoaliLst, param);
-		console.log(result, 'result');
 		yield put(loadGoalListSuccess({ list: [] }));
 	} catch (error) {
-		console.log(error, 'error');
 		yield put(loadGoalListFailure(error));
 	}
 }
