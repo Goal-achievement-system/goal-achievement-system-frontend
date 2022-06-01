@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GoalListParams, LoadGoalParam } from 'store/sagas/goalSaga';
 import { Goal } from 'types/goal';
