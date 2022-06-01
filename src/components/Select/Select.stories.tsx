@@ -2,7 +2,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import Select from '.';
+import Select from './Select';
 
 export interface Option {
 	id: number;
@@ -44,7 +44,7 @@ const options = [
 		value: '50대',
 	},
 ];
-
+/*
 export const IsRequired = Template.bind({});
 IsRequired.args = {
 	label: '연령',
@@ -58,3 +58,4 @@ NotRequired.args = {
 	isRequired: false,
 	value: '20대',
 };
+*/

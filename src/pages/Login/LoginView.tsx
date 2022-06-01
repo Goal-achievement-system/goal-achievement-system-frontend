@@ -4,7 +4,6 @@ import SubmitButton from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
 import { Link } from 'react-router-dom';
 import Path from 'utils/path';
-import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
@@ -31,12 +30,12 @@ function LoginView({ error, onSubmit, email, password, setEmail, setPassword }: 
 				<label htmlFor="email" className="mb-[16px] font-semibold text-[20px]">
 					이메일 <span className="text-primaryOrange-200 font-semibold">*</span>
 				</label>
-				<TextInput placeholder="이메일 주소" value={email} setState={setEmail} />
+				<TextInput placeholder="이메일 주소" value={email} onChange={setEmail} />
 				<label htmlFor="password" className="mb-[16px] mt-[30px] font-semibold text-[20px]">
 					비밀번호 <span className="text-primaryOrange-200 font-semibold ">*</span>
 				</label>
 
-				<TextInput placeholder="비밀번호" value={password} setState={setPassword} />
+				<TextInput placeholder="비밀번호" value={password} onChange={setPassword} />
 				<div className="flex justify-between w-full  mb-[27px] mt-[186px]">
 					<span className="text-[20px] font-semibold text-primaryGray-200">비밀번호를 잊으셨나요?</span>
 					<span className="text-[20px] font-semibold text-primaryOrange-200">

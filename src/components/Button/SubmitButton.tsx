@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-type BtnStates = 'active' | 'inactive' | 'pressed';
+export type BtnStates = 'active' | 'inactive' | 'pressed';
 
 enum BgColor {
 	orange200 = 'bg-primaryOrange-200',
@@ -16,7 +16,7 @@ enum TextColor {
 
 export interface Props {
 	label: string;
-	onClick: () => void;
+	onClick?: () => void;
 	btnState: BtnStates;
 }
 function SubmitButton({ label, onClick, btnState }: Props) {
@@ -34,7 +34,7 @@ function SubmitButton({ label, onClick, btnState }: Props) {
 		<button
 			type="submit"
 			onClick={onClick}
-			className={`flex flex-row grow-0 justify-center items-center h-[70px]  rounded-[8px]  w-full py-[22px]  ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center h-[70px]  rounded-[8px]  w-full py-[22px]   ${getBgColor(
 				btnState
 			)}`}
 		>

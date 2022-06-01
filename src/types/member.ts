@@ -1,4 +1,4 @@
-type Sex = 'FEMALE' | 'MALE' | 'UNKNOWN';
+export type Sex = 'FEMALE' | 'MALE' | 'UNKNOWN';
 export interface Member {
 	email: string;
 	password: string;

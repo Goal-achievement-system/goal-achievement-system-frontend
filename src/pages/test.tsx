@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Select, { Option } from 'components/Select/Select';
 
+export const test = 1;
+
+/*
 export default function Test() {
 	const GenderOption = [
 		{ id: 1, value: '남자' },
@@ -25,3 +28,4 @@ export default function Test() {
 		</div>
 	);
 }
+*/

@@ -6,14 +6,15 @@ export interface Option {
 }
 
 interface SelectProps {
-	label: string;
-	isRequired: boolean;
+	// label: string;
+	// isRequired: boolean;
 	options: Option[];
 	value: string;
-	onChange: Dispatch<SetStateAction<string>>;
+	// onChange: Dispatch<SetStateAction<string>>;
+	onChange: (curVar: string) => void;
 }
-
-export default function Select({ label, isRequired = false, options, value, onChange }: SelectProps) {
+// label, isRequired = false,
+export default function Select({ options, value, onChange }: SelectProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const optionRef = useRef<HTMLDivElement>(null);
 	const optionList = options.map((option: Option) => (
@@ -49,14 +50,14 @@ export default function Select({ label, isRequired = false, options, value, onCh
 
 	return (
 		<div>
-			{label && (
+			{/* label && (
 				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
 					<label htmlFor={label} className="font-semibold text-[20px]">
 						{label}
 					</label>
 					{isRequired && <span className="font-semibold text-primaryOrange-200 ">*</span>}
 				</div>
-			)}
+			) */}
 			<div className="dropdown w-[282px]" ref={optionRef}>
 				<div className="select w-full h-[70px] border-2 border-primaryBlack-100 rounded-xl ">
 					<button type="button" className="flex items-center justify-start w-full p-6" onClick={handleClick}>
