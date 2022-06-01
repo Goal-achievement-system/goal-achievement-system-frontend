@@ -1,6 +1,8 @@
 import React from 'react';
 import CountUp from 'react-countup';
+import { Link } from 'react-router-dom';
 import { GoalCount } from 'types/statistics';
+import Path from 'utils/path';
 import MenuBox from '../../components/Box/MenuBox';
 import SmallBox from '../../components/Box/SmallBox';
 import { Member } from '../../types/member';
@@ -18,12 +20,12 @@ function HomeView({ member, goalCount }: Props) {
 			</div>
 			<div className="flex-1">
 				<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] bg-primaryOrange-200">
-					<button
-						type="button"
+					<Link
+						to={Path.notice}
 						className="absolute bottom-[8px] right-[8px] pc:bottom-[16px] pc:right-[16px] rounded-[8px] p-[8px] text-white text-[10px] pc:text-[16px] font-[600] leading-[12px] pc:leading-[19.2px] bg-opacity-[30%] bg-black inline-block"
 					>
 						1/3 전체보기
-					</button>
+					</Link>
 				</div>
 				{member ? (
 					<>

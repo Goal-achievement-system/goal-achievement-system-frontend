@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Member } from 'types/member';
+import Path from 'utils/path';
 import SideBarButton from '../Button/SideBarButton';
 
 export interface Props {
@@ -18,9 +20,9 @@ function MenuBox({ member }: Props) {
 				) : (
 					<>
 						<div className="test-[22px] font-[600] leading-[30px] mb-[4px]">로그인을 해주세요</div>
-						<a href="/#" className="text-[16px] text-primaryOrange-200 font-[600px] leading-[19px]">
+						<Link to={Path.login} className="text-[16px] text-primaryOrange-200 font-[600px] leading-[19px]">
 							바로가기 &gt;
-						</a>
+						</Link>
 					</>
 				)}
 			</div>
@@ -56,7 +58,7 @@ function MenuBox({ member }: Props) {
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">목표등록현황</div>
 				{member &&
 					['4.1', '4.2'].map((item) => (
-						<div className="mb-[7px]">
+						<div key={item} className="mb-[7px]">
 							<SideBarButton key={`key_${item}`} onClick={() => {}} bgColor="orange">
 								<div className="flex justify-between w-full">
 									<span className="text-primaryWhite">목표인증</span>

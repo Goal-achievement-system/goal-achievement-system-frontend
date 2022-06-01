@@ -1,8 +1,7 @@
 import client from './client';
 
-const getMember = async () => {
-	const res = await client.get('/members/myinfo');
-	return res.data;
+export const getMember = () => {
+	return client.get('/members/myinfo');
 };
 
 export default getMember;
