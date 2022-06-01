@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NoticeCategory } from 'types/notice';
 import MenuBox from '../../components/Box/MenuBox';
 import FilterButton from '../../components/Button/FilterButton';
@@ -6,11 +6,10 @@ import { Member } from '../../types/member';
 
 export interface Props {
 	member: Member | null;
-	category: NoticeCategory;
-	setCategory: React.Dispatch<React.SetStateAction<NoticeCategory>>;
 }
 
-function NoticeView({ member, category, setCategory }: Props) {
+function NoticeView({ member }: Props) {
+	const [category, setCategory] = useState<NoticeCategory>('all');
 	return (
 		<div className="min-w-[360px] pc:w-[1200px] pc:flex my-0 mx-auto p-[20px] pc:p-12 pc:box-content">
 			<div className="hidden pc:block mr-[30px]">

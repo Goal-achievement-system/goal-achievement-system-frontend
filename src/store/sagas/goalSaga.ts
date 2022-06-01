@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import goalSlice from 'store/slices/goalSlice';
 import { Goal } from 'types/goal';

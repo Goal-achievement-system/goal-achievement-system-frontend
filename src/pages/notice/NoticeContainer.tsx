@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { NoticeCategory } from 'types/notice';
+import React from 'react';
 import NoticeView from './NoticeView';
 
 function NoticeContainer() {
-	const [category, setCategory] = useState<NoticeCategory>('all');
-	return <NoticeView member={null} category={category} setCategory={setCategory} />;
+	return <NoticeView member={null} />;
 }
 
 export default NoticeContainer;
