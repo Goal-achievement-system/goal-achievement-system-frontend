@@ -1,6 +1,7 @@
 import React from 'react';
 import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
+import { Goal } from 'types/goal';
 import { GoalCount } from 'types/statistics';
 import Path from 'utils/path';
 import MenuBox from '../../components/Box/MenuBox';
@@ -10,9 +11,10 @@ import { Member } from '../../types/member';
 export interface Props {
 	member: Member | null;
 	goalCount: GoalCount | null;
+	goalList: Goal[];
 }
 
-function HomeView({ member, goalCount }: Props) {
+function HomeView({ member, goalCount, goalList }: Props) {
 	return (
 		<div className="min-w-[360px] pc:w-[1200px] pc:flex my-0 mx-auto p-[20px] pc:p-12 pc:box-content">
 			<div className="hidden pc:block mr-[30px]">
@@ -36,23 +38,12 @@ function HomeView({ member, goalCount }: Props) {
 							</button>
 						</div>
 						<ul className="flex flex-wrap gap-x-[16px] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
-							{[0, 1, 2, 3, 4, 5].map((item) => (
-								<li key={item}>
-									<SmallBox
-										goal={{
-											goalId: 1,
-											memberEmail: '',
-											category: '취미',
-											goalName: '목표인증 텍스트',
-											content: '목표 내용',
-											limitDate: new Date(2022, 5, 25),
-											money: 10000,
-											reward: 'high',
-											verificationResult: 'ongoing',
-										}}
-									/>
-								</li>
-							))}
+							{goalList &&
+								goalList.map((goal) => (
+									<li key={goal.goalId}>
+										<SmallBox goal={goal} />
+									</li>
+								))}
 						</ul>
 					</>
 				) : (

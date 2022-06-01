@@ -42,9 +42,9 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "lint": "eslint './src/**/*.{ts,tsx,js,jsx}'",
-    "lint:fix": "eslint --fix './src/**/*.{ts,tsx,js,jsx}'",
-    "prettier": "prettier --write --config ./.prettierrc './src/**/*.{ts,tsx}'",
+    "lint": "eslint \"./src/**/*.{ts,tsx,js,jsx}\"",
+    "lint:fix": "eslint --fix \"./src/**/*.{ts,tsx,js,jsx}\"",
+    "prettier": "prettier --write --config ./.prettierrc \"./src/**/*.{ts,tsx}\"",
     "cy:open": "cypress open"
   },
   "eslintConfig": {

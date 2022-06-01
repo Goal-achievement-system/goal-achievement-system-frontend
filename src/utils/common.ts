@@ -8,7 +8,8 @@ export function cls(...classnames: string[]) {
 // 디데이 계산
 export function getDday(targetDate: Date) {
 	const gap = new Date().getTime() - new Date(targetDate).getTime();
-	const dDay = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
+	let dDay = Math.floor(gap / (1000 * 60 * 60 * 24)) * -1;
+	if (dDay < 0) dDay = 0;
 	return dDay;
 }
 

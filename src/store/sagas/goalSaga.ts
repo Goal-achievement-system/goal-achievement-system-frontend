@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AxiosResponse } from 'axios';
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import goalSlice from 'store/slices/goalSlice';
 import { Goal } from 'types/goal';
-import * as API from '../../api/goalAPI';
-
-export interface GoalListParams {
-	list: Goal[];
-}
+import * as goalAPI from '../../api/goalAPI';
 
 export interface LoadGoalParam {
 	status: string;
@@ -20,8 +17,8 @@ function* loadGoalSaga(action: { payload: LoadGoalParam }) {
 	const param = action.payload;
 
 	try {
-		const result: GoalListParams = yield call(API.loadGoaliLst, param);
-		yield put(loadGoalListSuccess({ list: [] }));
+		const result: AxiosResponse<Goal[]> = yield call(goalAPI.loadGoaliLst, param);
+		yield put(loadGoalListSuccess(result.data));
 	} catch (error) {
 		yield put(loadGoalListFailure(error));
 	}
