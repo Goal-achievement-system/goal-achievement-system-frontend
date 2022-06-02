@@ -30,8 +30,8 @@ function* replaceMemberSaga(action: { payload: Member }) {
 		const token: string = localStorage.getItem('goalKeeperToken')!;
 		client.defaults.headers.common.Authorization = token;
 
-		const result: Member = yield call(memberAPI.replceMember, action.payload);
-		yield put(replaceMemberInfoSuccess(result));
+		const result: AxiosResponse<Member> = yield call(memberAPI.replceMember, action.payload);
+		yield put(replaceMemberInfoSuccess(result.data));
 	} catch (error) {
 		yield put(replaceMemberInfoFail(String(error)));
 	}
