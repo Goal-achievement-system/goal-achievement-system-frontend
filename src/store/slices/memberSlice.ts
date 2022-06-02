@@ -28,6 +28,17 @@ export const memberSlice = createSlice({
 			state.isLoading = false;
 			state.error = error;
 		},
+		replaceMemberInfo: (state, { payload }) => {
+			state.isLoading = true;
+		},
+		replaceMemberInfoSuccess: (state, { payload }: PayloadAction<Member>) => {
+			state.isLoading = false;
+			state.memberinfo = { ...state.memberinfo, ...payload };
+		},
+		replaceMemberInfoFail: (state, { payload: error }: PayloadAction<string>) => {
+			state.isLoading = false;
+			state.error = error;
+		},
 	},
 });
 
