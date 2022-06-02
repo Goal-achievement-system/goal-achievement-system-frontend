@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import RouteModal from 'components/Modal/RouteModal';
-import useDetectClose from 'utils/useDetectClose';
+import useDetectClose from 'hooks/useDetectClose';
 
 type Menu = {
 	id: string;
@@ -49,7 +49,7 @@ export default function Header() {
 	};
 
 	return (
-		<header className="w-full h-[86px] p-2 flex justify-between items-center">
+		<header className="pc:max-w-[1200px] h-[86px] p-2 flex justify-between items-center">
 			<div className="pc:basis-[312px] h-full flex items-center">
 				<Link className="" to="/">
 					<img className="pc:max-w-[157px] max-w-[112px]" src="./image/icon/logo.svg" alt="" />
@@ -77,7 +77,7 @@ export default function Header() {
 						src="./image/icon/my.svg"
 						alt="user-icon"
 					/>
-					<RouteModal title="개인정보 수정" isLogin={false} isOpen={isOpen[1]} />
+					<RouteModal title="개인정보 수정" isLogin isOpen={isOpen[1]} />
 				</div>
 			</div>
 			<div className="block pc:hidden min-w-[16px] min-h-[12px]">
