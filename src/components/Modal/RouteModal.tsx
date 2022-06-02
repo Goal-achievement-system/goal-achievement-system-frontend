@@ -70,12 +70,13 @@ export default function RouteModal({ title, isLogin = false, alarmList = data, i
 		<div className="absolute right-0">
 			<div className={`w-[380px] h-[391px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
 				<div className="font-[700]">{title}</div>
-				<div className="overflow-auto popup-body mt-7 mb-2 pc:max-h-[270px]">
-					{title === '알림' ? <AlarmPopup alarmList={alarmList} /> : <UserProfilePopUp />}
+				<div className="overflow-auto popup-body mt-7 mb-2 pc:max-h-[270px] pc:min-h-[270px]">
+					{/* {title === '알림' ? <AlarmPopup alarmList={alarmList} /> : <UserProfilePopUp isOpen={isOpen} />} */}
+					{title === '알림' ? <AlarmPopup /> : <UserProfilePopUp isOpen={isOpen} />}
 				</div>
-				<div className="">
+				{/* <div className="">
 					{title === '알림' && <img className="m-auto" src="./image/icon/down-arrow.svg" alt="down-arrow" />}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
