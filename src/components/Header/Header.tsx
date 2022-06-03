@@ -5,10 +5,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import RouteModal from 'components/Modal/RouteModal';
 import useDetectClose from 'hooks/useDetectClose';
+import Path from 'utils/path';
 
 type Menu = {
 	id: string;
 	title: string;
+	path: string;
 };
 
 export default function Header() {
@@ -19,24 +21,28 @@ export default function Header() {
 		{
 			id: 'notice',
 			title: '공지사항',
+			path: Path.notice,
 		},
 		{
 			id: '등록',
 			title: '목표등록',
+			path: '',
 		},
 		{
 			id: '인증',
 			title: '목표인증',
+			path: '',
 		},
 		{
 			id: 'profile',
 			title: '내 정보',
+			path: '',
 		},
 	];
 	const menus = menuList.map((menu: Menu): React.ReactElement => {
 		return (
 			<li key={menu.id} className="p-2">
-				<Link to={menu.id}>{menu.title}</Link>
+				<Link to={menu.path}>{menu.title}</Link>
 			</li>
 		);
 	});
@@ -61,7 +67,7 @@ export default function Header() {
 			<nav className="hidden mr-auto pc:block">
 				<ul className="flex">{menus}</ul>
 			</nav>
-			<div className="hidden header-sub-menus pc:flex " aria-hidden ref={dropDownRef}>
+			<div className="hidden header-sub-menus pc:flex z-[1]" aria-hidden ref={dropDownRef}>
 				<div className="relative">
 					<img
 						className="min-w-[35px] object-cover cursor-pointer"
