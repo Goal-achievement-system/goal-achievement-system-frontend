@@ -55,6 +55,7 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 				<PerformInput
 					label="비밀번호"
 					isRequired
+					value={formState.password}
 					type="password"
 					placeholder="비밀번호 (8자리 이상)"
 					onChange={(curVar: string) => formDispatch({ type: 'password', payload: curVar })}
@@ -63,6 +64,7 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 				<PerformInput
 					type="password"
 					isRequired
+					value={formState.passwordCheck}
 					placeholder="비밀번호 확인"
 					onChange={(curVar: string) => formDispatch({ type: 'passwordCheck', payload: curVar })}
 				/>

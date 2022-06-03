@@ -1,4 +1,5 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useEffect, useState } from 'react';
+import { confirmOverlapEmail } from 'api/memberAPI';
 import { validateEmail, validatePassword } from '../../utils/common';
 
 interface Props {
@@ -9,8 +10,8 @@ interface Props {
 	buttonTitle?: string;
 	subButtonTitle?: string;
 	value?: string;
-	onClick?: () => void;
-	// onChange: Dispatch<SetStateAction<string>>;
+	// onClick?: () => void;
+	onClick?: (type: string, value: string | undefined) => void;
 	onChange: (curVar: string) => void;
 }
 
@@ -36,16 +37,34 @@ export default function PerformInput({
 	onChange,
 }: Props) {
 	const [isConfirm, setIsConfirm] = useState<boolean>(false);
-	const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+	const [isCorrect, setIsCorrect] = useState<boolean>(true);
 	const [isOpenGuide, setIsOpenGuide] = useState<boolean>(false);
 
-	const getFocusColor = () => {
-		if (type !== 'email' && type !== 'password') {
-			return 'focus:border-primaryOrange-200';
+	useEffect(() => {
+		if (!isCorrect) {
+			setIsOpenGuide(true);
+			return;
 		}
-		return isCorrect === null || isCorrect
-			? 'focus:border-primaryOrange-200 focus:text-primaryOrange-200'
-			: 'focus:border-buttonOrange-200 focus:text-buttonOrange-200';
+		setIsOpenGuide(false);
+	}, [isCorrect]);
+
+	// ㅍㅁ
+	useEffect(() => {
+		if (!value) {
+			setIsOpenGuide(false);
+		} else {
+			setIsOpenGuide(true);
+		}
+
+		setIsConfirm(false);
+	}, [value]);
+
+	const getFocusColor = () => {
+		if (!value || (type !== 'email' && type !== 'password')) return 'focus:border-primaryOrange-200';
+
+		return isCorrect === false
+			? 'focus:border-buttonOrange-200 focus:text-buttonOrange-200'
+			: 'focus:border-primaryOrange-200 focus:text-primaryOrange-200';
 	};
 
 	const getButtonColor = (): string => {
@@ -58,8 +77,8 @@ export default function PerformInput({
 		return isCorrect ? 'text-primaryOrange-200' : 'text-buttonOrange-200';
 	};
 
+	// input 타입에 따라 다른 메세지를 반환
 	const renderGuideMessage = () => {
-		if (isCorrect === null) return '';
 		if (type === 'email') {
 			if (isCorrect) return '사용 가능한 이메일입니다.';
 			return '잘못된 형식의 이메일입니다.';
@@ -71,27 +90,36 @@ export default function PerformInput({
 		return '';
 	};
 
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (isConfirm || !isCorrect) return;
-		setIsConfirm(!isConfirm);
+	// 이메일의 경우 이메일 중복검사를 추가로 실행
+	// 이메일이 아닌 경우에는 props로 전단받은 onClick(type, value) 함수를 실행
+	const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+		if (!isCorrect) return;
+		if (type === 'email') {
+			const confirmResult = await confirmOverlapEmail(value);
+			if (confirmResult) setIsConfirm(true);
+		}
+		// type, value 인자로 받아 함수내부의 동작을 수행한다.
+		if (onClick) onClick(type, value);
+		setIsConfirm(true);
 	};
 
+	// formState를 변경 유효성검사 진행
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		onChange(e?.currentTarget.value);
 
-		if (type === 'email') {
-			setIsCorrect(validateEmail(e?.currentTarget.value));
-		}
-		if (type === 'password') {
-			setIsCorrect(validatePassword(e?.currentTarget.value));
-		}
-
-		setIsConfirm(false);
+		if (type === 'email') setIsCorrect(validateEmail(e?.currentTarget.value));
+		if (type === 'password') setIsCorrect(validatePassword(e?.currentTarget.value));
 	};
 
+	// isOpenGuid 만을 핸들링한다
 	const handleFocus = () => {
-		if (type !== 'email' && type !== 'password') return;
-		setIsOpenGuide(true);
+		if (!value) {
+			setIsOpenGuide(false);
+			return;
+		}
+		if (!isCorrect && (type === 'email' || type === 'password')) {
+			setIsOpenGuide(true);
+		}
 	};
 
 	const handleBlur = () => {
