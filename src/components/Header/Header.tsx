@@ -52,7 +52,7 @@ export default function Header() {
 	};
 
 	return (
-		<header className="pc:max-w-[1200px] h-[86px] p-2 flex justify-between items-center">
+		<header className="pc:max-w-[1200px] h-[86px] flex mx-auto justify-between items-center">
 			<div className="pc:basis-[312px] h-full flex items-center">
 				<Link className="" to="/">
 					<img className="pc:max-w-[157px] max-w-[112px]" src="./image/icon/logo.svg" alt="" />
@@ -61,7 +61,7 @@ export default function Header() {
 			<nav className="hidden mr-auto pc:block">
 				<ul className="flex">{menus}</ul>
 			</nav>
-			<div className="header-sub-menus hidden pc:flex basis-[120px]" aria-hidden ref={dropDownRef}>
+			<div className="hidden header-sub-menus pc:flex " aria-hidden ref={dropDownRef}>
 				<div className="relative">
 					<img
 						className="min-w-[35px] object-cover cursor-pointer"
