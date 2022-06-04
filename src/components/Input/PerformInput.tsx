@@ -37,29 +37,21 @@ export default function PerformInput({
 	onChange,
 }: Props) {
 	const [isConfirm, setIsConfirm] = useState<boolean>(false);
-	const [isCorrect, setIsCorrect] = useState<boolean>(true);
+	const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 	const [isOpenGuide, setIsOpenGuide] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (!isCorrect) {
-			setIsOpenGuide(true);
+		if (!value || isCorrect === null) {
+			setIsOpenGuide(false);
 			return;
 		}
-		setIsOpenGuide(false);
-	}, [isCorrect]);
 
-	// ㅍㅁ
-	useEffect(() => {
-		if (!value) {
-			setIsOpenGuide(false);
-		} else {
-			setIsOpenGuide(true);
-		}
-
-		setIsConfirm(false);
-	}, [value]);
+		console.log('useEffect', isCorrect);
+		setIsOpenGuide(true);
+	}, [value, isCorrect]);
 
 	const getFocusColor = () => {
+		if (isCorrect === null) return '';
 		if (!value || (type !== 'email' && type !== 'password')) return 'focus:border-primaryOrange-200';
 
 		return isCorrect === false
@@ -79,6 +71,7 @@ export default function PerformInput({
 
 	// input 타입에 따라 다른 메세지를 반환
 	const renderGuideMessage = () => {
+		if (isCorrect === null) return '';
 		if (type === 'email') {
 			if (isCorrect) return '사용 가능한 이메일입니다.';
 			return '잘못된 형식의 이메일입니다.';
@@ -93,7 +86,7 @@ export default function PerformInput({
 	// 이메일의 경우 이메일 중복검사를 추가로 실행
 	// 이메일이 아닌 경우에는 props로 전단받은 onClick(type, value) 함수를 실행
 	const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (!isCorrect) return;
+		if (isCorrect === false) return;
 		if (type === 'email') {
 			const confirmResult = await confirmOverlapEmail(value);
 			if (confirmResult) setIsConfirm(true);
@@ -109,6 +102,8 @@ export default function PerformInput({
 
 		if (type === 'email') setIsCorrect(validateEmail(e?.currentTarget.value));
 		if (type === 'password') setIsCorrect(validatePassword(e?.currentTarget.value));
+
+		setIsConfirm(false);
 	};
 
 	// isOpenGuid 만을 핸들링한다
@@ -117,7 +112,7 @@ export default function PerformInput({
 			setIsOpenGuide(false);
 			return;
 		}
-		if (!isCorrect && (type === 'email' || type === 'password')) {
+		if (type === 'email' || type === 'password') {
 			setIsOpenGuide(true);
 		}
 	};
@@ -158,7 +153,7 @@ export default function PerformInput({
 					</button>
 				)}
 			</div>
-			{isOpenGuide && <p className={`p-3 ${getGuideColor()}`}>{renderGuideMessage()}</p>}
+			{isOpenGuide && isCorrect !== null && <p className={`p-3 ${getGuideColor()}`}>{renderGuideMessage()}</p>}
 		</div>
 	);
 }

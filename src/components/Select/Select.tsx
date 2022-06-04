@@ -71,7 +71,7 @@ export default function Select({ options, value, onChange }: SelectProps) {
 					<div
 						className={`options w-[282px] border-2 border-primaryBlack-100 bg-primaryWhite rounded-xl mt-1 ${
 							isOpen ? '' : 'hidden'
-						} z-500 absolute`}
+						} z-50 absolute`}
 					>
 						<button
 							type="button"
