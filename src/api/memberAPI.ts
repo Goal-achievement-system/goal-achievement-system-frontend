@@ -6,11 +6,11 @@ export const getMember = () => {
 };
 
 export const replceMember = ({ email, password, nickName, sex, age, money }: Member) => {
-	return client.put('/member/myinfo', { email, password, nickName, sex, age, money });
+	return client.put('/members/myinfo', { email, password, nickName, sex, age, money });
 };
 
 export const confirmOverlapEmail = (email: string | undefined) => {
-	return client.get(`/member/${email}`);
+	return client.get(`/members/${email}`);
 };
 
 export const getNotifications = () => {
