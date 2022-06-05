@@ -68,7 +68,11 @@ export default function Select({ options, value, onChange }: SelectProps) {
 					</button>
 				</div>
 				{options && (
-					<div className={`options w-full border-2 border-primaryBlack-100 rounded-xl mt-1 ${isOpen ? '' : 'hidden'}`}>
+					<div
+						className={`options w-[282px] border-2 border-primaryBlack-100 bg-primaryWhite rounded-xl mt-1 ${
+							isOpen ? '' : 'hidden'
+						} z-50 absolute`}
+					>
 						<button
 							type="button"
 							className=" w-full max-h-[162px] overflow-y-auto scrollbar"

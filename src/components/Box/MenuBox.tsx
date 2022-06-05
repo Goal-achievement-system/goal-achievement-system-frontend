@@ -9,12 +9,23 @@ export interface Props {
 }
 
 function MenuBox({ member }: Props) {
+	const tempLogout = () => {
+		localStorage.removeItem('goalKeeperToken');
+		window.location.replace('/');
+	};
 	return (
 		<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white">
 			<div className="border-b-[1px] border-borderGray pb-[16px] mb-[16px]">
 				{member ? (
 					<>
-						<div className="test-[22px] font-[600] leading-[30px] mb-[4px]">{member.nickName}</div>
+						{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+						<div
+							onClick={tempLogout}
+							onKeyDown={tempLogout}
+							className="test-[22px] font-[600] leading-[30px] mb-[4px] cursor-pointer"
+						>
+							{member.nickName}
+						</div>
 						<div className="text-[16px] text-primaryOrange-200 font-[600px] leading-[19px]">{member.email}</div>
 					</>
 				) : (

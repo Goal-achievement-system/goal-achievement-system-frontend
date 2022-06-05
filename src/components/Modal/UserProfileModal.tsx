@@ -1,9 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PerformInput from 'components/Input/PerformInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store/slices';
+import memberSlice from 'store/slices/memberSlice';
+// import rootReducer from 'store/slices';
 
-export default function UserProfileModal() {
-	const [name, setName] = useState('김씨');
-	const [email, setEmail] = useState('test@test.com');
+interface Props {
+	isOpen: boolean;
+}
+export default function UserProfileModal({ isOpen }: Props) {
+	const currentMemberInfo = useSelector((state: RootState) => state.member.memberinfo);
+	const currentNickName = useSelector((state: RootState) => state.member.memberinfo?.nickName);
+	const currentEmail = useSelector((state: RootState) => state.member.memberinfo?.email);
+	const [replaceNickName, setReplaceNickName] = useState<string | undefined>(undefined);
+	const [replaceEmail, setReplaceEmail] = useState<string | undefined>(undefined);
+	const dispatch = useDispatch();
+
+	const onClick = (type: string, value: string | undefined) => {
+		const replaceMemberInfo = { ...currentMemberInfo, [type]: value };
+		dispatch(memberSlice.actions.replaceMemberInfo(replaceMemberInfo));
+	};
+
+	useEffect(() => {
+		setReplaceNickName(currentNickName);
+		setReplaceEmail(currentEmail);
+	}, [currentNickName, currentEmail, isOpen]);
 
 	return (
 		<>
@@ -13,9 +34,9 @@ export default function UserProfileModal() {
 					type="text"
 					placeholder="닉네임"
 					buttonTitle="변경"
-					onClick={() => {}}
-					value={name}
-					onChange={setName}
+					onClick={onClick}
+					value={replaceNickName}
+					onChange={setReplaceNickName}
 				/>
 			</div>
 			<div className="input-wrap">
@@ -24,9 +45,9 @@ export default function UserProfileModal() {
 					type="email"
 					placeholder="email"
 					buttonTitle="중복확인"
-					onClick={() => {}}
-					value={email}
-					onChange={setEmail}
+					onClick={onClick}
+					value={replaceEmail}
+					onChange={setReplaceEmail}
 				/>
 			</div>
 		</>
