@@ -3,8 +3,8 @@ import React, { useRef, useState } from 'react';
 import Header from 'components/Header/Header';
 
 interface TemplateProps {
-	children: React.ReactElement;
-	Modal: React.ReactElement;
+	children: React.ReactNode;
+	Modal?: React.ReactElement;
 }
 
 export default function BaseTemplate({ children, Modal }: TemplateProps) {
@@ -33,7 +33,7 @@ export default function BaseTemplate({ children, Modal }: TemplateProps) {
 	};
 
 	const modalSection = (
-		<div className="absolute top-0 left-0 w-full h-full qqqqqq z-1000" onClick={handleModalClick} aria-hidden>
+		<div className="absolute top-0 left-0 z-50 w-full h-full" onClick={handleModalClick} aria-hidden>
 			<div className="absolute w-full h-full z-999 bg-primaryBlack-500 bg-opacity-20" />
 			<div className="relative top-1/2 left-1/2" ref={modalRef}>
 				{Modal}
@@ -42,7 +42,7 @@ export default function BaseTemplate({ children, Modal }: TemplateProps) {
 	);
 
 	return (
-		<div className="main pc:max-w-[1200px] m-auto">
+		<div className="main pc:max-w-[1200px] m-auto h-full">
 			<Header />
 			<div onClick={handleClick} aria-hidden>
 				{children}

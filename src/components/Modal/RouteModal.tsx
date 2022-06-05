@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { RootState } from 'store/slices';
 import AlarmPopup from './AlarmModal';
 import UserProfilePopUp from './UserProfileModal';
 
@@ -46,9 +48,10 @@ const data = [
 ];
 
 export default function RouteModal({ title, isLogin = false, alarmList = data, isOpen }: Props) {
-	if (!isLogin) {
+	const { memberinfo } = useSelector((state: RootState) => state.member);
+	if (!memberinfo) {
 		return (
-			<div className="absolute right-0">
+			<div className="absolute right-0 z-50">
 				<div className={`w-[380px] h-[226px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
 					<div className="font-[600]">{title}</div>
 					<div className="overflow-auto pc:m-auto pc:h-full max-h-[270px] flex flex-col space-y-[40px] justify-center items-center">
@@ -67,15 +70,16 @@ export default function RouteModal({ title, isLogin = false, alarmList = data, i
 	}
 
 	return (
-		<div className="absolute right-0">
+		<div className="absolute right-0 z-50">
 			<div className={`w-[380px] h-[391px] p-6 rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}>
 				<div className="font-[700]">{title}</div>
-				<div className="overflow-auto popup-body mt-7 mb-2 pc:max-h-[270px]">
-					{title === '알림' ? <AlarmPopup alarmList={alarmList} /> : <UserProfilePopUp />}
+				<div className="overflow-auto popup-body mt-7 mb-2 pc:max-h-[270px] pc:min-h-[270px]">
+					{/* {title === '알림' ? <AlarmPopup alarmList={alarmList} /> : <UserProfilePopUp isOpen={isOpen} />} */}
+					{title === '알림' ? <AlarmPopup /> : <UserProfilePopUp isOpen={isOpen} />}
 				</div>
-				<div className="">
+				{/* <div className="">
 					{title === '알림' && <img className="m-auto" src="./image/icon/down-arrow.svg" alt="down-arrow" />}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

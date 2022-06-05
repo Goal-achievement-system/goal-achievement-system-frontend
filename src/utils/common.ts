@@ -13,8 +13,6 @@ export function getDday(targetDate: Date) {
 	return dDay;
 }
 
-// 이메일 유효성 검사
-// 이걸 이 파일에 위치시켜두는 것이 맞는건지 모르겠네요..
 export const validateEmail = (target: string): boolean => {
 	// [알파벳, 숫자, -_] @ [알파벳]] . [알파벳] 2개이상 3개이하로 끝남
 	const emailReg = /^[\w-]*@[a-zA-Z]*\.[a-zA-Z]{2,3}$/i;
