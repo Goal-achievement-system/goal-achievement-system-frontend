@@ -1,16 +1,16 @@
 /* eslint-disable func-names */
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import Notice, { Props } from './NoticeView';
+import Notice from './NoticeView';
 
 export default {
 	title: 'Pages/Notice',
 	component: Notice,
 } as ComponentMeta<typeof Notice>;
 
-const Template: ComponentStory<typeof Notice> = function (args: Props) {
+const Template: ComponentStory<typeof Notice> = function () {
 	/* eslint-disable-next-line react/jsx-props-no-spreading */
-	return <Notice {...args} />;
+	return <Notice />;
 };
 
 export const Primary = Template.bind({});

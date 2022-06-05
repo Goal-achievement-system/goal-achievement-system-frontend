@@ -31,7 +31,7 @@ export default function Header() {
 		{
 			id: '인증',
 			title: '목표인증',
-			path: '',
+			path: Path.certifications,
 		},
 		{
 			id: 'profile',
