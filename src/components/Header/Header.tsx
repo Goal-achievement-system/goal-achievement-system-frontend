@@ -35,13 +35,13 @@ export default function Header() {
 		},
 		{
 			id: 'profile',
-			title: '내 정보',
+			title: '내정보',
 			path: '',
 		},
 	];
 	const menus = menuList.map((menu: Menu): React.ReactElement => {
 		return (
-			<li key={menu.id} className="p-2">
+			<li key={menu.id} className="font-[600]">
 				<Link to={menu.path}>{menu.title}</Link>
 			</li>
 		);
@@ -65,7 +65,7 @@ export default function Header() {
 				</Link>
 			</div>
 			<nav className="hidden mr-auto pc:block">
-				<ul className="flex">{menus}</ul>
+				<ul className="flex space-x-[39px]">{menus}</ul>
 			</nav>
 			<div className="hidden header-sub-menus pc:flex z-[1]" aria-hidden ref={dropDownRef}>
 				<div className="relative">
