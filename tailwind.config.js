@@ -21,6 +21,10 @@ module.exports = {
 					400: '#8B8B8B',
 					500: '#000000',
 				},
+				primaryGray: {
+					100: '#E6E6E6',
+					200: '#898989',
+				},
 				primaryWhite: '#FFFFFF',
 				buttonBlack: {
 					100: '#F4F4F4',
@@ -38,6 +42,7 @@ module.exports = {
 				borderOrange: '#FF8A00',
 				statesRed: '#FF1523',
 				statesOrange: '#FF8A00',
+				modalGray: '#FAFAFA',
 			},
 		},
 	},

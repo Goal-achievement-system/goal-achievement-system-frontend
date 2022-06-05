@@ -57,7 +57,7 @@ span {
     color: #000;
 }
 
-/* @media screen and (max-width: 360px) { 
+ @media screen and (max-width: 360px) { 
     body,
     button,
     input,
@@ -66,10 +66,14 @@ span {
     textarea {
         font-size: 12px;
     }
-} */
+
+} 
+
+
 
 @font-face {
     font-family: "AppleSDGothicNeo";
     font-weight: 400;
     src: url("../assets/fonts/AppleSDGothicNeo/AppleSDGothicNeoM.ttf") format("truetype");
 }
+

@@ -18,19 +18,19 @@ export const statisticsSlice = createSlice({
 	name: 'statistics',
 	initialState,
 	reducers: {
-		loadGoalCount: (state, action: PayloadAction) => {
+		loadGoalCount: (state, { payload }: PayloadAction) => {
 			state.isLoading = true;
 		},
-		loadGoalCountSuccess: (state, action: PayloadAction<GoalCount>) => {
+		loadGoalCountSuccess: (state, { payload }: PayloadAction<GoalCount>) => {
 			state.isLoading = false;
 			state.goalCount = {
-				totalSuccessGoalCount: action.payload.totalSuccessGoalCount,
-				totalGoalCount: action.payload.totalGoalCount,
-				totalOngoingGoalCount: action.payload.totalOngoingGoalCount,
-				totalFailGoalCount: action.payload.totalFailGoalCount,
+				totalSuccessGoalCount: payload.totalSuccessGoalCount,
+				totalGoalCount: payload.totalGoalCount,
+				totalOngoingGoalCount: payload.totalOngoingGoalCount,
+				totalFailGoalCount: payload.totalFailGoalCount,
 			};
 		},
-		loadGoalCountFailure: (state, { payload: error }) => {
+		loadGoalCountFailure: (state, { payload: error }: PayloadAction<string>) => {
 			state.isLoading = false;
 			state.error = error;
 		},

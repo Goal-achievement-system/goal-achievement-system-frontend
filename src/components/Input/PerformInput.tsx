@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { validateEmail, validatePassword } from '../../utils/common';
 
 interface Props {
 	type: string;
 	placeholder: string;
 	label?: string;
+	isRequired?: boolean;
 	buttonTitle?: string;
 	subButtonTitle?: string;
-	width?: string;
+	value?: string;
 	onClick?: () => void;
+	// onChange: Dispatch<SetStateAction<string>>;
+	onChange: (curVar: string) => void;
 }
 
 enum Color {
@@ -22,13 +25,15 @@ enum Color {
 }
 
 export default function PerformInput({
-	label,
 	type,
 	placeholder,
+	label,
+	isRequired = false,
 	buttonTitle,
 	subButtonTitle,
-	width = 'full',
+	value,
 	onClick,
+	onChange,
 }: Props) {
 	const [isConfirm, setIsConfirm] = useState<boolean>(false);
 	const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -49,15 +54,6 @@ export default function PerformInput({
 			: `text-${Color.primaryBlack400} bg-${Color.buttonBlack100}`;
 	};
 
-	// const getInputColor = () => {
-	// 	// if (isCorrect === null) return `border-${Color.borderGray}`;
-	// 	// if (isConfirm && isCorrect) return `border-${Color.borderGray}`;
-	// 	// if (isCorrect) return `border-${Color.primaryOrange200} text-${Color.primaryOrange200}`;
-	// 	if (isCorrect) return `focus:text-${Color.primaryOrange200}`;
-	// 	// return `border-${Color.buttonOrange200} text-${Color.buttonOrange200}`;
-	// 	return `focus:text-${Color.buttonOrange200}`;
-	// };
-
 	const getGuideColor = () => {
 		return isCorrect ? 'text-primaryOrange-200' : 'text-buttonOrange-200';
 	};
@@ -75,24 +71,26 @@ export default function PerformInput({
 		return '';
 	};
 
-	const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-		// onClick();
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (isConfirm || !isCorrect) return;
 		setIsConfirm(!isConfirm);
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		onChange(e?.currentTarget.value);
+
 		if (type === 'email') {
-			setIsCorrect(validateEmail(e.currentTarget.value));
+			setIsCorrect(validateEmail(e?.currentTarget.value));
 		}
 		if (type === 'password') {
-			setIsCorrect(validatePassword(e.currentTarget.value));
+			setIsCorrect(validatePassword(e?.currentTarget.value));
 		}
 
 		setIsConfirm(false);
 	};
 
 	const handleFocus = () => {
+		if (type !== 'email' && type !== 'password') return;
 		setIsOpenGuide(true);
 	};
 
@@ -101,17 +99,23 @@ export default function PerformInput({
 	};
 
 	return (
-		<div className={`email-input-wrap w-${width}`}>
-			<label htmlFor={label} className="w-full m-[8px] inline-block">
-				{label}
-			</label>
+		<div className="w-full email-input-wrap">
+			{label && (
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px] ">
+					<label htmlFor={label} className="font-semibold text-[20px]">
+						{label}
+					</label>
+					{isRequired && <span className="font-semibold text-primaryOrange-200 ">*</span>}
+				</div>
+			)}
 			<div className="relative w-full">
 				<input
 					id={label}
 					type={type}
 					placeholder={placeholder}
-					className={`w-full p-6 border-2 rounded-xl focus:outline-none ${getFocusColor()}
+					className={`w-full p-[24px] border-2 rounded-xl focus:outline-none ${getFocusColor()}
 					`}
+					value={value}
 					onChange={handleChange}
 					onFocus={handleFocus}
 					onBlur={handleBlur}
@@ -119,8 +123,8 @@ export default function PerformInput({
 				{buttonTitle && (
 					<button
 						type="button"
-						className={`absolute pc:min-w-[86px] pc:min-h-[42px] p-2 rounded-xl right-6 top-1/2 -translate-y-1/2 ${getButtonColor()}`}
-						onMouseDown={handleMouseDown}
+						className={`absolute pc:min-w-[86px] pc:min-h-[42px] py-[12px] px-[14px] rounded-xl right-[12px] top-1/2 -translate-y-1/2 ${getButtonColor()}`}
+						onClick={handleClick}
 					>
 						{isConfirm ? `${subButtonTitle || buttonTitle}` : `${buttonTitle}`}
 					</button>

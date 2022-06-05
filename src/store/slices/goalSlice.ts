@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GoalListParams, LoadGoalParam } from 'store/sagas/goalSaga';
+import { LoadGoalParam } from 'store/sagas/goalSaga';
 import { Goal } from 'types/goal';
 
 export interface InitialState {
-	list: Goal[];
+	goalList: Goal[];
 	isLoading: boolean;
 	error: null | string;
 }
 
 const initialState: InitialState = {
-	list: [],
+	goalList: [],
 	isLoading: false,
 	error: null,
 };
@@ -22,9 +22,9 @@ export const goalSlice = createSlice({
 		loadGoalList: (state, action: PayloadAction<LoadGoalParam>) => {
 			state.isLoading = true;
 		},
-		loadGoalListSuccess: (state, action: PayloadAction<GoalListParams>) => {
+		loadGoalListSuccess: (state, { payload: goalList }: PayloadAction<Goal[]>) => {
 			state.isLoading = false;
-			state.list = action.payload.list;
+			state.goalList = goalList;
 		},
 		loadGoalListFailure: (state, { payload: error }) => {
 			state.isLoading = false;

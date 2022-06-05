@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import statisticsSlice from 'store/slices/statisticsSlice';
 import { GoalCount } from 'types/statistics';
-import * as API from '../../api/statisticsAPI';
+import * as API from 'api/statisticsAPI';
 
 const { loadGoalCount, loadGoalCountSuccess, loadGoalCountFailure } = statisticsSlice.actions;
 
@@ -11,7 +11,7 @@ function* loadGoalCountSaga() {
 		const result: AxiosResponse<GoalCount> = yield call(API.loadGoalCount);
 		yield put(loadGoalCountSuccess(result.data));
 	} catch (error) {
-		yield put(loadGoalCountFailure(error));
+		yield put(loadGoalCountFailure(String(error)));
 	}
 }
 

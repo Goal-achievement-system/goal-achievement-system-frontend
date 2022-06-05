@@ -1,7 +1,7 @@
-import axios from 'axios';
+import client from './client';
 
 export const loadGoalCount = () => {
-	return axios.get(`https://www.robinjoon.xyz/api/statistics/total`);
+	return client.get(`https://www.robinjoon.xyz/api/statistics/total`);
 };
 
 export default loadGoalCount;
