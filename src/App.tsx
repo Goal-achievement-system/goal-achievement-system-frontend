@@ -9,6 +9,7 @@ import SignUp from 'pages/SignUp/SignUpContainer';
 import Notice from 'pages/notice/NoticeContainer';
 
 import NotFound from 'pages/NotFound';
+import Test from 'pages/test';
 
 /*
 routes
@@ -25,7 +26,7 @@ function App() {
 					<Route path={Path.home} element={<Home />} />
 
 					<Route path={Path.login} element={<Login />} />
-
+					<Route path="test" element={<Test />} />
 					<Route path={Path.signUp} element={<SignUp />} />
 					<Route path={Path.notice} element={<Notice />} />
 					<Route path="*" element={<NotFound />} />
