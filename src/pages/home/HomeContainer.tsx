@@ -6,6 +6,7 @@ import { RootState } from 'store/slices';
 import goalSlice from 'store/slices/goalSlice';
 import memberSlice from 'store/slices/memberSlice';
 import statisticsSlice from 'store/slices/statisticsSlice';
+
 import HomeView from './HomeView';
 
 function HomeContainer() {
