@@ -5,6 +5,8 @@ const Path = {
 	signUp: '/sign-up',
 	certifications: '/certifications',
 	notice: '/notice',
+	moneyCharge: '/money/charge',
+	moneyTransfer: '/money/transfer',
 };
 
 export default Path;

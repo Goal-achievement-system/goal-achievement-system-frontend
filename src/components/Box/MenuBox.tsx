@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Member } from 'types/member';
 import Path from 'utils/path';
 import SideBarButton from '../Button/SideBarButton';
@@ -9,6 +9,7 @@ export interface Props {
 }
 
 function MenuBox({ member }: Props) {
+	const navigate = useNavigate();
 	return (
 		<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white">
 			<div className="border-b-[1px] border-borderGray pb-[16px] mb-[16px]">
@@ -86,8 +87,8 @@ function MenuBox({ member }: Props) {
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">내 목표머니</div>
 				<div className="text-[22px] font-[600] leading-[30px] mb-[4px]">0원</div>
 				<div className="flex gap-[10px]">
-					<SideBarButton label="충전" onClick={() => {}} bgColor="gray" />
-					<SideBarButton label="이체" onClick={() => {}} bgColor="gray" />
+					<SideBarButton label="충전" onClick={() => navigate(Path.moneyCharge)} bgColor="gray" />
+					<SideBarButton label="이체" onClick={() => navigate(Path.moneyTransfer)} bgColor="gray" />
 				</div>
 			</div>
 		</div>

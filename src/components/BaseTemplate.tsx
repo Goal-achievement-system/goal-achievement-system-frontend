@@ -24,12 +24,12 @@ export default function BaseTemplate({ children, Modal }: TemplateProps) {
 	const handleClick = () => {
 		setIsOpen(true);
 		// 모달을 제외한 스크롤 방지
-		document.body.style.cssText = `
-			position: fixed;
-			overflow: hidden;
-			width: 100%;
-			height: 100%
-		`;
+		// document.body.style.cssText = `
+		// 	position: fixed;
+		// 	overflow: hidden;
+		// 	width: 100%;
+		// 	height: 100%
+		// `;
 	};
 
 	const modalSection = (
