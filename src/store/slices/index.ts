@@ -4,6 +4,7 @@ import goalSlice from 'store/slices/goalSlice';
 import memberSlice from './memberSlice';
 import statisticsSlice from './statisticsSlice';
 import notificationsSlice from './notificationsSlice';
+import modalSlice from './modalSlice';
 
 const rootReducer = combineReducers({
 	goal: goalSlice.reducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
 	statistics: statisticsSlice.reducer,
 	member: memberSlice.reducer,
 	notifications: notificationsSlice.reducer,
+	modal: modalSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

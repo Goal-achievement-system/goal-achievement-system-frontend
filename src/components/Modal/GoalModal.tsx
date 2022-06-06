@@ -3,13 +3,18 @@ import { getDday } from 'utils/common';
 import SubmitButton from 'components/Button/SubmitButton';
 import FilterButton from 'components/Button/FilterButton';
 
-import { Goal } from 'types/goal';
+// import { Goal } from 'types/goal';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/slices';
 
 interface Props {
-	goal: Goal;
+	id: number;
 }
 
-export default function GoalModal({ goal }: Props) {
+export default function GoalModal({ id }: Props) {
+	// goal에 대해 조금더 알아봐야할듯
+	// const goal = useSelector((state: RootState) => state.goal.goalList[id]);
+	const goal = useSelector((state: RootState) => state.goal.goalList);
 	const className = {
 		size: 'pc:w-[890px] max-w-[90vw] pc:max-h-[80vh] w-[320px] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
