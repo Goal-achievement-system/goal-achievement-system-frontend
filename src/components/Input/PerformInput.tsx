@@ -46,7 +46,6 @@ export default function PerformInput({
 			return;
 		}
 
-		console.log('useEffect', isCorrect);
 		setIsOpenGuide(true);
 	}, [value, isCorrect]);
 
