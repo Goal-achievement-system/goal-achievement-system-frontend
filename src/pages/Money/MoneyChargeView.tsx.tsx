@@ -3,6 +3,7 @@ import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
 import Main from 'components/Main';
 import React, { useState } from 'react';
+import { Member } from 'types/member';
 import { addComma, deleteComma } from 'utils/common';
 import { IFormState, Action } from './MoneyChargeType';
 
@@ -10,9 +11,16 @@ interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
 	formState: IFormState;
 	formDispatch: React.Dispatch<Action>;
+	memberInfo: Member | null;
 }
 
-function MoneyChargeView({ onSubmit, formState, formDispatch }: Props) {
+function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Props) {
+	const changeInputTextValue = (text: string): string => {
+		const regex = /[^0-9]/g;
+		const number = Number(text.replace(regex, ''));
+		if (number > 1000) return '1000';
+		return number.toString();
+	};
 	const getBtnState = (): BtnStates => {
 		const { chargeMoney, agree } = formState;
 		if (!(agree && deleteComma(chargeMoney) > 0)) return 'inactive';
@@ -21,30 +29,39 @@ function MoneyChargeView({ onSubmit, formState, formDispatch }: Props) {
 	};
 	return (
 		<Main title="목표머니 충전">
-			<form className="rounded-[16px] p-[72px] bg-[#FAFAFA]" onSubmit={onSubmit}>
-				<div className="mb-[30px] text-[22px] leading-[20px] font-[700]">충전 금액</div>
-				<div className="mb-[30px]">
+			<form className="pc:rounded-[16px] pc:p-[72px] pc:bg-[#FAFAFA]" onSubmit={onSubmit}>
+				<div className="mb-[16px] pc:mb-[30px] text-[14px] pc:text-[22px] leading-[16.8px] pc:leading-[20px] font-[500] pc:font-[700]">
+					충전 금액
+				</div>
+				<div className="mb-[20px] pc:mb-[30px]">
 					<TextInput
 						placeholder="1만원"
-						onChange={(curVar: string) => formDispatch({ type: 'chargeMoney', payload: addComma(curVar) })}
+						onChange={(curVar: string) => formDispatch({ type: 'chargeMoney', payload: changeInputTextValue(curVar) })}
 						value={formState?.chargeMoney}
 					/>
 				</div>
 				<div className="mb-[50px]">
-					<div className="flex justify-between text-[18px] text-primaryBlack-300 font-[500] leading-[22px] mb-[10px]">
+					<div className="flex justify-between text-[12px] pc:text-[18px] text-primaryBlack-300 font-[500] leading-[14.4px] pc:leading-[22px] mb-[8px] pc:mb-[10px]">
 						<div>현재 목표머니</div>
-						<div>53,000원</div>
+						<div>{addComma(String(memberInfo?.money))}원</div>
 					</div>
-					<div className="flex justify-between text-[18px] text-primaryBlack-300 font-[500] leading-[22px] mb-[10px]">
+					<div className="flex justify-between text-[12px] pc:text-[18px] text-primaryBlack-300 font-[500] leading-[14.4px] pc:leading-[22px] mb-[8px] pc:mb-[10px]">
 						<div>충전 후 목표머니</div>
-						<div>63,000원</div>
+						<div>
+							{addComma(
+								String(memberInfo?.money ? memberInfo?.money : 0 + deleteComma(`${formState.chargeMoney}0000`))
+							)}
+							원
+						</div>
 					</div>
-					<div className="flex justify-between text-[18px] font-[500] leading-[22px] pt-[18px] border-t-[1px] border-primaryGray-300">
+					<div className="flex justify-between text-[12px] pc:text-[18px] font-[500] leading-[22px] pt-[18px] border-t-[1px] border-primaryGray-300">
 						<div>충전 금액</div>
-						<div>{formState.chargeMoney}원</div>
+						<div>{addComma(`${formState.chargeMoney}0000`)}원</div>
 					</div>
 				</div>
-				<div className="mb-[30px] text-[22px] leading-[20px] font-[700]">충전 수단</div>
+				<div className="mb-[16px] pc:mb-[30px] text-[14px] pc:text-[22px] leading-[16.8px] pc:leading-[20px] font-[500] pc:font-[700]">
+					충전 수단
+				</div>
 				<div className="flex gap-[24px] flex-wrap flex-col mb-[50px]">
 					<div className="flex gap-[24px] flex-wrap flex-1">
 						<div className="flex-1">
@@ -83,7 +100,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch }: Props) {
 				>
 					<input
 						type="checkbox"
-						className="w-[30px] h-[30px] mr-[18px] cursor-pointer"
+						className="w-[24px] pc:w-[30px] h-[24px] pc:h-[30px] mr-[18px] cursor-pointer"
 						checked={formState.agree}
 						readOnly
 					/>

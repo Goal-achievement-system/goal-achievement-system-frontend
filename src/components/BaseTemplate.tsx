@@ -42,7 +42,7 @@ export default function BaseTemplate({ children, Modal }: TemplateProps) {
 	);
 
 	return (
-		<div className="main pc:max-w-[1200px] mx-auto">
+		<div className="main pc:max-w-[1200px] mx-auto p-[20px] pc:p-0">
 			<Header />
 			<div onClick={handleClick} aria-hidden>
 				{children}

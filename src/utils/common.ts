@@ -40,7 +40,7 @@ export const addComma = (target: string): string => {
 
 // 콤마가 붙어있는 string형 target을 콤마를 지운 number로 반환
 export const deleteComma = (target: string): number => {
-	const regex = /[,]/g;
+	const regex = /[^0-9]/g;
 	const number = Number(target.replace(regex, ''));
 	return number;
 };
