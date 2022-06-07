@@ -1,7 +1,7 @@
 import Main from 'components/Main';
 import React, { useState } from 'react';
 import { NoticeCategory } from 'types/notice';
-import FilterButton from '../../components/Button/FilterButton';
+import FilterButton from 'components/Button/FilterButton';
 
 function NoticeView() {
 	const [category, setCategory] = useState<NoticeCategory>('all');
