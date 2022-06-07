@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Main from 'components/Main';
+
 import { CertCategories, CertCategoryType } from 'types/certification';
 import FilterButton from 'components/Button/FilterButton';
 import SmallBox from 'components/Box/SmallBox';
 import { Goal } from 'types/goal';
 import LargeBox from 'components/Box/LargeBox';
-import Pagination from 'components/Button/Pagination';
+import Pagination from 'components/Pagination';
 
 const goalTemp: Goal = {
 	goalId: 1,
@@ -21,9 +22,10 @@ const goalTemp: Goal = {
 function CertificationsView() {
 	const [curCategory, setCurCategory] = useState<CertCategoryType>('all');
 	const [isOneColumnMode, setIsOneColumnMode] = useState<boolean>(false);
+	const [curPage, setCurPage] = useState<number>(1);
 	return (
 		<Main title="목표인증">
-			<div>
+			<div className="mb-[30px]">
 				<div className="flex justify-between items-center mb-[17px] pc:mb-[30px]">
 					<ul className="flex gap-x-[6px] pc:gap-x-[8px] ">
 						{CertCategories.map((category) => (
@@ -72,8 +74,8 @@ function CertificationsView() {
 						))}
 					</ul>
 				)}
-				<Pagination btnType="number" isActive number={1} onClick={() => {}} />
 			</div>
+			<Pagination curPage={curPage} setCurPage={setCurPage} numOfPages={7} numOfPageBtn={3} />
 		</Main>
 	);
 }
