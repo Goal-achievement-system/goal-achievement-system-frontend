@@ -47,8 +47,12 @@ export const memberSlice = createSlice({
 				money: state.memberinfo!.money! + money,
 			};
 		},
-		chargeMoneyFailure: (state, { payload: error }) => {
-			state.error = error;
+		transferMoney: (state, { payload }: PayloadAction<IChargeMoney>) => {},
+		transferMoneySuccess: (state, { payload: money }: PayloadAction<number>) => {
+			state.memberinfo = {
+				...state.memberinfo!,
+				money: state.memberinfo!.money! - money,
+			};
 		},
 	},
 });

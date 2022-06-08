@@ -19,7 +19,8 @@ const {
 	replaceMemberInfoFail,
 	chargeMoney,
 	chargeMoneySuccess,
-	chargeMoneyFailure,
+	transferMoney,
+	transferMoneySuccess,
 } = memberSlice.actions;
 
 function* loadMemberSaga(action: PayloadAction) {
@@ -55,7 +56,18 @@ function* chargeMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
-		yield put(chargeMoneyFailure(String(error)));
+	}
+	yield put(finishLoading(action.type));
+}
+
+function* transferMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
+	yield put(startLoading(action.type));
+	try {
+		yield call(memberAPI.transferMoney, action.payload);
+		yield put(transferMoneySuccess(action.payload.money));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
 	}
 	yield put(finishLoading(action.type));
 }
@@ -63,15 +75,21 @@ function* chargeMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 function* watchLoadMemberSaga() {
 	yield takeLatest(loadMemberInfo, loadMemberSaga);
 }
-
 function* watchReplaceMemberSaga() {
 	yield takeLatest(replaceMemberInfo, replaceMemberSaga);
 }
-
 function* watchChargeMoneySaga() {
 	yield takeLatest(chargeMoney, chargeMoneySaga);
 }
+function* watchTransferMoneySaga() {
+	yield takeLatest(transferMoney, transferMoneySaga);
+}
 
 export default function* MemberSaga() {
-	yield all([fork(watchLoadMemberSaga), fork(watchReplaceMemberSaga), fork(watchChargeMoneySaga)]);
+	yield all([
+		fork(watchLoadMemberSaga),
+		fork(watchReplaceMemberSaga),
+		fork(watchChargeMoneySaga),
+		fork(watchTransferMoneySaga),
+	]);
 }

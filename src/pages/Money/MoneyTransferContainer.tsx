@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
-import resultSlice from 'store/slices/resultSlice';
+import { deleteComma } from 'utils/common';
 import MoneyTransferView from './MoneyTransferView';
 import { TransferFormReducerAction, TransferFormState } from './MoneyType';
 
@@ -25,19 +25,32 @@ function MoneyTransferContainer() {
 	const memberInfo = useSelector((state: RootState) => state.member.memberinfo);
 	const [formState, formDispatch] = useReducer(formReducer, initialState);
 	const [transferMoneyLoading, transferMoneyResult, initTransferMoneyResult] = useGetActionState(
-		memberSlice.actions.chargeMoney.type
+		memberSlice.actions.transferMoney.type
 	);
 
 	const onSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		if (!memberInfo || transferMoneyLoading) return;
-		const { transferMoney } = formState;
+		if (
+			!formState.agree ||
+			deleteComma(formState.transferMoney) === 0 ||
+			formState.bank.length === 0 ||
+			formState.accountNumber.length === 0
+		)
+			return;
+
+		const transferMoney = Number(formState.transferMoney);
+
+		if (transferMoney > memberInfo.money) {
+			alert('이체 금액이 잘못되었습니다.');
+			return;
+		}
 
 		dispatch(
-			memberSlice.actions.chargeMoney({
+			memberSlice.actions.transferMoney({
 				email: memberInfo.email,
 				password: 'cksdud12!', // 비밀번호 입력 UI 나올 때까지 임시 입력
-				money: Number(transferMoney) * 10000,
+				money: Number(transferMoney),
 			})
 		);
 	};

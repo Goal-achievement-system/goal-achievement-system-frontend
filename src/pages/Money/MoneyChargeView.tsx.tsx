@@ -48,13 +48,9 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 					<div className="flex justify-between text-[12px] pc:text-[18px] text-primaryBlack-300 font-[500] leading-[14.4px] pc:leading-[22px] mb-[8px] pc:mb-[10px]">
 						<div>충전 후 목표머니</div>
 						<div>
-							{addComma(
-								String(
-									memberInfo?.money
-										? memberInfo?.money
-										: 0 + deleteComma(addComma(deleteComma(formState.chargeMoney) * 10000))
-								)
-							)}
+							{memberInfo?.money
+								? addComma(memberInfo.money + deleteComma(formState.chargeMoney) * 10000)
+								: addComma(deleteComma(formState.chargeMoney) * 10000)}
 							원
 						</div>
 					</div>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import useGetActionState from 'hooks/useGetActionState';
 import memberSlice from 'store/slices/memberSlice';
+import { deleteComma } from 'utils/common';
 import { ChargeFormReducerAction, ChargeFormState } from './MoneyType';
 import MoneyChargeView from './MoneyChargeView.tsx';
 
@@ -29,6 +30,8 @@ function MoneyChargeContainer() {
 	const onSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		if (!memberInfo || chargeMoneyLoading) return;
+		if (!formState.agree || deleteComma(formState.chargeMoney) === 0) return;
+
 		const { chargeMoney } = formState;
 
 		dispatch(

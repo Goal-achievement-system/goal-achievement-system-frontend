@@ -26,3 +26,7 @@ export const getNotifications = () => {
 export const chargeMoney = ({ email, password, money }: IChargeMoney) => {
 	return client.put('/members/myinfo/charge', { email, password, money });
 };
+
+export const transferMoney = ({ email, password, money }: IChargeMoney) => {
+	return client.put('/members/myinfo/refund', { email, password, money });
+};
