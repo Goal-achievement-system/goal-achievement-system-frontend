@@ -5,12 +5,12 @@ import Main from 'components/Main';
 import React, { useState } from 'react';
 import { Member } from 'types/member';
 import { addComma, deleteComma } from 'utils/common';
-import { IFormState, formReducerAction } from './MoneyChargeType';
+import { ChargeFormState, ChargeFormReducerAction } from './MoneyType';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
-	formState: IFormState;
-	formDispatch: React.Dispatch<formReducerAction>;
+	formState: ChargeFormState;
+	formDispatch: React.Dispatch<ChargeFormReducerAction>;
 	memberInfo: Member | null;
 }
 
@@ -35,7 +35,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 				</div>
 				<div className="mb-[20px] pc:mb-[30px]">
 					<TextInput
-						placeholder="1만원"
+						placeholder="1만원 (단위 만원)"
 						onChange={(curVar: string) => formDispatch({ type: 'chargeMoney', payload: changeInputTextValue(curVar) })}
 						value={formState?.chargeMoney}
 					/>
@@ -49,14 +49,18 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 						<div>충전 후 목표머니</div>
 						<div>
 							{addComma(
-								String(memberInfo?.money ? memberInfo?.money : 0 + deleteComma(`${formState.chargeMoney}0000`))
+								String(
+									memberInfo?.money
+										? memberInfo?.money
+										: 0 + deleteComma(addComma(deleteComma(formState.chargeMoney) * 10000))
+								)
 							)}
 							원
 						</div>
 					</div>
 					<div className="flex justify-between text-[12px] pc:text-[18px] font-[500] leading-[22px] pt-[18px] border-t-[1px] border-primaryGray-300">
 						<div>충전 금액</div>
-						<div>{addComma(`${formState.chargeMoney}0000`)}원</div>
+						<div>{addComma(deleteComma(formState.chargeMoney) * 10000)}원</div>
 					</div>
 				</div>
 				<div className="mb-[16px] pc:mb-[30px] text-[14px] pc:text-[22px] leading-[16.8px] pc:leading-[20px] font-[500] pc:font-[700]">
