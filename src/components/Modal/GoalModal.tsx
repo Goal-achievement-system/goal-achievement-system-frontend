@@ -3,13 +3,16 @@ import { getDday } from 'utils/common';
 import SubmitButton from 'components/Button/SubmitButton';
 import FilterButton from 'components/Button/FilterButton';
 
-import { Goal } from 'types/goal';
+// import { Goal } from 'types/goal';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/slices';
 
 interface Props {
-	goal: Goal;
+	index: number;
 }
 
-export default function GoalModal({ goal }: Props) {
+export default function GoalModal({ index }: Props) {
+	const goal = useSelector((state: RootState) => state.goal.goalList[index]);
 	const className = {
 		size: 'pc:w-[890px] max-w-[90vw] pc:max-h-[80vh] w-[320px] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
@@ -24,7 +27,7 @@ export default function GoalModal({ goal }: Props) {
 					<img className="w-full" src="./image/modal/default-goal.svg" alt="default-goal-img" />
 				</div>
 				<div className="flex justify-between">
-					<div>닉네임</div>
+					<div>익명</div>
 					<div>⏰ D-{getDday(goal.limitDate)}</div>
 				</div>
 			</div>
@@ -35,19 +38,13 @@ export default function GoalModal({ goal }: Props) {
 						<h2>{goal.goalName}</h2>
 					</div>
 					<div className="min-w-[100px] flex pc:space-x-[16px] space-x-[10px] overflow-auto">
-						<FilterButton label="# 취미" isSelected={false} onClick={() => {}} />
+						<FilterButton label={`# ${goal.category}`} isSelected={false} onClick={() => {}} />
 						<div className="p-[4px] pc:p-[16px] bg-buttonRed-100 rounded-[4px] pc:rounded-[8px] text-buttonRed-200 flex items-center">
 							0/10회
 						</div>
 					</div>
 				</div>
-				<div className="pc:max-h-[90px] overflow-auto">
-					목표 달성 게시글에 올릴 상세 내용을 작성하세요. 최대 작성길이는 더 길어 질 수 있습니다.목표 달성 게시글에 올릴
-					상세 내용을 작성하세요. 최대 작성길이는 더 길어 질 수 있습니다.목표 달성 게시글에 올릴 상세 내용을 작성하세요.
-					최대 작성길이는 더 길어 질 수 있습니다.목표 달성 게시글에 올릴 상세 내용을 작성하세요. 최대 작성길이는 더 길어
-					질 수 있습니다.목표 달성 게시글에 올릴 상세 내용을 작성하세요. 최대 작성길이는 더 길어 질 수 있습니다.목표
-					달성 게시글에 올릴 상세 내용을 작성하세요. 최대 작성길이는 더 길어 질 수 있습니다.
-				</div>
+				<div className="pc:max-h-[90px] overflow-auto">{goal.content}</div>
 				<div className="flex pc:space-x-[26px] space-x-[6px]">
 					<SubmitButton label="실패" btnState="inactive" onClick={() => {}} />
 					<SubmitButton label="성공" btnState="active" onClick={() => {}} />
