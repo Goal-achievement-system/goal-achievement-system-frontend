@@ -3,7 +3,7 @@ export interface IFormState {
 	chargeType: number;
 	agree: boolean;
 }
-export interface Action {
-	type: 'chargeMoney' | 'chargeType' | 'agree';
-	payload: string | number | boolean;
+export interface formReducerAction {
+	type: 'chargeMoney' | 'chargeType' | 'agree' | 'init';
+	payload?: string | number | boolean;
 }

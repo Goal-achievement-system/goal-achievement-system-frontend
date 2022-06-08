@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IChargeMoney } from 'api/memberAPI';
 import { Member } from 'types/member';
 
 export interface InitialState {
@@ -37,6 +38,16 @@ export const memberSlice = createSlice({
 		},
 		replaceMemberInfoFail: (state, { payload: error }: PayloadAction<string>) => {
 			state.isLoading = false;
+			state.error = error;
+		},
+		chargeMoney: (state, { payload }: PayloadAction<IChargeMoney>) => {},
+		chargeMoneySuccess: (state, { payload: money }: PayloadAction<number>) => {
+			state.memberinfo = {
+				...state.memberinfo!,
+				money: state.memberinfo!.money! + money,
+			};
+		},
+		chargeMoneyFailure: (state, { payload: error }) => {
 			state.error = error;
 		},
 	},

@@ -1,6 +1,5 @@
 import { call, takeLatest, fork, all, put } from 'redux-saga/effects';
 import * as authAPI from 'api/authAPI';
-import getMember from 'api/memberAPI';
 import authSlice from 'store/slices/authSlice';
 import client from 'api/client';
 import { Member } from 'types/member';

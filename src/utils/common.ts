@@ -32,9 +32,9 @@ export const validatePassword = (target: string): boolean => {
 };
 
 // string type의 input에 숫자 입력 시 자동으로 콤마 추가 (문자는 지움)
-export const addComma = (target: string): string => {
+export const addComma = (target: string | number): string => {
 	const regex = /[^0-9]/g;
-	const number = Number(target.replace(regex, ''));
+	const number = Number(String(target).replace(regex, ''));
 	return number.toLocaleString().toString();
 };
 

@@ -5,12 +5,12 @@ import Main from 'components/Main';
 import React, { useState } from 'react';
 import { Member } from 'types/member';
 import { addComma, deleteComma } from 'utils/common';
-import { IFormState, Action } from './MoneyChargeType';
+import { IFormState, formReducerAction } from './MoneyChargeType';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
 	formState: IFormState;
-	formDispatch: React.Dispatch<Action>;
+	formDispatch: React.Dispatch<formReducerAction>;
 	memberInfo: Member | null;
 }
 
@@ -106,7 +106,10 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 					/>
 					<div>(필수) 개인정보 제3자 제공에 동의합니다.</div>
 				</button>
-				<SubmitButton label={`${formState.chargeMoney}원 충전하기`} btnState={getBtnState()} />
+				<SubmitButton
+					label={`${addComma(deleteComma(formState.chargeMoney) * 10000)}원 충전하기`}
+					btnState={getBtnState()}
+				/>
 			</form>
 		</Main>
 	);

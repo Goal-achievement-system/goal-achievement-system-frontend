@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Member } from 'types/member';
+import { addComma } from 'utils/common';
 import Path from 'utils/path';
 import SideBarButton from '../Button/SideBarButton';
 
@@ -83,14 +84,25 @@ function MenuBox({ member }: Props) {
 					<SideBarButton label="목표인증이 없습니다" onClick={() => {}} bgColor="gray" />
 				)}
 			</div>
-			<div>
-				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">내 목표머니</div>
-				<div className="text-[22px] font-[600] leading-[30px] mb-[4px]">0원</div>
-				<div className="flex gap-[10px]">
-					<SideBarButton label="충전" onClick={() => navigate(Path.moneyCharge)} bgColor="gray" />
-					<SideBarButton label="이체" onClick={() => navigate(Path.moneyTransfer)} bgColor="gray" />
+			{member ? (
+				<div>
+					<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">내 목표머니</div>
+					<div className="text-[22px] font-[600] leading-[30px] mb-[4px]">{addComma(member.money)}원</div>
+					<div className="flex gap-[10px]">
+						<SideBarButton label="충전" onClick={() => navigate(Path.moneyCharge)} bgColor="gray" />
+						<SideBarButton label="이체" onClick={() => navigate(Path.moneyTransfer)} bgColor="gray" />
+					</div>
 				</div>
-			</div>
+			) : (
+				<div>
+					<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">내 목표머니</div>
+					<div className="text-[22px] font-[600] leading-[30px] mb-[4px]">0원</div>
+					<div className="flex gap-[10px]">
+						<SideBarButton label="충전" onClick={() => navigate(Path.login)} bgColor="gray" />
+						<SideBarButton label="이체" onClick={() => navigate(Path.login)} bgColor="gray" />
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }
