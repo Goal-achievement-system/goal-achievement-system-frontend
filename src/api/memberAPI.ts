@@ -1,6 +1,12 @@
 import { Member } from 'types/member';
 import client from './client';
 
+export interface IChargeMoney {
+	email: string;
+	password: string;
+	money: number;
+}
+
 export const getMember = () => {
 	return client.get('/members/myinfo');
 };
@@ -16,4 +22,11 @@ export const confirmOverlapEmail = (email: string | undefined) => {
 export const getNotifications = () => {
 	return client.get('/myinfo/notifications');
 };
-export default getMember;
+
+export const chargeMoney = ({ email, password, money }: IChargeMoney) => {
+	return client.put('/members/myinfo/charge', { email, password, money });
+};
+
+export const transferMoney = ({ email, password, money }: IChargeMoney) => {
+	return client.put('/members/myinfo/refund', { email, password, money });
+};

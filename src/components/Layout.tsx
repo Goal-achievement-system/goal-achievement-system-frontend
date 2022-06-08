@@ -8,9 +8,11 @@ import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
 import isLoggedIn from 'utils/isLoggedIn';
 import Path from 'utils/path';
-import Notice from 'pages/notice/NoticeContainer';
+import Notice from 'pages/Notice/NoticeContainer';
 import Certifications from 'pages/Certifications/CertificationsContainer';
-import Home from 'pages/home/HomeContainer';
+import Home from 'pages/Home/HomeContainer';
+import MoneyCharge from 'pages/Money/MoneyChargeContainer';
+import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
 
 function Layout() {
 	const dispatch: AppDispatch = useDispatch();
@@ -23,7 +25,7 @@ function Layout() {
 
 	return (
 		<BaseTemplate>
-			<div className=" pc:w-[1200px] pc:flex mt-[50px] mx-auto pc:box-content ">
+			<div className=" pc:w-[1200px] pc:flex my-[50px] mx-auto pc:box-content ">
 				<div className="hidden pc:block mr-[30px]">
 					<MenuBox member={memberinfo} />
 				</div>
@@ -31,6 +33,8 @@ function Layout() {
 					<Route path={Path.home} element={<Home />} />
 					<Route path={Path.notice} element={<Notice />} />
 					<Route path={Path.certifications} element={<Certifications />} />
+					<Route path={Path.moneyCharge} element={<MoneyCharge />} />
+					<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
 				</Routes>
 			</div>
 		</BaseTemplate>

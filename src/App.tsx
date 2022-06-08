@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Path from 'utils/path';
-import Home from 'pages/home/HomeContainer';
+import Home from 'pages/Home/HomeContainer';
 import Login from 'pages/Login/LoginContainer';
 import SignUp from 'pages/SignUp/SignUpContainer';
 import Certifications from 'pages/Certifications/CertificationsContainer';
-import Notice from 'pages/notice/NoticeContainer';
+import Notice from 'pages/Notice/NoticeContainer';
 import NotFound from 'pages/NotFound';
 import Layout from 'components/Layout';
 

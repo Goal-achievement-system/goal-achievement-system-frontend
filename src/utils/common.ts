@@ -30,3 +30,17 @@ export const validatePassword = (target: string): boolean => {
 	const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?+-])[a-zA-Z0-9!@#$%^&*?+-]{8,13}$/;
 	return passwordReg.test(target);
 };
+
+// string type의 input에 숫자 입력 시 자동으로 콤마 추가 (문자는 지움)
+export const addComma = (target: string | number): string => {
+	const regex = /[^0-9]/g;
+	const number = Number(String(target).replace(regex, ''));
+	return number.toLocaleString().toString();
+};
+
+// 콤마가 붙어있는 string형 target을 콤마를 지운 number로 반환
+export const deleteComma = (target: string): number => {
+	const regex = /[^0-9]/g;
+	const number = Number(target.replace(regex, ''));
+	return number;
+};
