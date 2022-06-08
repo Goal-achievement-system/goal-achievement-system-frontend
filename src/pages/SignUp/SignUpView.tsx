@@ -3,7 +3,7 @@ import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import PerformInput from 'components/Input/PerformInput';
 import { IFormState, Action } from 'pages/SignUp/SignUpContainer';
 import Select, { Option } from 'components/Select/Select';
-import Header from '../../components/Header/Header';
+import BaseTemplate from 'components/BaseTemplate';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
@@ -33,8 +33,7 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 		return 'active';
 	};
 	return (
-		<div>
-			<Header />
+		<BaseTemplate>
 			<div className="pc:w-[1200px] h-[762px] my-0 mx-auto mt-[20px] flex justify-between ">
 				<div className="bg-primaryOrange-200 rounded-[16px] p-[55px] w-[481px]  flex flex-col items-start ">
 					<img src="../image/banner/image1773.png" alt="banner" />
@@ -101,7 +100,7 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 					<SubmitButton label="회원가입" btnState={getBtnState()} />
 				</form>
 			</div>
-		</div>
+		</BaseTemplate>
 	);
 }
 

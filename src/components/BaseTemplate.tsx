@@ -14,7 +14,7 @@ export default function BaseTemplate({ children }: TemplateProps) {
 	const { isOpenModal } = useSelector((state: RootState) => state.modal);
 
 	return (
-		<div className="main pc:max-w-[1200px] m-auto h-full">
+		<div className="main pc:max-w-[1200px] mx-auto ">
 			<Header />
 			{children}
 			{isOpenModal && <ModalSection />}

@@ -1,16 +1,16 @@
 /* eslint-disable func-names */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import Pagination, { Props } from './Pagination';
+import PaginationElement, { Props } from './PaginationElement';
 
 export default {
-	component: Pagination,
-	title: 'Component/Button/Pagination',
-} as ComponentMeta<typeof Pagination>;
+	component: PaginationElement,
+	title: 'Component/Button/PaginationElement',
+} as ComponentMeta<typeof PaginationElement>;
 
-const Template: ComponentStory<typeof Pagination> = function (args: Props) {
+const Template: ComponentStory<typeof PaginationElement> = function (args: Props) {
 	/* eslint-disable-next-line react/jsx-props-no-spreading */
-	return <Pagination {...args} />;
+	return <PaginationElement {...args} />;
 };
 
 export const ActiveNum = Template.bind({});

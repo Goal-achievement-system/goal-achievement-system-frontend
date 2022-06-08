@@ -4,6 +4,7 @@ import { RootState } from 'store/slices';
 import Path from 'utils/path';
 import { useNavigate } from 'react-router-dom';
 import authSlice from 'store/slices/authSlice';
+import BaseTemplate from 'components/BaseTemplate';
 import LoginView from './LoginView';
 
 export interface IFormState {
