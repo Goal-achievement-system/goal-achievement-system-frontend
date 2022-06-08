@@ -8,9 +8,9 @@ import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
 import isLoggedIn from 'utils/isLoggedIn';
 import Path from 'utils/path';
-import Notice from 'pages/Notice/NoticeContainer';
+import Notice from 'pages/notice/NoticeContainer';
 import Certifications from 'pages/Certifications/CertificationsContainer';
-import Home from 'pages/Home/HomeContainer';
+import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
 import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
 
