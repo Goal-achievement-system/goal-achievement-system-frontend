@@ -5,7 +5,7 @@ import modalSlice from 'store/slices/modalSlice';
 
 export default function useModal() {
 	const dispatch = useDispatch();
-	const openModal = (payLoad: { name: string; props?: { id: number } }) => {
+	const openModal = (payLoad: { name: string; props?: { index: number } }) => {
 		dispatch(modalSlice.actions.open(payLoad));
 	};
 
