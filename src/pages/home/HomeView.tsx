@@ -1,3 +1,4 @@
+import useModal from 'hooks/useModal';
 import React from 'react';
 import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
@@ -12,9 +13,10 @@ export interface Props {
 	member: Member | null;
 	goalCount: GoalCount | null;
 	goalList: Goal[];
+	openGoalModal: (index: number) => void;
 }
 
-function HomeView({ member, goalCount, goalList }: Props) {
+function HomeView({ member, goalCount, goalList, openGoalModal }: Props) {
 	return (
 		<div className="flex-1">
 			<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] bg-primaryOrange-200">
@@ -35,9 +37,9 @@ function HomeView({ member, goalCount, goalList }: Props) {
 					</div>
 					<ul className="flex flex-wrap gap-x-[16px] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
 						{goalList &&
-							goalList.map((goal) => (
+							goalList.map((goal, index) => (
 								<li key={goal.goalId}>
-									<SmallBox goal={goal} />
+									<SmallBox goal={goal} onClick={() => openGoalModal(index)} />
 								</li>
 							))}
 					</ul>

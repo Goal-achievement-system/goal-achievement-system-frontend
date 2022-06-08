@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 interface ArrProps {
 	direction?: ArrowDirections;
+
 	arrColor: string;
 }
 function Arrow({ direction, arrColor }: ArrProps) {
@@ -52,7 +53,7 @@ export interface Props {
 	onClick: () => void;
 }
 
-function SideBarButton({ btnType, isActive, number, arrDirection, onClick }: Props) {
+function PaginationElement({ btnType, isActive, number, arrDirection, onClick }: Props) {
 	const getBgColor = useCallback((type: ButtonTypes, active: boolean): BgColor => {
 		if (type === 'number') {
 			if (active) return BgColor.orange;
@@ -84,4 +85,4 @@ function SideBarButton({ btnType, isActive, number, arrDirection, onClick }: Pro
 	);
 }
 
-export default React.memo(SideBarButton);
+export default React.memo(PaginationElement);

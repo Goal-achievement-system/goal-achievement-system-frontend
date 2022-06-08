@@ -4,11 +4,16 @@ import { getDday } from '../../utils/common';
 
 export interface Props {
 	goal: Goal;
+	onClick?: () => void;
 }
 
-function SmallBox({ goal }: Props) {
+function SmallBox({ goal, onClick }: Props) {
 	return (
-		<div className="flex rounded-[8px] pc:rounded-[16px] w-[320px] pc:w-[891px] h-[96px] pc:h-[177px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden bg-white">
+		<button
+			type="button"
+			onClick={onClick}
+			className="flex rounded-[8px] pc:rounded-[16px] w-[320px] pc:w-[891px] h-[96px] pc:h-[177px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden bg-white text-left"
+		>
 			<div className="bg-buttonBlack-100 rounded-[8px] w-[135px] pc:w-[325px] h-[100%] mr-[16px] pc:mr-[32px] overflow-hidden" />
 			<div className="flex-1 flex justify-between flex-col">
 				<div>
@@ -44,7 +49,7 @@ function SmallBox({ goal }: Props) {
 					</div>
 				</div>
 			</div>
-		</div>
+		</button>
 	);
 }
 

@@ -6,7 +6,7 @@ interface Props {
 }
 function Main({ title, children }: Props) {
 	return (
-		<div className="flex-1">
+		<div className="flex-1 overflow-auto">
 			<div className="mb-[16px] pc:mb-[30px] font-[800] text-[20px] leading-[24px] pc:font-[800] pc:text-[30px] pc:leading-[36px]">
 				{title}
 			</div>

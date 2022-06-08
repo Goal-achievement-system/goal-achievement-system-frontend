@@ -6,6 +6,7 @@ import statisticsSlice from './statisticsSlice';
 import notificationsSlice from './notificationsSlice';
 import loadingSlice from './loadingSlice';
 import resultSlice from './resultSlice';
+import modalSlice from './modalSlice';
 
 const rootReducer = combineReducers({
 	goal: goalSlice.reducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
 	notifications: notificationsSlice.reducer,
 	loading: loadingSlice.reducer,
 	result: resultSlice.reducer,
+	modal: modalSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
