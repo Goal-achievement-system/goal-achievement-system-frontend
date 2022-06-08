@@ -6,7 +6,6 @@ import modalList from 'utils/importModal';
 import useModal from 'hooks/useModal';
 
 export default function ModalSection() {
-	// const [openModal, closeModal] = useModal();
 	const modalRef = useRef<HTMLDivElement>(null);
 	const { openList, isOpenModal } = useSelector((state: RootState) => state.modal);
 	const dispatch = useDispatch();

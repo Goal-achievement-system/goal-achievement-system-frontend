@@ -7,6 +7,8 @@ import goalSlice from 'store/slices/goalSlice';
 import memberSlice from 'store/slices/memberSlice';
 import statisticsSlice from 'store/slices/statisticsSlice';
 
+import useModal from 'hooks/useModal';
+
 import HomeView from './HomeView';
 
 function HomeContainer() {
@@ -14,6 +16,11 @@ function HomeContainer() {
 	const { goalCount } = useSelector((state: RootState) => state.statistics);
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	const { goalList } = useSelector((state: RootState) => state.goal);
+	const [openModal, cloasModal] = useModal();
+
+	const openGoalModal = (index: number) => {
+		openModal({ name: 'GoalModal', props: { index } });
+	};
 
 	useEffect(() => {
 		if (!memberinfo) {
@@ -27,7 +34,7 @@ function HomeContainer() {
 		}
 	}, [dispatch, memberinfo, goalCount]);
 
-	return <HomeView member={memberinfo} goalCount={goalCount} goalList={goalList} />;
+	return <HomeView member={memberinfo} goalCount={goalCount} goalList={goalList} openGoalModal={openGoalModal} />;
 }
 
 export default HomeContainer;
