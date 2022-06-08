@@ -27,7 +27,6 @@ function Layout() {
 				<div className="hidden pc:block mr-[30px]">
 					<MenuBox member={memberinfo} />
 				</div>
-
 				<Routes>
 					<Route path={Path.home} element={<Home />} />
 					<Route path={Path.notice} element={<Notice />} />

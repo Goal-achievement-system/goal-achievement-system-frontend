@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 interface ArrProps {
 	direction?: ArrowDirections;
+
 	arrColor: string;
 }
 function Arrow({ direction, arrColor }: ArrProps) {

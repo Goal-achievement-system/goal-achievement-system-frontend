@@ -1,20 +1,25 @@
+import React, { useState } from 'react';
 import Main from 'components/Main';
-
-import React,{useState} from 'react';
 
 import { CertCategories, CertCategoryType } from 'types/certification';
 import FilterButton from 'components/Button/FilterButton';
 import SmallBox from 'components/Box/SmallBox';
 import { Goal } from 'types/goal';
 import LargeBox from 'components/Box/LargeBox';
-import PaginationElement from 'components/Button/PaginationElement';
 import Pagination from 'components/Pagination';
 
-
+const goalTemp: Goal = {
+	goalId: 1,
+	memberEmail: '',
+	category: '취미',
+	goalName: '목표인증 텍스트',
+	content: '목표 내용',
+	limitDate: new Date(2022, 5, 25),
+	money: 10000,
+	reward: 'high',
+	verificationResult: 'ongoing',
+};
 function CertificationsView() {
-
-
-
 	const [curCategory, setCurCategory] = useState<CertCategoryType>('all');
 	const [isOneColumnMode, setIsOneColumnMode] = useState<boolean>(false);
 	const [curPage, setCurPage] = useState<number>(1);
@@ -70,10 +75,9 @@ function CertificationsView() {
 					</ul>
 				)}
 			</div>
-
 			<Pagination curPage={curPage} setCurPage={setCurPage} numOfPages={7} numOfPageBtn={3} />
 		</Main>
 	);
-
+}
 
 export default CertificationsView;

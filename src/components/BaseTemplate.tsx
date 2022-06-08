@@ -42,11 +42,14 @@ export default function BaseTemplate({ children, Modal }: TemplateProps) {
 	);
 
 	return (
-		<div className="main pc:max-w-[1200px] mx-auto">
+		<div className="main pc:max-w-[1200px] mx-auto ">
 			<Header />
-			<div onClick={handleClick} aria-hidden>
+			{/*
+<div onClick={handleClick} aria-hidden>
 				{children}
 			</div>
+*/}
+			{children}
 			{Modal && isOpen && modalSection}
 		</div>
 	);
