@@ -1,4 +1,4 @@
-type VerificationResult = 'success' | 'fail' | 'ongoing' | 'hold';
+export type VerificationResult = 'all' | 'success' | 'fail' | 'ongoing' | 'hold' | 'oncertification';
 export interface Goal {
 	goalId: number;
 	memberEmail: string;

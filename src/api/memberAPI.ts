@@ -1,10 +1,21 @@
 import { Member } from 'types/member';
+import { Goal, VerificationResult } from 'types/goal';
 import client from './client';
 
 export interface IChargeMoney {
 	email: string;
 	password: string;
 	money: number;
+}
+
+export interface IGetMemberGoals {
+	state: VerificationResult;
+	page: number;
+}
+
+export interface IGetMemberGoalsResult {
+	maxPage: number;
+	goals: Goal[];
 }
 
 export const getMember = () => {
@@ -29,4 +40,8 @@ export const chargeMoney = ({ email, password, money }: IChargeMoney) => {
 
 export const transferMoney = ({ email, password, money }: IChargeMoney) => {
 	return client.put('/members/myinfo/refund', { email, password, money });
+};
+
+export const getMemberGoals = ({ state, page }: IGetMemberGoals) => {
+	return client.get(`/members/myinfo/goals/${state}/${page}`);
 };

@@ -1,12 +1,12 @@
+import { AxiosResponse } from 'axios';
 import { call, takeLatest, fork, all, put } from 'redux-saga/effects';
-import * as memberAPI from 'api/memberAPI';
+import { PayloadAction } from '@reduxjs/toolkit';
 import memberSlice from 'store/slices/memberSlice';
+import loadingSlice from 'store/slices/loadingSlice';
+import resultSlice from 'store/slices/resultSlice';
+import * as memberAPI from 'api/memberAPI';
 import client from 'api/client';
 import { Member } from 'types/member';
-import { AxiosResponse } from 'axios';
-import loadingSlice from 'store/slices/loadingSlice';
-import { PayloadAction } from '@reduxjs/toolkit';
-import resultSlice from 'store/slices/resultSlice';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -14,6 +14,9 @@ const {
 	loadMemberInfo,
 	loadMemberInfoSuccess,
 	loadMemberInfoFailure,
+	getMemberGoals,
+	getMemberGoalsSuccess,
+	getMemberGoalsFail,
 	replaceMemberInfo,
 	replaceMemberInfoSuccess,
 	replaceMemberInfoFail,
@@ -36,16 +39,35 @@ function* loadMemberSaga(action: PayloadAction) {
 	yield put(finishLoading(action.type));
 }
 
-function* replaceMemberSaga(action: { payload: Member }) {
+// action을 받는다. type, payload의 데이터타입을 지정해준다.
+// function* getMemberGoalsSaga(action: { type: string; payload: memberAPI.IGetMemberGoals }) {
+function* getMemberGoalsSaga(action: PayloadAction<memberAPI.IGetMemberGoals>) {
+	yield put(startLoading(action.type));
+	try {
+		const token: string = localStorage.getItem('goalKeeperToken')!;
+		client.defaults.headers.common.Authorization = token;
+
+		const result: AxiosResponse<memberAPI.IGetMemberGoalsResult> = yield call(memberAPI.getMemberGoals, action.payload);
+		yield put(getMemberGoalsSuccess(result.data));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		yield put(getResult({ isSuccess: false, actionType: action.type }));
+	}
+	yield put(finishLoading(action.type));
+}
+function* replaceMemberSaga(action: PayloadAction<Member>) {
+	yield put(startLoading(action.type));
 	try {
 		const token: string = localStorage.getItem('goalKeeperToken')!;
 		client.defaults.headers.common.Authorization = token;
 
 		const result: AxiosResponse<Member> = yield call(memberAPI.replceMember, action.payload);
 		yield put(replaceMemberInfoSuccess(result.data));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(replaceMemberInfoFail(String(error)));
+		yield put(getResult({ isSuccess: false, actionType: action.type }));
 	}
+	yield put(finishLoading(action.type));
 }
 
 function* chargeMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
@@ -75,6 +97,9 @@ function* transferMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 function* watchLoadMemberSaga() {
 	yield takeLatest(loadMemberInfo, loadMemberSaga);
 }
+function* watchGetMemberGoalsSaga() {
+	yield takeLatest(getMemberGoals, getMemberGoalsSaga);
+}
 function* watchReplaceMemberSaga() {
 	yield takeLatest(replaceMemberInfo, replaceMemberSaga);
 }
@@ -91,5 +116,6 @@ export default function* MemberSaga() {
 		fork(watchReplaceMemberSaga),
 		fork(watchChargeMoneySaga),
 		fork(watchTransferMoneySaga),
+		fork(watchGetMemberGoalsSaga),
 	]);
 }
