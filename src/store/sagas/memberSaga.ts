@@ -44,9 +44,6 @@ function* loadMemberSaga(action: PayloadAction) {
 function* getMemberGoalsSaga(action: PayloadAction<memberAPI.IGetMemberGoals>) {
 	yield put(startLoading(action.type));
 	try {
-		const token: string = localStorage.getItem('goalKeeperToken')!;
-		client.defaults.headers.common.Authorization = token;
-
 		const result: AxiosResponse<memberAPI.IGetMemberGoalsResult> = yield call(memberAPI.getMemberGoals, action.payload);
 		yield put(getMemberGoalsSuccess(result.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
@@ -58,9 +55,6 @@ function* getMemberGoalsSaga(action: PayloadAction<memberAPI.IGetMemberGoals>) {
 function* replaceMemberSaga(action: PayloadAction<Member>) {
 	yield put(startLoading(action.type));
 	try {
-		const token: string = localStorage.getItem('goalKeeperToken')!;
-		client.defaults.headers.common.Authorization = token;
-
 		const result: AxiosResponse<Member> = yield call(memberAPI.replceMember, action.payload);
 		yield put(replaceMemberInfoSuccess(result.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
