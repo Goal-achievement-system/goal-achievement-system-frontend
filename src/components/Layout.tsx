@@ -33,6 +33,7 @@ function Layout() {
 					<Route path={Path.home} element={<Home />} />
 					<Route path={Path.notice} element={<Notice />} />
 					<Route path={Path.certifications} element={<Certifications />} />
+
 					<Route path={Path.moneyCharge} element={<MoneyCharge />} />
 					<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
 				</Routes>
