@@ -18,14 +18,15 @@ function GoalRegisterContainer() {
 	const memberInfo = useSelector((state: RootState) => state.member.memberinfo);
 	const [formState, formDispatch] = useReducer(formReducer, initialState);
 	const [loading, result, initResult] = useGetActionState(goalSlice.actions.registerGoal.type);
-	console.log(memberInfo?.money);
+
+	const isFormValid = (formState) => {};
 	const onSubmit = (event: React.SyntheticEvent) => {
 		// 머니 범위 설정
 		// 날짜 입력 숫자로만 했는지 확인
 		event.preventDefault();
-		console.log('enter', loading, memberInfo);
+
 		if (!memberInfo || loading) return;
-		console.log('hi', loading, memberInfo);
+
 		const { goalName, content, money, limitDate, reward, category } = formState;
 		// 심플하게 만드는 법 생각해보기
 		console.log('submit', formState, limitDate, !limitDate.trim());
