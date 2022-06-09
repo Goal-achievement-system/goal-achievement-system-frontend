@@ -1,3 +1,4 @@
+import { VerificationResult } from 'types/goal';
 import { Member } from 'types/member';
 import client from './client';
 
@@ -5,6 +6,11 @@ export interface IChargeMoney {
 	email: string;
 	password: string;
 	money: number;
+}
+
+export interface IGetMemberGoals {
+	state: VerificationResult;
+	page: number;
 }
 
 export const getMember = () => {
@@ -33,4 +39,8 @@ export const transferMoney = ({ email, password, money }: IChargeMoney) => {
 
 export const getMemberGoalStatistics = () => {
 	return client.get('/statistics/mine');
+};
+
+export const getMemberGoals = ({ state, page }: IGetMemberGoals) => {
+	return client.get(`/members/myinfo/goals/${state}/${page}`);
 };

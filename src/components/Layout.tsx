@@ -26,7 +26,7 @@ function Layout() {
 
 	return (
 		<BaseTemplate>
-			<div className=" pc:w-[1200px] pc:flex my-[50px] mx-auto pc:box-content ">
+			<div className=" pc:w-[1200px] pc:flex mt-[50px] pb-[50px] mx-auto pc:box-content">
 				<div className="hidden pc:block mr-[30px]">
 					<MenuBox member={memberinfo} />
 				</div>

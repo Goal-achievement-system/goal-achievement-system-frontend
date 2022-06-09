@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoadGoalParam, RegisterGoalParam } from 'store/sagas/goalSaga';
-import { Goal } from 'types/goal';
+import { Goal, GoalsResponse } from 'types/goal';
 
 export interface InitialState {
 	goalList: Goal[];
 	isLoading: boolean;
 	error: null | string;
+	maxPage: number;
 }
 
 const initialState: InitialState = {
 	goalList: [],
 	isLoading: false,
 	error: null,
+	maxPage: 0,
 };
 
 export const goalSlice = createSlice({
@@ -22,9 +24,10 @@ export const goalSlice = createSlice({
 		loadGoalList: (state, action: PayloadAction<LoadGoalParam>) => {
 			state.isLoading = true;
 		},
-		loadGoalListSuccess: (state, { payload: goalList }: PayloadAction<Goal[]>) => {
+		loadGoalListSuccess: (state, { payload }: PayloadAction<GoalsResponse>) => {
 			state.isLoading = false;
-			state.goalList = goalList;
+			state.goalList = payload.goals;
+			state.maxPage = payload.maxPage;
 		},
 		loadGoalListFailure: (state, { payload: error }) => {
 			state.isLoading = false;

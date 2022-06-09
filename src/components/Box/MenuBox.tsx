@@ -15,15 +15,16 @@ export interface Props {
 function MenuBox({ member }: Props) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { goalStatistics } = useSelector((state: RootState) => state.member);
+	const { goalStatistics, onGoingGoals } = useSelector((state: RootState) => state.member);
 
 	useEffect(() => {
 		if (member) {
-			if (!goalStatistics) {
-				dispatch(memberSlice.actions.getGoalStatistics());
-			}
+			dispatch(memberSlice.actions.getMemberMenuInfos());
 		}
-	}, [dispatch, goalStatistics, member]);
+	}, [dispatch, member]);
+
+	console.log(goalStatistics, 'goalStatistics');
+	console.log(onGoingGoals, 'onGoingGoals');
 
 	return (
 		<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white">
@@ -72,26 +73,27 @@ function MenuBox({ member }: Props) {
 			</div>
 			<div className="mb-[30px]">
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">목표등록현황</div>
-				{member &&
-					['4.1', '4.2'].map((item) => (
-						<div key={item} className="mb-[7px]">
-							<SideBarButton key={`key_${item}`} onClick={() => {}} bgColor="orange">
-								<div className="flex justify-between w-full">
-									<span className="text-primaryWhite">목표인증</span>
-									<span className="text-primaryWhite">📅 {item}</span>
-								</div>
-							</SideBarButton>
-						</div>
-					))}
-				<SideBarButton label="목표등록 추가" onClick={() => {}} bgColor="gray" />
+				{onGoingGoals.map((goal, idx) => (
+					<div key={goal.goalId} className="mb-[7px]">
+						<SideBarButton onClick={() => {}} bgColor="orange">
+							<div className="flex justify-between w-full">
+								<span className="text-primaryWhite">목표인증</span>
+								<span className="text-primaryWhite">
+									📅 {new Date(goal.limitDate).getMonth() + 1}. {new Date(goal.limitDate).getDate()}
+								</span>
+							</div>
+						</SideBarButton>
+					</div>
+				))}
+				<SideBarButton label="목표등록 추가" onClick={() => navigate(Path.goalRegister)} bgColor="gray" />
 			</div>
 			<div className="mb-[30px]">
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">목표인증현황</div>
 				{member ? (
 					<SideBarButton onClick={() => {}} bgColor="black">
 						<div className="flex justify-between w-full">
-							<span className="text-primaryWhite">목표인증 텍스트</span>
-							<span className="text-primaryWhite">4.1</span>
+							<span className="text-primaryWhite">API 없음</span>
+							<span className="text-primaryWhite">1 / 10회</span>
 						</div>
 					</SideBarButton>
 				) : (

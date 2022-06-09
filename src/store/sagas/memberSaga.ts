@@ -8,6 +8,7 @@ import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import resultSlice from 'store/slices/resultSlice';
 import { GoalCount } from 'types/statistics';
+import { Goal, GoalsResponse } from 'types/goal';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -22,8 +23,8 @@ const {
 	chargeMoneySuccess,
 	transferMoney,
 	transferMoneySuccess,
-	getGoalStatistics,
-	getGoalStatisticsSuccess,
+	getMemberMenuInfos,
+	getMemberMenuInfosSuccess,
 } = memberSlice.actions;
 
 function* loadMemberSaga(action: PayloadAction) {
@@ -75,11 +76,17 @@ function* transferMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 	yield put(finishLoading(action.type));
 }
 
-function* getGoalStatisticsSaga(action: PayloadAction) {
+function* getMemberMenuInfosSaga(action: PayloadAction) {
 	yield put(startLoading(action.type));
 	try {
-		const result: AxiosResponse<GoalCount> = yield call(memberAPI.getMemberGoalStatistics);
-		yield put(getGoalStatisticsSuccess(result.data));
+		const goalStatistics: AxiosResponse<GoalCount> = yield call(memberAPI.getMemberGoalStatistics);
+		const onGoingGoals: AxiosResponse<GoalsResponse> = yield call(memberAPI.getMemberGoals, {
+			state: 'ongoing',
+			page: 1,
+		});
+		yield put(
+			getMemberMenuInfosSuccess({ goalStatistics: goalStatistics.data, onGoingGoals: onGoingGoals.data.goals })
+		);
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
@@ -99,8 +106,8 @@ function* watchChargeMoneySaga() {
 function* watchTransferMoneySaga() {
 	yield takeLatest(transferMoney, transferMoneySaga);
 }
-function* watchGetGoalStatisticsSaga() {
-	yield takeLatest(getGoalStatistics, getGoalStatisticsSaga);
+function* watchGetMemberMenuInfosSaga() {
+	yield takeLatest(getMemberMenuInfos, getMemberMenuInfosSaga);
 }
 
 export default function* MemberSaga() {
@@ -109,6 +116,6 @@ export default function* MemberSaga() {
 		fork(watchReplaceMemberSaga),
 		fork(watchChargeMoneySaga),
 		fork(watchTransferMoneySaga),
-		fork(watchGetGoalStatisticsSaga),
+		fork(watchGetMemberMenuInfosSaga),
 	]);
 }

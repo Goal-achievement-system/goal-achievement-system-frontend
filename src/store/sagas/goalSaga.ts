@@ -2,8 +2,8 @@
 import { AxiosResponse } from 'axios';
 import { GoalFormState } from 'pages/Goal/GoalRegister/RegisterType';
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
+import { GoalsResponse } from 'types/goal';
 import goalSlice from 'store/slices/goalSlice';
-import { Goal } from 'types/goal';
 import resultSlice from 'store/slices/resultSlice';
 import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -33,8 +33,7 @@ function* loadGoalSaga(action: { payload: LoadGoalParam }) {
 	const param = action.payload;
 
 	try {
-		const result: AxiosResponse<Goal[]> = yield call(goalAPI.loadGoaliLst, param);
-		console.log(result);
+		const result: AxiosResponse<GoalsResponse> = yield call(goalAPI.loadGoaliLst, param);
 		yield put(loadGoalListSuccess(result.data));
 	} catch (error) {
 		yield put(loadGoalListFailure(error));
