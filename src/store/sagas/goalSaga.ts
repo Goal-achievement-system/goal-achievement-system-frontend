@@ -15,6 +15,17 @@ export interface LoadGoalParam {
 	page: number;
 }
 
+export interface RegisterGoalParam {
+	memberEmail: string;
+	goalName: string;
+	content: string;
+	money: number;
+	limitDate: Date;
+	reward: 'low' | 'high';
+	// 디자인 완성되면  고치기
+	category: string;
+}
+
 const { loadGoalListSuccess, loadGoalListFailure, loadGoalList, registerGoal } = goalSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -23,18 +34,19 @@ function* loadGoalSaga(action: { payload: LoadGoalParam }) {
 
 	try {
 		const result: AxiosResponse<Goal[]> = yield call(goalAPI.loadGoaliLst, param);
+		console.log(result);
 		yield put(loadGoalListSuccess(result.data));
 	} catch (error) {
 		yield put(loadGoalListFailure(error));
 	}
 }
 
-function* registerGoalSaga(action: PayloadAction<GoalFormState>) {
+function* registerGoalSaga(action: PayloadAction<RegisterGoalParam>) {
 	const param = action.payload;
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse = yield call(goalAPI.registerGoal, param);
-		console.log(result);
+
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		console.log(error);

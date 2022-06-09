@@ -27,15 +27,16 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 	const getBtnState = (): BtnStates => {
 		const { goalName, content, money, limitDate, reward, category } = formState;
 		// 심플하게 만드는 법 생각해보기
+		console.log(!limitDate.trim(), +money);
 		if (
 			!goalName.trim() ||
 			!content.trim() ||
-			(money || -1) < 0 ||
-			(money || -1) > remainingMoney ||
-			!`${money}`.trim() ||
-			!limitDate?.trim() ||
-			!reward?.trim() ||
-			!category?.trim()
+			+money < 0 ||
+			+money > remainingMoney ||
+			!`${+money}`.trim() ||
+			!limitDate.trim() ||
+			!reward.trim() ||
+			!category.trim()
 		)
 			return 'inactive';
 
@@ -51,32 +52,53 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 					isRequired
 					label="목표 제목"
 				/>
+
 				<TextInput
 					placeholder="목표 달성 게시글에 올릴 상세 내용을 작성하세요"
-					onChange={(curVar: string) => formDispatch({ type: 'goalName', payload: curVar })}
-					value={formState?.goalName}
+					onChange={(curVar: string) => formDispatch({ type: 'content', payload: curVar })}
+					value={formState?.content}
 				/>
+				<div className="mb-[20px]" />
 				<TextInput
-					placeholder="₩ 1만원"
-					onChange={(curVar: string) => formDispatch({ type: 'goalName', payload: curVar })}
-					value={formState?.goalName}
+					placeholder="10000"
+					onChange={(curVar: string) => formDispatch({ type: 'money', payload: curVar })}
+					value={formState?.money}
 					isRequired
-					label="보증금 선택"
+					label="보증금 선택 (단위 원)"
 				/>
+				<span className="text-red-500">*보증금은 만원부터 백만원까지 선택할 수 있어요</span>
+				<div className="mb-[20px]" />
 				<TextInput
-					placeholder="4월 1일"
-					onChange={(curVar: string) => formDispatch({ type: 'goalName', payload: curVar })}
-					value={formState?.goalName}
+					placeholder="YYYY-MM-DD (2022-06-09)"
+					onChange={(curVar: string) => formDispatch({ type: 'limitDate', payload: curVar })}
+					value={formState?.limitDate}
 					isRequired
 					label="목표 마감일 선택"
 				/>
-				<span>까지</span>
-				<span>달성 시 추가금 방식</span>
-				<div className="grid grid-cols-2 gap-[10px]">
-					<ObtionButton label="하이리스크 하이리턴" onClick={() => {}} isSelected size="large" />
-					<ObtionButton label="로우리스크 로우리턴" onClick={() => {}} isSelected={false} size="large" />
+
+				<div className="mb-[20px]" />
+
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
+					<span className="font-semibold text-[20px]">달성 시 추가금 방식</span>
+					<span className="font-semibold text-primaryOrange-200 ">*</span>
 				</div>
-				<SubmitButton label="" btnState={getBtnState()} />
+
+				<div className="grid grid-cols-2 gap-[10px]">
+					<ObtionButton
+						label="하이리스크 하이리턴"
+						onClick={() => formDispatch({ type: 'reward', payload: 'high' })}
+						isSelected={false}
+						size="large"
+					/>
+					<ObtionButton
+						label="로우리스크 로우리턴"
+						onClick={() => formDispatch({ type: 'reward', payload: 'low' })}
+						isSelected={false}
+						size="large"
+					/>
+				</div>
+				<div className="mb-[50px]" />
+				<SubmitButton label="등록하기" btnState={getBtnState()} />
 			</form>
 		</Main>
 	);
