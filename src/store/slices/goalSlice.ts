@@ -2,6 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoadGoalParam } from 'store/sagas/goalSaga';
 import { Goal } from 'types/goal';
+import { GoalFormState } from 'pages/Goal/GoalRegister/RegisterType';
 
 export interface InitialState {
 	goalList: Goal[];
@@ -30,6 +31,7 @@ export const goalSlice = createSlice({
 			state.isLoading = false;
 			state.error = error;
 		},
+		registerGoal: (state, action: PayloadAction<GoalFormState>) => {},
 	},
 });
 
