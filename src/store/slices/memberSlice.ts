@@ -10,18 +10,10 @@ export interface InitialState {
 }
 
 const initialState: InitialState = {
-	// memberinfo: {
-	// 	email: '',
-	// 	password: '',
-	// 	nickName: '',
-	// 	sex: 'UNKNOWN',
-	// 	age: 0,
-	// 	money: 0,
-	// },
 	memberinfo: null,
 	memberGoals: {
 		maxPage: 1,
-		goals: [],
+		goals: null,
 	},
 	isLoading: false,
 	error: null,
@@ -47,7 +39,7 @@ export const memberSlice = createSlice({
 		},
 		getMemberGoalsSuccess: (state, { payload }: PayloadAction<IGetMemberGoalsResult>) => {
 			state.isLoading = false;
-			state.memberGoals = payload;
+			state.memberGoals = { ...payload };
 		},
 		getMemberGoalsFail: (state, { payload: error }: PayloadAction<string>) => {
 			state.isLoading = false;

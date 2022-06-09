@@ -15,7 +15,7 @@ export interface IGetMemberGoals {
 
 export interface IGetMemberGoalsResult {
 	maxPage: number;
-	goals: Goal[];
+	goals: Goal[] | null;
 }
 
 export const getMember = () => {
