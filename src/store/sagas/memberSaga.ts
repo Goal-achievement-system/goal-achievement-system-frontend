@@ -7,6 +7,7 @@ import { AxiosResponse } from 'axios';
 import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import resultSlice from 'store/slices/resultSlice';
+import { GoalCount } from 'types/statistics';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -21,6 +22,8 @@ const {
 	chargeMoneySuccess,
 	transferMoney,
 	transferMoneySuccess,
+	getGoalStatistics,
+	getGoalStatisticsSuccess,
 } = memberSlice.actions;
 
 function* loadMemberSaga(action: PayloadAction) {
@@ -72,6 +75,18 @@ function* transferMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 	yield put(finishLoading(action.type));
 }
 
+function* getGoalStatisticsSaga(action: PayloadAction) {
+	yield put(startLoading(action.type));
+	try {
+		const result: AxiosResponse<GoalCount> = yield call(memberAPI.getMemberGoalStatistics);
+		yield put(getGoalStatisticsSuccess(result.data));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
+	}
+	yield put(finishLoading(action.type));
+}
+
 function* watchLoadMemberSaga() {
 	yield takeLatest(loadMemberInfo, loadMemberSaga);
 }
@@ -84,6 +99,9 @@ function* watchChargeMoneySaga() {
 function* watchTransferMoneySaga() {
 	yield takeLatest(transferMoney, transferMoneySaga);
 }
+function* watchGetGoalStatisticsSaga() {
+	yield takeLatest(getGoalStatistics, getGoalStatisticsSaga);
+}
 
 export default function* MemberSaga() {
 	yield all([
@@ -91,5 +109,6 @@ export default function* MemberSaga() {
 		fork(watchReplaceMemberSaga),
 		fork(watchChargeMoneySaga),
 		fork(watchTransferMoneySaga),
+		fork(watchGetGoalStatisticsSaga),
 	]);
 }

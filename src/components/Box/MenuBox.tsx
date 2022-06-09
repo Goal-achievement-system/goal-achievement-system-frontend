@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { RootState } from 'store/slices';
+import memberSlice from 'store/slices/memberSlice';
 import { Member } from 'types/member';
 import { addComma } from 'utils/common';
 import Path from 'utils/path';
@@ -10,7 +13,18 @@ export interface Props {
 }
 
 function MenuBox({ member }: Props) {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { goalStatistics } = useSelector((state: RootState) => state.member);
+
+	useEffect(() => {
+		if (member) {
+			if (!goalStatistics) {
+				dispatch(memberSlice.actions.getGoalStatistics());
+			}
+		}
+	}, [dispatch, goalStatistics, member]);
+
 	return (
 		<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white">
 			<div className="border-b-[1px] border-borderGray pb-[16px] mb-[16px]">
@@ -33,26 +47,26 @@ function MenuBox({ member }: Props) {
 				<ul className="p-[16px] rounded-[8px] bg-primaryOrange-100 text-[16px] font-[500] leading-[19px]">
 					<li className="flex justify-between mb-[16px]">
 						<div className="flex items-center">목표 등록</div>
-						<div className="text-primaryOrange-200">0</div>
+						<div className="text-primaryOrange-200">{goalStatistics ? goalStatistics.totalGoalCount : 0}</div>
 					</li>
 					<li className="flex justify-between mb-[16px]">
 						<div className="flex items-center">목표 인증</div>
-						<div className="text-primaryOrange-200">0</div>
+						<div className="text-primaryOrange-200">{goalStatistics ? goalStatistics.totalOngoingGoalCount : 0}</div>
 					</li>
 					<li className="flex justify-between mb-[16px]">
 						<div className="flex items-center">
 							목표 성공
-							{member && (
+							{/* {member && (
 								<div className="rounded-[4px] bg-primaryOrange-200 px-[6px] py-[4px] text-[12px] font-[600] leading-[14.4px] ml-[8px] text-white">
 									+32,000원
 								</div>
-							)}
+							)} */}
 						</div>
-						<div className="text-primaryOrange-200">0</div>
+						<div className="text-primaryOrange-200">{goalStatistics ? goalStatistics.totalSuccessGoalCount : 0}</div>
 					</li>
 					<li className="flex justify-between">
 						<div className="flex items-center">목표 실패</div>
-						<div className="text-primaryOrange-200">0</div>
+						<div className="text-primaryOrange-200">{goalStatistics ? goalStatistics.totalFailGoalCount : 0}</div>
 					</li>
 				</ul>
 			</div>

@@ -1,17 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IChargeMoney } from 'api/memberAPI';
 import { Member } from 'types/member';
+import { GoalCount } from 'types/statistics';
 
 export interface InitialState {
 	memberinfo: Member | null;
 	isLoading: boolean;
 	error: null | string;
+	goalStatistics: null | GoalCount;
 }
 
 const initialState: InitialState = {
 	memberinfo: null,
 	isLoading: false,
 	error: null,
+	goalStatistics: null,
 };
 
 export const memberSlice = createSlice({
@@ -53,6 +56,10 @@ export const memberSlice = createSlice({
 				...state.memberinfo!,
 				money: state.memberinfo!.money! - money,
 			};
+		},
+		getGoalStatistics: (state) => {},
+		getGoalStatisticsSuccess: (state, { payload: goalStatistics }: PayloadAction<GoalCount>) => {
+			state.goalStatistics = goalStatistics;
 		},
 	},
 });
