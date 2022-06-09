@@ -6,6 +6,8 @@ import FilterButton from 'components/Button/FilterButton';
 // import { Goal } from 'types/goal';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
+import { successCertGoal, failCertGoal } from 'api/goalAPI';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
 	index: number;
@@ -13,9 +15,28 @@ interface Props {
 
 export default function GoalModal({ index }: Props) {
 	const goal = useSelector((state: RootState) => state.goal.goalList[index]);
+	const navigate = useNavigate();
 	const className = {
 		size: 'pc:w-[890px] max-w-[90vw] pc:max-h-[80vh] w-[320px] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
+	};
+
+	const handleSuccessClick = () => {
+		try {
+			successCertGoal(goal.goalId);
+		} catch (err) {
+			alert('요청이 제대로 이루어지지 않았습니다.');
+			navigate('/');
+		}
+	};
+	// 실패요청 핸들러
+	const handleFailClick = () => {
+		try {
+			failCertGoal(goal.goalId);
+		} catch (err) {
+			alert('요청이 제대로 이루어지지 않았습니다.');
+			navigate('/');
+		}
 	};
 
 	return (
@@ -46,8 +67,8 @@ export default function GoalModal({ index }: Props) {
 				</div>
 				<div className="pc:max-h-[90px] overflow-auto">{goal.content}</div>
 				<div className="flex pc:space-x-[26px] space-x-[6px]">
-					<SubmitButton label="실패" btnState="inactive" onClick={() => {}} />
-					<SubmitButton label="성공" btnState="active" onClick={() => {}} />
+					<SubmitButton label="실패" btnState="inactive" onClick={handleFailClick} />
+					<SubmitButton label="성공" btnState="active" onClick={handleSuccessClick} />
 				</div>
 			</div>
 		</div>
