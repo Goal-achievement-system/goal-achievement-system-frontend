@@ -87,13 +87,13 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 					<ObtionButton
 						label="하이리스크 하이리턴"
 						onClick={() => formDispatch({ type: 'reward', payload: 'high' })}
-						isSelected={false}
+						isSelected={formState.reward === 'high'}
 						size="large"
 					/>
 					<ObtionButton
 						label="로우리스크 로우리턴"
 						onClick={() => formDispatch({ type: 'reward', payload: 'low' })}
-						isSelected={false}
+						isSelected={formState.reward === 'low'}
 						size="large"
 					/>
 				</div>
