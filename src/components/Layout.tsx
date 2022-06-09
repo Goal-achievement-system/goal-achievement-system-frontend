@@ -13,6 +13,7 @@ import Certifications from 'pages/Certifications/CertificationsContainer';
 import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
 import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
+import GoalRegister from 'pages/Goal/GoalRegister/GoalRegisterContainer';
 
 function Layout() {
 	const dispatch: AppDispatch = useDispatch();
@@ -35,6 +36,7 @@ function Layout() {
 					<Route path={Path.certifications} element={<Certifications />} />
 					<Route path={Path.moneyCharge} element={<MoneyCharge />} />
 					<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
+					<Route path={Path.goalRegister} element={<GoalRegister />} />
 				</Routes>
 			</div>
 		</BaseTemplate>
