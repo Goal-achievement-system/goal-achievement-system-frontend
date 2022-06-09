@@ -24,9 +24,9 @@ export default function Header() {
 			path: Path.notice,
 		},
 		{
-			id: '등록',
+			id: 'registerGoal',
 			title: '목표등록',
-			path: '',
+			path: Path.goalRegister,
 		},
 		{
 			id: '인증',
