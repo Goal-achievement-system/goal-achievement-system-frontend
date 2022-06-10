@@ -105,4 +105,3 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 }
 
 export default GoalRegisterView;
-
