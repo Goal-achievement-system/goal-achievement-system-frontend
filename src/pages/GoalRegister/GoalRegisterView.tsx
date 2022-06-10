@@ -14,16 +14,6 @@ interface Props {
 }
 
 function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }: Props) {
-	/*
-	const changeInputTextValue = (text: string): string => {
-		const regex = /[^0-9]/g;
-		const number = Number(text.replace(regex, ''));
-		if (number > 1000) return '1000';
-		return number.toString();
-	};
-	
-	};
-	*/
 	const getBtnState = (): BtnStates => {
 		const { goalName, content, money, limitDate, reward, category } = formState;
 		// 심플하게 만드는 법 생각해보기
@@ -105,4 +95,3 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 }
 
 export default GoalRegisterView;
-
