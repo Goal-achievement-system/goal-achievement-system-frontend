@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AxiosResponse } from 'axios';
-import { GoalFormState } from 'pages/Goal/GoalRegister/RegisterType';
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import goalSlice from 'store/slices/goalSlice';
 import { Goal } from 'types/goal';
@@ -49,6 +48,7 @@ function* registerGoalSaga(action: PayloadAction<RegisterGoalParam>) {
 
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
+		// 에러 처리 하기
 		console.log(error);
 		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
 	}
