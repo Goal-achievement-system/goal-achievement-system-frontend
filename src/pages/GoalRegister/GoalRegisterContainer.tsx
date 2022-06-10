@@ -19,7 +19,6 @@ function GoalRegisterContainer() {
 	const [formState, formDispatch] = useReducer(formReducer, initialState);
 	const [loading, result, initResult] = useGetActionState(goalSlice.actions.registerGoal.type);
 
-	const isFormValid = (formState) => {};
 	const onSubmit = (event: React.SyntheticEvent) => {
 		// 머니 범위 설정
 		// 날짜 입력 숫자로만 했는지 확인
