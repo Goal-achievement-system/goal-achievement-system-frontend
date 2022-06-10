@@ -19,6 +19,7 @@ export const certificationSlice = createSlice({
 	reducers: {
 		loadCertGoalList: (state, action: PayloadAction<LoadCertGoalParam>) => {},
 		loadCertGoalListSuccess: (state, { payload }: PayloadAction<GoalsResponse>) => {
+			console.log(payload.goals);
 			state.goalList = payload.goals;
 			state.maxPage = payload.maxPage;
 		},

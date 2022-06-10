@@ -21,7 +21,8 @@ function* loadCertGoalSaga(action: PayloadAction<LoadCertGoalParam>) {
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<GoalsResponse> = yield call(goalAPI.loadCertGoalList, param);
-		yield put(loadCertGoalListSuccess(result.data));
+		console.log(result);
+		yield put(loadCertGoalListSuccess(result?.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
