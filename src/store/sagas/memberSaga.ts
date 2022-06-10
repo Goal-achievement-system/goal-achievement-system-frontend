@@ -7,6 +7,8 @@ import resultSlice from 'store/slices/resultSlice';
 import * as memberAPI from 'api/memberAPI';
 import client from 'api/client';
 import { Member } from 'types/member';
+import { GoalCount } from 'types/statistics';
+import { Goal, GoalsResponse } from 'types/goal';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -24,6 +26,8 @@ const {
 	chargeMoneySuccess,
 	transferMoney,
 	transferMoneySuccess,
+	getMemberMenuInfos,
+	getMemberMenuInfosSuccess,
 } = memberSlice.actions;
 
 function* loadMemberSaga(action: PayloadAction) {
@@ -39,8 +43,6 @@ function* loadMemberSaga(action: PayloadAction) {
 	yield put(finishLoading(action.type));
 }
 
-// action을 받는다. type, payload의 데이터타입을 지정해준다.
-// function* getMemberGoalsSaga(action: { type: string; payload: memberAPI.IGetMemberGoals }) {
 function* getMemberGoalsSaga(action: PayloadAction<memberAPI.IGetMemberGoals>) {
 	yield put(startLoading(action.type));
 	try {
@@ -88,6 +90,24 @@ function* transferMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 	yield put(finishLoading(action.type));
 }
 
+function* getMemberMenuInfosSaga(action: PayloadAction) {
+	yield put(startLoading(action.type));
+	try {
+		const goalStatistics: AxiosResponse<GoalCount> = yield call(memberAPI.getMemberGoalStatistics);
+		const onGoingGoals: AxiosResponse<GoalsResponse> = yield call(memberAPI.getMemberGoals, {
+			state: 'ongoing',
+			page: 1,
+		});
+		yield put(
+			getMemberMenuInfosSuccess({ goalStatistics: goalStatistics.data, onGoingGoals: onGoingGoals.data.goals })
+		);
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
+	}
+	yield put(finishLoading(action.type));
+}
+
 function* watchLoadMemberSaga() {
 	yield takeLatest(loadMemberInfo, loadMemberSaga);
 }
@@ -103,6 +123,9 @@ function* watchChargeMoneySaga() {
 function* watchTransferMoneySaga() {
 	yield takeLatest(transferMoney, transferMoneySaga);
 }
+function* watchGetMemberMenuInfosSaga() {
+	yield takeLatest(getMemberMenuInfos, getMemberMenuInfosSaga);
+}
 
 export default function* MemberSaga() {
 	yield all([
@@ -111,5 +134,6 @@ export default function* MemberSaga() {
 		fork(watchChargeMoneySaga),
 		fork(watchTransferMoneySaga),
 		fork(watchGetMemberGoalsSaga),
+		fork(watchGetMemberMenuInfosSaga),
 	]);
 }

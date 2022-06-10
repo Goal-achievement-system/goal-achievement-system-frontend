@@ -10,3 +10,8 @@ export interface Goal {
 	reward: string;
 	verificationResult: VerificationResult;
 }
+
+export interface GoalsResponse {
+	goals: Goal[];
+	maxPage: number;
+}

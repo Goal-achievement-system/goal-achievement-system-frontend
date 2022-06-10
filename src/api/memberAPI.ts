@@ -42,6 +42,10 @@ export const transferMoney = ({ email, password, money }: IChargeMoney) => {
 	return client.put('/members/myinfo/refund', { email, password, money });
 };
 
+export const getMemberGoalStatistics = () => {
+	return client.get('/statistics/mine');
+};
+
 export const getMemberGoals = ({ state, page }: IGetMemberGoals) => {
 	return client.get(`/members/myinfo/goals/${state}/${page}`);
 };

@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface ModalComponentState {
 	name: string;
 	props: {
-		id: number;
+		index: number;
 	};
 }
 

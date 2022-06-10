@@ -14,6 +14,7 @@ import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
 import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
 import MyGoal from 'pages/MyGoal/MyGoalContainer';
+import GoalRegister from 'pages/GoalRegister/GoalRegisterContainer';
 
 function Layout() {
 	const dispatch: AppDispatch = useDispatch();
@@ -26,7 +27,7 @@ function Layout() {
 
 	return (
 		<BaseTemplate>
-			<div className=" pc:w-[1200px] pc:flex my-[50px] mx-auto pc:box-content ">
+			<div className=" pc:w-[1200px] pc:flex mt-[50px] pb-[50px] mx-auto pc:box-content">
 				<div className="hidden pc:block mr-[30px]">
 					<MenuBox member={memberinfo} />
 				</div>
@@ -37,6 +38,7 @@ function Layout() {
 					<Route path={Path.moneyCharge} element={<MoneyCharge />} />
 					<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
 					<Route path={Path.myGoals} element={<MyGoal />} />
+					<Route path={Path.goalRegister} element={<GoalRegister />} />
 				</Routes>
 			</div>
 		</BaseTemplate>
