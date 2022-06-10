@@ -1,17 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IChargeMoney } from 'api/memberAPI';
+import { Goal } from 'types/goal';
 import { Member } from 'types/member';
+import { GoalCount } from 'types/statistics';
+
+export interface MemberMenuInfos {
+	goalStatistics: GoalCount;
+	onGoingGoals: Goal[];
+}
 
 export interface InitialState {
 	memberinfo: Member | null;
 	isLoading: boolean;
 	error: null | string;
+	goalStatistics: null | GoalCount;
+	onGoingGoals: Goal[];
 }
 
 const initialState: InitialState = {
 	memberinfo: null,
 	isLoading: false,
 	error: null,
+	goalStatistics: null,
+	onGoingGoals: [],
 };
 
 export const memberSlice = createSlice({
@@ -53,6 +64,11 @@ export const memberSlice = createSlice({
 				...state.memberinfo!,
 				money: state.memberinfo!.money! - money,
 			};
+		},
+		getMemberMenuInfos: (state) => {},
+		getMemberMenuInfosSuccess: (state, { payload }: PayloadAction<MemberMenuInfos>) => {
+			state.goalStatistics = payload.goalStatistics;
+			state.onGoingGoals = payload.onGoingGoals;
 		},
 	},
 });
