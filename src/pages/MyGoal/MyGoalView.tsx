@@ -17,6 +17,7 @@ interface Props {
 	isSelected: string;
 	setIsSelected: Dispatch<SetStateAction<string>>;
 	maxPage: number;
+	openGoalModal: (index: number) => void;
 }
 
 export default function MyGoalView({
@@ -29,6 +30,7 @@ export default function MyGoalView({
 	isSelected,
 	setIsSelected,
 	maxPage,
+	openGoalModal,
 }: Props) {
 	// 버튼에 해당하는 현재 state
 	const getFilterState = (key: string) => {
@@ -69,9 +71,9 @@ export default function MyGoalView({
 				<div className="box-wrap pc:my-[30px]">
 					{goals?.length ? (
 						<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
-							{goals.map((goal) => (
+							{goals.map((goal, index) => (
 								<li key={goal.goalId}>
-									<SmallBox goal={goal} />
+									<SmallBox goal={goal} onClick={() => openGoalModal(index)} />
 								</li>
 							))}
 						</ul>

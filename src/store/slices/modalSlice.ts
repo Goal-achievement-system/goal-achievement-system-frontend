@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ModalComponentState {
 	name: string;
@@ -20,7 +20,7 @@ const modalSlice = createSlice({
 	name: 'modal',
 	initialState,
 	reducers: {
-		open: (state, action) => {
+		open: (state, action: PayloadAction<ModalComponentState>) => {
 			state.openList = [...state.openList, action.payload];
 			state.isOpenModal = true;
 		},
