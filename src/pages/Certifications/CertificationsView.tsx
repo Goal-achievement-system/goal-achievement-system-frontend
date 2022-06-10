@@ -27,7 +27,7 @@ function CertificationsView({ isLoading, goalList }: Props) {
 	const [curCategory, setCurCategory] = useState<CertCategoryType>('all');
 	const [isOneColumnMode, setIsOneColumnMode] = useState<boolean>(false);
 	const [curPage, setCurPage] = useState<number>(1);
-	console.log(isLoading);
+	console.log(isLoading, goalList);
 	return (
 		<Main title="목표인증">
 			{isLoading ? (
@@ -74,10 +74,10 @@ function CertificationsView({ isLoading, goalList }: Props) {
 						</ul>
 					) : (
 						<ul className=" grid grid-cols-3 gap-x-[16px] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
-							{[1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, idx) => (
+							{goalList.map((goal, idx) => (
 								// eslint-disable-next-line react/no-array-index-key
 								<li key={idx}>
-									<SmallBox goal={goalTemp} />
+									<SmallBox goal={goal} />
 								</li>
 							))}
 						</ul>
