@@ -25,7 +25,7 @@ function GoalRegisterContainer() {
 		event.preventDefault();
 
 		if (!memberInfo || loading) return;
-
+	
 		const { goalName, content, money, limitDate, reward, category } = formState;
 		// 심플하게 만드는 법 생각해보기
 		console.log('submit', formState, limitDate, !limitDate.trim());
