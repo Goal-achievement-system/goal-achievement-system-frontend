@@ -13,7 +13,7 @@ import Certifications from 'pages/Certifications/CertificationsContainer';
 import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
 import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
-import GoalRegister from 'pages/Goal/GoalRegister/GoalRegisterContainer';
+import GoalRegister from 'pages/GoalRegister/GoalRegisterContainer';
 
 function Layout() {
 	const dispatch: AppDispatch = useDispatch();

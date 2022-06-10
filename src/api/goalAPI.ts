@@ -1,4 +1,5 @@
 import { LoadGoalParam, RegisterGoalParam } from 'store/sagas/goalSaga';
+import { LoadCertGoalParam } from 'store/sagas/certificationSaga';
 import client from './client';
 
 export const loadGoaliLst = (params: LoadGoalParam) => {
@@ -7,6 +8,9 @@ export const loadGoaliLst = (params: LoadGoalParam) => {
 
 export const registerGoal = (params: RegisterGoalParam) => {
 	return client.post(`goals`, { ...params });
+};
+export const loadCertGoalList = (params: LoadCertGoalParam) => {
+	return client.get(`goals/${params.category}/list/oncertification/${params.page}`);
 };
 
 export default loadGoaliLst;
