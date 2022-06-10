@@ -67,8 +67,8 @@ export default function MyGoalView({
 					})}
 				</div>
 				<div className="box-wrap pc:my-[30px]">
-					{goals ? (
-						<ul className="grid grid-cols-3 pc:gap-[30px] gap-[16px]">
+					{goals?.length ? (
+						<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
 							{goals.map((goal) => (
 								<li key={goal.goalId}>
 									<SmallBox goal={goal} />
@@ -80,7 +80,7 @@ export default function MyGoalView({
 					)}
 				</div>
 				<div className="flex content-center ">
-					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={1} />
+					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={5} />
 				</div>
 			</Main>
 			<div className="pc:mt-[30px]">
