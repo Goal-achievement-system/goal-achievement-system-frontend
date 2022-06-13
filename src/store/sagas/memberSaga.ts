@@ -43,8 +43,6 @@ function* loadMemberSaga(action: PayloadAction) {
 	yield put(finishLoading(action.type));
 }
 
-// action을 받는다. type, payload의 데이터타입을 지정해준다.
-// function* getMemberGoalsSaga(action: { type: string; payload: memberAPI.IGetMemberGoals }) {
 function* getMemberGoalsSaga(action: PayloadAction<memberAPI.IGetMemberGoals>) {
 	yield put(startLoading(action.type));
 	try {

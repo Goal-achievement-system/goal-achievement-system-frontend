@@ -19,9 +19,7 @@ function HomeContainer() {
 	const [openModal, cloasModal] = useModal();
 
 	console.log('goalList', goalList);
-	const openGoalModal = (index: number) => {
-		openModal({ name: 'GoalModal', props: { index } });
-	};
+	const openGoalModal = (index: number) => openModal({ name: 'GoalModal', props: { index } });
 
 	useEffect(() => {
 		if (!memberinfo) {

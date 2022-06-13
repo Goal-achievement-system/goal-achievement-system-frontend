@@ -17,6 +17,7 @@ interface Props {
 	isSelected: string;
 	setIsSelected: Dispatch<SetStateAction<string>>;
 	maxPage: number;
+	openGoalModal: (index: number) => void;
 }
 
 export default function MyGoalView({
@@ -29,6 +30,7 @@ export default function MyGoalView({
 	isSelected,
 	setIsSelected,
 	maxPage,
+	openGoalModal,
 }: Props) {
 	// 버튼에 해당하는 현재 state
 	const getFilterState = (key: string) => {
@@ -67,11 +69,11 @@ export default function MyGoalView({
 					})}
 				</div>
 				<div className="box-wrap pc:my-[30px]">
-					{goals ? (
-						<ul className="grid grid-cols-3 pc:gap-[30px] gap-[16px]">
-							{goals.map((goal) => (
+					{goals?.length ? (
+						<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
+							{goals.map((goal, index) => (
 								<li key={goal.goalId}>
-									<SmallBox goal={goal} />
+									<SmallBox goal={goal} onClick={() => openGoalModal(index)} />
 								</li>
 							))}
 						</ul>
@@ -80,7 +82,7 @@ export default function MyGoalView({
 					)}
 				</div>
 				<div className="flex content-center ">
-					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={1} />
+					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={5} />
 				</div>
 			</Main>
 			<div className="pc:mt-[30px]">

@@ -21,23 +21,10 @@ export default function GoalModal({ index }: Props) {
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
 
-	const handleSuccessClick = () => {
-		try {
-			successCertGoal(goal.goalId);
-		} catch (err) {
-			alert('요청이 제대로 이루어지지 않았습니다.');
-			navigate('/');
-		}
-	};
+	const handleSuccessClick = () => successCertGoal(goal.goalId);
+
 	// 실패요청 핸들러
-	const handleFailClick = () => {
-		try {
-			failCertGoal(goal.goalId);
-		} catch (err) {
-			alert('요청이 제대로 이루어지지 않았습니다.');
-			navigate('/');
-		}
-	};
+	const handleFailClick = () => failCertGoal(goal.goalId);
 
 	return (
 		<div
