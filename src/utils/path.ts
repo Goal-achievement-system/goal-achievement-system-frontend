@@ -8,6 +8,7 @@ const Path = {
 	moneyCharge: '/money/charge',
 	moneyTransfer: '/money/transfer',
 	myGoals: '/my-goal',
+	goalRegister: '/goals/register',
 };
 
 export default Path;

@@ -1,4 +1,6 @@
 export type VerificationResult = 'all' | 'success' | 'fail' | 'ongoing' | 'hold' | 'oncertification';
+// all, ongoing, success, fail, hold, oncertification
+
 export interface Goal {
 	goalId: number;
 	memberEmail: string;
@@ -9,4 +11,9 @@ export interface Goal {
 	money: number;
 	reward: string;
 	verificationResult: VerificationResult;
+}
+
+export interface GoalsResponse {
+	goals: Goal[];
+	maxPage: number;
 }
