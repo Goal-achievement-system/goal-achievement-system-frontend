@@ -28,7 +28,7 @@ function HomeContainer() {
 		if (!memberinfo) {
 			dispatch(statisticsSlice.actions.loadGoalCount());
 		} else {
-			dispatch(goalSlice.actions.loadGoalList({ category: 'all', page: 1, status: 'ongoing' }));
+			dispatch(goalSlice.actions.loadGoalList({ category: 'all', page: 1, status: 'oncertification' }));
 		}
 	}, [dispatch, memberinfo, goalCount]);
 
