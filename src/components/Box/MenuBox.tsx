@@ -1,3 +1,4 @@
+import useGetActionState from 'hooks/useGetActionState';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,6 +16,8 @@ export interface Props {
 function MenuBox({ member }: Props) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const [memberInfoLoading] = useGetActionState(memberSlice.actions.loadMemberInfo.type);
+	const [menuInfoLoading] = useGetActionState(memberSlice.actions.getMemberMenuInfos.type);
 	const { goalStatistics, menuGoals, menuCerts } = useSelector((state: RootState) => state.member);
 
 	useEffect(() => {
@@ -23,7 +26,10 @@ function MenuBox({ member }: Props) {
 		}
 	}, [dispatch, member]);
 
-	console.log(goalStatistics);
+	if (memberInfoLoading || menuInfoLoading)
+		return (
+			<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white h-[674px]" />
+		);
 
 	return (
 		<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white">
