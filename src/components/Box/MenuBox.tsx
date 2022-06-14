@@ -102,7 +102,7 @@ function MenuBox({ member }: Props) {
 			</div>
 			{member ? (
 				<div>
-					<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">내 목표머니</div>
+					<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">충전 잔액</div>
 					<div className="text-[22px] font-[600] leading-[30px] mb-[4px]">{addComma(member.money)}원</div>
 					<div className="flex gap-[10px]">
 						<SideBarButton label="충전" onClick={() => navigate(Path.moneyCharge)} bgColor="gray" />
