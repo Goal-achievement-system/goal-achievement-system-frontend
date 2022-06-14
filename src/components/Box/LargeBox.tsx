@@ -7,7 +7,7 @@ export interface Props {
 	onClick?: () => void;
 }
 
-function SmallBox({ goal, onClick }: Props) {
+function LargeBox({ goal, onClick }: Props) {
 	return (
 		<button
 			type="button"
@@ -53,4 +53,4 @@ function SmallBox({ goal, onClick }: Props) {
 	);
 }
 
-export default React.memo(SmallBox);
+export default React.memo(LargeBox);
