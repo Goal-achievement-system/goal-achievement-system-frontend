@@ -73,7 +73,7 @@ function PaginationElement({ btnType, isActive, number, arrDirection, onClick }:
 		<button
 			type="button"
 			onClick={onClick}
-			className={`flex flex-row grow-0 justify-center items-center rounded-[8px] text-[20px] font-[600]  w-[34px] h-[34px] ${getBgColor(
+			className={`flex flex-row grow-0 justify-center items-center rounded-[4px]  font-[600] text-[12px]  w-[20px] h-[20px] pc:text-[20px]  pc:w-[34px] pc:h-[34px] pc:rounded-[8px] ${getBgColor(
 				btnType,
 				isActive
 			)}`}
