@@ -3,4 +3,5 @@ export interface GoalCount {
 	totalGoalCount: number;
 	totalOngoingGoalCount: number;
 	totalFailGoalCount: number;
+	totalHoldGoalCount: number;
 }

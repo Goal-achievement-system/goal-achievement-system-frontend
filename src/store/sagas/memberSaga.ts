@@ -9,6 +9,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import resultSlice from 'store/slices/resultSlice';
 import { GoalCount } from 'types/statistics';
 import { Goal, GoalsResponse } from 'types/goal';
+import { Cert } from 'types/certification';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -80,12 +81,20 @@ function* getMemberMenuInfosSaga(action: PayloadAction) {
 	yield put(startLoading(action.type));
 	try {
 		const goalStatistics: AxiosResponse<GoalCount> = yield call(memberAPI.getMemberGoalStatistics);
-		const onGoingGoals: AxiosResponse<GoalsResponse> = yield call(memberAPI.getMemberGoals, {
+		const menuGoals: AxiosResponse<GoalsResponse> = yield call(memberAPI.getMemberGoals, {
 			state: 'ongoing',
 			page: 1,
 		});
+		// const menuCerts: AxiosResponse<Cert[]> = yield call(memberAPI.getMemberCerts, {
+		// 	state: 'ongoing',
+		// 	page: 1,
+		// });
 		yield put(
-			getMemberMenuInfosSuccess({ goalStatistics: goalStatistics.data, onGoingGoals: onGoingGoals.data.goals })
+			getMemberMenuInfosSuccess({
+				goalStatistics: goalStatistics.data,
+				menuGoals: menuGoals.data.goals,
+				menuCerts: [],
+			})
 		);
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {

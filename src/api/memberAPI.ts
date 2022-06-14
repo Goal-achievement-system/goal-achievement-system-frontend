@@ -13,6 +13,11 @@ export interface IGetMemberGoals {
 	page: number;
 }
 
+export interface IGetMemberCerts {
+	state: VerificationResult;
+	page: number;
+}
+
 export const getMember = () => {
 	return client.get('/members/myinfo');
 };
@@ -43,4 +48,8 @@ export const getMemberGoalStatistics = () => {
 
 export const getMemberGoals = ({ state, page }: IGetMemberGoals) => {
 	return client.get(`/members/myinfo/goals/${state}/${page}`);
+};
+
+export const getMemberCerts = ({ state, page }: IGetMemberCerts) => {
+	return client.get(`/members/myinfo/cert/${state}/${page}`);
 };
