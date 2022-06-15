@@ -88,7 +88,7 @@ function MoneyTransferView({ formState, formDispatch, memberInfo, onSubmit }: Pr
 				<button
 					type="button"
 					onClick={() => formDispatch({ type: 'agree', payload: !formState.agree })}
-					className="flex mb-[50px] items-center cursor-pointer"
+					className="flex mb-[20px] pc:mb-[50px] items-center cursor-pointer"
 				>
 					<input
 						type="checkbox"
