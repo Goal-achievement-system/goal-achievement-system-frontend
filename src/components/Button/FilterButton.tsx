@@ -22,7 +22,7 @@ function FilterButton({ label, isSelected, onClick }: Props) {
 		<button
 			type="button"
 			onClick={onClick}
-			className={`p-[16px] rounded-[8px] ${isSelected ? BgColor.black : BgColor.gray} `}
+			className={`p-[10px] pc:p-[16px] rounded-[8px] ${isSelected ? BgColor.black : BgColor.gray} `}
 		>
 			<span className={`glow-0  not-italic whitespace-nowrap ${isSelected ? TextColor.white : TextColor.black} `}>
 				{label}

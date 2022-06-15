@@ -1,3 +1,4 @@
+import useGetActionState from 'hooks/useGetActionState';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,7 +16,9 @@ export interface Props {
 function MenuBox({ member }: Props) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { goalStatistics, onGoingGoals } = useSelector((state: RootState) => state.member);
+	const [memberInfoLoading] = useGetActionState(memberSlice.actions.loadMemberInfo.type);
+	const [menuInfoLoading] = useGetActionState(memberSlice.actions.getMemberMenuInfos.type);
+	const { goalStatistics, menuGoals, menuCerts } = useSelector((state: RootState) => state.member);
 
 	useEffect(() => {
 		if (member) {
@@ -23,8 +26,10 @@ function MenuBox({ member }: Props) {
 		}
 	}, [dispatch, member]);
 
-	console.log(goalStatistics, 'goalStatistics');
-	console.log(onGoingGoals, 'onGoingGoals');
+	if (memberInfoLoading || menuInfoLoading)
+		return (
+			<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white h-[674px]" />
+		);
 
 	return (
 		<div className="rounded-[16px] w-[278px] p-[24px] border-[1px] border-borderGray overflow-hidden bg-white">
@@ -51,18 +56,11 @@ function MenuBox({ member }: Props) {
 						<div className="text-primaryOrange-200">{goalStatistics ? goalStatistics.totalGoalCount : 0}</div>
 					</li>
 					<li className="flex justify-between mb-[16px]">
-						<div className="flex items-center">목표 인증</div>
+						<div className="flex items-center">목표 진행</div>
 						<div className="text-primaryOrange-200">{goalStatistics ? goalStatistics.totalOngoingGoalCount : 0}</div>
 					</li>
 					<li className="flex justify-between mb-[16px]">
-						<div className="flex items-center">
-							목표 성공
-							{/* {member && (
-								<div className="rounded-[4px] bg-primaryOrange-200 px-[6px] py-[4px] text-[12px] font-[600] leading-[14.4px] ml-[8px] text-white">
-									+32,000원
-								</div>
-							)} */}
-						</div>
+						<div className="flex items-center">목표 성공</div>
 						<div className="text-primaryOrange-200">{goalStatistics ? goalStatistics.totalSuccessGoalCount : 0}</div>
 					</li>
 					<li className="flex justify-between">
@@ -73,36 +71,48 @@ function MenuBox({ member }: Props) {
 			</div>
 			<div className="mb-[30px]">
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">목표등록현황</div>
-				{onGoingGoals.map((goal, idx) => (
-					<div key={goal.goalId} className="mb-[7px]">
-						<SideBarButton onClick={() => {}} bgColor="orange">
-							<div className="flex justify-between w-full">
-								<span className="text-primaryWhite">목표인증</span>
-								<span className="text-primaryWhite">
-									📅 {new Date(goal.limitDate).getMonth() + 1}. {new Date(goal.limitDate).getDate()}
-								</span>
+				{menuGoals.map((goal, idx) => {
+					if (idx < 2) {
+						return (
+							<div key={goal.goalId} className="mb-[7px]">
+								<SideBarButton onClick={() => {}} bgColor="orange">
+									<div className="flex justify-between w-full">
+										<span className="text-primaryWhite truncate flex-1 text-left">{goal.goalName}</span>
+										<span className="text-primaryWhite ml-[10px]">
+											📅 {new Date(goal.limitDate).getMonth() + 1}. {new Date(goal.limitDate).getDate()}
+										</span>
+									</div>
+								</SideBarButton>
 							</div>
-						</SideBarButton>
-					</div>
-				))}
+						);
+					}
+					return null;
+				})}
 				<SideBarButton label="목표등록 추가" onClick={() => navigate(Path.goalRegister)} bgColor="gray" />
 			</div>
 			<div className="mb-[30px]">
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">목표인증현황</div>
-				{member ? (
-					<SideBarButton onClick={() => {}} bgColor="black">
-						<div className="flex justify-between w-full">
-							<span className="text-primaryWhite">API 없음</span>
-							<span className="text-primaryWhite">1 / 10회</span>
-						</div>
-					</SideBarButton>
+				{member && menuCerts?.length > 0 ? (
+					menuCerts.map((cert, idx) => {
+						if (idx < 2) {
+							<SideBarButton key={cert.certId} onClick={() => {}} bgColor="black">
+								<div className="flex justify-between w-full">
+									<span className="text-primaryWhite truncate flex-1 text-left">목표 인증</span>
+									<span className="text-primaryWhite ml-[10px]">
+										{cert.successCount} / {cert.requireSuccessCount}회
+									</span>
+								</div>
+							</SideBarButton>;
+						}
+						return null;
+					})
 				) : (
 					<SideBarButton label="목표인증이 없습니다" onClick={() => {}} bgColor="gray" />
 				)}
 			</div>
 			{member ? (
 				<div>
-					<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">내 목표머니</div>
+					<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">충전 잔액</div>
 					<div className="text-[22px] font-[600] leading-[30px] mb-[4px]">{addComma(member.money)}원</div>
 					<div className="flex gap-[10px]">
 						<SideBarButton label="충전" onClick={() => navigate(Path.moneyCharge)} bgColor="gray" />

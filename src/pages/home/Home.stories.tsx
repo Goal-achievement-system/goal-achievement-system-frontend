@@ -21,6 +21,7 @@ Logout.args = {
 		totalGoalCount: 1200,
 		totalOngoingGoalCount: 300,
 		totalFailGoalCount: 300,
+		totalHoldGoalCount: 200,
 	},
 };
 
