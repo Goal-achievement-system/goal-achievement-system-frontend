@@ -17,7 +17,7 @@ function SmallBox({ goal, onClick }: Props) {
 		<button
 			type="button"
 			onClick={onClick}
-			className="cursor-pointer rounded-[8px] pc:rounded-[16px] w-[152px] pc:w-[277px] h-[150px] pc:h-[277px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden bg-white text-left"
+			className="cursor-pointer rounded-[8px] pc:rounded-[16px] w-[100%] pc:w-[277px] h-[150px] pc:h-[277px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden bg-white text-left"
 		>
 			<div className="bg-buttonBlack-100 rounded-[8px] h-[68px] pc:h-[125px] mb-[8px] pc:mb-[16px] overflow-hidden">
 				{goal && checkDrawBox(goal.verificationResult) && (
