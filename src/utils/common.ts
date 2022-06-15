@@ -44,3 +44,17 @@ export const deleteComma = (target: string): number => {
 	const number = Number(target.replace(regex, ''));
 	return number;
 };
+
+// goal 데이터의 verificationResult을 전달하면 그에 맞는 text를 반환
+export const getGoalState = (verificationResult: string): string => {
+	switch (verificationResult) {
+		case 'success':
+			return '💰 보상금 지급 완료';
+		case 'fail':
+			return '😱 보상금 지급 실패';
+		case 'hold':
+			return '💡 검토 요청';
+		default:
+			return '';
+	}
+};
