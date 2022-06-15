@@ -37,38 +37,44 @@ function HomeView({ member, goalCount, goalList, openGoalModal }: Props) {
 							더보기
 						</Link>
 					</div>
-					<ul className="flex flex-wrap gap-x-[16px] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
+					<ul className="flex flex-wrap gap-x-[4%] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
 						{goalList &&
 							goalList.map((goal, index) => (
-								<li key={goal.goalId}>
+								<li key={goal.goalId} className="w-[48%] pc:w-auto">
 									<SmallBox goal={goal} onClick={() => openGoalModal(index)} />
 								</li>
 							))}
 					</ul>
 				</>
 			) : (
-				<div className="rounded-[16px] border-[1px] border-borderGray px-[42px] py-[60px]">
-					<div className="font-[800] text-[30px] leading-[36px] mb-[24px]">현재 골키퍼에서는 ..</div>
-					<div className="font-[600] text-[22px] leading-[30px]">
-						<div className="flex items-center font-[800] text-[30px] leading-[36px] text-primaryOrange-200 mb-[64px]">
+				<div className="pc:rounded-[16px] pc:border-[1px] pc:border-borderGray pc:px-[42px] pc:py-[60px]">
+					<div className="font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] mb-[24px]">
+						현재 골키퍼에서는 ..
+					</div>
+					<div className="font-[600] text-[16px] pc:text-[22px] leading-[30px]">
+						<div className="flex items-center flex-wrap pc:flex-nowrap gap-y-[10px] font-[800] text-[16px] pc:text-[30px] leading-[36px] text-primaryOrange-200 mb-[40px] pc:mb-[64px]">
 							총
 							<CountUp start={0} end={goalCount ? goalCount.totalGoalCount : 0} separator="," delay={0}>
 								{({ countUpRef }) => (
-									<div className="box-border rounded-[12px] font-[800] text-[30px] leading-[36px] text-white px-[25px] py-[10px] bg-primaryOrange-200 mx-[18px]">
-										<span className="font-[800] text-[30px] leading-[36px] text-white" ref={countUpRef} />개
+									<div className="box-border rounded-[12px] font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] text-white px-[16px] pc:px-[25px] py-[8px] pc:py-[10px] bg-primaryOrange-200 mx-[16px] pc:mx-[18px]">
+										<span
+											className="font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] text-white"
+											ref={countUpRef}
+										/>
+										개
 									</div>
 								)}
 							</CountUp>
 							의 전체 목표가 등록되었어요!
 						</div>
-						<div className="flex items-center flex-wrap gap-x-[24px] gap-y-[45px]">
-							<div className="flex items-center">
+						<div className="flex items-center flex-wrap gap-x-[24px] gap-y-[16px] pc:gap-y-[45px]">
+							<div className="flex items-center gap-y-[10px] flex-wrap pc:flex-nowrap">
 								💰 성공한 목표는 총
 								<CountUp start={0} end={goalCount ? goalCount.totalSuccessGoalCount : 0} separator="," delay={0}>
 									{({ countUpRef }) => (
-										<div className="box-border rounded-[12px] font-[800] text-[30px] leading-[36px] text-primaryOrange-200 px-[23px] py-[8px] bg-white mx-[18px] border-[2px] border-primaryOrange-200">
+										<div className="box-border rounded-[12px] font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] text-primaryOrange-200 px-[16px] pc:px-[25px] py-[8px] pc:py-[10px] bg-white mx-[12px] pc:mx-[18px] border-[2px] border-primaryOrange-200">
 											<span
-												className="font-[800] text-[30px] leading-[36px] text-primaryOrange-200 "
+												className="font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] text-primaryOrange-200"
 												ref={countUpRef}
 											/>
 											개
@@ -77,13 +83,13 @@ function HomeView({ member, goalCount, goalList, openGoalModal }: Props) {
 								</CountUp>
 								이며,
 							</div>
-							<div className="flex items-center">
+							<div className="flex items-center gap-y-[10px] flex-wrap pc:flex-nowrap">
 								😥 실패한 목표는 총
 								<CountUp start={0} end={goalCount ? goalCount.totalFailGoalCount : 0} separator="," delay={0}>
 									{({ countUpRef }) => (
-										<div className="box-border rounded-[12px] font-[800] text-[30px] leading-[36px] text-primaryOrange-200 px-[23px] py-[8px] bg-white mx-[18px] border-[2px] border-primaryOrange-200">
+										<div className="box-border rounded-[12px] font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] text-primaryOrange-200 px-[16px] pc:px-[25px] py-[8px] pc:py-[10px] bg-white mx-[12px] pc:mx-[18px] border-[2px] border-primaryOrange-200">
 											<span
-												className="font-[800] text-[30px] leading-[36px] text-primaryOrange-200 "
+												className="font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] text-primaryOrange-200"
 												ref={countUpRef}
 											/>
 											개
@@ -92,13 +98,13 @@ function HomeView({ member, goalCount, goalList, openGoalModal }: Props) {
 								</CountUp>
 								이고,
 							</div>
-							<div className="flex items-center">
+							<div className="flex items-center gap-y-[10px] flex-wrap pc:flex-nowrap">
 								🎉 진행중인 목표는 총
 								<CountUp start={0} end={goalCount ? goalCount.totalOngoingGoalCount : 0} separator="," delay={0}>
 									{({ countUpRef }) => (
-										<div className="box-border rounded-[12px] font-[800] text-[30px] leading-[36px] text-primaryOrange-200 px-[23px] py-[8px] bg-white mx-[18px] border-[2px] border-primaryOrange-200">
+										<div className="box-border rounded-[12px] font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] text-primaryOrange-200 px-[16px] pc:px-[25px] py-[8px] pc:py-[10px] bg-white mx-[12px] pc:mx-[18px] border-[2px] border-primaryOrange-200">
 											<span
-												className="font-[800] text-[30px] leading-[36px] text-primaryOrange-200 "
+												className="font-[800] text-[16px] pc:text-[30px] leading-[19.2px] pc:leading-[36px] text-primaryOrange-200"
 												ref={countUpRef}
 											/>
 											개
