@@ -23,16 +23,16 @@ function LoginView({ error, onSubmit, formState, formDispatch }: Props) {
 	};
 	return (
 		<BaseTemplate>
-			<div className="pc:w-[1200px] h-[762px] my-0 mx-auto mt-[20px] flex justify-between">
-				<div className="bg-primaryOrange-200 rounded-[16px] p-[55px] w-[481px] flex flex-col items-start ">
+			<div className="my-0 mx-auto h-[300px] pc:w-[1200px] pc:h-[762px]  pc:mt-[20px] pc:flex pc:justify-between">
+				<div className="bg-primaryOrange-200  invisible  w-0 h-0  flex flex-col items-start pc:rounded-[16px] pc:h-full pc:p-[55px] pc:visible pc:w-[481px] ">
 					<img src="../image/banner/image1773.png" alt="banner" />
 					<img className="my-[57px] w-[157px] h-[34px]" src="../image/logo/img--logo.png" alt="logo" />
 
 					<img className="w-[310px] h-[96px]" src="../image/text/slogan.png" alt="slogan" />
 				</div>
 
-				<form onSubmit={onSubmit} className="w-[585px] flex flex-col items-start justify-end">
-					<h1 className=" text-[36px] font-[800] my-[76px]">로그인</h1>
+				<form onSubmit={onSubmit} className="pc:w-[585px] flex flex-col items-start justify-end">
+					<h1 className="text-[20px] font-[800] pc:text-[36px]  pc:my-[76px]">로그인</h1>
 
 					<TextInput
 						label="이메일"
@@ -50,7 +50,7 @@ function LoginView({ error, onSubmit, formState, formDispatch }: Props) {
 						value={formState.password}
 						onChange={(curVar: string) => formDispatch({ type: 'password', payload: curVar })}
 					/>
-					<div className="flex justify-between w-full   mt-[100px]">
+					<div className="w-0 h-0 invisible pc:visible pc:w-full  pc:mt-[100px] pc:flex pc:justify-between ">
 						<span className="text-[20px] font-semibold text-primaryGray-200">비밀번호를 잊으셨나요?</span>
 						<span className="text-[20px] font-semibold text-primaryOrange-200">
 							회원이 아직 아니신가요? <Link to={Path.signUp}>회원가입</Link>
@@ -61,6 +61,12 @@ function LoginView({ error, onSubmit, formState, formDispatch }: Props) {
 					</div>
 
 					<SubmitButton label="로그인" btnState={getBtnState()} />
+					<div className="visible w-full space-y-[16px] items-center mt-[60px] flex flex-col pc:w-0 pc:h-0 pc:invisible  ">
+						<span className="text-[12px]  text-primaryOrange-200">
+							회원이 아직 아니신가요? <Link to={Path.signUp}>회원가입</Link>
+						</span>
+						<span className="text-[12px]  text-primaryGray-200">비밀번호를 잊으셨나요?</span>
+					</div>
 				</form>
 			</div>
 		</BaseTemplate>
