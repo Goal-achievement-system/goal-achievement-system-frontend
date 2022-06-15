@@ -38,7 +38,9 @@ function SubmitButton({ label, onClick, btnState }: Props) {
 				btnState
 			)}`}
 		>
-			<span className={`glow-0  not-italic text-[22px] whitespace-nowrap ${getTextColor(btnState)} `}>{label}</span>
+			<span className={`glow-0  not-italic text-[12px]  pc:text-[22px] whitespace-nowrap ${getTextColor(btnState)} `}>
+				{label}
+			</span>
 		</button>
 	);
 }

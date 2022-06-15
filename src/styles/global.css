@@ -51,15 +51,7 @@ h4 {
     font-style: normal;
     color: #000;
 }
-span {
-    font-size: 18px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #000;
-}
+
 
  @media screen and (max-width: 360px) { 
     body,
