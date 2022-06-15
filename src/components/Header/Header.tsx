@@ -35,8 +35,8 @@ export default function Header() {
 		},
 		{
 			id: 'profile',
-			title: '내정보',
-			path: '',
+			title: '내목표',
+			path: Path.myGoals,
 		},
 	];
 	const menus = menuList.map((menu: Menu): React.ReactElement => {
@@ -61,7 +61,11 @@ export default function Header() {
 		<header className="pc:max-w-[1200px] h-[86px] flex mx-auto  justify-between items-center">
 			<div className="pc:basis-[312px] h-full flex items-center">
 				<Link className="" to="/">
-					<img className="pc:max-w-[157px] max-w-[112px]" src="./image/icon/logo.svg" alt="" />
+					<img
+						className="pc:max-w-[157px] max-w-[112px]"
+						src={`${process.env.PUBLIC_URL}/image/icon/logo.svg`}
+						alt="logo-icon"
+					/>
 				</Link>
 			</div>
 			<nav className="hidden mr-auto pc:block">
@@ -73,7 +77,7 @@ export default function Header() {
 						className="min-w-[35px] object-cover cursor-pointer"
 						onClick={(e) => handleClick(e, 0)}
 						aria-hidden
-						src="./image/icon/alarm.svg"
+						src={`${process.env.PUBLIC_URL}/image/icon/alarm.svg`}
 						alt="alarm-icon"
 					/>
 					<RouteModal title="알림" isLogin={isLoggedIn} isOpen={isOpen[0]} />
@@ -83,7 +87,8 @@ export default function Header() {
 						className="ml-[35px] min-w-[35px] object-cover cursor-pointer"
 						onClick={(e) => handleClick(e, 1)}
 						aria-hidden
-						src="./image/icon/my.svg"
+						src={`${process.env.PUBLIC_URL}/image/icon/my.svg`}
+						// src="../image/icon/my.svg"
 						alt="user-icon"
 					/>
 					<RouteModal title="개인정보 수정" isLogin={isLoggedIn} isOpen={isOpen[1]} />
@@ -91,7 +96,7 @@ export default function Header() {
 			</div>
 			<div className="block pc:hidden min-w-[16px] min-h-[12px] ">
 				<button type="button">
-					<img className="w-full" src="image/icon/hamburger.svg" alt="hamburger" />
+					<img className="w-full" src="../image/icon/hamburger.svg" alt="hamburger" />
 				</button>
 			</div>
 		</header>

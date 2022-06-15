@@ -20,9 +20,8 @@ function HomeContainer() {
 	const [loading] = useGetActionState(memberSlice.actions.loadMemberInfo.type);
 	const [openModal, cloasModal] = useModal();
 
-	const openGoalModal = (index: number) => {
-		openModal({ name: 'GoalModal', props: { index } });
-	};
+	console.log('goalList', goalList);
+	const openGoalModal = (index: number) => openModal({ name: 'GoalModal', props: { index } });
 
 	useEffect(() => {
 		if (!memberinfo) {

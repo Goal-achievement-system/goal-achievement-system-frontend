@@ -3,7 +3,7 @@ import PerformInput from 'components/Input/PerformInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
-// import rootReducer from 'store/slices';
+import { Member } from 'types/member';
 
 interface Props {
 	isOpen: boolean;
@@ -16,9 +16,10 @@ export default function UserProfileModal({ isOpen }: Props) {
 	const [replaceEmail, setReplaceEmail] = useState<string | undefined>(undefined);
 	const dispatch = useDispatch();
 
-	const onClick = (type: string, value: string | undefined) => {
-		const replaceMemberInfo = { ...currentMemberInfo, [type]: value };
-		dispatch(memberSlice.actions.replaceMemberInfo(replaceMemberInfo));
+	const onClick = (type: string, value: string) => {
+		if (!currentMemberInfo) return;
+		const MemberInfo: Member = { ...currentMemberInfo, [type]: value };
+		dispatch(memberSlice.actions.replaceMemberInfo(MemberInfo));
 	};
 
 	useEffect(() => {

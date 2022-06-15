@@ -10,8 +10,7 @@ interface Props {
 	buttonTitle?: string;
 	subButtonTitle?: string;
 	value?: string;
-	// onClick?: () => void;
-	onClick?: (type: string, value: string | undefined) => void;
+	onClick?: (type: string, value: string) => void;
 	onChange: (curVar: string) => void;
 }
 
@@ -91,7 +90,7 @@ export default function PerformInput({
 			if (confirmResult) setIsConfirm(true);
 		}
 		// type, value 인자로 받아 함수내부의 동작을 수행한다.
-		if (onClick) onClick(type, value);
+		if (onClick && value) onClick(type, value);
 		setIsConfirm(true);
 	};
 

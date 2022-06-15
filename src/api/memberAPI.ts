@@ -1,5 +1,5 @@
-import { VerificationResult } from 'types/goal';
 import { Member } from 'types/member';
+import { Goal, VerificationResult } from 'types/goal';
 import client from './client';
 
 export interface IChargeMoney {
@@ -11,6 +11,11 @@ export interface IChargeMoney {
 export interface IGetMemberGoals {
 	state: VerificationResult;
 	page: number;
+}
+
+export interface IGetMemberGoalsResult {
+	maxPage: number;
+	goals: Goal[] | null;
 }
 
 export interface IGetMemberCerts {
