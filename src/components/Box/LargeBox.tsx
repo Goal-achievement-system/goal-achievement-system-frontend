@@ -43,9 +43,9 @@ function LargeBox({ goal, onClick }: Props) {
 							</span>
 							{goal.category}
 						</div>
-						<div className="p-[4px] pc:p-[8px] bg-buttonRed-100 rounded-[4px] pc:rounded-[8px] text-buttonRed-200">
+						{/* <div className="p-[4px] pc:p-[8px] bg-buttonRed-100 rounded-[4px] pc:rounded-[8px] text-buttonRed-200">
 							0/10회
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>
