@@ -43,6 +43,7 @@ module.exports = {
 				statesRed: '#FF1523',
 				statesOrange: '#FF8A00',
 				modalGray: '#FAFAFA',
+				alarmGray: '#F9F9F9',
 			},
 		},
 	},
