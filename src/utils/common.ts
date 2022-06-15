@@ -27,8 +27,10 @@ export const validatePassword = (target: string): boolean => {
 	// (?=.*?[#?!@$%^&*-])            // 최소 한개의 특수 문자
 	// .{8,13}												// 8 ~ 13
 
-	const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?+-])[a-zA-Z0-9!@#$%^&*?+-]{8,13}$/;
-	return passwordReg.test(target);
+	// const passwordReg = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?+-])[a-zA-Z0-9!@#$%^&*?+-]{8,13}$/;
+	// const passwordReg = /{8, 13}$/;
+	return target.length >= 8;
+	// return passwordReg.test(target);
 };
 
 // string type의 input에 숫자 입력 시 자동으로 콤마 추가 (문자는 지움)

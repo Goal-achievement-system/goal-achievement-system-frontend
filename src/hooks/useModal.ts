@@ -14,6 +14,7 @@ export interface CloseModal {
 
 export default function useModal() {
 	const dispatch = useDispatch();
+
 	const openModal = (payLoad: OpenModal) => {
 		dispatch(modalSlice.actions.open(payLoad));
 	};
