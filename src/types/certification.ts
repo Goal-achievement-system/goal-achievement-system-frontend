@@ -7,3 +7,12 @@ export const CertCategories = [
 	{ type: 'hobby' as CertCategoryType, label: '취미' },
 	{ type: 'etc' as CertCategoryType, label: '기타' },
 ];
+export interface Cert {
+	certId: number;
+	goalId: number;
+	content: string;
+	image: string;
+	requireSuccessCount: number;
+	successCount: number;
+	failCount: number;
+}

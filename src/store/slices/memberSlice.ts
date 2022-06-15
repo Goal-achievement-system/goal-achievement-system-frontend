@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IChargeMoney, IGetMemberGoals, IGetMemberGoalsResult } from 'api/memberAPI';
+import { Cert } from 'types/certification';
 import { Goal } from 'types/goal';
 import { Member } from 'types/member';
 import { GoalCount } from 'types/statistics';
 
 export interface MemberMenuInfos {
 	goalStatistics: GoalCount;
-	onGoingGoals: Goal[];
+	menuGoals: Goal[];
+	menuCerts: Cert[];
 }
 
 export interface InitialState {
@@ -15,7 +17,8 @@ export interface InitialState {
 	isLoading: boolean;
 	error: null | string;
 	goalStatistics: null | GoalCount;
-	onGoingGoals: Goal[];
+	menuGoals: Goal[];
+	menuCerts: Cert[];
 }
 
 const initialState: InitialState = {
@@ -27,7 +30,8 @@ const initialState: InitialState = {
 	isLoading: false,
 	error: null,
 	goalStatistics: null,
-	onGoingGoals: [],
+	menuGoals: [],
+	menuCerts: [],
 };
 
 export const memberSlice = createSlice({
@@ -84,7 +88,8 @@ export const memberSlice = createSlice({
 		getMemberMenuInfos: (state) => {},
 		getMemberMenuInfosSuccess: (state, { payload }: PayloadAction<MemberMenuInfos>) => {
 			state.goalStatistics = payload.goalStatistics;
-			state.onGoingGoals = payload.onGoingGoals;
+			state.menuGoals = payload.menuGoals;
+			state.menuCerts = payload.menuCerts;
 		},
 	},
 });

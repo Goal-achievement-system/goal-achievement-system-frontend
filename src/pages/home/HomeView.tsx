@@ -1,4 +1,3 @@
-import useModal from 'hooks/useModal';
 import React from 'react';
 import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
@@ -6,7 +5,6 @@ import { Goal } from 'types/goal';
 import { GoalCount } from 'types/statistics';
 import Path from 'utils/path';
 import SmallBox from '../../components/Box/SmallBox';
-import Header from '../../components/Header/Header';
 import { Member } from '../../types/member';
 
 export interface Props {
@@ -31,9 +29,13 @@ function HomeView({ member, goalCount, goalList, openGoalModal }: Props) {
 				<>
 					<div className="flex justify-between items-center mb-[30px]">
 						<div className="text-[30px] font-[800] leading-[36px]">목표인증</div>
-						<button type="button" className="text-[22px] font-[600] leading-[30px] text-primaryBlack-200">
+						<Link
+							to={Path.certifications}
+							type="button"
+							className="text-[22px] font-[600] leading-[30px] text-primaryBlack-200"
+						>
 							더보기
-						</button>
+						</Link>
 					</div>
 					<ul className="flex flex-wrap gap-x-[16px] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
 						{goalList &&

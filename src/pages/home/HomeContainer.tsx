@@ -9,6 +9,7 @@ import statisticsSlice from 'store/slices/statisticsSlice';
 
 import useModal from 'hooks/useModal';
 
+import useGetActionState from 'hooks/useGetActionState';
 import HomeView from './HomeView';
 
 function HomeContainer() {
@@ -16,6 +17,7 @@ function HomeContainer() {
 	const { goalCount } = useSelector((state: RootState) => state.statistics);
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	const { goalList } = useSelector((state: RootState) => state.goal);
+	const [loading] = useGetActionState(memberSlice.actions.loadMemberInfo.type);
 	const [openModal, cloasModal] = useModal();
 
 	console.log('goalList', goalList);
@@ -23,16 +25,13 @@ function HomeContainer() {
 
 	useEffect(() => {
 		if (!memberinfo) {
-			if (localStorage.getItem('goalKeeperToken')) {
-				dispatch(memberSlice.actions.loadMemberInfo());
-			} else {
-				dispatch(statisticsSlice.actions.loadGoalCount());
-			}
+			dispatch(statisticsSlice.actions.loadGoalCount());
 		} else {
-			dispatch(goalSlice.actions.loadGoalList({ category: 'all', page: 1, status: 'ongoing' }));
+			dispatch(goalSlice.actions.loadGoalList({ category: 'all', page: 1, status: 'oncertification' }));
 		}
 	}, [dispatch, memberinfo, goalCount]);
 
+	if (loading) return null;
 	return <HomeView member={memberinfo} goalCount={goalCount} goalList={goalList} openGoalModal={openGoalModal} />;
 }
 

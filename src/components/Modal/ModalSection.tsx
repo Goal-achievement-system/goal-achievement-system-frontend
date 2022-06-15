@@ -3,7 +3,6 @@ import { RootState } from 'store/slices';
 import modalSlice, { ModalComponentState } from 'store/slices/modalSlice';
 import React, { useEffect, useRef } from 'react';
 import modalList from 'utils/importModal';
-import useModal from 'hooks/useModal';
 
 export default function ModalSection() {
 	const modalRef = useRef<HTMLDivElement>(null);
