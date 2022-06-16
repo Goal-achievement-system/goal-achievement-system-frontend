@@ -18,15 +18,15 @@ export default function TextInput({ isPassword, placeholder, label, isRequired =
 	return (
 		<div className="w-full">
 			{label && (
-				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
-					<label htmlFor={label} className="font-semibold text-[20px]">
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[4px] pc:mt-[30px] mt-[20px]">
+					<label htmlFor={label} className="font-semibold pc:text-[20px] text-[14px]">
 						{label}
 					</label>
 					{isRequired && <span className="font-semibold text-primaryOrange-200 ">*</span>}
 				</div>
 			)}
 			<input
-				className="w-full p-6 my-2 border-2 rounded-xl focus:outline-none focus:border-primaryOrange-200"
+				className="w-full pc:p-[24px] p-[16px] pc:max-h-[95px] max-h-[46px] pc:my-2 my-1 pc:border-[2px] border-[1px] rounded-xl focus:outline-none focus:border-primaryOrange-200"
 				id={label}
 				placeholder={placeholder}
 				value={value}

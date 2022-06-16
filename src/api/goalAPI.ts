@@ -6,8 +6,15 @@ export const loadGoaliLst = (params: LoadGoalParam) => {
 	return client.get(`goals/${params.category}/list/${params.status}/${params.page}`);
 };
 
-export const successCertGoal = (goalID: number) => {
-	return client.put(`/goals/cert/success/${goalID}`);
+// eslint-disable-next-line consistent-return
+export const successCertGoal = async (goalID: number) => {
+	try {
+		const response = await client.put(`/goals/cert/success/${goalID}`);
+		return response;
+	} catch (err) {
+		// 임시
+		alert('재접속 후 다시 시도해주세요');
+	}
 };
 
 export const failCertGoal = (goalID: number) => {
