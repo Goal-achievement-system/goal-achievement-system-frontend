@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Path from 'utils/path';
 import { IFormState, Action } from 'pages/Login/LoginContainer';
 import BaseTemplate from 'components/BaseTemplate';
+import AuthLayout from 'components/AuthLayout';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
@@ -23,15 +24,8 @@ function LoginView({ error, onSubmit, formState, formDispatch }: Props) {
 	};
 	return (
 		<BaseTemplate>
-			<div className="my-0 mx-auto h-[300px] pc:w-[1200px] pc:h-[762px]  pc:mt-[20px] pc:flex pc:justify-between">
-				<div className="bg-primaryOrange-200  invisible  w-0 h-0  flex flex-col items-start pc:rounded-[16px] pc:h-full pc:p-[55px] pc:visible pc:w-[481px] ">
-					<img src="../image/banner/image1773.png" alt="banner" />
-					<img className="my-[57px] w-[157px] h-[34px]" src="../image/logo/img--logo.png" alt="logo" />
-
-					<img className="w-[310px] h-[96px]" src="../image/text/slogan.png" alt="slogan" />
-				</div>
-
-				<form onSubmit={onSubmit} className="pc:w-[585px] flex flex-col items-start justify-end">
+			<AuthLayout>
+				<form onSubmit={onSubmit} className="pc:w-[585px] pc:h-full flex flex-col items-start justify-end">
 					<h1 className="text-[20px] font-[800] pc:text-[36px]  pc:my-[76px]">로그인</h1>
 
 					<TextInput
@@ -61,14 +55,14 @@ function LoginView({ error, onSubmit, formState, formDispatch }: Props) {
 					</div>
 
 					<SubmitButton label="로그인" btnState={getBtnState()} />
-					<div className="visible w-full space-y-[16px] items-center mt-[60px] flex flex-col pc:w-0 pc:h-0 pc:invisible  ">
+					<div className="visible w-full space-y-[16px] items-center  mt-[60px] flex flex-col pc:mt-0 pc:w-0 pc:h-0 pc:invisible  ">
 						<span className="text-[12px]  text-primaryOrange-200">
 							회원이 아직 아니신가요? <Link to={Path.signUp}>회원가입</Link>
 						</span>
 						<span className="text-[12px]  text-primaryGray-200">비밀번호를 잊으셨나요?</span>
 					</div>
 				</form>
-			</div>
+			</AuthLayout>
 		</BaseTemplate>
 	);
 }
