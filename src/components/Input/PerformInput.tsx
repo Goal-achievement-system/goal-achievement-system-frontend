@@ -123,7 +123,7 @@ export default function PerformInput({
 		<div className="w-full email-input-wrap">
 			{label && (
 				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px] ">
-					<label htmlFor={label} className="font-semibold text-[20px]">
+					<label htmlFor={label} className="font-semibold pc:text-[20px] text-[14px]">
 						{label}
 					</label>
 					{isRequired && <span className="font-semibold text-primaryOrange-200 ">*</span>}
@@ -134,7 +134,7 @@ export default function PerformInput({
 					id={label}
 					type={type}
 					placeholder={placeholder}
-					className={`w-full p-[24px] border-2 rounded-xl focus:outline-none ${getFocusColor()}
+					className={`w-full pc:p-[24px] p-[16px] pc:max-h-[95px] max-h-[46px] pc:border-[2px] border-[1px] rounded-xl focus:outline-none ${getFocusColor()}
 					`}
 					value={value}
 					onChange={handleChange}
@@ -144,14 +144,14 @@ export default function PerformInput({
 				{buttonTitle && (
 					<button
 						type="button"
-						className={`absolute pc:min-w-[86px] pc:min-h-[42px] py-[12px] px-[14px] rounded-xl right-[12px] top-1/2 -translate-y-1/2 ${getButtonColor()}`}
+						className={`absolute pc:min-w-[86px] pc:min-h-[42px] min-h-[30px] max-h-[30px] pc:text-[16px] text-[12px]  pc:py-[12px] pc:px-[14px] px-[8px] py-[6px] rounded-lg line-h leading-none right-[12px] top-1/2 -translate-y-1/2 ${getButtonColor()}`}
 						onClick={handleClick}
 					>
 						{isConfirm ? `${subButtonTitle || buttonTitle}` : `${buttonTitle}`}
 					</button>
 				)}
 			</div>
-			{isOpenGuide && isCorrect !== null && <p className={`p-3 ${getGuideColor()}`}>{renderGuideMessage()}</p>}
+			{isOpenGuide && isCorrect !== null && <p className={`pc:pt-3 pt-2 ${getGuideColor()}`}>{renderGuideMessage()}</p>}
 		</div>
 	);
 }
