@@ -28,6 +28,7 @@ export const statisticsSlice = createSlice({
 				totalGoalCount: payload.totalGoalCount,
 				totalOngoingGoalCount: payload.totalOngoingGoalCount,
 				totalFailGoalCount: payload.totalFailGoalCount,
+				totalHoldGoalCount: payload.totalHoldGoalCount,
 			};
 		},
 		loadGoalCountFailure: (state, { payload: error }: PayloadAction<string>) => {

@@ -42,11 +42,11 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 				</div>
 				<div className="mb-[50px]">
 					<div className="flex justify-between text-[12px] pc:text-[18px] text-primaryBlack-300 font-[500] leading-[14.4px] pc:leading-[22px] mb-[8px] pc:mb-[10px]">
-						<div>현재 목표머니</div>
+						<div>현재 잔액</div>
 						<div>{addComma(String(memberInfo?.money))}원</div>
 					</div>
 					<div className="flex justify-between text-[12px] pc:text-[18px] text-primaryBlack-300 font-[500] leading-[14.4px] pc:leading-[22px] mb-[8px] pc:mb-[10px]">
-						<div>충전 후 목표머니</div>
+						<div>충전 후 잔액</div>
 						<div>
 							{memberInfo?.money
 								? addComma(memberInfo.money + deleteComma(formState.chargeMoney) * 10000)
@@ -62,8 +62,8 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 				<div className="mb-[16px] pc:mb-[30px] text-[14px] pc:text-[22px] leading-[16.8px] pc:leading-[20px] font-[500] pc:font-[700]">
 					충전 수단
 				</div>
-				<div className="flex gap-[24px] flex-wrap flex-col mb-[50px]">
-					<div className="flex gap-[24px] flex-wrap flex-1">
+				<div className="flex gap-[8px] pc:gap-[24px] flex-wrap flex-col mb-[50px]">
+					<div className="flex gap-[8px] pc:gap-[24px] flex-wrap flex-1">
 						<div className="flex-1">
 							<ObtionButton
 								label="골키퍼 전용머니"
@@ -81,7 +81,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 							/>
 						</div>
 					</div>
-					<div className="flex gap-[24px] flex-wrap flex-1">
+					<div className="flex gap-[8px] pc:gap-[24px] flex-wrap flex-1">
 						<div className="flex-1">
 							<ObtionButton
 								label="계좌이체"
@@ -96,7 +96,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 				<button
 					type="button"
 					onClick={() => formDispatch({ type: 'agree', payload: !formState.agree })}
-					className="flex mb-[50px] items-center cursor-pointer"
+					className="flex mb-[20px] pc:mb-[50px] items-center cursor-pointer"
 				>
 					<input
 						type="checkbox"

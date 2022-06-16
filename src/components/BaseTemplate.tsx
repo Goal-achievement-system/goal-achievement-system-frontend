@@ -7,17 +7,16 @@ import { RootState } from 'store/slices';
 
 interface TemplateProps {
 	children: React.ReactNode;
-	// Modal?: React.ReactNode;
 }
 
 export default function BaseTemplate({ children }: TemplateProps) {
-	const { isOpenModal } = useSelector((state: RootState) => state.modal);
+	// const { isOpenModal } = useSelector((state: RootState) => state.modal);
 
 	return (
-		<div className="main   pc:max-w-[1200px] mx-auto ">
+		<div className="main pc:max-w-[1200px] mx-auto px-[20px] pc:px-[0]">
 			<Header />
 			{children}
-			{isOpenModal && <ModalSection />}
+			<ModalSection />
 		</div>
 	);
 }

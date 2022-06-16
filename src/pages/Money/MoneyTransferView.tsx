@@ -61,11 +61,11 @@ function MoneyTransferView({ formState, formDispatch, memberInfo, onSubmit }: Pr
 				</div>
 				<div className="mb-[50px]">
 					<div className="flex justify-between text-[12px] pc:text-[18px] text-primaryBlack-300 font-[500] leading-[14.4px] pc:leading-[22px] mb-[8px] pc:mb-[10px]">
-						<div>현재 목표머니</div>
+						<div>현재 잔액</div>
 						<div>{addComma(String(memberInfo?.money))}원</div>
 					</div>
 					<div className="flex justify-between text-[12px] pc:text-[18px] text-primaryBlack-300 font-[500] leading-[14.4px] pc:leading-[22px] mb-[8px] pc:mb-[10px]">
-						<div>이체 후 목표머니</div>
+						<div>이체 후 잔액</div>
 						<div>
 							{addComma(
 								String(
@@ -88,7 +88,7 @@ function MoneyTransferView({ formState, formDispatch, memberInfo, onSubmit }: Pr
 				<button
 					type="button"
 					onClick={() => formDispatch({ type: 'agree', payload: !formState.agree })}
-					className="flex mb-[50px] items-center cursor-pointer"
+					className="flex mb-[20px] pc:mb-[50px] items-center cursor-pointer"
 				>
 					<input
 						type="checkbox"
