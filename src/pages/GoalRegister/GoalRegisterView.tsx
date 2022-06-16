@@ -68,8 +68,8 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 
 				<div className="mb-[20px]" />
 
-				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
-					<span className="font-semibold text-[20px]">달성 시 추가금 방식</span>
+				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px] ">
+					<span className="font-semibold pc:text-[20px] text-[14px]">달성 시 추가금 방식</span>
 					<span className="font-semibold text-primaryOrange-200 ">*</span>
 				</div>
 
@@ -87,7 +87,7 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 						size="large"
 					/>
 				</div>
-				<div className="mb-[50px]" />
+				<div className="pc:mb-[50px] mb-[25px]" />
 				<SubmitButton label="등록하기" btnState={getBtnState()} />
 			</form>
 		</Main>
