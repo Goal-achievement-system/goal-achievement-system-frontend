@@ -73,7 +73,7 @@ function CertificationsView({ isLoading, goalList }: Props) {
 							))}
 						</ul>
 					) : (
-						<ul className=" grid grid-cols-3 gap-x-[16px] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
+						<ul className=" grid grid-cols-2 pc:grid-cols-3 gap-x-[16px] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
 							{goalList.map((goal, idx) => (
 								// eslint-disable-next-line react/no-array-index-key
 								<li key={idx}>
