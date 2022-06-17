@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import RouteModal from 'components/Modal/RouteModal';
 import useDetectClose from 'hooks/useDetectClose';
 import Path from 'utils/path';
+import SideMenu from 'components/Sidemenu/Sidemenu';
 
 type Menu = {
 	id: string;
@@ -17,6 +18,7 @@ export default function Header() {
 	const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 	const dropDownRef = useRef<HTMLImageElement>(null);
 	const [isOpen, setIsOpen] = useDetectClose(dropDownRef, [false, false]);
+	const [isOpenSideMenu, setIsOpenSideMenu] = useState<boolean>(false);
 	const menuList = [
 		{
 			id: 'notice',
@@ -29,13 +31,13 @@ export default function Header() {
 			path: Path.goalRegister,
 		},
 		{
-			id: '인증',
+			id: 'certifications',
 			title: '목표인증',
 			path: Path.certifications,
 		},
 		{
 			id: 'profile',
-			title: '내목표',
+			title: '내정보',
 			path: Path.myGoals,
 		},
 	];
@@ -56,6 +58,8 @@ export default function Header() {
 			});
 		}
 	};
+
+	const handleClickOfSideMenu = () => setIsOpenSideMenu(!isOpenSideMenu);
 
 	return (
 		<header className="pc:max-w-[1200px] h-[86px] flex mx-auto  justify-between items-center">
@@ -95,10 +99,11 @@ export default function Header() {
 				</div>
 			</div>
 			<div className="block pc:hidden min-w-[16px] min-h-[12px] ">
-				<button type="button">
+				<button type="button" onClick={handleClickOfSideMenu}>
 					<img className="w-full" src="../image/icon/hamburger.svg" alt="hamburger" />
 				</button>
 			</div>
+			{isOpenSideMenu && <SideMenu handleClickOfSideMenu={handleClickOfSideMenu} />}
 		</header>
 	);
 }
