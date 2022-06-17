@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
-import resultSlice, { IResult } from 'store/slices/resultSlice';
+import resultSlice, { SagaResultProps } from 'store/slices/resultSlice';
 
-export default function useGetActionState(actionType: string): [boolean, IResult, () => void] {
+export default function useGetActionState(actionType: string): [boolean, SagaResultProps | null, () => void] {
 	const dispatch = useDispatch();
 	const { loading } = useSelector((state: RootState) => state.loading);
 	const { result } = useSelector((state: RootState) => state.result);
 	const loadingState: boolean = loading[actionType];
-	const resultState: IResult = result[actionType];
+	const resultState: SagaResultProps | null = result[actionType];
 	const initResult = () => {
 		dispatch(resultSlice.actions.initResult(actionType));
 	};

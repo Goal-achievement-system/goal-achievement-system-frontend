@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { call, takeLatest, fork, all, put } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import memberSlice from 'store/slices/memberSlice';
@@ -36,7 +36,8 @@ function* loadMemberSaga(action: PayloadAction) {
 		const result: AxiosResponse<Member> = yield call(memberAPI.getMember);
 		yield put(loadMemberInfoSuccess(result.data));
 	} catch (error) {
-		yield put(getResult({ isSuccess: false, actionType: action.type }));
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }
@@ -48,7 +49,8 @@ function* getMemberGoalsSaga(action: PayloadAction<memberAPI.IGetMemberGoals>) {
 		yield put(getMemberGoalsSuccess(result.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(getResult({ isSuccess: false, actionType: action.type }));
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }
@@ -60,7 +62,8 @@ function* replaceMemberSaga(action: PayloadAction<Member>) {
 		yield put(replaceMemberInfoSuccess(result.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(getResult({ isSuccess: false, actionType: action.type }));
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }
@@ -72,7 +75,8 @@ function* chargeMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 		yield put(chargeMoneySuccess(action.payload.money));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }
@@ -84,7 +88,8 @@ function* transferMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 		yield put(transferMoneySuccess(action.payload.money));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }
@@ -110,7 +115,8 @@ function* getMemberMenuInfosSaga(action: PayloadAction) {
 		);
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }

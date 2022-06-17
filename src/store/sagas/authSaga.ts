@@ -3,6 +3,10 @@ import * as authAPI from 'api/authAPI';
 import authSlice from 'store/slices/authSlice';
 import client from 'api/client';
 import { Member } from 'types/member';
+import { AxiosError } from 'axios';
+import resultSlice from 'store/slices/resultSlice';
+import { PayloadAction } from '@reduxjs/toolkit';
+import loadingSlice from 'store/slices/loadingSlice';
 
 interface Token {
 	data: {
@@ -18,8 +22,12 @@ interface Status {
 "password": "password",
 
 */
+const { getResult } = resultSlice.actions;
+const { startLoading, finishLoading } = loadingSlice.actions;
 const { login, loginSuccess, signUp, authFailure } = authSlice.actions;
-function* loginSaga(action: { payload: authAPI.ILogIn }) {
+
+function* loginSaga(action: PayloadAction<authAPI.ILogIn>) {
+	yield put(startLoading(action.type));
 	const loginData = action.payload;
 	try {
 		const logInRes: Token = yield call(authAPI.login, loginData);
@@ -28,8 +36,11 @@ function* loginSaga(action: { payload: authAPI.ILogIn }) {
 		client.defaults.headers.common.Authorization = token;
 		yield put(loginSuccess());
 	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 		yield put(authFailure());
 	}
+	yield put(finishLoading(action.type));
 }
 function* signUpSaga(action: { payload: authAPI.ISignUp }) {
 	const signUpData = action.payload;

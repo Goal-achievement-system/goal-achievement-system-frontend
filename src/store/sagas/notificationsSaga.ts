@@ -4,7 +4,7 @@ import client from 'api/client';
 import * as MemberAPI from 'api/memberAPI';
 
 import { Notification } from 'types/notification';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { PayloadAction } from '@reduxjs/toolkit';
 import resultSlice from 'store/slices/resultSlice';
 import loadingSlice from 'store/slices/loadingSlice';
@@ -18,8 +18,9 @@ export function* loadNotificationsSaga(action: PayloadAction) {
 	try {
 		const result: AxiosResponse<Notification[]> = yield call(MemberAPI.getNotifications);
 		yield put(loadNotificationSuccess(result.data));
-	} catch (err) {
-		yield put(getResult({ isSuccess: false, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }
