@@ -84,7 +84,7 @@ export default function Header() {
 						src={`${process.env.PUBLIC_URL}/image/icon/alarm.svg`}
 						alt="alarm-icon"
 					/>
-					<RouteModal title="알림" isLogin={isLoggedIn} isOpen={isOpen[0]} />
+					<RouteModal title="알림" isOpen={isOpen[0]} setIsOpen={setIsOpen} />
 				</div>
 				<div className="relative">
 					<img
@@ -92,10 +92,9 @@ export default function Header() {
 						onClick={(e) => handleClick(e, 1)}
 						aria-hidden
 						src={`${process.env.PUBLIC_URL}/image/icon/my.svg`}
-						// src="../image/icon/my.svg"
 						alt="user-icon"
 					/>
-					<RouteModal title="개인정보 수정" isLogin={isLoggedIn} isOpen={isOpen[1]} />
+					<RouteModal title="로그인 관리" isOpen={isOpen[1]} setIsOpen={setIsOpen} />
 				</div>
 			</div>
 			<div className="block pc:hidden min-w-[16px] min-h-[12px] ">

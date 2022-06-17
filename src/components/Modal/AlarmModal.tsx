@@ -3,17 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import { Notification } from 'types/notification';
-// interface Alarm {
-// 	title: string;
-// 	content: string;
-// 	date: number;
-// }
+import { ReactComponent as DownArrow } from 'assets/icons/down-arrow.svg';
 
-// interface Props {
-// 	alarmList: Alarm[];
-// }
-
-// export default function AlarmModal({ alarmList }: Props) {
 export default function AlarmModal() {
 	const alarmList = useSelector((state: RootState) => state.notifications.notificationList);
 
@@ -28,20 +19,17 @@ export default function AlarmModal() {
 			</div>
 		);
 	});
+
 	return (
 		<>
 			{alarms.length ? (
 				alarms
 			) : (
-				<div className="block w-full h-full text-center ">
-					<div>알림이 없습니다 🍎</div>
-				</div>
+				<div className="leading-none text-primaryBlack-300 pc:mx-auto">지금은 알림이 없어요!</div>
 			)}
-			{alarms.length > 3 && (
-				<div className="">
-					<img className="m-auto" src="./image/icon/down-arrow.svg" alt="down-arrow" />
-				</div>
-			)}
+			<div className="absolute bottom-0 left-0 w-full pb-[18px]">
+				<DownArrow className="m-auto" stroke={`${alarms.length ? 'black' : '#A6A6A6'}`} />
+			</div>
 		</>
 	);
 }

@@ -42,6 +42,7 @@ function* loginSaga(action: PayloadAction<authAPI.ILogIn>) {
 	}
 	yield put(finishLoading(action.type));
 }
+
 function* signUpSaga(action: { payload: authAPI.ISignUp }) {
 	const signUpData = action.payload;
 	const { email, password } = signUpData;
