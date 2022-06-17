@@ -16,13 +16,10 @@ const { startLoading, finishLoading } = loadingSlice.actions;
 const {
 	loadMemberInfo,
 	loadMemberInfoSuccess,
-	loadMemberInfoFailure,
 	getMemberGoals,
 	getMemberGoalsSuccess,
-	getMemberGoalsFail,
 	replaceMemberInfo,
 	replaceMemberInfoSuccess,
-	replaceMemberInfoFail,
 	chargeMoney,
 	chargeMoneySuccess,
 	transferMoney,
@@ -39,7 +36,7 @@ function* loadMemberSaga(action: PayloadAction) {
 		const result: AxiosResponse<Member> = yield call(memberAPI.getMember);
 		yield put(loadMemberInfoSuccess(result.data));
 	} catch (error) {
-		yield put(loadMemberInfoFailure(String(error)));
+		yield put(getResult({ isSuccess: false, actionType: action.type }));
 	}
 	yield put(finishLoading(action.type));
 }
@@ -55,6 +52,7 @@ function* getMemberGoalsSaga(action: PayloadAction<memberAPI.IGetMemberGoals>) {
 	}
 	yield put(finishLoading(action.type));
 }
+
 function* replaceMemberSaga(action: PayloadAction<Member>) {
 	yield put(startLoading(action.type));
 	try {

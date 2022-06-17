@@ -25,18 +25,20 @@ export interface RegisterGoalParam {
 	category: string;
 }
 
-const { loadGoalListSuccess, loadGoalListFailure, loadGoalList, registerGoal } = goalSlice.actions;
+const { loadGoalListSuccess, loadGoalList, registerGoal } = goalSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
-function* loadGoalSaga(action: { payload: LoadGoalParam }) {
-	const param = action.payload;
 
+function* loadGoalSaga(action: PayloadAction<LoadGoalParam>) {
+	const param = action.payload;
+	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<GoalsResponse> = yield call(goalAPI.loadGoaliLst, param);
 		yield put(loadGoalListSuccess(result.data));
 	} catch (error) {
-		yield put(loadGoalListFailure(error));
+		yield put(getResult({ isSuccess: false, actionType: action.type }));
 	}
+	yield put(finishLoading(action.type));
 }
 
 function* registerGoalSaga(action: PayloadAction<RegisterGoalParam>) {

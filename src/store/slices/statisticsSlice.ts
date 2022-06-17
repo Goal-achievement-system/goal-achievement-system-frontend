@@ -4,25 +4,18 @@ import { GoalCount } from 'types/statistics';
 
 export interface InitialState {
 	goalCount: GoalCount | null;
-	isLoading: boolean;
-	error: null | string;
 }
 
 const initialState: InitialState = {
 	goalCount: null,
-	isLoading: false,
-	error: null,
 };
 
 export const statisticsSlice = createSlice({
 	name: 'statistics',
 	initialState,
 	reducers: {
-		loadGoalCount: (state, { payload }: PayloadAction) => {
-			state.isLoading = true;
-		},
+		loadGoalCount: (state, { payload }: PayloadAction) => {},
 		loadGoalCountSuccess: (state, { payload }: PayloadAction<GoalCount>) => {
-			state.isLoading = false;
 			state.goalCount = {
 				totalSuccessGoalCount: payload.totalSuccessGoalCount,
 				totalGoalCount: payload.totalGoalCount,
@@ -30,10 +23,6 @@ export const statisticsSlice = createSlice({
 				totalFailGoalCount: payload.totalFailGoalCount,
 				totalHoldGoalCount: payload.totalHoldGoalCount,
 			};
-		},
-		loadGoalCountFailure: (state, { payload: error }: PayloadAction<string>) => {
-			state.isLoading = false;
-			state.error = error;
 		},
 	},
 });

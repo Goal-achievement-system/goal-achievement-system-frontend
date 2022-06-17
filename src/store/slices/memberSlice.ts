@@ -14,8 +14,6 @@ export interface MemberMenuInfos {
 export interface InitialState {
 	memberinfo: Member | null;
 	memberGoals: IGetMemberGoalsResult;
-	isLoading: boolean;
-	error: null | string;
 	goalStatistics: null | GoalCount;
 	menuGoals: Goal[];
 	menuCerts: Cert[];
@@ -27,8 +25,6 @@ const initialState: InitialState = {
 		maxPage: 1,
 		goals: null,
 	},
-	isLoading: false,
-	error: null,
 	goalStatistics: null,
 	menuGoals: [],
 	menuCerts: [],
@@ -38,38 +34,17 @@ export const memberSlice = createSlice({
 	name: 'member',
 	initialState,
 	reducers: {
-		loadMemberInfo: (state) => {
-			state.isLoading = true;
-		},
+		loadMemberInfo: (state) => {},
 		loadMemberInfoSuccess: (state, { payload }: PayloadAction<Member>) => {
 			state.memberinfo = payload;
-			state.isLoading = false;
 		},
-		loadMemberInfoFailure: (state, { payload: error }: PayloadAction<string>) => {
-			state.isLoading = false;
-			state.error = error;
-		},
-		getMemberGoals: (state, { payload }: PayloadAction<IGetMemberGoals>) => {
-			state.isLoading = true;
-		},
+		getMemberGoals: (state, { payload }: PayloadAction<IGetMemberGoals>) => {},
 		getMemberGoalsSuccess: (state, { payload }: PayloadAction<IGetMemberGoalsResult>) => {
-			state.isLoading = false;
 			state.memberGoals = { ...payload };
 		},
-		getMemberGoalsFail: (state, { payload: error }: PayloadAction<string>) => {
-			state.isLoading = false;
-			state.error = error;
-		},
-		replaceMemberInfo: (state, { payload }: PayloadAction<Member>) => {
-			state.isLoading = true;
-		},
+		replaceMemberInfo: (state, { payload }: PayloadAction<Member>) => {},
 		replaceMemberInfoSuccess: (state, { payload }: PayloadAction<Member>) => {
-			state.isLoading = false;
 			state.memberinfo = { ...state.memberinfo, ...payload };
-		},
-		replaceMemberInfoFail: (state, { payload: error }: PayloadAction<string>) => {
-			state.isLoading = false;
-			state.error = error;
 		},
 		chargeMoney: (state, { payload }: PayloadAction<IChargeMoney>) => {},
 		chargeMoneySuccess: (state, { payload: money }: PayloadAction<number>) => {
