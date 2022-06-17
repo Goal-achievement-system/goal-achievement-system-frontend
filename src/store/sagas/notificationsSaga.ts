@@ -4,25 +4,31 @@ import client from 'api/client';
 import * as MemberAPI from 'api/memberAPI';
 
 import { Notification } from 'types/notification';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { PayloadAction } from '@reduxjs/toolkit';
+import resultSlice from 'store/slices/resultSlice';
+import loadingSlice from 'store/slices/loadingSlice';
 
-const { loadNotification, loadNotificationSuccess, loadNotificationFail } = notificationSlice.actions;
+const { getResult } = resultSlice.actions;
+const { startLoading, finishLoading } = loadingSlice.actions;
+const { loadNotification, loadNotificationSuccess } = notificationSlice.actions;
 
-export function* loadNotificationsSaga() {
+export function* loadNotificationsSaga(action: PayloadAction) {
+	yield put(startLoading(action.type));
 	try {
-		const token: string = localStorage.getItem('goalKeeperToken')!;
-		client.defaults.headers.common.Authorization = token;
 		const result: AxiosResponse<Notification[]> = yield call(MemberAPI.getNotifications);
-
 		yield put(loadNotificationSuccess(result.data));
-	} catch (err) {
-		yield put(loadNotificationFail(err));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
+	yield put(finishLoading(action.type));
 }
 
 export function* watchLoadNotificationsSaga() {
 	yield takeLatest(loadNotification, loadNotificationsSaga);
 }
+
 export default function* notificationsSaga() {
 	yield all([fork(watchLoadNotificationsSaga)]);
 }

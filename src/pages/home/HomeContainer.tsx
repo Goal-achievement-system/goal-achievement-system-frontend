@@ -19,8 +19,6 @@ function HomeContainer() {
 	const { goalList } = useSelector((state: RootState) => state.goal);
 	const [loading] = useGetActionState(memberSlice.actions.loadMemberInfo.type);
 	const [openModal, cloasModal] = useModal();
-
-	console.log('goalList', goalList);
 	const openGoalModal = (index: number) => openModal({ name: 'GoalModal', props: { index } });
 
 	useEffect(() => {

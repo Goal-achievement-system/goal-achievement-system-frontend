@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import { GoalsResponse } from 'types/goal';
 import goalSlice from 'store/slices/goalSlice';
@@ -25,18 +25,21 @@ export interface RegisterGoalParam {
 	category: string;
 }
 
-const { loadGoalListSuccess, loadGoalListFailure, loadGoalList, registerGoal } = goalSlice.actions;
+const { loadGoalListSuccess, loadGoalList, registerGoal } = goalSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
-function* loadGoalSaga(action: { payload: LoadGoalParam }) {
-	const param = action.payload;
 
+function* loadGoalSaga(action: PayloadAction<LoadGoalParam>) {
+	const param = action.payload;
+	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<GoalsResponse> = yield call(goalAPI.loadGoaliLst, param);
 		yield put(loadGoalListSuccess(result.data));
 	} catch (error) {
-		yield put(loadGoalListFailure(error));
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
+	yield put(finishLoading(action.type));
 }
 
 function* registerGoalSaga(action: PayloadAction<RegisterGoalParam>) {
@@ -47,9 +50,10 @@ function* registerGoalSaga(action: PayloadAction<RegisterGoalParam>) {
 
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
+		const axiosError = error as AxiosError<any>;
 		// 에러 처리 하기
 		console.log(error);
-		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import { GoalsResponse } from 'types/goal';
 import certificationSlice from 'store/slices/certificationSlice';
@@ -25,7 +25,8 @@ function* loadCertGoalSaga(action: PayloadAction<LoadCertGoalParam>) {
 		yield put(loadCertGoalListSuccess(result?.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(getResult({ isSuccess: false, actionType: action.type, errorMsg: String(error) }));
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
 }
