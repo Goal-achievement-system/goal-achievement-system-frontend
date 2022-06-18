@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/slices';
 import RouteModal from 'components/Modal/RouteModal';
 import useDetectClose from 'hooks/useDetectClose';
 import Path from 'utils/path';
+import isLoggedIn from 'utils/isLoggedIn';
 
 type Menu = {
 	id: string;
@@ -14,7 +13,6 @@ type Menu = {
 };
 
 export default function Header() {
-	const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 	const dropDownRef = useRef<HTMLImageElement>(null);
 	const [isOpen, setIsOpen] = useDetectClose(dropDownRef, [false, false]);
 	const menuList = [
@@ -80,7 +78,7 @@ export default function Header() {
 						src={`${process.env.PUBLIC_URL}/image/icon/alarm.svg`}
 						alt="alarm-icon"
 					/>
-					<RouteModal title="알림" isLogin={isLoggedIn} isOpen={isOpen[0]} />
+					<RouteModal title="알림" isLogin={isLoggedIn()} isOpen={isOpen[0]} />
 				</div>
 				<div className="relative">
 					<img
@@ -91,7 +89,7 @@ export default function Header() {
 						// src="../image/icon/my.svg"
 						alt="user-icon"
 					/>
-					<RouteModal title="개인정보 수정" isLogin={isLoggedIn} isOpen={isOpen[1]} />
+					<RouteModal title="개인정보 수정" isLogin={isLoggedIn()} isOpen={isOpen[1]} />
 				</div>
 			</div>
 			<div className="block pc:hidden min-w-[16px] min-h-[12px] ">

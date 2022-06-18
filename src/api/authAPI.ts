@@ -17,9 +17,6 @@ export interface SignUpBody {
 export interface LoginResponse {
 	Authorization: string;
 }
-export interface SignUpResponse {
-	status: number;
-}
 
 export interface TempError {
 	data: {

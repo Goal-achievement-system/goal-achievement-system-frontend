@@ -1,23 +1,24 @@
 import React from 'react';
 import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import PerformInput from 'components/Input/PerformInput';
-import { IFormState, Action } from 'pages/SignUp/SignUpContainer';
 import Select, { Option } from 'components/Select/Select';
 import BaseTemplate from 'components/BaseTemplate';
 import AuthLayout from 'components/AuthLayout';
+import { IForm, Action } from './FormStateMgt';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
-	formState: IFormState;
+	formState: IForm;
 	formDispatch: React.Dispatch<Action>;
 	error: string;
 }
-const GenderOption = [
+
+export const GenderOption = [
 	{ id: 1, value: '남자' },
 	{ id: 2, value: '여자' },
 	{ id: 3, value: '없음' },
 ] as Option[];
-const AgeOption = [
+export const AgeOption = [
 	{ id: 10, value: '10대' },
 	{ id: 20, value: '20대' },
 	{ id: 30, value: '30대' },
