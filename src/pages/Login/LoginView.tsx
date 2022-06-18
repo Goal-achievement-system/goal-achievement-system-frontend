@@ -4,13 +4,13 @@ import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
 import { Link } from 'react-router-dom';
 import Path from 'utils/path';
-import { IFormState, Action } from 'pages/Login/LoginContainer';
 import BaseTemplate from 'components/BaseTemplate';
 import AuthLayout from 'components/AuthLayout';
+import { IForm, Action } from './FormStateMgt';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
-	formState: IFormState;
+	formState: IForm;
 	formDispatch: React.Dispatch<Action>;
 	error: string;
 }

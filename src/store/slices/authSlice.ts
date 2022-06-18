@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ILogIn, ISignUp } from 'api/authAPI';
+import { LogInBody, SignUpBody } from 'api/authAPI';
 import { Member } from 'types/member';
 
 export interface AuthState {
@@ -16,12 +16,12 @@ export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		login: (state, action: PayloadAction<ILogIn>) => {},
+		login: (state, action: PayloadAction<LogInBody>) => {},
 		loginSuccess: (state) => {
 			state.isLoggedIn = true;
 		},
 
-		signUp: (state, action: PayloadAction<ISignUp>) => {},
+		signUp: (state, action: PayloadAction<SignUpBody>) => {},
 		authFailure: (state) => {
 			state.isLoggedIn = false;
 			state.hasError = true;
