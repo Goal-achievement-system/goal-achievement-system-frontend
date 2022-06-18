@@ -9,7 +9,7 @@ import loadingSlice from 'store/slices/loadingSlice';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
-const { login, loginSuccess, signUp, authFailure } = authSlice.actions;
+const { login, signUp, authFailure } = authSlice.actions;
 
 function* loginSaga(action: PayloadAction<authAPI.LogInBody>) {
 	yield put(startLoading(action.type));
