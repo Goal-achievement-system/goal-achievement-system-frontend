@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RouteModal from 'components/Modal/RouteModal';
 import useDetectClose from 'hooks/useDetectClose';
 import Path from 'utils/path';
-import isLoggedIn from 'utils/isLoggedIn';
+import SideMenu from 'components/Sidemenu/Sidemenu';
 
 type Menu = {
 	id: string;
@@ -15,6 +15,7 @@ type Menu = {
 export default function Header() {
 	const dropDownRef = useRef<HTMLImageElement>(null);
 	const [isOpen, setIsOpen] = useDetectClose(dropDownRef, [false, false]);
+	const [isOpenSideMenu, setIsOpenSideMenu] = useState<boolean>(false);
 	const menuList = [
 		{
 			id: 'notice',
@@ -27,13 +28,13 @@ export default function Header() {
 			path: Path.goalRegister,
 		},
 		{
-			id: '인증',
+			id: 'certifications',
 			title: '목표인증',
 			path: Path.certifications,
 		},
 		{
 			id: 'profile',
-			title: '내목표',
+			title: '내정보',
 			path: Path.myGoals,
 		},
 	];
@@ -54,6 +55,8 @@ export default function Header() {
 			});
 		}
 	};
+
+	const handleClickOfSideMenu = () => setIsOpenSideMenu(!isOpenSideMenu);
 
 	return (
 		<header className="pc:max-w-[1200px] h-[86px] flex mx-auto  justify-between items-center">
@@ -78,7 +81,7 @@ export default function Header() {
 						src={`${process.env.PUBLIC_URL}/image/icon/alarm.svg`}
 						alt="alarm-icon"
 					/>
-					<RouteModal title="알림" isLogin={isLoggedIn()} isOpen={isOpen[0]} />
+					<RouteModal title="알림" isOpen={isOpen[0]} setIsOpen={setIsOpen} />
 				</div>
 				<div className="relative">
 					<img
@@ -86,17 +89,17 @@ export default function Header() {
 						onClick={(e) => handleClick(e, 1)}
 						aria-hidden
 						src={`${process.env.PUBLIC_URL}/image/icon/my.svg`}
-						// src="../image/icon/my.svg"
 						alt="user-icon"
 					/>
-					<RouteModal title="개인정보 수정" isLogin={isLoggedIn()} isOpen={isOpen[1]} />
+					<RouteModal title="로그인 관리" isOpen={isOpen[1]} setIsOpen={setIsOpen} />
 				</div>
 			</div>
 			<div className="block pc:hidden min-w-[16px] min-h-[12px] ">
-				<button type="button">
+				<button type="button" onClick={handleClickOfSideMenu}>
 					<img className="w-full" src="../image/icon/hamburger.svg" alt="hamburger" />
 				</button>
 			</div>
+			{isOpenSideMenu && <SideMenu handleClickOfSideMenu={handleClickOfSideMenu} />}
 		</header>
 	);
 }

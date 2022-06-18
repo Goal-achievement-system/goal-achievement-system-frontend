@@ -1,55 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import PerformInput from 'components/Input/PerformInput';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
-import memberSlice from 'store/slices/memberSlice';
-import { Member } from 'types/member';
+import Path from 'utils/path';
 
 interface Props {
-	isOpen: boolean;
+	handleLogout: () => void;
+	closePopUp: () => void;
 }
-export default function UserProfileModal({ isOpen }: Props) {
-	const currentMemberInfo = useSelector((state: RootState) => state.member.memberinfo);
-	const currentNickName = useSelector((state: RootState) => state.member.memberinfo?.nickName);
-	const currentEmail = useSelector((state: RootState) => state.member.memberinfo?.email);
-	const [replaceNickName, setReplaceNickName] = useState<string | undefined>(undefined);
-	const [replaceEmail, setReplaceEmail] = useState<string | undefined>(undefined);
-	const dispatch = useDispatch();
+export default function UserProfileModal({ handleLogout, closePopUp }: Props) {
+	const MemberInfo = useSelector((state: RootState) => state.member.memberinfo);
+	const nickName = useSelector((state: RootState) => state.member.memberinfo?.nickName);
+	const email = useSelector((state: RootState) => state.member.memberinfo?.email);
 
-	const onClick = (type: string, value: string) => {
-		if (!currentMemberInfo) return;
-		const MemberInfo: Member = { ...currentMemberInfo, [type]: value };
-		dispatch(memberSlice.actions.replaceMemberInfo(MemberInfo));
+	// eslint-disable-next-line consistent-return
+	const handleClick = () => {
+		handleLogout();
 	};
-
-	useEffect(() => {
-		setReplaceNickName(currentNickName);
-		setReplaceEmail(currentEmail);
-	}, [currentNickName, currentEmail, isOpen]);
 
 	return (
 		<>
-			<div className="input-wrap mb-[17px]">
-				<PerformInput
-					label="닉네임"
-					type="text"
-					placeholder="닉네임"
-					buttonTitle="변경"
-					onClick={onClick}
-					value={replaceNickName}
-					onChange={setReplaceNickName}
-				/>
+			<div className="mb-[30px]">
+				<div className="w-full user-email mb-[8px] ">
+					<div className="font-[600]">{nickName}</div>
+				</div>
+				<div className="w-full user-email ">
+					<div className="text-[16px] text-primaryOrange-200">{email}</div>
+				</div>
 			</div>
-			<div className="input-wrap">
-				<PerformInput
-					label="이메일"
-					type="email"
-					placeholder="email"
-					buttonTitle="중복확인"
-					onClick={onClick}
-					value={replaceEmail}
-					onChange={setReplaceEmail}
-				/>
+			<div>
+				<div>
+					<Link to={Path.myGoals} onClick={() => closePopUp()}>
+						내 정보 수정
+					</Link>
+				</div>
+			</div>
+			<div className="absolute left-[27px] right-[27px] bottom-[27px]">
+				<button
+					type="button"
+					className="w-full border-2 rounded-[8px] border-borderGray pc:px-[29px] pc:py-[15px] text-primaryBlack-300"
+					onClick={handleClick}
+				>
+					{MemberInfo ? '로그아웃' : '로그인'}
+				</button>
 			</div>
 		</>
 	);

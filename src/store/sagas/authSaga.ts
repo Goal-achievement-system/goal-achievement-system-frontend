@@ -28,6 +28,7 @@ function* loginSaga(action: PayloadAction<authAPI.LogInBody>) {
 	}
 	yield put(finishLoading(action.type));
 }
+
 function* signUpSaga(action: PayloadAction<authAPI.SignUpBody>) {
 	const body = action.payload;
 	yield put(startLoading(action.type));

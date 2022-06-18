@@ -16,6 +16,12 @@ const config: webpack.Configuration = {
 				include: path.resolve(__dirname, 'src'),
 				use: ['style-loader', 'css-loader', 'postcss-loader'],
 			},
+			{
+				test: /\.svg$/,
+				include: ['src', 'src/custom.d.ts'],
+				// include: path.resolve(__dirname, 'src'),
+				use: ['@svgr/webpack'],
+			},
 		],
 	},
 
