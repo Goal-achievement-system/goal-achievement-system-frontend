@@ -14,17 +14,6 @@ export interface LoadGoalParam {
 	page: number;
 }
 
-export interface RegisterGoalParam {
-	memberEmail: string;
-	goalName: string;
-	content: string;
-	money: number;
-	limitDate: Date;
-	reward: 'low' | 'high';
-	// 디자인 완성되면  고치기
-	category: string;
-}
-
 const { loadGoalListSuccess, loadGoalList, registerGoal } = goalSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -42,7 +31,7 @@ function* loadGoalSaga(action: PayloadAction<LoadGoalParam>) {
 	yield put(finishLoading(action.type));
 }
 
-function* registerGoalSaga(action: PayloadAction<RegisterGoalParam>) {
+function* registerGoalSaga(action: PayloadAction<goalAPI.RegisterGoalBody>) {
 	const param = action.payload;
 	yield put(startLoading(action.type));
 	try {

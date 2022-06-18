@@ -2,57 +2,45 @@ import { call, takeLatest, fork, all, put } from 'redux-saga/effects';
 import * as authAPI from 'api/authAPI';
 import authSlice from 'store/slices/authSlice';
 import client from 'api/client';
-import { Member } from 'types/member';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import resultSlice from 'store/slices/resultSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import loadingSlice from 'store/slices/loadingSlice';
 
-interface Token {
-	data: {
-		Authorization: string;
-	};
-}
-interface Status {
-	status: number;
-}
-
-/*
-"email": "example@e.com",
-"password": "password",
-
-*/
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
-const { login, loginSuccess, signUp, authFailure } = authSlice.actions;
+const { login, signUp } = authSlice.actions;
 
-function* loginSaga(action: PayloadAction<authAPI.ILogIn>) {
+function* loginSaga(action: PayloadAction<authAPI.LogInBody>) {
 	yield put(startLoading(action.type));
-	const loginData = action.payload;
+	const body = action.payload;
 	try {
-		const logInRes: Token = yield call(authAPI.login, loginData);
-		const { Authorization: token } = logInRes.data;
+		const result: AxiosResponse<authAPI.LoginResponse> = yield call(authAPI.login, body);
+
+		const { Authorization: token } = result.data;
 		localStorage.setItem('goalKeeperToken', token);
 		client.defaults.headers.common.Authorization = token;
-		yield put(loginSuccess());
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
+
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
-		yield put(authFailure());
 	}
 	yield put(finishLoading(action.type));
 }
 
-function* signUpSaga(action: { payload: authAPI.ISignUp }) {
-	const signUpData = action.payload;
-	const { email, password } = signUpData;
+function* signUpSaga(action: PayloadAction<authAPI.SignUpBody>) {
+	const body = action.payload;
+	yield put(startLoading(action.type));
 	try {
-		const signUpRes: Status = yield call(authAPI.signUp, signUpData);
-		console.log(signUpData, signUpRes);
-		yield put(login({ email, password }));
+		yield call(authAPI.signUp, body);
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(authFailure());
+		const axiosError = error as AxiosError<any>;
+
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
+	yield put(finishLoading(action.type));
 }
 
 function* watchLoginSaga() {

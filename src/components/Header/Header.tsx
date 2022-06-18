@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/slices';
 import RouteModal from 'components/Modal/RouteModal';
 import useDetectClose from 'hooks/useDetectClose';
 import Path from 'utils/path';
@@ -15,7 +13,6 @@ type Menu = {
 };
 
 export default function Header() {
-	const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 	const dropDownRef = useRef<HTMLImageElement>(null);
 	const [isOpen, setIsOpen] = useDetectClose(dropDownRef, [false, false]);
 	const [isOpenSideMenu, setIsOpenSideMenu] = useState<boolean>(false);
