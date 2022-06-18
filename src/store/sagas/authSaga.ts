@@ -9,7 +9,7 @@ import loadingSlice from 'store/slices/loadingSlice';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
-const { login, signUp, authFailure } = authSlice.actions;
+const { login, signUp } = authSlice.actions;
 
 function* loginSaga(action: PayloadAction<authAPI.LogInBody>) {
 	yield put(startLoading(action.type));
@@ -28,16 +28,18 @@ function* loginSaga(action: PayloadAction<authAPI.LogInBody>) {
 	}
 	yield put(finishLoading(action.type));
 }
-function* signUpSaga(action: { payload: authAPI.SignUpBody }) {
+function* signUpSaga(action: PayloadAction<authAPI.SignUpBody>) {
 	const body = action.payload;
-	const { email, password } = body;
+	yield put(startLoading(action.type));
 	try {
-		const signUpRes: authAPI.SignUpResponse = yield call(authAPI.signUp, body);
-		// console.log(signUpData, signUpRes);
-		yield put(login({ email, password }));
+		yield call(authAPI.signUp, body);
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
-		yield put(authFailure());
+		const axiosError = error as AxiosError<any>;
+
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
+	yield put(finishLoading(action.type));
 }
 
 function* watchLoginSaga() {

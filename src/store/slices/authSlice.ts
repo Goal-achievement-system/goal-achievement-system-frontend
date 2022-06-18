@@ -9,11 +9,6 @@ export const authSlice = createSlice({
 		login: (state, action: PayloadAction<LogInBody>) => {},
 
 		signUp: (state, action: PayloadAction<SignUpBody>) => {},
-		authFailure: (state) => {
-			// state.isLoggedIn = false;
-			// state.hasError = true;
-			// state.auth = {} as auth;
-		},
 	},
 });
 
