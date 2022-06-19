@@ -1,4 +1,4 @@
-import ObtionButton from 'components/Button/ObtionButton';
+import OptionButton from 'components/Button/OptionButton';
 import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
 import Main from 'components/Main';
@@ -74,13 +74,13 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 				</div>
 
 				<div className="grid grid-cols-2 gap-[10px]">
-					<ObtionButton
+					<OptionButton
 						label="하이리스크 하이리턴"
 						onClick={() => formDispatch({ type: 'reward', payload: 'high' })}
 						isSelected={formState.reward === 'high'}
 						size="large"
 					/>
-					<ObtionButton
+					<OptionButton
 						label="로우리스크 로우리턴"
 						onClick={() => formDispatch({ type: 'reward', payload: 'low' })}
 						isSelected={formState.reward === 'low'}

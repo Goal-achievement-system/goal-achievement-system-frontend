@@ -1,5 +1,5 @@
 import React from 'react';
-import OptionButton from 'components/Button/ObtionButton';
+import OptionButton from 'components/Button/OptionButton';
 import TextInput from 'components/Input/TextInput';
 import SubmitButton from 'components/Button/SubmitButton';
 
