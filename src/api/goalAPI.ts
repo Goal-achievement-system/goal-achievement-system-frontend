@@ -1,5 +1,4 @@
 import { LoadGoalParam } from 'store/sagas/goalSaga';
-import { LoadCertGoalParam } from 'store/sagas/certificationSaga';
 import client from './client';
 
 export interface RegisterGoalBody {
@@ -11,6 +10,11 @@ export interface RegisterGoalBody {
 	reward: 'low' | 'high';
 	// 디자인 완성되면  고치기
 	category: string;
+}
+
+export interface LoadCertGoalParam {
+	category: string;
+	page: number;
 }
 
 export const loadGoaliLst = (params: LoadGoalParam) => {
@@ -32,12 +36,12 @@ export const failCertGoal = (goalID: number) => {
 	return client.put(`/goals/cert/fail/${goalID}`);
 };
 
-export const registerGoal = (params: RegisterGoalBody) => {
-	return client.post(`goals`, { ...params });
+export const registerGoal = (body: RegisterGoalBody) => {
+	return client.post(`goals`, { ...body });
 };
 
-export const loadCertGoalList = (params: LoadCertGoalParam) => {
-	return client.get(`goals/${params.category}/list/oncertification/${params.page}`);
+export const loadCertGoalList = ({ category, page }: LoadCertGoalParam) => {
+	return client.get(`goals/${category}/list/oncertification/${page}`);
 };
 
 export default loadGoaliLst;
