@@ -2,7 +2,7 @@ import OptionButton from 'components/Button/OptionButton';
 import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
 import React from 'react';
-import { IForm, Action } from './FormStateMgt';
+import { IForm, Action, isFormValid } from './FormStateMgt';
 
 interface Props {
 	onSubmit: (event: React.SyntheticEvent) => void;
@@ -13,22 +13,8 @@ interface Props {
 }
 
 function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, categories }: Props) {
-	console.log(categories);
 	const getBtnState = (): BtnStates => {
-		const { goalName, content, money, limitDate, reward, category } = formState;
-		// 심플하게 만드는 법 생각해보기
-		console.log(!limitDate.trim(), +money);
-		if (
-			!goalName.trim() ||
-			!content.trim() ||
-			+money < 0 ||
-			+money > remainingMoney ||
-			!`${+money}`.trim() ||
-			!limitDate.trim() ||
-			!reward?.trim() ||
-			!category.trim()
-		)
-			return 'inactive';
+		if (!isFormValid(formState, categories, remainingMoney)) return 'inactive';
 
 		return 'active';
 	};
@@ -47,9 +33,22 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, c
 				onChange={(curVar: string) => formDispatch({ type: 'content', payload: curVar })}
 				value={formState?.content}
 			/>
-			{categories.map((category) => (
-				<div>{category}</div>
-			))}
+			<div className="pc:mb-[16px] mb-[4px] pc:mt-[30px] mt-[20px] pc:space-x-[8px] space-x-[4px]">
+				<span className="font-semibold pc:text-[20px] text-[14px]">카테고리 선택</span>
+				<span className="font-semibold text-primaryOrange-200 ">*</span>
+			</div>
+			<div className="flex pc:space-x-2 mb-[50px]">
+				{categories.map((category) => (
+					<OptionButton
+						key={category}
+						label={`# ${category}`}
+						onClick={() => formDispatch({ type: 'category', payload: category })}
+						isSelected={formState.category === category}
+						size="small"
+					/>
+				))}
+			</div>
+
 			<TextInput
 				placeholder="10000"
 				onChange={(curVar: string) => formDispatch({ type: 'money', payload: curVar })}

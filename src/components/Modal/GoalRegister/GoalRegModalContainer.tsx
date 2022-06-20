@@ -1,9 +1,10 @@
+/* eslint-disable no-restricted-globals */
 import React, { useEffect, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import useGetActionState from 'hooks/useGetActionState';
 import goalSlice from 'store/slices/goalSlice';
-import { IForm, Action, initialState } from './FormStateMgt';
+import { IForm, Action, initialState, isFormValid } from './FormStateMgt';
 import GoalRegModalView from './GoalRegModalView';
 
 function formReducer(state: IForm, action: Action) {
@@ -21,6 +22,7 @@ function GoalRegModalContainer() {
 	const [categoriesLoading, categoriesResult, categoriesInitResult] = useGetActionState(
 		goalSlice.actions.loadCategories.type
 	);
+
 	const onSubmit = (event: React.SyntheticEvent) => {
 		// 머니 범위 설정
 		// 날짜 입력 숫자로만 했는지 확인
@@ -29,29 +31,9 @@ function GoalRegModalContainer() {
 		if (!memberInfo || goalRegLoading) return;
 
 		const { goalName, content, money, limitDate, reward, category } = formState;
-		// 심플하게 만드는 법 생각해보기
-		console.log('submit', formState, limitDate, !limitDate.trim());
-		console.log(
-			!goalName.trim(),
-			!content.trim(),
-			+money < 0,
-			!`${+money}`.trim(),
-			+money > memberInfo?.money,
-			!limitDate.trim(),
 
-			!category?.trim()
-		);
-		if (reward === null) return;
-		if (
-			!goalName.trim() ||
-			!content.trim() ||
-			+money < 0 ||
-			+money > memberInfo.money ||
-			!`${money}`.trim() ||
-			!limitDate?.trim() ||
-			!category?.trim()
-		)
-			return;
+		if (!isFormValid(formState, categories, memberInfo.money)) return;
+
 		console.log('pass');
 		const y = limitDate.split('-')[0];
 		const m = limitDate.split('-')[1];
@@ -66,15 +48,16 @@ function GoalRegModalContainer() {
 				content,
 				money: 0,
 				limitDate: date,
-				reward,
-				category: '다이어트',
+				reward: reward as 'high' | 'low',
+				category,
 			})
 		);
 	};
 	useEffect(() => {
 		if (categoriesLoading) return;
 		dispatch(goalSlice.actions.loadCategories());
-	}, []);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (categoriesResult?.isSuccess) {
