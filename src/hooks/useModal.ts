@@ -1,7 +1,8 @@
-// import UserProfileModal from "components/Modal/UserProfileModal";
-
 import { useDispatch } from 'react-redux';
 import modalSlice from 'store/slices/modalSlice';
+import { ModalNameList } from 'utils/importModal';
+
+// name 에 문자열을 넣어주기 번거롭고  어떤 모달들이 존재하는지 알기 어렵다 변수로 지정해놓자
 
 export interface OpenModal {
 	name: string;
@@ -26,10 +27,10 @@ export default function useModal(): [OpenModalOnClick, any] {
 
 	const openModalOnClick = ({ certState, index }: OpenModalOnClickArgs) => {
 		if (certState === 'ongoing') {
-			openModal({ name: 'CertAddModal', props: { index } });
+			openModal({ name: ModalNameList.certAddModal, props: { index } });
 			return;
 		}
-		openModal({ name: 'CertAddModal', props: { index } });
+		openModal({ name: ModalNameList.goalModal, props: { index } });
 	};
 
 	const closeModal = (payLoad: CloseModal) => {
