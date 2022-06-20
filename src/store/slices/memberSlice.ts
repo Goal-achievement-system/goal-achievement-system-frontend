@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IChargeMoney, IGetMemberGoals, IGetMemberGoalsResult } from 'api/memberAPI';
+import { ChargeMoneyBody, GetMemberGoalsBody } from 'api/memberAPI';
 import { Cert } from 'types/certification';
-import { Goal } from 'types/goal';
+import { Goal, GoalsResponse } from 'types/goal';
 import { Member } from 'types/member';
 import { GoalCount } from 'types/statistics';
 
@@ -13,7 +13,7 @@ export interface MemberMenuInfos {
 
 export interface InitialState {
 	memberinfo: Member | null;
-	memberGoals: IGetMemberGoalsResult;
+	memberGoals: GoalsResponse;
 	goalStatistics: null | GoalCount;
 	menuGoals: Goal[];
 	menuCerts: Cert[];
@@ -23,7 +23,7 @@ const initialState: InitialState = {
 	memberinfo: null,
 	memberGoals: {
 		maxPage: 1,
-		goals: null,
+		goals: [],
 	},
 	goalStatistics: null,
 	menuGoals: [],
@@ -38,22 +38,22 @@ export const memberSlice = createSlice({
 		loadMemberInfoSuccess: (state, { payload }: PayloadAction<Member>) => {
 			state.memberinfo = payload;
 		},
-		getMemberGoals: (state, { payload }: PayloadAction<IGetMemberGoals>) => {},
-		getMemberGoalsSuccess: (state, { payload }: PayloadAction<IGetMemberGoalsResult>) => {
+		getMemberGoals: (state, { payload }: PayloadAction<GetMemberGoalsBody>) => {},
+		getMemberGoalsSuccess: (state, { payload }: PayloadAction<GoalsResponse>) => {
 			state.memberGoals = { ...payload };
 		},
 		replaceMemberInfo: (state, { payload }: PayloadAction<Member>) => {},
 		replaceMemberInfoSuccess: (state, { payload }: PayloadAction<Member>) => {
 			state.memberinfo = { ...state.memberinfo, ...payload };
 		},
-		chargeMoney: (state, { payload }: PayloadAction<IChargeMoney>) => {},
+		chargeMoney: (state, { payload }: PayloadAction<ChargeMoneyBody>) => {},
 		chargeMoneySuccess: (state, { payload: money }: PayloadAction<number>) => {
 			state.memberinfo = {
 				...state.memberinfo!,
 				money: state.memberinfo!.money! + money,
 			};
 		},
-		transferMoney: (state, { payload }: PayloadAction<IChargeMoney>) => {},
+		transferMoney: (state, { payload }: PayloadAction<ChargeMoneyBody>) => {},
 		transferMoneySuccess: (state, { payload: money }: PayloadAction<number>) => {
 			state.memberinfo = {
 				...state.memberinfo!,

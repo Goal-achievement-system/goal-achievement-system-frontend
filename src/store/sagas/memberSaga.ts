@@ -42,10 +42,10 @@ function* loadMemberSaga(action: PayloadAction) {
 	yield put(finishLoading(action.type));
 }
 
-function* getMemberGoalsSaga(action: PayloadAction<memberAPI.IGetMemberGoals>) {
+function* getMemberGoalsSaga(action: PayloadAction<memberAPI.GetMemberGoalsBody>) {
 	yield put(startLoading(action.type));
 	try {
-		const result: AxiosResponse<memberAPI.IGetMemberGoalsResult> = yield call(memberAPI.getMemberGoals, action.payload);
+		const result: AxiosResponse<GoalsResponse> = yield call(memberAPI.getMemberGoals, action.payload);
 		yield put(getMemberGoalsSuccess(result.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
@@ -68,7 +68,7 @@ function* replaceMemberSaga(action: PayloadAction<Member>) {
 	yield put(finishLoading(action.type));
 }
 
-function* chargeMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
+function* chargeMoneySaga(action: PayloadAction<memberAPI.ChargeMoneyBody>) {
 	yield put(startLoading(action.type));
 	try {
 		yield call(memberAPI.chargeMoney, action.payload);
@@ -81,7 +81,7 @@ function* chargeMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
 	yield put(finishLoading(action.type));
 }
 
-function* transferMoneySaga(action: PayloadAction<memberAPI.IChargeMoney>) {
+function* transferMoneySaga(action: PayloadAction<memberAPI.ChargeMoneyBody>) {
 	yield put(startLoading(action.type));
 	try {
 		yield call(memberAPI.transferMoney, action.payload);
