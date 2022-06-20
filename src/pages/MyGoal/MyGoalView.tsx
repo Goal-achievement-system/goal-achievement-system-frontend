@@ -6,6 +6,7 @@ import Main from 'components/Main';
 import FilterButton from 'components/Button/FilterButton';
 import SmallBox from 'components/Box/SmallBox';
 import Pagination from 'components/Pagination';
+import { OpenModalOnClick } from 'hooks/useModal';
 
 interface Props {
 	goals: Goal[] | null;
@@ -17,7 +18,7 @@ interface Props {
 	isSelected: string;
 	setIsSelected: Dispatch<SetStateAction<string>>;
 	maxPage: number;
-	openGoalModal: (index: number) => void;
+	openModalOnClick: OpenModalOnClick;
 }
 
 export default function MyGoalView({
@@ -30,7 +31,7 @@ export default function MyGoalView({
 	isSelected,
 	setIsSelected,
 	maxPage,
-	openGoalModal,
+	openModalOnClick,
 }: Props) {
 	// 버튼에 해당하는 현재 state
 	const getFilterState = (key: string) => {
@@ -73,7 +74,10 @@ export default function MyGoalView({
 						<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
 							{goals.map((goal, index) => (
 								<li key={goal.goalId}>
-									<SmallBox goal={goal} onClick={() => openGoalModal(index)} />
+									<SmallBox
+										goal={goal}
+										onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
+									/>
 								</li>
 							))}
 						</ul>

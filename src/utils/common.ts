@@ -1,5 +1,8 @@
 // 함수 더 추가 되면 export default->export로 바꿔주세요.
 // tailwind 함수 사용할 때 클래스 네임들 이어주는 함수
+
+import { CertCategoryKrType } from 'types/certification';
+
 // 사용 예시 <div className={classNames(state==="ok"?"text-green-50":"text-red-50","bg-black","flex")}> Hello </div>
 export function cls(...classnames: string[]) {
 	return classnames.join(' ');
@@ -56,6 +59,24 @@ export const getGoalState = (verificationResult: string): string => {
 			return '😱 보상금 지급 실패';
 		case 'hold':
 			return '💡 검토 요청';
+		default:
+			return '';
+	}
+};
+
+// goal 카테고리를 한국어로 전달받을시 지정된 영문으로 변환
+export const getGoalCategoryEng = (goalCategory: CertCategoryKrType): string => {
+	switch (goalCategory) {
+		case '운동':
+			return 'exercice';
+		case '공부':
+			return 'study';
+		case '습관':
+			return 'habit';
+		case '취미':
+			return 'hobby';
+		case '기타':
+			return 'etc';
 		default:
 			return '';
 	}

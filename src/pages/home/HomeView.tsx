@@ -1,3 +1,4 @@
+import { OpenModalOnClick } from 'hooks/useModal';
 import React from 'react';
 import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
@@ -11,10 +12,10 @@ export interface Props {
 	member: Member | null;
 	goalCount: GoalCount | null;
 	goalList: Goal[];
-	openGoalModal: (index: number) => void;
+	openModalOnClick: OpenModalOnClick;
 }
 
-function HomeView({ member, goalCount, goalList, openGoalModal }: Props) {
+function HomeView({ member, goalCount, goalList, openModalOnClick }: Props) {
 	return (
 		<div className="flex-1">
 			<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] bg-primaryOrange-200">
@@ -41,7 +42,10 @@ function HomeView({ member, goalCount, goalList, openGoalModal }: Props) {
 						{goalList &&
 							goalList.map((goal, index) => (
 								<li key={goal.goalId} className="w-[48%] pc:w-auto">
-									<SmallBox goal={goal} onClick={() => openGoalModal(index)} />
+									<SmallBox
+										goal={goal}
+										onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
+									/>
 								</li>
 							))}
 					</ul>

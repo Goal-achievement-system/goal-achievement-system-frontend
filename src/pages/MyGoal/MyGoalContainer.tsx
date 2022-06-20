@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from 'store';
 import { RootState } from 'store/slices';
@@ -17,9 +17,7 @@ export default function MyGoal() {
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [goalFilter, setGoalFilter] = useState<VerificationResult>('all');
 	const [isSelected, setIsSelected] = useState<string>('전체');
-	const [openModal, closeModal] = useModal();
-
-	const openGoalModal = (index: number) => openModal({ name: 'GoalModal', props: { index } });
+	const [openModalonClick, closeModal] = useModal();
 
 	// filter가 바뀔 때마다 페이지를 1로 변경
 	useEffect(() => {
@@ -42,7 +40,7 @@ export default function MyGoal() {
 			isSelected={isSelected}
 			setIsSelected={setIsSelected}
 			maxPage={maxPage}
-			openGoalModal={openGoalModal}
+			openModalOnClick={openModalonClick}
 		/>
 	);
 }
