@@ -7,8 +7,8 @@ const modalList: ModalIndex[] = [
 		component: lazy(() => import('components/Modal/GoalModal')),
 	},
 	{
-		name: 'GoalAddModal',
-		component: lazy(() => import('components/Modal/GoalAddModal')),
+		name: 'CertAddModal',
+		component: lazy(() => import('components/Modal/CertAddModal')),
 	},
 ];
 
