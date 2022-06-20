@@ -8,20 +8,15 @@ import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import * as goalAPI from '../../api/goalAPI';
 
-export interface LoadCertGoalParam {
-	category: string;
-	page: number;
-}
 const { loadCertGoalList, loadCertGoalListSuccess } = certificationSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
 
-function* loadCertGoalSaga(action: PayloadAction<LoadCertGoalParam>) {
+function* loadCertGoalSaga(action: PayloadAction<goalAPI.LoadCertGoalParam>) {
 	const param = action.payload;
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<GoalsResponse> = yield call(goalAPI.loadCertGoalList, param);
-		console.log(result);
 		yield put(loadCertGoalListSuccess(result?.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {

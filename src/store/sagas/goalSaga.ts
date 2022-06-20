@@ -14,7 +14,7 @@ export interface LoadGoalParam {
 	page: number;
 }
 
-const { loadGoalListSuccess, loadGoalList, registerGoal } = goalSlice.actions;
+const { loadGoalListSuccess, loadGoalList, registerGoal, loadCategories, loadCategoriesSuccess } = goalSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
 
@@ -47,8 +47,28 @@ function* registerGoalSaga(action: PayloadAction<goalAPI.RegisterGoalBody>) {
 	yield put(finishLoading(action.type));
 }
 
+function* loadCategoriesSaga(action: PayloadAction) {
+	yield put(startLoading(action.type));
+	try {
+		const result: AxiosResponse<string[]> = yield call(goalAPI.getCategories);
+		console.log(result);
+		yield put(loadCategoriesSuccess(result.data));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		// 에러 처리 하기
+		console.log(error);
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
+
 function* watchGoalSaga() {
 	yield takeEvery(loadGoalList, loadGoalSaga);
+}
+
+function* watchLoadCategoriesSaga() {
+	yield takeEvery(loadCategories, loadCategoriesSaga);
 }
 
 function* watchRegisterGoalSaga() {
@@ -56,5 +76,5 @@ function* watchRegisterGoalSaga() {
 }
 
 export default function* goalSaga() {
-	yield all([fork(watchGoalSaga), fork(watchRegisterGoalSaga)]);
+	yield all([fork(watchGoalSaga), fork(watchRegisterGoalSaga), fork(watchLoadCategoriesSaga)]);
 }

@@ -1,4 +1,4 @@
-import ObtionButton from 'components/Button/ObtionButton';
+import OptionButton from 'components/Button/OptionButton';
 import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
 import Main from 'components/Main';
@@ -65,7 +65,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 				<div className="flex gap-[8px] pc:gap-[24px] flex-wrap flex-col mb-[50px]">
 					<div className="flex gap-[8px] pc:gap-[24px] flex-wrap flex-1">
 						<div className="flex-1">
-							<ObtionButton
+							<OptionButton
 								label="골키퍼 전용머니"
 								onClick={() => formDispatch({ type: 'chargeType', payload: 1 })}
 								isSelected={formState.chargeType === 1}
@@ -73,7 +73,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 							/>
 						</div>
 						<div className="flex-1">
-							<ObtionButton
+							<OptionButton
 								label="신용/체크카드"
 								onClick={() => formDispatch({ type: 'chargeType', payload: 2 })}
 								isSelected={formState.chargeType === 2}
@@ -83,7 +83,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 					</div>
 					<div className="flex gap-[8px] pc:gap-[24px] flex-wrap flex-1">
 						<div className="flex-1">
-							<ObtionButton
+							<OptionButton
 								label="계좌이체"
 								onClick={() => formDispatch({ type: 'chargeType', payload: 3 })}
 								isSelected={formState.chargeType === 3}

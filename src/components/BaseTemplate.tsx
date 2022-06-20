@@ -2,8 +2,6 @@
 import React from 'react';
 import Header from 'components/Header/Header';
 import ModalSection from 'components/Modal/ModalSection';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/slices';
 
 interface TemplateProps {
 	children: React.ReactNode;

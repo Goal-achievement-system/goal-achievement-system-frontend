@@ -17,7 +17,7 @@ export interface Props {
 	children?: React.ReactNode;
 }
 
-function ObtionButton({ label = '', onClick, isSelected, size, children }: Props) {
+function OptionButton({ label = '', onClick, isSelected, size, children }: Props) {
 	return (
 		<button
 			type="button"
@@ -37,4 +37,4 @@ function ObtionButton({ label = '', onClick, isSelected, size, children }: Props
 	);
 }
 
-export default React.memo(ObtionButton);
+export default React.memo(OptionButton);

@@ -5,7 +5,7 @@ import modalSlice from 'store/slices/modalSlice';
 
 export interface OpenModal {
 	name: string;
-	props: { index: number };
+	props?: { index: number };
 }
 
 export interface CloseModal {
