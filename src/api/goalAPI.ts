@@ -21,6 +21,10 @@ export const loadGoaliLst = (params: LoadGoalParam) => {
 	return client.get(`goals/${params.category}/list/${params.status}/${params.page}`);
 };
 
+export const getCategories = () => {
+	return client.get(`goals/categories`);
+};
+
 // eslint-disable-next-line consistent-return
 export const successCertGoal = async (goalID: number) => {
 	try {

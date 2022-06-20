@@ -3,9 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import useGetActionState from 'hooks/useGetActionState';
 import goalSlice from 'store/slices/goalSlice';
-import OptionButton from 'components/Button/OptionButton';
-import SubmitButton from 'components/Button/SubmitButton';
-import TextInput from 'components/Input/TextInput';
 import { IForm, Action, initialState } from './FormStateMgt';
 import GoalRegModalView from './GoalRegModalView';
 
@@ -18,15 +15,18 @@ function formReducer(state: IForm, action: Action) {
 function GoalRegModalContainer() {
 	const dispatch = useDispatch();
 	const memberInfo = useSelector((state: RootState) => state.member.memberinfo);
+	const categories = useSelector((state: RootState) => state.goal.categories);
 	const [formState, formDispatch] = useReducer(formReducer, initialState);
-	const [loading, result, initResult] = useGetActionState(goalSlice.actions.registerGoal.type);
-
+	const [goalRegLoading, goalRegResult, goalRegInitResult] = useGetActionState(goalSlice.actions.registerGoal.type);
+	const [categoriesLoading, categoriesResult, categoriesInitResult] = useGetActionState(
+		goalSlice.actions.loadCategories.type
+	);
 	const onSubmit = (event: React.SyntheticEvent) => {
 		// 머니 범위 설정
 		// 날짜 입력 숫자로만 했는지 확인
 		event.preventDefault();
 
-		if (!memberInfo || loading) return;
+		if (!memberInfo || goalRegLoading) return;
 
 		const { goalName, content, money, limitDate, reward, category } = formState;
 		// 심플하게 만드는 법 생각해보기
@@ -71,14 +71,27 @@ function GoalRegModalContainer() {
 			})
 		);
 	};
+	useEffect(() => {
+		if (categoriesLoading) return;
+		dispatch(goalSlice.actions.loadCategories());
+	}, []);
 
 	useEffect(() => {
-		if (result?.isSuccess) {
+		if (categoriesResult?.isSuccess) {
+			// success
+		} else {
+			// fail
+		}
+		categoriesInitResult();
+	}, [categoriesResult, categoriesInitResult]);
+
+	useEffect(() => {
+		if (goalRegResult?.isSuccess) {
 			alert('목표가 등록되었습니다.');
 			formDispatch({ type: 'init' });
 		}
-		initResult();
-	}, [result, initResult]);
+		goalRegInitResult();
+	}, [goalRegResult, goalRegInitResult]);
 
 	const className = {
 		// size: 'pc:max-w-[890px] pc:max-h-[90vh] max-w-[320px] max-h-[470px]',
@@ -94,6 +107,7 @@ function GoalRegModalContainer() {
 				formState={formState}
 				formDispatch={formDispatch}
 				remainingMoney={memberInfo?.money as number}
+				categories={categories}
 			/>
 		</div>
 	);

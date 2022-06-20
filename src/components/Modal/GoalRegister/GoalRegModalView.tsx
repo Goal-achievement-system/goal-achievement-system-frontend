@@ -9,9 +9,11 @@ interface Props {
 	formState: IForm;
 	formDispatch: React.Dispatch<Action>;
 	remainingMoney: number;
+	categories: string[];
 }
 
-function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }: Props) {
+function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, categories }: Props) {
+	console.log(categories);
 	const getBtnState = (): BtnStates => {
 		const { goalName, content, money, limitDate, reward, category } = formState;
 		// 심플하게 만드는 법 생각해보기
@@ -45,7 +47,9 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney }:
 				onChange={(curVar: string) => formDispatch({ type: 'content', payload: curVar })}
 				value={formState?.content}
 			/>
-
+			{categories.map((category) => (
+				<div>{category}</div>
+			))}
 			<TextInput
 				placeholder="10000"
 				onChange={(curVar: string) => formDispatch({ type: 'money', payload: curVar })}
