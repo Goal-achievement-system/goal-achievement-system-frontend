@@ -2,23 +2,18 @@ import { Member } from 'types/member';
 import { Goal, VerificationResult } from 'types/goal';
 import client from './client';
 
-export interface IChargeMoney {
+export interface ChargeMoneyBody {
 	email: string;
 	password: string;
 	money: number;
 }
 
-export interface IGetMemberGoals {
+export interface GetMemberGoalsBody {
 	state: VerificationResult;
 	page: number;
 }
 
-export interface IGetMemberGoalsResult {
-	maxPage: number;
-	goals: Goal[] | null;
-}
-
-export interface IGetMemberCerts {
+export interface GetMemberCertsBody {
 	state: VerificationResult;
 	page: number;
 }
@@ -39,11 +34,11 @@ export const getNotifications = () => {
 	return client.get('/myinfo/notifications');
 };
 
-export const chargeMoney = ({ email, password, money }: IChargeMoney) => {
+export const chargeMoney = ({ email, password, money }: ChargeMoneyBody) => {
 	return client.put('/members/myinfo/charge', { email, password, money });
 };
 
-export const transferMoney = ({ email, password, money }: IChargeMoney) => {
+export const transferMoney = ({ email, password, money }: ChargeMoneyBody) => {
 	return client.put('/members/myinfo/refund', { email, password, money });
 };
 
@@ -51,10 +46,10 @@ export const getMemberGoalStatistics = () => {
 	return client.get('/statistics/mine');
 };
 
-export const getMemberGoals = ({ state, page }: IGetMemberGoals) => {
+export const getMemberGoals = ({ state, page }: GetMemberGoalsBody) => {
 	return client.get(`/members/myinfo/goals/${state}/${page}`);
 };
 
-export const getMemberCerts = ({ state, page }: IGetMemberCerts) => {
+export const getMemberCerts = ({ state, page }: GetMemberCertsBody) => {
 	return client.get(`/members/myinfo/cert/${state}/${page}`);
 };
