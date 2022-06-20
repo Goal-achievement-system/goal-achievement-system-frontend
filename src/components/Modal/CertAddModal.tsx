@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import OptionButton from 'components/Button/ObtionButton';
 import TextInput from 'components/Input/TextInput';
 import SubmitButton from 'components/Button/SubmitButton';
+import { CertCategories, CertCategoryType } from 'types/certification';
 
-export default function GoalAddModal() {
+export default function CertAddModal() {
+	const [curCategory, setCurCategory] = useState<CertCategoryType>('exercice');
 	const className = {
-		// size: 'pc:max-w-[890px] pc:max-h-[90vh] max-w-[320px] max-h-[470px]',
 		size: 'pc:w-[890px] max-w-[90vw] pc:max-h-[80vh] w-[320px] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
 
 	return (
 		<div
-			className={`${className.size} ${className.translate} text-left pc:p-[72px] p-[26px] rounded-2xl relative  bg-modalGray overflow-auto`}
+			className={`scrollbar ${className.size} ${className.translate} text-left pc:p-[72px] p-[26px] rounded-2xl relative  bg-modalGray overflow-auto`}
 		>
 			<div className="pc:mb-[52px] mb-[16px]">
 				<div className="pc:mb-[30px] mb-[8px] font-[600]">인증 사진</div>
@@ -30,27 +31,16 @@ export default function GoalAddModal() {
 				<div className="pc:mb-[30px] mb-[8px] font-[600]">카테고리 선택</div>
 				<div className="category-wrap">
 					<ul className="grid pc:gap-[16px] gap-[6px] grid-flow-col overflow-auto">
-						<li>
-							<OptionButton size="medium" label="# 운동" isSelected onClick={() => {}} />
-						</li>
-						<li>
-							<OptionButton size="medium" label="# 운동" isSelected={false} onClick={() => {}} />
-						</li>
-						<li>
-							<OptionButton size="medium" label="# 운동" isSelected={false} onClick={() => {}} />
-						</li>
-						<li>
-							<OptionButton size="medium" label="# 공부" isSelected={false} onClick={() => {}} />
-						</li>
-						<li>
-							<OptionButton size="medium" label="# 습관" isSelected={false} onClick={() => {}} />
-						</li>
-						<li>
-							<OptionButton size="medium" label="# 취미" isSelected={false} onClick={() => {}} />
-						</li>
-						<li>
-							<OptionButton size="medium" label="# 기타" isSelected={false} onClick={() => {}} />
-						</li>
+						{CertCategories.map((category) => (
+							<li>
+								<OptionButton
+									size="medium"
+									label={`# ${category.label}`}
+									isSelected={curCategory === category.type}
+									onClick={() => setCurCategory(category.type)}
+								/>
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>
