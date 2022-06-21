@@ -1,35 +1,74 @@
+import { LoadInspectionResponse } from 'api/adminAPI';
 import Main from 'components/Main';
 import Pagination from 'components/Pagination';
 import React from 'react';
 
-function InspectionView() {
+interface Props {
+	inspectionList: LoadInspectionResponse;
+}
+
+function InspectionView({ inspectionList }: Props) {
 	return (
 		<Main title="목표 검토">
-			<div className="p-[72px] bg-modalGray font-[600] mb-[30px]">
+			<div className="p-[72px] bg-modalGray font-[600] text-[16px] mb-[30px]">
 				<div className="w-full flex py-[24px]">
-					<div className="w-[10%]">No</div>
-					<div className="w-[30%]">목표 이름</div>
-					<div className="w-[10%]">카테고리</div>
+					<div className="w-[8%]">No</div>
+					<div className="w-[38%]">목표 이름</div>
+					<div className="w-[12%]">카테고리</div>
 					<div className="w-[15%]">목표일</div>
 					<div className="w-[15%]">회원검증</div>
-					<div className="w-[20%]">검토 상태</div>
+					<div className="w-[12%]">검토 상태</div>
 				</div>
 				<ul>
-					{[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, idx) => {
+					{inspectionList.map((item) => {
 						return (
-							<li className="w-full flex py-[24px] border-t-[1px] border-[#E4E4E4]" key={item}>
-								<div className="w-[10%]">{item}</div>
-								<div className="w-[30%]">골키퍼 관리자 페이지 만들기</div>
-								<div className="w-[10%]">일상</div>
-								<div className="w-[15%]">2022. 3. 24</div>
-								<div className="w-[15%]">[실패] 8/10</div>
-								<div className="w-[20%]">성공 처리</div>
+							<li
+								className="w-full flex items-center text-[16px] py-[16px] border-t-[1px] border-[#E4E4E4]"
+								key={item.goal.goalId}
+							>
+								<div className="w-[8%]">{item.goal.goalId}</div>
+								<div className="w-[38%]">{item.goal.goalName}</div>
+								<div className="w-[12%]">{item.goal.category}</div>
+								<div className="w-[15%]">
+									{new Date(item.goal.limitDate).getFullYear()}.{new Date(item.goal.limitDate).getMonth() + 1}.
+									{new Date(item.goal.limitDate).getDate()}
+								</div>
+								<div className="w-[15%]">
+									[실패] {item.certification.successCount}/{item.certification.requireSuccessCount}
+								</div>
+								<div className="w-[12%]">
+									{
+										/* eslint-disable no-nested-ternary */
+										item.goal.verificationResult === 'success' ? (
+											<button
+												type="button"
+												className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-primaryOrange-200 text-primaryWhite border-[1px] border-primaryOrange-200;"
+											>
+												성공 처리
+											</button>
+										) : item.goal.verificationResult === 'hold' ? (
+											<button
+												type="button"
+												className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-primaryOrange-100 text-primaryOrange-200 border-[1px] border-primaryOrange-200"
+											>
+												검토 하기
+											</button>
+										) : (
+											<button
+												type="button"
+												className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-buttonBlack-100 text-[#999999] border-[1px] border-buttonBlack-100"
+											>
+												실패 처리
+											</button>
+										)
+									}
+								</div>
 							</li>
 						);
 					})}
 				</ul>
 			</div>
-			<Pagination curPage={1} setCurPage={() => {}} numOfPages={1} numOfPageBtn={3} />
+			<Pagination curPage={1} setCurPage={() => {}} numOfPages={5} numOfPageBtn={5} />
 		</Main>
 	);
 }

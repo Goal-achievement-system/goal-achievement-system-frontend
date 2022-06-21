@@ -8,6 +8,7 @@ import loadingSlice from './loadingSlice';
 import resultSlice from './resultSlice';
 import modalSlice from './modalSlice';
 import certificationSlice from './certificationSlice';
+import adminSlice from './adminSlice';
 
 const rootReducer = combineReducers({
 	goal: goalSlice.reducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
 	result: resultSlice.reducer,
 	modal: modalSlice.reducer,
 	certification: certificationSlice.reducer,
+	admin: adminSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
