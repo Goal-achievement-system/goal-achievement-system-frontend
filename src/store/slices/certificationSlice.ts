@@ -5,6 +5,7 @@ import { Goal, GoalsResponse } from 'types/goal';
 
 export interface InitialState {
 	goalList: Goal[];
+	certDetail: Certification;
 	maxPage: number;
 }
 
