@@ -6,11 +6,8 @@ export interface Option {
 }
 
 interface SelectProps {
-	// label: string;
-	// isRequired: boolean;
 	options: Option[];
-	value: string;
-	// onChange: Dispatch<SetStateAction<string>>;
+	value: string | null;
 	onChange: (curVar: string) => void;
 }
 // label, isRequired = false,

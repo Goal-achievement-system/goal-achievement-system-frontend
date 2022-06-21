@@ -6,10 +6,18 @@ import Main from 'components/Main';
 import FilterButton from 'components/Button/FilterButton';
 import SmallBox from 'components/Box/SmallBox';
 import Pagination from 'components/Pagination';
+import PerformInput from 'components/Input/PerformInput';
+import Select from 'components/Select/Select';
+import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
+import { Member } from 'types/member';
+import SubmitButton from 'components/Button/SubmitButton';
+import { IReplaceMemeberForm } from './FormStateMgt';
 
 interface Props {
 	goals: Goal[] | null;
 	notificationList: Notification[];
+	// memberInfo: Member | null;
+	formState: IReplaceMemeberForm | null;
 	currentPage: number;
 	setCurrentPage: Dispatch<SetStateAction<number>>;
 	goalFilter: VerificationResult;
@@ -18,11 +26,14 @@ interface Props {
 	setIsSelected: Dispatch<SetStateAction<string>>;
 	maxPage: number;
 	openGoalModal: (index: number) => void;
+	handleChange: () => void;
 }
 
 export default function MyGoalView({
 	goals,
 	notificationList,
+	// memberInfo,
+	formState,
 	currentPage,
 	setCurrentPage,
 	goalFilter,
@@ -31,6 +42,7 @@ export default function MyGoalView({
 	setIsSelected,
 	maxPage,
 	openGoalModal,
+	handleChange,
 }: Props) {
 	// 버튼에 해당하는 현재 state
 	const getFilterState = (key: string) => {
@@ -69,56 +81,66 @@ export default function MyGoalView({
 					})}
 				</div>
 				<div className="box-wrap pc:my-[30px]">
-					{goals?.length ? (
-						<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
-							{goals.map((goal, index) => (
+					<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
+						<li>
+							<SmallBox onClick={() => {}} />
+						</li>
+						{goals?.length &&
+							goals.map((goal, index) => (
 								<li key={goal.goalId}>
 									<SmallBox goal={goal} onClick={() => openGoalModal(index)} />
 								</li>
 							))}
-						</ul>
-					) : (
-						<div className="text-center">&#34;{isSelected}&#34; 인 상태의 목표가 없습니다.</div>
-					)}
+					</ul>
 				</div>
 				<div className="flex content-center ">
 					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={5} />
 				</div>
 			</Main>
+			{/* <div className="pc:mt-[30px]">
+				<Main title="알림" />
+			</div> */}
 			<div className="pc:mt-[30px]">
-				<Main title="알림">
-					<div className="flex flex-col pc:space-y-[16px]">
-						{/* {notificationList.map(({ category, sendingTime, message, link }: Notification) => {
-							return (
-								<div>
-									<div>{category}</div>
-									<div>{message}</div>
-									<div>{sendingTime}</div>
-								</div>
-							);
-						})} */}
-						{[
-							{ category: 'category', sendingTime: '2022-02-02', message: '메세지입니다.', link: '/' },
-							{ category: 'category', sendingTime: '2022-02-02', message: '첫 목표등록이 완료되었어요.', link: '/' },
-							{
-								category: 'categorycategorycategorycategory',
-								sendingTime: '2022-02-02',
-								message:
-									'메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다.메세지입니다',
-								link: '/',
-							},
-							{ category: 'category', sendingTime: '2022-02-02', message: '메세지입니다.', link: '/' },
-							{ category: 'category', sendingTime: '2022-02-02', message: '메세지입니다.', link: '/' },
-							{ category: 'category', sendingTime: '2022-02-02', message: '메세지입니다.', link: '/' },
-						].map(({ category, sendingTime, message, link }) => (
-							<div className="border-2 bg-alarmGray  border-borderGray pc:px-[24px] pc:pt-[24px] pc:pb-[20px] rounded-[16px] pc:h-[108px] flex flex-col justify-between">
-								<div className="flex justify-between">
-									<div className="text-primaryOrange-200 w-[100px] line-clamp-1">{category}</div>
-									<div className="">{sendingTime}</div>
-								</div>
-								<div className="line-clamp-1">{message}</div>
+				<Main title="개인정보 관리">
+					<div className="flex flex-col space-y-[40px]">
+						<div>
+							<PerformInput
+								type="email"
+								placeholder="이메일이 표시되지 않으면 재접속해주세요!"
+								label="이메일"
+								onChange={() => {}}
+							/>
+						</div>
+						<div>
+							<div>
+								<PerformInput type="password" placeholder="현재 비밀번호" label="비밀번호 변경" onChange={() => {}} />
 							</div>
-						))}
+							<div className="my-[10px]">
+								<PerformInput type="password" placeholder="새 비밀번호(8자리 이상)" onChange={() => {}} />
+							</div>
+							<div className="my-[10px]">
+								<PerformInput type="password" placeholder="새 비밀번호 확인" onChange={() => {}} />
+							</div>
+						</div>
+						<div>
+							<PerformInput type="email" placeholder="닉네임" label="닉네임 변경" onChange={() => {}} />
+						</div>
+						<div>
+							<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px]">
+								<span className="font-semibold text-[20px]">선택사항</span>
+							</div>
+							<div className="flex justify-between w-full">
+								<Select options={GenderOption} value={formState ? formState.sex : null} onChange={handleChange} />
+								<Select
+									options={AgeOption}
+									value={formState ? formState.age.toString() : null}
+									onChange={handleChange}
+								/>
+							</div>
+						</div>
+						<div>
+							<SubmitButton label="변경하기" btnState="active" />
+						</div>
 					</div>
 				</Main>
 			</div>
