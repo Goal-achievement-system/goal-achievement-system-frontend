@@ -13,7 +13,7 @@ import Certifications from 'pages/Certifications/CertificationsContainer';
 import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
 import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
-import MyGoal from 'pages/MyGoal/MyGoalContainer';
+import MyGoal from 'pages/MyPage/MyPageContainer';
 import GoalRegister from 'pages/GoalRegister/GoalRegisterContainer';
 
 function Layout() {

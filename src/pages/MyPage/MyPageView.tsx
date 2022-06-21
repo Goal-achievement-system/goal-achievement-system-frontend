@@ -69,21 +69,28 @@ export default function MyGoalView({
 						);
 					})}
 				</div>
-				<div className="box-wrap pc:my-[30px]">
-					{goals?.length ? (
-						<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
-							{goals.map((goal, index) => (
-								<li key={goal.goalId}>
-									<SmallBox
-										goal={goal}
-										onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
-									/>
-								</li>
-							))}
-						</ul>
-					) : (
-						<div className="text-center">&#34;{isSelected}&#34; 인 상태의 목표가 없습니다.</div>
-					)}
+				<div className="box-wrap pc:my-[30px] my-[16px]">
+					<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
+						<li>
+							<SmallBox
+								onClick={() => {
+									alert('목표를 등록하러 갈게요!');
+									// 나중에 목표등록 모달이 완료되면 열어주기
+									// openModalOnClick({ certState: '' });
+								}}
+							/>
+						</li>
+						{goals?.length
+							? goals.map((goal, index) => (
+									<li key={goal.goalId}>
+										<SmallBox
+											goal={goal}
+											onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
+										/>
+									</li>
+							  ))
+							: null}
+					</ul>
 				</div>
 				<div className="flex content-center ">
 					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={5} />
@@ -91,8 +98,13 @@ export default function MyGoalView({
 			</Main>
 			<div className="pc:mt-[30px]">
 				<Main title="알림">
-					<div className="flex flex-col pc:space-y-[16px]">
-						{/* {notificationList.map(({ category, sendingTime, message, link }: Notification) => {
+					<div className="relative">
+						<div className="flex flex-col pc:space-y-[16px]">
+							<span className="px-[24px] py-[20px] text-[22px] font-[600]">
+								읽지 않은 알람 <span className="text-primaryOrange-200">{notificationList.length}개</span>
+							</span>
+
+							{/* {notificationList.map(({ category, sendingTime, message, link }: Notification) => {
 							return (
 								<div>
 									<div>{category}</div>
@@ -101,7 +113,7 @@ export default function MyGoalView({
 								</div>
 							);
 						})} */}
-						{[
+							{/* {[
 							{ category: 'category', sendingTime: '2022-02-02', message: '메세지입니다.', link: '/' },
 							{ category: 'category', sendingTime: '2022-02-02', message: '첫 목표등록이 완료되었어요.', link: '/' },
 							{
@@ -122,7 +134,8 @@ export default function MyGoalView({
 								</div>
 								<div className="line-clamp-1">{message}</div>
 							</div>
-						))}
+						))} */}
+						</div>
 					</div>
 				</Main>
 			</div>

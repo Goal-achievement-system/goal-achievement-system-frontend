@@ -1,11 +1,11 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from 'store';
 import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
 import { VerificationResult } from 'types/goal';
 import useModal from 'hooks/useModal';
-import MyGoalView from './MyGoalView';
+import MyPageView from './MyPageView';
 
 export default function MyGoal() {
 	const dispatch: AppDispatch = useDispatch();
@@ -30,7 +30,7 @@ export default function MyGoal() {
 	}, [goalFilter, currentPage, dispatch, memberinfo]);
 
 	return (
-		<MyGoalView
+		<MyPageView
 			goals={goals}
 			notificationList={notificationList}
 			currentPage={currentPage}
