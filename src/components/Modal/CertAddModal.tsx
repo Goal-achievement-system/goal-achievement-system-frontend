@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import OptionButton from 'components/Button/ObtionButton';
+import OptionButton from 'components/Button/OptionButton';
 import TextInput from 'components/Input/TextInput';
 import SubmitButton from 'components/Button/SubmitButton';
 import { CertCategories, CertCategoryKrType, CertCategoryType } from 'types/certification';
@@ -27,7 +27,7 @@ export default function CertAddModal({ index }: Props) {
 	const dispatch = useDispatch();
 
 	const className = {
-		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px]',
+		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px] max-w-[90vw]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
 

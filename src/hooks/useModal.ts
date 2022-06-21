@@ -13,7 +13,7 @@ export interface CloseModal {
 }
 export interface OpenModalOnClickArgs {
 	certState: string;
-	index: number;
+	index?: number;
 }
 
 export type OpenModalOnClick = ({ certState, index }: OpenModalOnClickArgs) => void;
@@ -26,10 +26,15 @@ export default function useModal(): [OpenModalOnClick, any] {
 	};
 
 	const openModalOnClick = ({ certState, index }: OpenModalOnClickArgs) => {
+		if (certState === 'register') {
+			openModal({ name: ModalNameList.goalRegModal });
+		}
+		if (!index) return;
 		if (certState === 'ongoing') {
 			openModal({ name: ModalNameList.certAddModal, props: { index } });
 			return;
 		}
+
 		openModal({ name: ModalNameList.goalModal, props: { index } });
 	};
 

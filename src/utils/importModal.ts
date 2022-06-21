@@ -3,7 +3,8 @@ import { ModalIndex } from 'types/modal';
 
 export const ModalNameList = {
 	goalModal: 'GoalModal',
-	certAddModal: 'certAddModal',
+	certAddModal: 'CertAddModal',
+	goalRegModal: 'GoalRegModal',
 };
 
 const modalList: ModalIndex[] = [
@@ -16,7 +17,7 @@ const modalList: ModalIndex[] = [
 		component: lazy(() => import('components/Modal/CertAddModal')),
 	},
 	{
-		name: 'GoalRegModal',
+		name: ModalNameList.goalRegModal,
 		component: lazy(() => import('components/Modal/GoalRegister/GoalRegModalContainer')),
 	},
 ];
