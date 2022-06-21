@@ -35,12 +35,9 @@ function GoalRegModalContainer() {
 		if (!isFormValid(formState, categories, memberInfo.money)) return;
 
 		console.log('pass');
-		const y = limitDate.split('-')[0];
-		const m = limitDate.split('-')[1];
-		const d = limitDate.split('-')[2];
 
-		const date = new Date(+y, +m, +d);
-		console.log(date, formState);
+		const date = new Date(limitDate);
+
 		dispatch(
 			goalSlice.actions.registerGoal({
 				memberEmail: memberInfo.email,

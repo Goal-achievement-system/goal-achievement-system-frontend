@@ -40,8 +40,6 @@ function* registerGoalSaga(action: PayloadAction<goalAPI.RegisterGoalBody>) {
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
-		// 에러 처리 하기
-		console.log(error);
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
@@ -51,13 +49,12 @@ function* loadCategoriesSaga(action: PayloadAction) {
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<string[]> = yield call(goalAPI.getCategories);
-		console.log(result);
+
 		yield put(loadCategoriesSuccess(result.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
-		// 에러 처리 하기
-		console.log(error);
+
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));

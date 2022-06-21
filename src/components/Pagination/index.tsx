@@ -10,9 +10,7 @@ interface Props {
 }
 function Pagination({ numOfPages, setCurPage, curPage, numOfPageBtn }: Props) {
 	const [slideNum, setSlideNum] = useState<number>(1);
-	useEffect(() => {
-		console.log(curPage, slideNum);
-	}, [curPage, slideNum]);
+
 	return (
 		<div className="w-full flex justify-center items-center space-x-2">
 			<Element
