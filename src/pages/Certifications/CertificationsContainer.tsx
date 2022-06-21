@@ -17,6 +17,7 @@ function CertificationsContainer() {
 	);
 	const categories = useSelector((state: RootState) => state.goal.categories);
 	const [curCategory, setCurCategory] = useState<string>('all');
+	const [curPage, setCurPage] = useState<number>(1);
 	useEffect(() => {
 		if (categoriesLoading) return;
 		dispatch(goalSlice.actions.loadCategories());
@@ -33,7 +34,7 @@ function CertificationsContainer() {
 	useEffect(() => {
 		if (certLoading) return;
 		if (![...categories, 'all'].includes(curCategory)) return;
-		dispatch(certificationSlice.actions.loadCertGoalList({ category: curCategory, page: 1 }));
+		dispatch(certificationSlice.actions.loadCertGoalList({ category: curCategory, page: curPage }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, curCategory]);
 
@@ -46,6 +47,8 @@ function CertificationsContainer() {
 			curCategory={curCategory}
 			setCurCategory={setCurCategory}
 			maxPage={maxPage}
+			curPage={curPage}
+			setCurPage={setCurPage}
 		/>
 	);
 }

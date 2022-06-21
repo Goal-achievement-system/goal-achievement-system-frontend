@@ -25,6 +25,8 @@ interface Props {
 	curCategory: string;
 	setCurCategory: React.Dispatch<React.SetStateAction<string>>;
 	maxPage: number;
+	curPage: number;
+	setCurPage: React.Dispatch<React.SetStateAction<number>>;
 }
 function CertificationsView({
 	isCategoryLoading,
@@ -34,10 +36,11 @@ function CertificationsView({
 	setCurCategory,
 	goalList,
 	maxPage,
+	curPage,
+	setCurPage,
 }: Props) {
 	const [isOneColumnMode, setIsOneColumnMode] = useState<boolean>(false);
-	const [curPage, setCurPage] = useState<number>(1);
-	console.log(goalList, categories, maxPage);
+
 	return (
 		<Main title="목표인증">
 			<div className="mb-[30px]">
