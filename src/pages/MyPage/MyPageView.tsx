@@ -12,13 +12,13 @@ import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
 import { Member } from 'types/member';
 import SubmitButton from 'components/Button/SubmitButton';
 import { OpenModalOnClick } from 'hooks/useModal';
-import { IReplaceMemeberForm } from './ReplaceMemberForm';
+import { IReplaceMemeberForm, ReplaceMemberReducerAction } from './ReplaceMemberForm';
 
 interface Props {
 	goals: Goal[] | null;
 	notificationList: Notification[];
-	// memberInfo: Member | null;
 	formState: IReplaceMemeberForm | null;
+	formDispatch: React.Dispatch<ReplaceMemberReducerAction>;
 	currentPage: number;
 	setCurrentPage: Dispatch<SetStateAction<number>>;
 	goalFilter: VerificationResult;
@@ -34,6 +34,7 @@ export default function MyGoalView({
 	goals,
 	notificationList,
 	formState,
+	formDispatch,
 	currentPage,
 	setCurrentPage,
 	goalFilter,
@@ -48,8 +49,8 @@ export default function MyGoalView({
 	const getFilterState = (key: string) => {
 		const filterMap = new Map([
 			['전체', 'all'],
-			['등록 전', 'ongoing'],
-			['진행 중', 'oncertification'],
+			['진행 중', 'ongoing'],
+			['인증 중', 'oncertification'],
 			['성공', 'success'],
 			['실패', 'fail'],
 			['보류', 'hold'],
@@ -72,7 +73,7 @@ export default function MyGoalView({
 					}}
 					aria-hidden
 				>
-					{['전체', '등록 전', '진행 중', '성공', '실패', '보류'].map((ele: string) => {
+					{['전체', '진행 중', '인증 중', '성공', '실패', '보류'].map((ele: string) => {
 						return (
 							<div key={ele}>
 								<FilterButton label={ele} isSelected={ele === isSelected} onClick={() => setIsSelected(ele)} />
@@ -87,7 +88,7 @@ export default function MyGoalView({
 								onClick={() => {
 									alert('목표를 등록하러 갈게요!');
 									// 나중에 목표등록 모달이 완료되면 열어주기
-									// openModalOnClick({ certState: '' });
+									openModalOnClick({ certState: 'register' });
 								}}
 							/>
 						</li>
@@ -103,7 +104,7 @@ export default function MyGoalView({
 							: null}
 					</ul>
 				</div>
-				<div className="flex content-center pagination-wrap ">
+				<div className="flex content-center pagination-wrap">
 					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={5} />
 				</div>
 				<div className="pc:mt-[30px]">

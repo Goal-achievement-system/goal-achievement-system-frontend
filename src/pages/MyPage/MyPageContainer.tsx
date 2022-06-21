@@ -41,6 +41,7 @@ export default function MyGoal() {
 			goals={goals}
 			notificationList={notificationList}
 			formState={formState}
+			formDispatch={formDispatch}
 			currentPage={currentPage}
 			setCurrentPage={setCurrentPage}
 			goalFilter={goalFilter}
