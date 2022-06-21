@@ -47,7 +47,7 @@ export default function ModalSection() {
 						if (!config || !config.component) return null;
 						const ModalComponent = config.component;
 						// eslint-disable-next-line react/jsx-props-no-spreading
-						return <ModalComponent {...props} />;
+						return <ModalComponent {...props} key={name} />;
 					})}
 				</div>
 			</div>

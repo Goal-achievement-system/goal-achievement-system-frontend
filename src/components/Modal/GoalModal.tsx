@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function GoalModal({ index }: Props) {
-	const goal = useSelector((state: RootState) => state.goal.goalList[index]);
+	const goal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
 	const navigate = useNavigate();
 	const className = {
 		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px]',
