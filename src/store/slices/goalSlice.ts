@@ -6,12 +6,14 @@ import { Goal, GoalsResponse } from 'types/goal';
 
 export interface InitialState {
 	goalList: Goal[];
+
 	maxPage: number;
 	categories: string[];
 }
 
 const initialState: InitialState = {
 	goalList: [],
+
 	maxPage: 0,
 	categories: [],
 };
