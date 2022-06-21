@@ -18,8 +18,8 @@ function HomeContainer() {
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	const { goalList } = useSelector((state: RootState) => state.goal);
 	const [loading] = useGetActionState(memberSlice.actions.loadMemberInfo.type);
-	const [openModal, cloasModal] = useModal();
-	const openGoalModal = (index: number) => openModal({ name: 'GoalModal', props: { index } });
+	const [openModalOnClick, cloasModal] = useModal();
+	// const openGoalModal = (index: number) => openModal({ name: 'GoalModal', props: { index } });
 
 	useEffect(() => {
 		if (!memberinfo) {
@@ -30,7 +30,7 @@ function HomeContainer() {
 	}, [dispatch, memberinfo, goalCount]);
 
 	if (loading) return null;
-	return <HomeView member={memberinfo} goalCount={goalCount} goalList={goalList} openGoalModal={openGoalModal} />;
+	return <HomeView member={memberinfo} goalCount={goalCount} goalList={goalList} openModalOnClick={openModalOnClick} />;
 }
 
 export default HomeContainer;

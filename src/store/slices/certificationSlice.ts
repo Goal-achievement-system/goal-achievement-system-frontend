@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CertFormState } from 'api/certAPI';
 import { LoadCertGoalParam } from 'store/sagas/certificationSaga';
 import { Goal, GoalsResponse } from 'types/goal';
 
@@ -23,6 +24,10 @@ export const certificationSlice = createSlice({
 			state.goalList = payload.goals;
 			state.maxPage = payload.maxPage;
 		},
+		submitCertGoal: (state, action: PayloadAction<CertFormState>) => {
+			console.log('start');
+		},
+		submitCertGoalSuccess: (state) => {},
 	},
 });
 

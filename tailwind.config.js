@@ -38,6 +38,10 @@ module.exports = {
 					100: '#FFE8E8',
 					200: '#FF6B6B',
 				},
+				buttonGray: {
+					100: '#E8E8E8',
+					200: '#949494',
+				},
 				borderGray: '#E7E7E7',
 				borderOrange: '#FF8A00',
 				statesRed: '#FF1523',

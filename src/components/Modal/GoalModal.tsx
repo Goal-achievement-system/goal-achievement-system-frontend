@@ -17,7 +17,7 @@ export default function GoalModal({ index }: Props) {
 	const goal = useSelector((state: RootState) => state.goal.goalList[index]);
 	const navigate = useNavigate();
 	const className = {
-		size: 'pc:w-[890px] max-w-[90vw] pc:max-h-[80vh] w-[320px] max-h-[424px]',
+		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
 
@@ -28,7 +28,7 @@ export default function GoalModal({ index }: Props) {
 
 	return (
 		<div
-			className={`${className.size} ${className.translate} text-left pc:p-[72px] p-[24px] border-borderGray rounded-2xl relativ bg-modalGray overflow-auto`}
+			className={`scrollbar ${className.size} ${className.translate} text-left pc:p-[72px] p-[24px] border-borderGray rounded-2xl relativ bg-modalGray overflow-auto`}
 		>
 			<div className="modal-tops pc:space-y-[72px] flex flex-col space-y-[20px]">
 				<div>

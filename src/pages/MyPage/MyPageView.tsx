@@ -11,7 +11,8 @@ import Select from 'components/Select/Select';
 import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
 import { Member } from 'types/member';
 import SubmitButton from 'components/Button/SubmitButton';
-import { IReplaceMemeberForm } from './FormStateMgt';
+import { OpenModalOnClick } from 'hooks/useModal';
+import { IReplaceMemeberForm } from './ReplaceMemberForm';
 
 interface Props {
 	goals: Goal[] | null;
@@ -25,14 +26,13 @@ interface Props {
 	isSelected: string;
 	setIsSelected: Dispatch<SetStateAction<string>>;
 	maxPage: number;
-	openGoalModal: (index: number) => void;
+	openModalOnClick: OpenModalOnClick;
 	handleChange: () => void;
 }
 
 export default function MyGoalView({
 	goals,
 	notificationList,
-	// memberInfo,
 	formState,
 	currentPage,
 	setCurrentPage,
@@ -41,7 +41,7 @@ export default function MyGoalView({
 	isSelected,
 	setIsSelected,
 	maxPage,
-	openGoalModal,
+	openModalOnClick,
 	handleChange,
 }: Props) {
 	// 버튼에 해당하는 현재 state
@@ -62,7 +62,7 @@ export default function MyGoalView({
 		<div className="flex-1 overflow-auto">
 			<Main title="내목표">
 				<div
-					className="flex space-x-[8px]"
+					className="mygoal-category-wrap flex space-x-[8px]"
 					onClick={(e: React.MouseEvent<HTMLDivElement> | BaseSyntheticEvent) => {
 						if (e.target === e.currentTarget) return;
 						const { innerText } = e.target;
@@ -80,30 +80,48 @@ export default function MyGoalView({
 						);
 					})}
 				</div>
-				<div className="box-wrap pc:my-[30px]">
+				<div className="goalbox-wrap pc:my-[30px] my-[16px]">
 					<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
 						<li>
-							<SmallBox onClick={() => {}} />
+							<SmallBox
+								onClick={() => {
+									alert('목표를 등록하러 갈게요!');
+									// 나중에 목표등록 모달이 완료되면 열어주기
+									// openModalOnClick({ certState: '' });
+								}}
+							/>
 						</li>
-						{goals?.length &&
-							goals.map((goal, index) => (
-								<li key={goal.goalId}>
-									<SmallBox goal={goal} onClick={() => openGoalModal(index)} />
-								</li>
-							))}
+						{goals?.length
+							? goals.map((goal, index) => (
+									<li key={goal.goalId}>
+										<SmallBox
+											goal={goal}
+											onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
+										/>
+									</li>
+							  ))
+							: null}
 					</ul>
 				</div>
-				<div className="flex content-center ">
+				<div className="flex content-center pagination-wrap ">
 					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={5} />
 				</div>
+				<div className="pc:mt-[30px]">
+					<Main title="알림">
+						<div className="relative">
+							<div className="flex flex-col pc:space-y-[16px]">
+								<span className="px-[24px] py-[20px] text-[22px] font-[600]">
+									읽지 않은 알람 <span className="text-primaryOrange-200">{notificationList.length}개</span>
+								</span>
+							</div>
+						</div>
+					</Main>
+				</div>
 			</Main>
-			{/* <div className="pc:mt-[30px]">
-				<Main title="알림" />
-			</div> */}
 			<div className="pc:mt-[30px]">
 				<Main title="개인정보 관리">
 					<div className="flex flex-col space-y-[40px]">
-						<div>
+						<div className="email-wrap">
 							<PerformInput
 								type="email"
 								placeholder="이메일이 표시되지 않으면 재접속해주세요!"
@@ -111,7 +129,7 @@ export default function MyGoalView({
 								onChange={() => {}}
 							/>
 						</div>
-						<div>
+						<div className="password-wrap">
 							<div>
 								<PerformInput type="password" placeholder="현재 비밀번호" label="비밀번호 변경" onChange={() => {}} />
 							</div>
@@ -138,7 +156,7 @@ export default function MyGoalView({
 								/>
 							</div>
 						</div>
-						<div>
+						<div className="submitbutton-wrap">
 							<SubmitButton label="변경하기" btnState="active" />
 						</div>
 					</div>

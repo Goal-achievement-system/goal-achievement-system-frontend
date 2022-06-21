@@ -5,9 +5,8 @@ import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
 import { VerificationResult } from 'types/goal';
 import useModal from 'hooks/useModal';
-// import useGetActionState from 'hooks/useGetActionState';
-import MyGoalView from './MyGoalView';
-import { replaceMemberformReducer, replaceMemberInitialState } from './FormStateMgt';
+import { replaceMemberformReducer, replaceMemberInitialState } from './ReplaceMemberForm';
+import MyPageView from './MyPageView';
 
 export type SelectType = 'age' | 'sex';
 
@@ -22,11 +21,8 @@ export default function MyGoal() {
 	const [isSelected, setIsSelected] = useState<string>('전체');
 
 	const [formState, formDispatch] = useReducer(replaceMemberformReducer, replaceMemberInitialState);
-
-	const [openModal, closeModal] = useModal();
+	const [openModalonClick, closeModal] = useModal();
 	const dispatch: AppDispatch = useDispatch();
-
-	const openGoalModal = (index: number) => openModal({ name: 'GoalModal', props: { index } });
 
 	const handleChange = () => {};
 
@@ -41,10 +37,9 @@ export default function MyGoal() {
 	}, [goalFilter, currentPage, dispatch, memberInfo]);
 
 	return (
-		<MyGoalView
+		<MyPageView
 			goals={goals}
 			notificationList={notificationList}
-			// memberInfo={memberInfo
 			formState={formState}
 			currentPage={currentPage}
 			setCurrentPage={setCurrentPage}
@@ -53,8 +48,8 @@ export default function MyGoal() {
 			isSelected={isSelected}
 			setIsSelected={setIsSelected}
 			maxPage={maxPage}
-			openGoalModal={openGoalModal}
 			handleChange={handleChange}
+			openModalOnClick={openModalonClick}
 		/>
 	);
 }

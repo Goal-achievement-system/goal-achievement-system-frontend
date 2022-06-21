@@ -1,4 +1,5 @@
 export type CertCategoryType = 'all' | 'exercice' | 'study' | 'habit' | 'hobby' | 'etc';
+export type CertCategoryKrType = '전체' | '운동' | '공부' | '습관' | '취미' | '기타';
 export const CertCategories = [
 	{ type: 'all' as CertCategoryType, label: '전체' },
 	{ type: 'exercice' as CertCategoryType, label: '운동' },
@@ -8,6 +9,16 @@ export const CertCategories = [
 	{ type: 'etc' as CertCategoryType, label: '기타' },
 ];
 export interface Cert {
+	certId: number;
+	goalId: number;
+	content: string;
+	image: string;
+	requireSuccessCount: number;
+	successCount: number;
+	failCount: number;
+}
+
+export interface CertResponse {
 	certId: number;
 	goalId: number;
 	content: string;
