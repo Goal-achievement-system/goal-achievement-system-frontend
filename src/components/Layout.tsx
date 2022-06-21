@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import BaseTemplate from 'components/BaseTemplate';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuBox from 'components/Box/MenuBox';
 import { AppDispatch } from 'store';
@@ -31,14 +31,22 @@ function Layout() {
 				<div className="hidden pc:block mr-[30px]">
 					<MenuBox member={memberinfo} />
 				</div>
-				<Routes>
-					<Route path={Path.home} element={<Home />} />
-					<Route path={Path.notice} element={<Notice />} />
-					<Route path={Path.certifications} element={<Certifications />} />
-					<Route path={Path.moneyCharge} element={<MoneyCharge />} />
-					<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
-					<Route path={Path.myGoals} element={<MyGoal />} />
-				</Routes>
+				{memberinfo ? (
+					<Routes>
+						<Route path={Path.home} element={<Home />} />
+						<Route path={Path.notice} element={<Notice />} />
+						<Route path={Path.certifications} element={<Certifications />} />
+						<Route path={Path.moneyCharge} element={<MoneyCharge />} />
+						<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
+						<Route path={Path.myGoals} element={<MyGoal />} />
+					</Routes>
+				) : (
+					<Routes>
+						<Route path={Path.home} element={<Home />} />
+						<Route path={Path.notice} element={<Notice />} />
+						<Route path="*" element={<Navigate to="/login" replace />} />
+					</Routes>
+				)}
 			</div>
 		</BaseTemplate>
 	);
