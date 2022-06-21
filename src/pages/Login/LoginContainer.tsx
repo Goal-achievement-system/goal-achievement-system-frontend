@@ -8,6 +8,7 @@ import LoginView from './LoginView';
 import { formReducer, initialState } from './FormStateMgt';
 
 function LoginContainer() {
+	const [userLogin, setUserLogin] = useState<boolean>(true);
 	const [formState, formDispatch] = useReducer(formReducer, initialState);
 	const [loading, result, initResult] = useGetActionState(authSlice.actions.login.type);
 	const [error, setError] = useState<string>('');
@@ -22,6 +23,7 @@ function LoginContainer() {
 
 		dispatch(authSlice.actions.login({ email, password }));
 	};
+
 	useEffect(() => {
 		if (result?.isSuccess) {
 			formDispatch({ type: 'init' });
@@ -30,7 +32,25 @@ function LoginContainer() {
 		initResult();
 	}, [result, initResult, navigate]);
 
-	return <LoginView error={error} formDispatch={formDispatch} formState={formState} onSubmit={onSubmit} />;
+	useEffect(() => {
+		if (!userLogin) {
+			formDispatch({ type: 'email', payload: 'admin@e.com' });
+			formDispatch({ type: 'password', payload: 'password' });
+		} else {
+			formDispatch({ type: 'init' });
+		}
+	}, [userLogin]);
+
+	return (
+		<LoginView
+			error={error}
+			formDispatch={formDispatch}
+			formState={formState}
+			onSubmit={onSubmit}
+			userLogin={userLogin}
+			setUserLogin={setUserLogin}
+		/>
+	);
 }
 
 export default LoginContainer;
