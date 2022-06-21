@@ -27,7 +27,7 @@ export default function CertAddModal({ index }: Props) {
 	const dispatch = useDispatch();
 
 	const className = {
-		size: 'pc:w-[890px] max-w-[90vw] pc:max-h-[80vh] w-[320px] max-h-[424px]',
+		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
 
