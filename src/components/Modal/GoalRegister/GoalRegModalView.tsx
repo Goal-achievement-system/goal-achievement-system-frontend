@@ -20,6 +20,7 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, c
 	};
 	return (
 		<form className="  pc:rounded-[16px] pc:px-[40px] pc:bg-[#FAFAFA]" onSubmit={onSubmit}>
+			<div className="-mb-8 pc:mb-0" />
 			<TextInput
 				placeholder="제목을 작성해주세요"
 				onChange={(curVar: string) => formDispatch({ type: 'goalName', payload: curVar })}
@@ -87,7 +88,7 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, c
 			</div>
 			<div className="pc:mb-[50px] mb-[25px]" />
 			<SubmitButton label="등록하기" btnState={getBtnState()} />
-			<div className="pc:mb-[30px] mb-[20px]" />
+			<div className="pc:mb-[30px] " />
 		</form>
 	);
 }
