@@ -28,13 +28,13 @@ export default function useModal(): [OpenModalOnClick, any] {
 	const openModalOnClick = ({ certState, index }: OpenModalOnClickArgs) => {
 		if (certState === 'register') {
 			openModal({ name: ModalNameList.goalRegModal });
+			return;
 		}
-		if (!index) return;
+		if (index === null || index === undefined) return;
 		if (certState === 'ongoing') {
 			openModal({ name: ModalNameList.certAddModal, props: { index } });
 			return;
 		}
-
 		openModal({ name: ModalNameList.goalModal, props: { index } });
 	};
 
