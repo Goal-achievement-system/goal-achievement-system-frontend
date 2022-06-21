@@ -18,19 +18,10 @@ export interface LoginResponse {
 	Authorization: string;
 }
 
-export interface TempError {
-	data: {
-		dateTime: string;
-		errorCode: number;
-		errorContent: string;
-		url: string;
-	};
-}
-
 export const login = ({ email, password }: LogInBody) => {
 	return client.post('/members/login', { email, password });
 };
 
-export const signUp = (signUpData: SignUpBody) => {
-	return client.post('/members', { ...signUpData });
+export const signUp = (body: SignUpBody) => {
+	return client.post('/members', { ...body });
 };

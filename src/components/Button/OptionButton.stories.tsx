@@ -1,16 +1,16 @@
 /* eslint-disable func-names */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import ObtionButton, { Props } from './ObtionButton';
+import OptionButton, { Props } from './OptionButton';
 
 export default {
-	component: ObtionButton,
-	title: 'Component/Button/ObtionButton',
-} as ComponentMeta<typeof ObtionButton>;
+	component: OptionButton,
+	title: 'Component/Button/OptionButton',
+} as ComponentMeta<typeof OptionButton>;
 
-const Template: ComponentStory<typeof ObtionButton> = function (args: Props) {
+const Template: ComponentStory<typeof OptionButton> = function (args: Props) {
 	/* eslint-disable-next-line react/jsx-props-no-spreading */
-	return <ObtionButton {...args} />;
+	return <OptionButton {...args} />;
 };
 
 export const selectedLarge = Template.bind({});

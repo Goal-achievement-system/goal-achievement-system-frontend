@@ -2,6 +2,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CertFormState } from 'api/certAPI';
 import { LoadCertGoalParam } from 'store/sagas/certificationSaga';
+// import { LoadCertGoalParam } from 'api/goalAPI';
 import { Goal, GoalsResponse } from 'types/goal';
 
 export interface InitialState {
@@ -20,7 +21,6 @@ export const certificationSlice = createSlice({
 	reducers: {
 		loadCertGoalList: (state, action: PayloadAction<LoadCertGoalParam>) => {},
 		loadCertGoalListSuccess: (state, { payload }: PayloadAction<GoalsResponse>) => {
-			console.log(payload.goals);
 			state.goalList = payload.goals;
 			state.maxPage = payload.maxPage;
 		},

@@ -6,7 +6,7 @@ import { ModalNameList } from 'utils/importModal';
 
 export interface OpenModal {
 	name: string;
-	props: { index: number };
+	props?: { index: number };
 }
 export interface CloseModal {
 	name: string;

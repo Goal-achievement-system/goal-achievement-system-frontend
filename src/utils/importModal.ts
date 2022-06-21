@@ -15,6 +15,10 @@ const modalList: ModalIndex[] = [
 		name: ModalNameList.certAddModal,
 		component: lazy(() => import('components/Modal/CertAddModal')),
 	},
+	{
+		name: 'GoalRegModal',
+		component: lazy(() => import('components/Modal/GoalRegister/GoalRegModalContainer')),
+	},
 ];
 
 export default modalList;

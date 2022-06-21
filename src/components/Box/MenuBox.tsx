@@ -1,4 +1,5 @@
 import useGetActionState from 'hooks/useGetActionState';
+import useModal from 'hooks/useModal';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -19,6 +20,7 @@ function MenuBox({ member }: Props) {
 	const [memberInfoLoading] = useGetActionState(memberSlice.actions.loadMemberInfo.type);
 	const [menuInfoLoading] = useGetActionState(memberSlice.actions.getMemberMenuInfos.type);
 	const { goalStatistics, menuGoals, menuCerts } = useSelector((state: RootState) => state.member);
+	const [openGoalRegModal] = useModal();
 
 	useEffect(() => {
 		if (member) {
@@ -88,7 +90,11 @@ function MenuBox({ member }: Props) {
 					}
 					return null;
 				})}
-				<SideBarButton label="목표등록 추가" onClick={() => navigate(Path.goalRegister)} bgColor="gray" />
+				<SideBarButton
+					label="목표등록 추가"
+					onClick={() => openGoalRegModal({ name: 'GoalRegModal' })}
+					bgColor="gray"
+				/>
 			</div>
 			<div className="mb-[30px]">
 				<div className="text-[16px] font-[600] leading-[19px] mb-[8px]">목표인증현황</div>
