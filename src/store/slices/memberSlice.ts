@@ -40,6 +40,10 @@ export const memberSlice = createSlice({
 		},
 		getMemberGoals: (state, { payload }: PayloadAction<GetMemberGoalsBody>) => {},
 		getMemberGoalsSuccess: (state, { payload }: PayloadAction<GoalsResponse>) => {
+			if (payload.maxPage === 0) {
+				state.memberGoals = initialState.memberGoals;
+				return;
+			}
 			state.memberGoals = { ...payload };
 		},
 		replaceMemberInfo: (state, { payload }: PayloadAction<Member>) => {},
