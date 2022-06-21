@@ -29,5 +29,4 @@ Primary.args = {
 		age: 25,
 		money: 10000,
 	},
-	active: '회원관리',
 };
