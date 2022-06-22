@@ -8,16 +8,36 @@ import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import * as goalAPI from '../../api/goalAPI';
 
-const { loadGoalListSuccess, loadGoalList, registerGoal, loadCategories, loadCategoriesSuccess } = goalSlice.actions;
+const {
+	loadGoalListSuccess,
+	loadGoalList,
+	loadGoal,
+	loadGoalSuccess,
+	registerGoal,
+	loadCategories,
+	loadCategoriesSuccess,
+} = goalSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
 
-function* loadGoalSaga(action: PayloadAction<goalAPI.LoadGoalListParam>) {
+function* loadGoalListSaga(action: PayloadAction<goalAPI.LoadGoalListParam>) {
 	const param = action.payload;
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<GoalsResponse> = yield call(goalAPI.loadGoaliLst, param);
 		yield put(loadGoalListSuccess(result.data));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
+function* loadGoalSaga(action: PayloadAction<goalAPI.LoadGoalParam>) {
+	const param = action.payload;
+	yield put(startLoading(action.type));
+	try {
+		const result: AxiosResponse<goalAPI.LoadGoalResponse> = yield call(goalAPI.getGoal, param);
+		yield put(loadGoalSuccess(result.data));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
@@ -54,8 +74,11 @@ function* loadCategoriesSaga(action: PayloadAction) {
 	yield put(finishLoading(action.type));
 }
 
-function* watchGoalSaga() {
-	yield takeEvery(loadGoalList, loadGoalSaga);
+function* watchLoadGoalListSaga() {
+	yield takeEvery(loadGoalList, loadGoalListSaga);
+}
+function* watchLoadGoalSaga() {
+	yield takeEvery(loadGoal, loadGoalSaga);
 }
 
 function* watchLoadCategoriesSaga() {
@@ -67,5 +90,10 @@ function* watchRegisterGoalSaga() {
 }
 
 export default function* goalSaga() {
-	yield all([fork(watchGoalSaga), fork(watchRegisterGoalSaga), fork(watchLoadCategoriesSaga)]);
+	yield all([
+		fork(watchLoadGoalListSaga),
+		fork(watchLoadGoalSaga),
+		fork(watchRegisterGoalSaga),
+		fork(watchLoadCategoriesSaga),
+	]);
 }

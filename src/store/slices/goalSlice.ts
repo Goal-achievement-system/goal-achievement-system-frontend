@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RegisterGoalBody, LoadGoalListParam } from 'api/goalAPI';
+import { RegisterGoalBody, LoadGoalListParam, LoadGoalParam } from 'api/goalAPI';
 import { Goal, GoalsResponse } from 'types/goal';
 
 export interface InitialState {
@@ -26,8 +26,10 @@ export const goalSlice = createSlice({
 			state.goalList = payload.goals;
 			state.maxPage = payload.maxPage;
 		},
-		loadGoal: (state, action: PayloadAction) => {},
-		loadGoalSuccess: (state, { payload }: PayloadAction) => {},
+		loadGoal: (state, action: PayloadAction<LoadGoalParam>) => {},
+		loadGoalSuccess: (state, { payload }: PayloadAction<Goal>) => {
+			state.goal = payload;
+		},
 		registerGoal: (state, action: PayloadAction<RegisterGoalBody>) => {},
 		loadCategories: (state) => {},
 		loadCategoriesSuccess: (state, { payload }: PayloadAction<string[]>) => {
