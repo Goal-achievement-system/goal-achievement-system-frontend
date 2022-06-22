@@ -1,3 +1,4 @@
+import { Announcements } from 'types/announcements';
 import { Cert } from 'types/certification';
 import { Goal } from 'types/goal';
 import client from './client';
@@ -8,6 +9,10 @@ export interface LogInBody {
 }
 
 export interface LoadInspectionBody {
+	page: number;
+}
+
+export interface LoadAnnouncementsListBody {
 	page: number;
 }
 
@@ -22,6 +27,11 @@ interface InspectionData {
 
 export type LoadInspectionResponse = InspectionData[];
 
+export interface LoadAnnouncementsListResponse {
+	maxPage: number;
+	announcements: Announcements[];
+}
+
 const checkAdmin = () => {
 	const token = localStorage.getItem('adminToken');
 	if (token) client.defaults.headers.common.Authorization = token;
@@ -35,4 +45,9 @@ export const login = ({ email, password }: LogInBody) => {
 export const loadInspection = ({ page }: LoadInspectionBody) => {
 	checkAdmin();
 	return client.get(`/admin/goals/hold/${page}`);
+};
+
+export const loadAnnouncementsList = ({ page }: LoadAnnouncementsListBody) => {
+	checkAdmin();
+	return client.get(`/announcements/list/${page}`);
 };

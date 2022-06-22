@@ -1,11 +1,13 @@
+import { LoadAnnouncementsListResponse } from 'api/adminAPI';
 import Main from 'components/Main';
 import React from 'react';
 
 interface Props {
 	openAnnounceMentsAddModal: () => void;
+	announcementsList: LoadAnnouncementsListResponse | null;
 }
 
-function AnnouncementsView({ openAnnounceMentsAddModal }: Props) {
+function AnnouncementsView({ openAnnounceMentsAddModal, announcementsList }: Props) {
 	return (
 		<Main title="공지사항">
 			<div className="flex justify-end mb-[30px]">
@@ -14,7 +16,7 @@ function AnnouncementsView({ openAnnounceMentsAddModal }: Props) {
 					type="button"
 					className="rounded-[8px] p-[16px] bg-[#F7F7F7] font-[600] text-[16px] leading-[19px]"
 				>
-					배너 등록하기
+					공지사항 등록하기
 				</button>
 			</div>
 			<div className="rounded-[16px] p-[72px] bg-modalGray font-[600] text-[16px] mb-[30px]">
@@ -24,11 +26,14 @@ function AnnouncementsView({ openAnnounceMentsAddModal }: Props) {
 					<div className="w-[15%]">활성여부</div>
 				</div>
 				<ul>
-					{[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
+					{announcementsList?.announcements.map((item) => {
 						return (
-							<li className="w-full flex items-center text-[16px] py-[16px] border-t-[1px] border-[#E4E4E4]" key={item}>
-								<div className="w-[10%]">{item}</div>
-								<div className="w-[75%]">공지사항명</div>
+							<li
+								className="w-full flex items-center text-[16px] py-[16px] border-t-[1px] border-[#E4E4E4]"
+								key={item.announcementId}
+							>
+								<div className="w-[10%]">{item.announcementId}</div>
+								<div className="w-[75%]">{item.title}</div>
 								<div className="w-[15%]">
 									<button
 										type="button"
