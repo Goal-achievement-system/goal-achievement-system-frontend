@@ -42,5 +42,5 @@ export default function CertDetailModalContainer() {
 	// 실패요청 핸들러
 	const handleFailClick = () => {};
 	console.log(searchParams.get('goal'));
-	return <CertDetailModalView />;
+	return <CertDetailModalView goalLoading={goalLoading} certLoading={certLoading} goal={goal} certGoal={certGoal} />;
 }
