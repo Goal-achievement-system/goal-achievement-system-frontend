@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoadCertListParam, LoadCertListResponse, LoadCertParam } from 'api/certAPI';
+import { LoadCertListParam, LoadCertListResponse, LoadCertParam, PushCertResultParam } from 'api/certAPI';
 import { Certification } from 'types/certification';
 import { Goal } from 'types/goal';
 
@@ -13,11 +13,11 @@ export interface InitialState {
 const initialState: InitialState = {
 	goalList: [],
 	certGoal: {} as Certification,
-	maxPage: 0,
+	maxPage: 1,
 };
 
 export const certificationSlice = createSlice({
-	name: 'goal',
+	name: 'certification',
 	initialState,
 	reducers: {
 		loadCertList: (state, action: PayloadAction<LoadCertListParam>) => {},
@@ -29,6 +29,8 @@ export const certificationSlice = createSlice({
 		loadCertSuccess: (state, { payload }: PayloadAction<Certification>) => {
 			state.certGoal = payload;
 		},
+		pushCertSuccess: (state, action: PayloadAction<PushCertResultParam>) => {},
+		pushCertFail: (state, action: PayloadAction<PushCertResultParam>) => {},
 	},
 });
 
