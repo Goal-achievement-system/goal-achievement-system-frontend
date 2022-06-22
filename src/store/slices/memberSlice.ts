@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ChargeMoneyBody, GetMemberGoalsBody } from 'api/memberAPI';
-import { Cert } from 'types/certification';
+import { Certification } from 'types/certification';
 import { Goal, GoalsResponse } from 'types/goal';
 import { Member } from 'types/member';
 import { GoalCount } from 'types/statistics';
@@ -8,7 +8,7 @@ import { GoalCount } from 'types/statistics';
 export interface MemberMenuInfos {
 	goalStatistics: GoalCount;
 	menuGoals: Goal[];
-	menuCerts: Cert[];
+	menuCerts: Certification[];
 }
 
 export interface InitialState {
@@ -16,7 +16,7 @@ export interface InitialState {
 	memberGoals: GoalsResponse;
 	goalStatistics: null | GoalCount;
 	menuGoals: Goal[];
-	menuCerts: Cert[];
+	menuCerts: Certification[];
 }
 
 const initialState: InitialState = {

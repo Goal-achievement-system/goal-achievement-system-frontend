@@ -9,7 +9,7 @@ import client from 'api/client';
 import { Member } from 'types/member';
 import { GoalCount } from 'types/statistics';
 import { Goal, GoalsResponse } from 'types/goal';
-import { Cert } from 'types/certification';
+import { Certification } from 'types/certification';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;

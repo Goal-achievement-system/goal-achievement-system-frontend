@@ -1,5 +1,18 @@
-import { LoadGoalParam } from 'store/sagas/goalSaga';
+import { Goal } from 'types/goal';
 import client from './client';
+
+export interface LoadGoalListParam {
+	status: string;
+	category: string;
+	page: number;
+}
+
+export interface LoadGoalParam {
+	goalId: number;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface LoadGoalResponse extends Goal {}
 
 export interface RegisterGoalBody {
 	memberEmail: string;
@@ -12,13 +25,12 @@ export interface RegisterGoalBody {
 	category: string;
 }
 
-export interface LoadCertGoalParam {
-	category: string;
-	page: number;
-}
-
-export const loadGoaliLst = (params: LoadGoalParam) => {
+export const loadGoaliLst = (params: LoadGoalListParam) => {
 	return client.get(`goals/${params.category}/list/${params.status}/${params.page}`);
+};
+
+export const getGoal = ({ goalId }: LoadGoalParam) => {
+	return client.get(`/goals/${goalId}`);
 };
 
 export const getCategories = () => {
@@ -40,12 +52,8 @@ export const failCertGoal = (goalID: number) => {
 	return client.put(`/goals/cert/fail/${goalID}`);
 };
 
-export const registerGoal = (body: RegisterGoalBody) => {
+export const postGoal = (body: RegisterGoalBody) => {
 	return client.post(`goals`, { ...body });
-};
-
-export const loadCertGoalList = ({ category, page }: LoadCertGoalParam) => {
-	return client.get(`goals/${category}/list/oncertification/${page}`);
 };
 
 export default loadGoaliLst;
