@@ -18,6 +18,10 @@ const modalList: ModalIndex[] = [
 		name: 'AnnounceMentsAddModal',
 		component: lazy(() => import('components/Modal/AnnounceMents/AnnounceMentsAddModal')),
 	},
+	{
+		name: 'AnnounceMentsEditModal',
+		component: lazy(() => import('components/Modal/AnnounceMents/AnnounceMentsEditModal')),
+	},
 ];
 
 export default modalList;

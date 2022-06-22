@@ -4,10 +4,11 @@ import React from 'react';
 
 interface Props {
 	openAnnounceMentsAddModal: () => void;
+	openAnnounceMentsEditModal: (index: number) => void;
 	announcementsList: LoadAnnouncementsListResponse | null;
 }
 
-function AnnouncementsView({ openAnnounceMentsAddModal, announcementsList }: Props) {
+function AnnouncementsView({ openAnnounceMentsAddModal, openAnnounceMentsEditModal, announcementsList }: Props) {
 	return (
 		<Main title="공지사항">
 			<div className="flex justify-end mb-[30px]">
@@ -26,7 +27,7 @@ function AnnouncementsView({ openAnnounceMentsAddModal, announcementsList }: Pro
 					<div className="w-[15%]">활성여부</div>
 				</div>
 				<ul>
-					{announcementsList?.announcements.map((item) => {
+					{announcementsList?.announcements.map((item, idx) => {
 						return (
 							<li
 								className="w-full flex items-center text-[16px] py-[16px] border-t-[1px] border-[#E4E4E4]"
@@ -36,6 +37,7 @@ function AnnouncementsView({ openAnnounceMentsAddModal, announcementsList }: Pro
 								<div className="w-[75%]">{item.title}</div>
 								<div className="w-[15%]">
 									<button
+										onClick={() => openAnnounceMentsEditModal(idx)}
 										type="button"
 										className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-buttonBlack-100 text-[#999999] border-[1px] border-buttonBlack-100"
 									>

@@ -9,13 +9,18 @@ function AnnouncementsContainer() {
 	const dispatch = useDispatch();
 	const [openModal, closeModal] = useModal();
 	const openAnnounceMentsAddModal = () => openModal({ name: 'AnnounceMentsAddModal' });
+	const openAnnounceMentsEditModal = (index: number) => openModal({ name: 'AnnounceMentsEditModal', props: { index } });
 	const announcementsList = useSelector((state: RootState) => state.admin.announcementsList);
 	useEffect(() => {
 		dispatch(adminSlice.actions.loadAnnouncementsList({ page: 1 }));
 	}, [dispatch]);
 
 	return (
-		<AnnouncementsView openAnnounceMentsAddModal={openAnnounceMentsAddModal} announcementsList={announcementsList} />
+		<AnnouncementsView
+			openAnnounceMentsAddModal={openAnnounceMentsAddModal}
+			openAnnounceMentsEditModal={openAnnounceMentsEditModal}
+			announcementsList={announcementsList}
+		/>
 	);
 }
 
