@@ -1,7 +1,9 @@
+/* eslint-disable no-nested-ternary */
 // 함수 더 추가 되면 export default->export로 바꿔주세요.
 // tailwind 함수 사용할 때 클래스 네임들 이어주는 함수
 
 import { CertCategoryKrType } from 'types/certification';
+import { SexEng, SexKr } from 'types/member';
 
 // 사용 예시 <div className={classNames(state==="ok"?"text-green-50":"text-red-50","bg-black","flex")}> Hello </div>
 export function cls(...classnames: string[]) {
@@ -36,6 +38,9 @@ export const validatePassword = (target: string): boolean => {
 	// return passwordReg.test(target);
 };
 
+// 유저 정보의 Sex를 변환하여 반환
+export const sexTransEngToKr = (sex: SexEng) => (sex === 'UNKNOWN' ? '없음' : sex === 'MALE' ? '남자' : '여자');
+export const sexTransKrToEng = (sex: SexKr) => (sex === '없음' ? 'UNKNOWN' : sex === '남자' ? 'MALE' : 'FEMALE');
 // string type의 input에 숫자 입력 시 자동으로 콤마 추가 (문자는 지움)
 export const addComma = (target: string | number): string => {
 	const regex = /[^0-9]/g;
