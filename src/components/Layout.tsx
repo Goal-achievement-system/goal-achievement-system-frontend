@@ -24,7 +24,6 @@ function Layout() {
 	useEffect(() => {
 		if (!memberinfo && isLoggedIn()) dispatch(memberSlice.actions.loadMemberInfo());
 	}, [dispatch, memberinfo]);
-
 	return (
 		<BaseTemplate>
 			<div className=" pc:w-[1200px] pc:flex mt-[0] pc:mt-[40px] pb-[50px] mx-auto pc:box-content">

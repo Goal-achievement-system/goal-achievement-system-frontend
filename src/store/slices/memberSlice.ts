@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChargeMoneyBody, GetMemberGoalsBody } from 'api/memberAPI';
+import { ChargeMoneyBody, GetMemberGoalsBody, ReplaceMemberBody } from 'api/memberAPI';
+// import { IReplaceMemeberForm } from 'pages/MyPage/ReplaceMemberForm';
 import { Cert } from 'types/certification';
 import { Goal, GoalsResponse } from 'types/goal';
 import { Member } from 'types/member';
@@ -46,7 +47,7 @@ export const memberSlice = createSlice({
 			}
 			state.memberGoals = { ...payload };
 		},
-		replaceMemberInfo: (state, { payload }: PayloadAction<Member>) => {},
+		replaceMemberInfo: (state, { payload }: PayloadAction<ReplaceMemberBody>) => {},
 		replaceMemberInfoSuccess: (state, { payload }: PayloadAction<Member>) => {
 			state.memberinfo = { ...state.memberinfo, ...payload };
 		},

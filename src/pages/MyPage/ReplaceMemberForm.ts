@@ -1,28 +1,43 @@
+// import { Sex } from 'types/member';
+
+import { Member, SexKr } from 'types/member';
+import { sexTransEngToKr } from 'utils/common';
+
 export interface IReplaceMemeberForm {
-	// email: string;
+	email: string;
 	password: string;
-	changePassword: string;
-	changePasswordCheck: string;
+	passwordCheck: string;
 	nickName: string;
-	sex: string;
+	sex: SexKr;
 	age: string;
+	money: number;
 }
 
 export const replaceMemberInitialState: IReplaceMemeberForm = {
+	email: '',
 	password: '',
-	changePassword: '',
-	changePasswordCheck: '',
+	passwordCheck: '',
 	nickName: '',
-	sex: '남자',
-	age: '20대',
+	sex: '없음',
+	age: '0',
+	money: 0,
 };
 
 export interface ReplaceMemberReducerAction {
-	type: 'password' | 'changePassword' | 'changePasswordCheck' | 'nickName' | 'sex' | 'age' | 'init';
-	payload?: string;
+	// type: 'email' | 'password' | 'changePassword' | 'changePasswordCheck' | 'nickName' | 'sex' | 'age' | 'init';
+	type: 'email' | 'password' | 'passwordCheck' | 'nickName' | 'sex' | 'age' | 'money' | 'init';
+	payload?: string | number | Member;
 }
 
-export function replaceMemberformReducer(state: IReplaceMemeberForm, action: ReplaceMemberReducerAction) {
-	if (action.type === 'init') return replaceMemberInitialState;
+export function replaceMemberformReducer(
+	state: IReplaceMemeberForm,
+	action: ReplaceMemberReducerAction
+): IReplaceMemeberForm {
+	if (action.type === 'init') {
+		const { sex, age, ...memberInfo } = action.payload as Member;
+		const sexTrans = sexTransEngToKr(sex);
+		const ageTrans = `${age}대`;
+		return { ...replaceMemberInitialState, ...memberInfo, sex: sexTrans, age: ageTrans };
+	}
 	return { ...state, [action.type]: action.payload };
 }

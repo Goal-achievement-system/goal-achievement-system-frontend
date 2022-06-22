@@ -9,7 +9,7 @@ import Pagination from 'components/Pagination';
 import PerformInput from 'components/Input/PerformInput';
 import Select from 'components/Select/Select';
 import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
-import { Member } from 'types/member';
+// import { Member } from 'types/member';
 import SubmitButton from 'components/Button/SubmitButton';
 import { OpenModalOnClick } from 'hooks/useModal';
 import { IReplaceMemeberForm, ReplaceMemberReducerAction } from './ReplaceMemberForm';
@@ -27,7 +27,7 @@ interface Props {
 	setIsSelected: Dispatch<SetStateAction<string>>;
 	maxPage: number;
 	openModalOnClick: OpenModalOnClick;
-	handleChange: () => void;
+	handleSubmit: (event: React.SyntheticEvent) => void;
 }
 
 export default function MyGoalView({
@@ -43,7 +43,7 @@ export default function MyGoalView({
 	setIsSelected,
 	maxPage,
 	openModalOnClick,
-	handleChange,
+	handleSubmit,
 }: Props) {
 	// 버튼에 해당하는 현재 state
 	const getFilterState = (key: string) => {
@@ -59,6 +59,8 @@ export default function MyGoalView({
 		return filterMap.get(key) || 'all';
 	};
 
+	const filterList = ['전체', '진행 중', '인증 중', '성공', '실패', '보류'];
+
 	return (
 		<div className="flex-1 overflow-auto">
 			<Main title="내목표">
@@ -73,7 +75,7 @@ export default function MyGoalView({
 					}}
 					aria-hidden
 				>
-					{['전체', '진행 중', '인증 중', '성공', '실패', '보류'].map((ele: string) => {
+					{filterList.map((ele: string) => {
 						return (
 							<div key={ele}>
 								<FilterButton label={ele} isSelected={ele === isSelected} onClick={() => setIsSelected(ele)} />
@@ -87,7 +89,6 @@ export default function MyGoalView({
 							<SmallBox
 								onClick={() => {
 									alert('목표를 등록하러 갈게요!');
-									// 나중에 목표등록 모달이 완료되면 열어주기
 									openModalOnClick({ certState: 'register' });
 								}}
 							/>
@@ -111,7 +112,7 @@ export default function MyGoalView({
 					<Main title="알림">
 						<div className="relative">
 							<div className="flex flex-col pc:space-y-[16px]">
-								<span className="px-[24px] py-[20px] text-[22px] font-[600]">
+								<span className="px-[24px] py-[20px] text-[22px] font-[600] rounded-[8px] bg-modalGray">
 									읽지 않은 알람 <span className="text-primaryOrange-200">{notificationList.length}개</span>
 								</span>
 							</div>
@@ -121,46 +122,76 @@ export default function MyGoalView({
 			</Main>
 			<div className="pc:mt-[30px]">
 				<Main title="개인정보 관리">
-					<div className="flex flex-col space-y-[40px]">
-						<div className="email-wrap">
-							<PerformInput
-								type="email"
-								placeholder="이메일이 표시되지 않으면 재접속해주세요!"
-								label="이메일"
-								onChange={() => {}}
-							/>
-						</div>
-						<div className="password-wrap">
-							<div>
-								<PerformInput type="password" placeholder="현재 비밀번호" label="비밀번호 변경" onChange={() => {}} />
-							</div>
-							<div className="my-[10px]">
-								<PerformInput type="password" placeholder="새 비밀번호(8자리 이상)" onChange={() => {}} />
-							</div>
-							<div className="my-[10px]">
-								<PerformInput type="password" placeholder="새 비밀번호 확인" onChange={() => {}} />
-							</div>
-						</div>
-						<div>
-							<PerformInput type="email" placeholder="닉네임" label="닉네임 변경" onChange={() => {}} />
-						</div>
-						<div>
-							<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px]">
-								<span className="font-semibold text-[20px]">선택사항</span>
-							</div>
-							<div className="flex justify-between w-full">
-								<Select options={GenderOption} value={formState ? formState.sex : null} onChange={handleChange} />
-								<Select
-									options={AgeOption}
-									value={formState ? formState.age.toString() : null}
-									onChange={handleChange}
+					<form className="" onSubmit={handleSubmit}>
+						<div className="flex flex-col space-y-[40px]">
+							<div className="email-wrap">
+								<PerformInput
+									type="email"
+									placeholder="이메일이 표시되지 않으면 재접속해주세요!"
+									label="이메일"
+									value={formState?.email}
+									onChange={() => {}}
 								/>
 							</div>
+							<div className="password-wrap">
+								{/* <div>
+									<PerformInput
+										type="password"
+										placeholder="현재 비밀번호"
+										label="비밀번호 변경"
+										value={formState?.password}
+										onChange={(curVal: string) => formDispatch({ type: 'password', payload: curVal })}
+									/>
+								</div> */}
+								<div className="my-[10px]">
+									<PerformInput
+										type="password"
+										placeholder="새 비밀번호(8자리 이상)"
+										label="비밀번호 변경"
+										value={formState?.password}
+										onChange={(curVal: string) => formDispatch({ type: 'password', payload: curVal })}
+									/>
+								</div>
+								<div className="my-[10px]">
+									<PerformInput
+										type="password"
+										placeholder="새 비밀번호 확인"
+										value={formState?.passwordCheck}
+										onChange={(curVal: string) => formDispatch({ type: 'passwordCheck', payload: curVal })}
+									/>
+								</div>
+							</div>
+							<div>
+								<PerformInput
+									type="nickName"
+									placeholder="닉네임"
+									label="닉네임 변경"
+									value={formState?.nickName}
+									onChange={(curVal: string) => formDispatch({ type: 'nickName', payload: curVal })}
+								/>
+							</div>
+							<div>
+								<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px]">
+									<span className="font-semibold text-[20px]">선택사항</span>
+								</div>
+								<div className="flex justify-between w-full">
+									<Select
+										options={GenderOption}
+										value={formState ? formState.sex : null}
+										onChange={(curVal: string) => formDispatch({ type: 'sex', payload: curVal })}
+									/>
+									<Select
+										options={AgeOption}
+										value={formState ? formState.age.toString() : null}
+										onChange={(curVal: string) => formDispatch({ type: 'age', payload: curVal })}
+									/>
+								</div>
+							</div>
+							<div className="submitbutton-wrap">
+								<SubmitButton label="변경하기" btnState="active" />
+							</div>
 						</div>
-						<div className="submitbutton-wrap">
-							<SubmitButton label="변경하기" btnState="active" />
-						</div>
-					</div>
+					</form>
 				</Main>
 			</div>
 		</div>
