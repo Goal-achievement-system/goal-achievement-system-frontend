@@ -9,24 +9,23 @@ import { RootState } from 'store/slices';
 import { successCertGoal, failCertGoal } from 'api/goalAPI';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-interface Props {
-	index: number;
-}
-
-export default function CertDetailModal({ index }: Props) {
-	const goal = useSelector((state: RootState) => state.goal.goalList[index]);
+export default function CertDetailModalContainer() {
+	// const goal = useSelector((state: RootState) => state.goal.goalList[index]);
 	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
-	console.log(searchParams.get('goal'));
+
+	useEffect(() => {
+		// if (!searchParams.get('goal')) re;
+	}, [searchParams]);
 	const className = {
 		size: 'pc:w-[890px] max-w-[90vw] pc:max-h-[80vh] w-[320px] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
 
-	const handleSuccessClick = () => successCertGoal(goal.goalId);
+	const handleSuccessClick = () => {};
 
 	// 실패요청 핸들러
-	const handleFailClick = () => failCertGoal(goal.goalId);
+	const handleFailClick = () => {};
 	console.log(searchParams.get('goal'));
 	return (
 		<div

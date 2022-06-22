@@ -10,7 +10,7 @@ import { successCertGoal, failCertGoal } from 'api/goalAPI';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function CertDetailModalView() {
-	const goal = useSelector((state: RootState) => state.goal.goalList[index]);
+	// const goal = useSelector((state: RootState) => state.goal.goalList[index]);
 	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
 	console.log(searchParams.get('goal'));
@@ -19,10 +19,10 @@ export default function CertDetailModalView() {
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
 
-	const handleSuccessClick = () => successCertGoal(goal.goalId);
+	const handleSuccessClick = () => {};
 
 	// 실패요청 핸들러
-	const handleFailClick = () => failCertGoal(goal.goalId);
+	const handleFailClick = () => {};
 	console.log(searchParams.get('goal'));
 	return (
 		<div

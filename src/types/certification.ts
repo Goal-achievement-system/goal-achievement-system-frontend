@@ -1,4 +1,4 @@
-export interface Cert {
+export interface Certification {
 	certId: number;
 	goalId: number;
 	content: string;

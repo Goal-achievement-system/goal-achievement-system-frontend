@@ -8,17 +8,11 @@ import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import * as goalAPI from '../../api/goalAPI';
 
-export interface LoadGoalParam {
-	status: string;
-	category: string;
-	page: number;
-}
-
 const { loadGoalListSuccess, loadGoalList, registerGoal, loadCategories, loadCategoriesSuccess } = goalSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
 
-function* loadGoalSaga(action: PayloadAction<LoadGoalParam>) {
+function* loadGoalSaga(action: PayloadAction<goalAPI.LoadGoalListParam>) {
 	const param = action.payload;
 	yield put(startLoading(action.type));
 	try {
@@ -35,7 +29,7 @@ function* registerGoalSaga(action: PayloadAction<goalAPI.RegisterGoalBody>) {
 	const param = action.payload;
 	yield put(startLoading(action.type));
 	try {
-		const result: AxiosResponse = yield call(goalAPI.registerGoal, param);
+		const result: AxiosResponse = yield call(goalAPI.postGoal, param);
 
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
