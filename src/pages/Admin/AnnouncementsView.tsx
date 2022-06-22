@@ -1,11 +1,19 @@
 import Main from 'components/Main';
 import React from 'react';
 
-function AnnouncementsView() {
+interface Props {
+	openAnnounceMentsAddModal: () => void;
+}
+
+function AnnouncementsView({ openAnnounceMentsAddModal }: Props) {
 	return (
 		<Main title="공지사항">
 			<div className="flex justify-end mb-[30px]">
-				<button type="button" className="rounded-[8px] p-[16px] bg-[#F7F7F7] font-[600] text-[16px] leading-[19px]">
+				<button
+					onClick={openAnnounceMentsAddModal}
+					type="button"
+					className="rounded-[8px] p-[16px] bg-[#F7F7F7] font-[600] text-[16px] leading-[19px]"
+				>
 					배너 등록하기
 				</button>
 			</div>
