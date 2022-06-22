@@ -1,6 +1,5 @@
 import { LoadInspectionResponse } from 'api/adminAPI';
 import Main from 'components/Main';
-import Pagination from 'components/Pagination';
 import React from 'react';
 
 interface Props {
@@ -10,7 +9,7 @@ interface Props {
 function InspectionView({ inspectionList }: Props) {
 	return (
 		<Main title="목표 검토">
-			<div className="p-[72px] bg-modalGray font-[600] text-[16px] mb-[30px]">
+			<div className="rounded-[16px] p-[72px] bg-modalGray font-[600] text-[16px] mb-[30px]">
 				<div className="w-full flex py-[24px]">
 					<div className="w-[8%]">No</div>
 					<div className="w-[38%]">목표 이름</div>
@@ -68,7 +67,6 @@ function InspectionView({ inspectionList }: Props) {
 					})}
 				</ul>
 			</div>
-			<Pagination curPage={1} setCurPage={() => {}} numOfPages={5} numOfPageBtn={5} />
 		</Main>
 	);
 }
