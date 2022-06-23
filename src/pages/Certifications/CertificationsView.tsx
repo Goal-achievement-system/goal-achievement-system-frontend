@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useState } from 'react';
 import Main from 'components/Main';
 import FilterButton from 'components/Button/FilterButton';
@@ -5,6 +6,10 @@ import SmallBox from 'components/Box/SmallBox';
 import { Goal } from 'types/goal';
 import LargeBox from 'components/Box/LargeBox';
 import Pagination from 'components/Pagination';
+import useModal from 'hooks/useModal';
+import { modalName } from 'utils/importModal';
+import Path from 'utils/path';
+import { Link } from 'react-router-dom';
 
 const goalTemp: Goal = {
 	goalId: 1,
@@ -40,7 +45,7 @@ function CertificationsView({
 	setCurPage,
 }: Props) {
 	const [isOneColumnMode, setIsOneColumnMode] = useState<boolean>(false);
-
+	const [openCertDetailModal] = useModal();
 	return (
 		<Main title="목표인증">
 			<div className="mb-[30px]">
@@ -88,7 +93,7 @@ function CertificationsView({
 						{goalList.map((goal, idx) => (
 							// eslint-disable-next-line react/no-array-index-key
 							<li key={idx}>
-								<LargeBox goal={goal} />
+								<LargeBox onClick={() => openCertDetailModal({ name: modalName.CertDetailModal })} goal={goal} />
 							</li>
 						))}
 					</ul>
@@ -97,7 +102,9 @@ function CertificationsView({
 						{goalList.map((goal, idx) => (
 							// eslint-disable-next-line react/no-array-index-key
 							<li key={idx}>
-								<SmallBox goal={goal} />
+								<Link to={`${Path.certifications}?goal=${goal.goalId}`}>
+									<SmallBox onClick={() => openCertDetailModal({ name: modalName.CertDetailModal })} goal={goal} />
+								</Link>
 							</li>
 						))}
 					</ul>

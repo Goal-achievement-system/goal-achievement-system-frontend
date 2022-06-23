@@ -11,7 +11,7 @@ import CertificationsView from './CertificationsView';
 function CertificationsContainer() {
 	const dispatch: AppDispatch = useDispatch();
 	const { goalList, maxPage } = useSelector((state: RootState) => state.certification);
-	const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCertGoalList.type);
+	const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCertList.type);
 	const [categoriesLoading, categoriesResult, categoriesInitResult] = useGetActionState(
 		goalSlice.actions.loadCategories.type
 	);
@@ -34,7 +34,7 @@ function CertificationsContainer() {
 	useEffect(() => {
 		if (certLoading) return;
 		if (![...categories, 'all'].includes(curCategory)) return;
-		dispatch(certificationSlice.actions.loadCertGoalList({ category: curCategory, page: curPage }));
+		dispatch(certificationSlice.actions.loadCertList({ category: curCategory, page: curPage }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, curCategory]);
 

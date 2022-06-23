@@ -19,6 +19,12 @@ export const initialState: IForm = {
 	reward: null,
 	category: '',
 };
+export function formReducer(state: IForm, action: Action) {
+	if (action.type === 'init') {
+		return initialState;
+	}
+	return { ...state, [action.type]: action.payload };
+}
 
 export const isFormValid = (formState: IForm, categories: string[], remainingMoney: number): boolean => {
 	const { goalName, content, money, limitDate, reward, category } = formState;
