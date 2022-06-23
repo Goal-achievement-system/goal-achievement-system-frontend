@@ -4,9 +4,10 @@ import React from 'react';
 
 interface Props {
 	inspectionList: LoadInspectionResponse;
+	openCertAdminModal: (index: number) => void;
 }
 
-function InspectionView({ inspectionList }: Props) {
+function InspectionView({ inspectionList, openCertAdminModal }: Props) {
 	return (
 		<Main title="목표 검토">
 			<div className="rounded-[16px] p-[72px] bg-modalGray font-[600] text-[16px] mb-[30px]">
@@ -19,7 +20,7 @@ function InspectionView({ inspectionList }: Props) {
 					<div className="w-[12%]">검토 상태</div>
 				</div>
 				<ul>
-					{inspectionList.map((item) => {
+					{inspectionList.map((item, idx) => {
 						return (
 							<li
 								className="w-full flex items-center text-[16px] py-[16px] border-t-[1px] border-[#E4E4E4]"
@@ -49,6 +50,7 @@ function InspectionView({ inspectionList }: Props) {
 											<button
 												type="button"
 												className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-primaryOrange-100 text-primaryOrange-200 border-[1px] border-primaryOrange-200"
+												onClick={() => openCertAdminModal(idx)}
 											>
 												검토 하기
 											</button>

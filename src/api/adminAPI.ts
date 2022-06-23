@@ -1,5 +1,5 @@
 import { Announcements } from 'types/announcements';
-import { Cert } from 'types/certification';
+import { Certification } from 'types/certification';
 import { Goal } from 'types/goal';
 import client from './client';
 
@@ -16,13 +16,18 @@ export interface LoadAnnouncementsListBody {
 	page: number;
 }
 
+export interface InspectCertificationBody {
+	state: 'success' | 'fail';
+	goalId: number;
+}
+
 export interface LoginResponse {
 	Authorization: string;
 }
 
 interface InspectionData {
 	goal: Goal;
-	certification: Cert;
+	certification: Certification;
 }
 
 export type LoadInspectionResponse = InspectionData[];
@@ -50,4 +55,9 @@ export const loadInspection = ({ page }: LoadInspectionBody) => {
 export const loadAnnouncementsList = ({ page }: LoadAnnouncementsListBody) => {
 	checkAdmin();
 	return client.get(`/announcements/list/${page}`);
+};
+
+export const inspectCertification = ({ state, goalId }: InspectCertificationBody) => {
+	checkAdmin();
+	return client.put(`/admin/goals/cert/${state}/${goalId}`);
 };

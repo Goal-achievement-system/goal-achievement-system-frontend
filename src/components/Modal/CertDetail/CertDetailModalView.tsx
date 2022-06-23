@@ -6,8 +6,8 @@ import { Goal } from 'types/goal';
 import { Certification } from 'types/certification';
 
 interface Props {
-	goalLoading: boolean;
-	certLoading: boolean;
+	goalLoading?: boolean;
+	certLoading?: boolean;
 	goal: Goal;
 	certGoal: Certification;
 	resultHandler: (isSuccess: boolean) => void;
