@@ -14,6 +14,7 @@ export const modalName = {
 	AnnounceMentsAddModal: 'AnnounceMentsAddModal',
 	AnnounceMentsEditModal: 'AnnounceMentsEditModal',
 	CertAdminModal: 'CertAdminModal',
+	LogoutModal: 'LogoutModal',
 };
 
 const modalList: ModalIndex[] = [
@@ -40,6 +41,10 @@ const modalList: ModalIndex[] = [
 	{
 		name: modalName.CertAdminModal,
 		component: lazy(() => import('components/Modal/CertDetail/CertAdminModalContainer')),
+	},
+	{
+		name: modalName.LogoutModal,
+		component: lazy(() => import('components/Modal/LogoutModal')),
 	},
 ];
 

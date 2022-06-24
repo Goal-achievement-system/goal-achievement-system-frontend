@@ -14,22 +14,22 @@ export default function CertDetailModalContainer() {
 	const dispatch: AppDispatch = useDispatch();
 	const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
 	const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCert.type);
-	const [certResultLoading, certResultResult, certResultInitResult] = useGetActionState(
-		certificationSlice.actions.loadCert.type
+	const [pushCertResultLoading, pushCertResultResult, pushCertResultInitResult] = useGetActionState(
+		certificationSlice.actions.pushCertResult.type
 	);
+
 	const [searchParams] = useSearchParams();
 	const resultHandler = (isSuccess: boolean) => {
-		if (certResultLoading) return;
+		if (pushCertResultLoading) return;
 		const goalId = searchParams.get('goal');
 		if (!goalId) return;
 		dispatch(certificationSlice.actions.pushCertResult({ goalId: +goalId, result: isSuccess }));
-		// else dispatch(certificationSlice.actions.pushCertFail({ goalId: +goalId }));
 	};
 
 	useEffect(() => {
 		const goalId = searchParams.get('goal');
 		if (!goalId) return;
-		if (goalLoading || certLoading) return;
+
 		dispatch(goalSlice.actions.loadGoal({ goalId: +goalId }));
 		dispatch(certificationSlice.actions.loadCert({ goalId: +goalId }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +38,15 @@ export default function CertDetailModalContainer() {
 		certInitResult();
 		goalInitResult();
 	}, [certInitResult, goalInitResult, goal, certGoal]);
-
+	useEffect(() => {
+		if (!pushCertResultResult) return;
+		if (pushCertResultResult.isSuccess) {
+			alert('인증 감사합니다.');
+		} else {
+			alert('이미 인증을 해주셨군요!');
+		}
+		pushCertResultInitResult();
+	}, [pushCertResultInitResult, pushCertResultResult]);
 	return (
 		<CertDetailModalView
 			goalLoading={goalLoading}
