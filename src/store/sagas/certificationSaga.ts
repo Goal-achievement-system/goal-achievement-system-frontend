@@ -8,6 +8,7 @@ import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { CertResponse } from 'types/certification';
 import * as certAPI from 'api/certAPI';
+import { Buffer } from 'buffer';
 
 export interface LoadCertGoalParam {
 	category: string;
@@ -82,13 +83,13 @@ function* pushCertResultSaga(action: PayloadAction<certAPI.PushCertResultParam>)
 
 function* getCertImageSaga(action: PayloadAction<certAPI.GetCertImageParam>) {
 	const param = action.payload;
-	console.log('getCertImageSaga');
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse = yield call(certAPI.getCertImage, param);
-		console.log(result, 'result');
+		const stringifiedBuffer = Buffer.from(result?.data).toString('base64');
+		const base64Image = `data:${result?.headers['content-type']};base64,${stringifiedBuffer}`;
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
-		yield put(getCertImageSuccess(result?.data));
+		yield put(getCertImageSuccess(base64Image));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));

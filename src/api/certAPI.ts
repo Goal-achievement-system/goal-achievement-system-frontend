@@ -63,5 +63,5 @@ export const putCertResult = async ({ goalId, result }: PushCertResultParam) => 
 };
 
 export const getCertImage = ({ certId }: GetCertImageParam) => {
-	return client.get(`/image/${certId}`);
+	return client.get(`/image/${certId}`, { responseType: 'arraybuffer' });
 };
