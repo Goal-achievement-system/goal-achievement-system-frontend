@@ -34,6 +34,7 @@ export interface LoadCertListResponse {
 
 export interface PushCertResultParam {
 	goalId: number;
+	result: boolean;
 }
 
 export const submitCertGoal = (formData: SubmitCertGoalBody) => {
@@ -52,10 +53,7 @@ export const getCertList = ({ category, page }: LoadCertListParam) => {
 };
 
 // eslint-disable-next-line consistent-return
-export const putCertSuccess = async ({ goalId }: PushCertResultParam) => {
-	return client.put(`/goals/cert/success/${goalId}`);
-};
-
-export const putCertFail = ({ goalId }: PushCertResultParam) => {
+export const putCertResult = async ({ goalId, result }: PushCertResultParam) => {
+	if (result) return client.put(`/goals/cert/success/${goalId}`);
 	return client.put(`/goals/cert/fail/${goalId}`);
 };

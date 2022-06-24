@@ -19,13 +19,11 @@ export default function CertDetailModalContainer() {
 	);
 	const [searchParams] = useSearchParams();
 	const resultHandler = (isSuccess: boolean) => {
-		console.log(isSuccess);
-		console.log(certResultLoading);
 		if (certResultLoading) return;
 		const goalId = searchParams.get('goal');
 		if (!goalId) return;
-		if (isSuccess) dispatch(certificationSlice.actions.pushCertSuccess({ goalId: +goalId }));
-		else dispatch(certificationSlice.actions.pushCertFail({ goalId: +goalId }));
+		dispatch(certificationSlice.actions.pushCertResult({ goalId: +goalId, result: isSuccess }));
+		// else dispatch(certificationSlice.actions.pushCertFail({ goalId: +goalId }));
 	};
 
 	useEffect(() => {

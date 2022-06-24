@@ -39,8 +39,7 @@ export const certificationSlice = createSlice({
 		loadCertSuccess: (state, { payload }: PayloadAction<Certification>) => {
 			state.certGoal = payload;
 		},
-		pushCertSuccess: (state, action: PayloadAction<PushCertResultParam>) => {},
-		pushCertFail: (state, action: PayloadAction<PushCertResultParam>) => {},
+		pushCertResult: (state, action: PayloadAction<PushCertResultParam>) => {},
 	},
 });
 
