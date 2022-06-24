@@ -29,7 +29,7 @@ export default function CertDetailModalContainer() {
 	useEffect(() => {
 		const goalId = searchParams.get('goal');
 		if (!goalId) return;
-		if (goalLoading || certLoading) return;
+
 		dispatch(goalSlice.actions.loadGoal({ goalId: +goalId }));
 		dispatch(certificationSlice.actions.loadCert({ goalId: +goalId }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
