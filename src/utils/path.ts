@@ -11,6 +11,7 @@ const Path = {
 	goalRegister: '/goals/register',
 	inspection: '/admin/inspection',
 	announcements: '/admin/announcements',
+	setting: '/setting',
 };
 
 export default Path;
