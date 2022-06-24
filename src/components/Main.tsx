@@ -12,7 +12,7 @@ function Main({ title, children, hasGoBack }: Props) {
 		<div className="flex-1 overflow-auto">
 			<div className=" flex items-center mb-[16px] pc:mb-[30px] font-[800] text-[20px] leading-[24px] pc:font-[800] pc:text-[30px] pc:leading-[36px]">
 				{hasGoBack && (
-					<button type="button" onClick={() => navigate(-1)} className=" mr-[4px]">
+					<button type="button" onClick={() => navigate(-1)} className="-translate-x-1 mr-[6px]">
 						<svg
 							className="w-5 h-5"
 							fill="none"
