@@ -30,7 +30,7 @@ interface Props {
 	handleSubmit: (event: React.SyntheticEvent) => void;
 }
 
-export default function MyGoalView({
+export default function MyPageView({
 	goals,
 	notificationList,
 	formState,

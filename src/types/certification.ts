@@ -8,7 +8,8 @@ export const CertCategories = [
 	{ type: 'hobby' as CertCategoryType, label: '취미' },
 	{ type: 'etc' as CertCategoryType, label: '기타' },
 ];
-export interface Cert {
+// export interface Cert {
+export interface Certification {
 	certId: number;
 	goalId: number;
 	content: string;

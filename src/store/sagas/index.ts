@@ -5,6 +5,7 @@ import statisticsSaga from './statisticsSaga';
 import MemberSaga from './memberSaga';
 import notificationsSaga from './notificationsSaga';
 import certificationSaga from './certificationSaga';
+import adminSaga from './adminSaga';
 
 export default function* rootSaga() {
 	yield all([
@@ -14,5 +15,6 @@ export default function* rootSaga() {
 		fork(MemberSaga),
 		fork(notificationsSaga),
 		fork(certificationSaga),
+		fork(adminSaga),
 	]);
 }

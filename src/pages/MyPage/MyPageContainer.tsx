@@ -12,7 +12,7 @@ import MyPageView from './MyPageView';
 
 export type SelectType = 'age' | 'sex';
 
-export default function MyGoal() {
+export default function MyPage() {
 	// 1. 받아온다.
 	const memberInfo = useSelector((state: RootState) => state.member.memberinfo);
 	const { maxPage } = useSelector((state: RootState) => state.member.memberGoals);

@@ -4,15 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import useGetActionState from 'hooks/useGetActionState';
 import goalSlice from 'store/slices/goalSlice';
-import { IForm, Action, initialState, isFormValid } from './FormStateMgt';
+import { formReducer, IForm, Action, initialState, isFormValid } from './FormStateMgt';
 import GoalRegModalView from './GoalRegModalView';
 
-function formReducer(state: IForm, action: Action) {
-	if (action.type === 'init') {
-		return initialState;
-	}
-	return { ...state, [action.type]: action.payload };
-}
 function GoalRegModalContainer() {
 	const dispatch = useDispatch();
 	const memberInfo = useSelector((state: RootState) => state.member.memberinfo);

@@ -1,30 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { getDday } from 'utils/common';
 import SubmitButton from 'components/Button/SubmitButton';
 import FilterButton from 'components/Button/FilterButton';
-
-// import { Goal } from 'types/goal';
-import { useSelector } from 'react-redux';
-import { RootState } from 'store/slices';
-import { successCertGoal, failCertGoal } from 'api/goalAPI';
-import { useNavigate } from 'react-router-dom';
+import { Goal } from 'types/goal';
+import { Certification } from 'types/certification';
 
 interface Props {
-	index: number;
+	goalLoading?: boolean;
+	certLoading?: boolean;
+	goal: Goal;
+	certGoal: Certification;
+	resultHandler: (isSuccess: boolean) => void;
 }
 
-export default function GoalModal({ index }: Props) {
-	const goal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
-	const navigate = useNavigate();
+// export default function GoalModal({ index }: Props) {
+// 	const goal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
+// 	const navigate = useNavigate();
+export default function CertDetailModalView({ goalLoading, certLoading, goal, certGoal, resultHandler }: Props) {
 	const className = {
 		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
-
-	const handleSuccessClick = () => successCertGoal(goal.goalId);
-
-	// 실패요청 핸들러
-	const handleFailClick = () => failCertGoal(goal.goalId);
 
 	return (
 		<div
@@ -48,14 +44,14 @@ export default function GoalModal({ index }: Props) {
 					<div className="min-w-[100px] flex pc:space-x-[16px] space-x-[10px] overflow-auto">
 						<FilterButton label={`# ${goal.category}`} isSelected={false} onClick={() => {}} />
 						<div className="p-[4px] pc:p-[16px] bg-buttonRed-100 rounded-[4px] pc:rounded-[8px] text-buttonRed-200 flex items-center">
-							0/10회
+							{certGoal.successCount}/{certGoal.requireSuccessCount}
 						</div>
 					</div>
 				</div>
-				<div className="pc:max-h-[90px] overflow-auto">{goal.content}</div>
+				<div className="pc:max-h-[90px] overflow-auto">{certGoal.content}</div>
 				<div className="flex pc:space-x-[26px] space-x-[6px]">
-					<SubmitButton label="실패" btnState="inactive" onClick={handleFailClick} />
-					<SubmitButton label="성공" btnState="active" onClick={handleSuccessClick} />
+					<SubmitButton label="실패" btnState="inactive" onClick={() => resultHandler(false)} />
+					<SubmitButton label="성공" btnState="active" onClick={() => resultHandler(true)} />
 				</div>
 			</div>
 		</div>

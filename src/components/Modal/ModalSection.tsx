@@ -3,12 +3,14 @@ import { RootState } from 'store/slices';
 import modalSlice, { ModalComponentState } from 'store/slices/modalSlice';
 import React, { useEffect, useRef, Suspense } from 'react';
 import modalList from 'utils/importModal';
+import { Router, useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function ModalSection() {
 	const modalRef = useRef<HTMLDivElement>(null);
 	const { openList, isOpenModal } = useSelector((state: RootState) => state.modal);
 	const dispatch = useDispatch();
-
+	const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
 	useEffect(() => {
 		if (isOpenModal) {
 			document.body.style.cssText = `
@@ -26,6 +28,7 @@ export default function ModalSection() {
 
 		if (current !== null && (!current.contains(target) || current === target)) {
 			// closeModal();
+			if (searchParams.get('goal')) navigate(-1);
 			dispatch(modalSlice.actions.close());
 			document.body.style.cssText = '';
 		}
@@ -42,6 +45,7 @@ export default function ModalSection() {
 				<div className="relative top-1/2 left-1/2" ref={modalRef}>
 					{openList.map(({ name, props }: ModalComponentState) => {
 						const config = modalList.find((ele) => {
+							console.log(ele.name, name);
 							return ele.name === name;
 						});
 						if (!config || !config.component) return null;

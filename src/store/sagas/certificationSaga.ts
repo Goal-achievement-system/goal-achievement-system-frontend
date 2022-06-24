@@ -1,29 +1,40 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { AxiosError, AxiosResponse } from 'axios';
-import { put, all, fork, takeEvery, call, takeLatest } from 'redux-saga/effects';
-import { GoalsResponse } from 'types/goal';
+// import { GoalsResponse } from 'types/goal';
+import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import certificationSlice from 'store/slices/certificationSlice';
 import resultSlice from 'store/slices/resultSlice';
 import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { CertResponse } from 'types/certification';
-import * as goalAPI from '../../api/goalAPI';
-import * as certAPI from '../../api/certAPI';
+import * as goalAPI from 'api/goalAPI';
+import * as certAPI from 'api/certAPI';
 
 export interface LoadCertGoalParam {
 	category: string;
 	page: number;
 }
-const { loadCertGoalList, loadCertGoalListSuccess, submitCertGoal } = certificationSlice.actions;
+// const { loadCertGoalList, loadCertGoalListSuccess, submitCertGoal } = certificationSlice.actions;
+
+const {
+	loadCertList,
+	loadCertListSuccess,
+	loadCert,
+	loadCertSuccess,
+	pushCertFail,
+	pushCertSuccess,
+	submitCertGoal,
+	submitCertGoalSuccess,
+} = certificationSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
 
-function* loadCertGoalSaga(action: PayloadAction<goalAPI.LoadCertGoalParam>) {
+function* loadCertListSaga(action: PayloadAction<certAPI.LoadCertListParam>) {
 	const param = action.payload;
 	yield put(startLoading(action.type));
 	try {
-		const result: AxiosResponse<GoalsResponse> = yield call(goalAPI.loadCertGoalList, param);
-		yield put(loadCertGoalListSuccess(result?.data));
+		const result: AxiosResponse<certAPI.LoadCertListResponse> = yield call(certAPI.getCertList, param);
+		yield put(loadCertListSuccess(result?.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
@@ -37,8 +48,7 @@ function* submitCertGoalSaga(action: PayloadAction<certAPI.CertFormState>) {
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<CertResponse> = yield call(certAPI.submitCertGoal, action.payload);
-		console.log(result);
-		// yield put(certificationSlice.actions.submitCertGoalSuccess(result?.data));
+		// yield put(submitCertGoalSuccess(result?.data))
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
@@ -46,14 +56,77 @@ function* submitCertGoalSaga(action: PayloadAction<certAPI.CertFormState>) {
 	}
 }
 
-function* watchCertGoalSaga() {
-	yield takeEvery(loadCertGoalList, loadCertGoalSaga);
+function* loadCertSaga(action: PayloadAction<certAPI.LoadCertParam>) {
+	const param = action.payload;
+	yield put(startLoading(action.type));
+	try {
+		const result: AxiosResponse<certAPI.CertResponse> = yield call(certAPI.getCert, param);
+		yield put(loadCertSuccess(result?.data));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
 }
 
+function* pushCertSuccessSaga(action: PayloadAction<certAPI.PushCertResultParam>) {
+	const param = action.payload;
+	yield put(startLoading(action.type));
+	try {
+		const result: AxiosResponse = yield call(certAPI.putCertSuccess, param);
+		console.log(result);
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
+
+function* pushCertFailSaga(action: PayloadAction<certAPI.PushCertResultParam>) {
+	const param = action.payload;
+	yield put(startLoading(action.type));
+	try {
+		yield call(certAPI.putCertFail, param);
+
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
+
+// function* watchCertGoalSaga() {
+// 	yield takeEvery(loadCertGoalList, loadCertGoalSaga);
+// }
 function* watchSubmitCertGoalSaga() {
-	yield takeLatest(submitCertGoal, submitCertGoalSaga);
+	yield takeEvery(submitCertGoal, submitCertGoalSaga);
+}
+function* watchLoadCertListSaga() {
+	yield takeEvery(loadCertList, loadCertListSaga);
+}
+function* watchLoadCertSaga() {
+	yield takeEvery(loadCert, loadCertSaga);
+}
+function* watchPushCertSuccessSaga() {
+	yield takeEvery(pushCertSuccess, pushCertSuccessSaga);
+}
+function* watchPushCertFailSaga() {
+	yield takeEvery(pushCertSuccess, pushCertFailSaga);
 }
 
-export default function* goalSaga() {
-	yield all([fork(watchCertGoalSaga), fork(watchSubmitCertGoalSaga)]);
+export default function* certificationSaga() {
+	yield all([
+		fork(watchSubmitCertGoalSaga),
+		fork(watchLoadCertListSaga),
+		fork(watchLoadCertSaga),
+		fork(watchPushCertSuccessSaga),
+		fork(watchPushCertFailSaga),
+	]);
 }
+
+// export default function* goalSaga() {
+// 	yield all([fork(watchCertGoalSaga), fork(watchSubmitCertGoalSaga)]);
+// 	yield put(finishLoading(action.type));
+// }

@@ -9,8 +9,7 @@ import client from 'api/client';
 import { Member } from 'types/member';
 import { GoalCount } from 'types/statistics';
 import { Goal, GoalsResponse } from 'types/goal';
-// import { Cert } from 'types/certification';
-// import { IReplaceMemeberForm } from 'pages/MyPage/ReplaceMemberForm';
+import { Certification } from 'types/certification';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;

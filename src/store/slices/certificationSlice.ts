@@ -1,26 +1,33 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CertFormState } from 'api/certAPI';
-import { LoadCertGoalParam } from 'store/sagas/certificationSaga';
-// import { LoadCertGoalParam } from 'api/goalAPI';
 import { Goal, GoalsResponse } from 'types/goal';
+import {
+	CertFormState,
+	LoadCertListParam,
+	LoadCertListResponse,
+	LoadCertParam,
+	PushCertResultParam,
+} from 'api/certAPI';
+import { Certification } from 'types/certification';
 
 export interface InitialState {
 	goalList: Goal[];
+	certGoal: Certification;
 	maxPage: number;
 }
 
 const initialState: InitialState = {
 	goalList: [],
-	maxPage: 0,
+	certGoal: {} as Certification,
+	maxPage: 1,
 };
 
 export const certificationSlice = createSlice({
-	name: 'goal',
+	name: 'certification',
 	initialState,
 	reducers: {
-		loadCertGoalList: (state, action: PayloadAction<LoadCertGoalParam>) => {},
-		loadCertGoalListSuccess: (state, { payload }: PayloadAction<GoalsResponse>) => {
+		loadCertList: (state, action: PayloadAction<LoadCertListParam>) => {},
+		loadCertListSuccess: (state, { payload }: PayloadAction<LoadCertListResponse>) => {
 			state.goalList = payload.goals;
 			state.maxPage = payload.maxPage;
 		},
@@ -28,6 +35,12 @@ export const certificationSlice = createSlice({
 			console.log('start');
 		},
 		submitCertGoalSuccess: (state) => {},
+		loadCert: (state, action: PayloadAction<LoadCertParam>) => {},
+		loadCertSuccess: (state, { payload }: PayloadAction<Certification>) => {
+			state.certGoal = payload;
+		},
+		pushCertSuccess: (state, action: PayloadAction<PushCertResultParam>) => {},
+		pushCertFail: (state, action: PayloadAction<PushCertResultParam>) => {},
 	},
 });
 

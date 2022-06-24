@@ -9,6 +9,8 @@ const Path = {
 	moneyTransfer: '/money/transfer',
 	myGoals: '/my-goal',
 	goalRegister: '/goals/register',
+	inspection: '/admin/inspection',
+	announcements: '/admin/announcements',
 };
 
 export default Path;

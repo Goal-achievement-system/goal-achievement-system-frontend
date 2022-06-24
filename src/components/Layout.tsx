@@ -13,31 +13,38 @@ import Certifications from 'pages/Certifications/CertificationsContainer';
 import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
 import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
-import MyGoal from 'pages/MyPage/MyPageContainer';
-// import GoalRegister from 'pages/GoalRegister/GoalRegisterContainer';
+// import MyPage from 'pages/MyGoal/MyGoalContainer';
+import MyPage from 'pages/MyPage/MyPageContainer';
+import Inspection from 'pages/Admin/InspectionContainer';
+import Announcements from 'pages/Admin/AnnouncementsContainer';
+import ManageMenuBox from './Box/ManageMenuBox';
 
 function Layout() {
 	const dispatch: AppDispatch = useDispatch();
 
+	const adminToken = localStorage.getItem('adminToken');
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 
 	useEffect(() => {
 		if (!memberinfo && isLoggedIn()) dispatch(memberSlice.actions.loadMemberInfo());
 	}, [dispatch, memberinfo]);
+
 	return (
 		<BaseTemplate>
 			<div className=" pc:w-[1200px] pc:flex mt-[0] pc:mt-[40px] pb-[50px] mx-auto pc:box-content">
 				<div className="hidden pc:block mr-[30px]">
-					<MenuBox member={memberinfo} />
+					{adminToken ? <ManageMenuBox member={null} /> : <MenuBox member={memberinfo} />}
 				</div>
-				{memberinfo ? (
+				{adminToken ? (
 					<Routes>
 						<Route path={Path.home} element={<Home />} />
 						<Route path={Path.notice} element={<Notice />} />
 						<Route path={Path.certifications} element={<Certifications />} />
 						<Route path={Path.moneyCharge} element={<MoneyCharge />} />
 						<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
-						<Route path={Path.myGoals} element={<MyGoal />} />
+						<Route path={Path.myGoals} element={<MyPage />} />
+						<Route path={Path.inspection} element={<Inspection />} />
+						<Route path={Path.announcements} element={<Announcements />} />
 					</Routes>
 				) : (
 					<Routes>
