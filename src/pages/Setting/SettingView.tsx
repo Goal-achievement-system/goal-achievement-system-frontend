@@ -2,13 +2,17 @@ import React from 'react';
 
 import Main from 'components/Main';
 import BaseTemplate from 'components/BaseTemplate';
-import memberSlice from 'store/slices/memberSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
+import useModal from 'hooks/useModal';
+import { modalName } from 'utils/importModal';
 
 const baseLiStyle = 'py-[20px] font-[800] text-[14px]';
 export default function SettingView() {
 	const { memberinfo } = useSelector((state: RootState) => state.member);
+	const [openLogoutModal] = useModal();
+	const [openWithdrawalModal] = useModal();
+
 	return (
 		<BaseTemplate>
 			<Main hasGoBack title="설정">
@@ -18,7 +22,11 @@ export default function SettingView() {
 						<span className="text-primaryOrange-200">{memberinfo?.email}</span>
 					</li>
 					<li className={baseLiStyle}>내 정보 변경</li>
-					<li className={baseLiStyle}>로그아웃</li>
+					<li className={baseLiStyle}>
+						<button type="button" onClick={() => openLogoutModal({ name: modalName.LogoutModal })}>
+							로그아웃
+						</button>
+					</li>
 					<li className={`${baseLiStyle} text-primaryBlack-300`}>서비스 탈퇴</li>
 				</ul>
 			</Main>
