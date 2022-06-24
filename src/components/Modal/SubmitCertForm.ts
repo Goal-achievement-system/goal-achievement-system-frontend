@@ -14,8 +14,8 @@ export interface CertFormReducerAction {
 
 export const initialState: CertFormState = {
 	goalId: 0,
-	content: '본문',
-	image: '이미지',
+	content: '',
+	image: '',
 	requireSuccessCount: 10,
 	successCount: 0,
 	failCount: 0,

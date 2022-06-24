@@ -19,6 +19,8 @@ export default function CertDetailModalContainer() {
 	);
 	const [searchParams] = useSearchParams();
 	const resultHandler = (isSuccess: boolean) => {
+		console.log(isSuccess);
+		console.log(certResultLoading);
 		if (certResultLoading) return;
 		const goalId = searchParams.get('goal');
 		if (!goalId) return;

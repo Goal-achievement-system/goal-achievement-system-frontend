@@ -9,31 +9,65 @@ import { getGoalCategoryEng } from 'utils/common';
 import { Goal } from 'types/goal';
 import CheckButton from 'components/Button/CheckButton';
 import certificationSlice from 'store/slices/certificationSlice';
+import useGetActionState from 'hooks/useGetActionState';
+import goalSlice from 'store/slices/goalSlice';
+import { useSearchParams } from 'react-router-dom';
 import { certFormReducer, initialState } from './SubmitCertForm';
 
-interface Props {
-	index: number;
-}
+// interface Props {
+// 	index: number;
+// goal: Goal
+// }
 
-export default function CertAddModal({ index }: Props) {
+export default function CertAddModal() {
+	const { goal } = useSelector((state: RootState) => state.goal);
+	const { certGoal } = useSelector((state: RootState) => state.certification);
+	const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
+	// const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCert.type);
+	// const [certResultLoading, certResultResult, certResultInitResult] = useGetActionState(
+	// certificationSlice.actions.loadCert.type
+	// );
+	const [searchParams] = useSearchParams();
+	const dispatch = useDispatch();
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	const { goals } = useSelector((state: RootState) => state.member.memberGoals);
-	const goal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
 	const [curCategory, setCurCategory] = useState<CertCategoryType>('exercice');
 	const [checkedGoalID, setCheckedGoalID] = useState<number>(0);
 	const [ongoingGoals, setOnGoingGoals] = useState<Goal[]>([]);
 
 	const [formState, formDispatch] = useReducer(certFormReducer, initialState);
-	const dispatch = useDispatch();
 
 	const className = {
 		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px] max-w-[90vw]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
 
+	// const resultHandler = (isSuccess: boolean) => {
+	// 	if (certResultLoading) return;
+	// 	const goalId = searchParams.get('goal');
+	// 	if (!goalId) return;
+	// 	if (isSuccess) dispatch(certificationSlice.actions.pushCertSuccess({ goalId: +goalId }));
+	// 	else dispatch(certificationSlice.actions.pushCertFail({ goalId: +goalId }));
+	// };
+
+	useEffect(() => {
+		const goalId = searchParams.get('goal');
+		if (!goalId) return;
+		if (goalLoading) return;
+		dispatch(goalSlice.actions.loadGoal({ goalId: +goalId }));
+		dispatch(certificationSlice.actions.loadCert({ goalId: +goalId }));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchParams]);
+	useEffect(() => {
+		goalInitResult();
+	}, [goalInitResult, goal, certGoal]);
+
 	const onSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
 		if (!memberinfo || !formState) return;
+		if (!formState.image || !formState.content) {
+			alert('인증에 필요한 모든 정보를 입력하세요!');
+		}
 
 		dispatch(certificationSlice.actions.submitCertGoal(formState));
 	};

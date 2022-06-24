@@ -85,7 +85,7 @@ export default function MyPageView({
 				</div>
 				<div className="goalbox-wrap pc:my-[30px] my-[16px]">
 					<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
-						<li>
+						<li className="max-w-[48%]">
 							<SmallBox
 								onClick={() => {
 									alert('목표를 등록하러 갈게요!');
@@ -95,7 +95,7 @@ export default function MyPageView({
 						</li>
 						{goals?.length
 							? goals.map((goal, index) => (
-									<li key={goal.goalId}>
+									<li className="max-w-[48%]" key={goal.goalId}>
 										<SmallBox
 											goal={goal}
 											onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}

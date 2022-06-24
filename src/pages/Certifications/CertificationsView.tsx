@@ -93,7 +93,7 @@ function CertificationsView({
 						{goalList.map((goal, idx) => (
 							// eslint-disable-next-line react/no-array-index-key
 							<li key={idx}>
-								<LargeBox onClick={() => openCertDetailModal({ name: modalName.CertDetailModal })} goal={goal} />
+								<LargeBox onClick={() => openCertDetailModal({ certState: goal.verificationResult })} goal={goal} />
 							</li>
 						))}
 					</ul>
@@ -103,7 +103,7 @@ function CertificationsView({
 							// eslint-disable-next-line react/no-array-index-key
 							<li key={idx}>
 								<Link to={`${Path.certifications}?goal=${goal.goalId}`}>
-									<SmallBox onClick={() => openCertDetailModal({ name: modalName.CertDetailModal })} goal={goal} />
+									<SmallBox onClick={() => openCertDetailModal({ certState: goal.verificationResult })} goal={goal} />
 								</Link>
 							</li>
 						))}

@@ -23,6 +23,7 @@ function Layout() {
 	const dispatch: AppDispatch = useDispatch();
 
 	const adminToken = localStorage.getItem('adminToken');
+	const goalKeeperToken = localStorage.getItem('goalKeeperToken');
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 
 	useEffect(() => {
@@ -35,7 +36,7 @@ function Layout() {
 				<div className="hidden pc:block mr-[30px]">
 					{adminToken ? <ManageMenuBox member={null} /> : <MenuBox member={memberinfo} />}
 				</div>
-				{adminToken ? (
+				{goalKeeperToken ? (
 					<Routes>
 						<Route path={Path.home} element={<Home />} />
 						<Route path={Path.notice} element={<Notice />} />
