@@ -23,11 +23,6 @@ export default function Header() {
 			path: Path.notice,
 		},
 		{
-			id: 'registerGoal',
-			title: '목표등록',
-			path: Path.goalRegister,
-		},
-		{
 			id: 'certifications',
 			title: '목표인증',
 			path: Path.certifications,

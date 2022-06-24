@@ -9,7 +9,7 @@ import InspectionView from './InspectionView';
 function InspectionContainer() {
 	const dispatch = useDispatch();
 	const [openModal, closeModal] = useModal();
-	const openCertAdminModal = (index: number) => openModal({ name: modalName.CertAdminModal, props: { index } });
+	const openCertAdminModal = (index: number) => openModal({ name: modalName.CertAdminModal, index });
 	const inspectionList = useSelector((state: RootState) => state.admin.inspectionList);
 	useEffect(() => {
 		dispatch(adminSlice.actions.loadInspection({ page: 1 }));

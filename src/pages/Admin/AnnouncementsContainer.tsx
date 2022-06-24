@@ -10,8 +10,7 @@ function AnnouncementsContainer() {
 	const dispatch = useDispatch();
 	const [openModal, closeModal] = useModal();
 	const openAnnounceMentsAddModal = () => openModal({ name: modalName.AnnounceMentsAddModal });
-	const openAnnounceMentsEditModal = (index: number) =>
-		openModal({ name: modalName.AnnounceMentsEditModal, props: { index } });
+	const openAnnounceMentsEditModal = (index: number) => openModal({ name: modalName.AnnounceMentsEditModal, index });
 	const announcementsList = useSelector((state: RootState) => state.admin.announcementsList);
 	useEffect(() => {
 		dispatch(adminSlice.actions.loadAnnouncementsList({ page: 1 }));

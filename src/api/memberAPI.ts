@@ -1,5 +1,5 @@
-import { Member } from 'types/member';
-import { Goal, VerificationResult } from 'types/goal';
+import { SexEng } from 'types/member';
+import { VerificationResult } from 'types/goal';
 import client from './client';
 
 export interface ChargeMoneyBody {
@@ -18,11 +18,20 @@ export interface GetMemberCertsBody {
 	page: number;
 }
 
+export interface ReplaceMemberBody {
+	email: string;
+	password: string;
+	nickName: string;
+	sex: SexEng;
+	age: number;
+	money: number;
+}
+
 export const getMember = () => {
 	return client.get('/members/myinfo');
 };
 
-export const replceMember = ({ email, password, nickName, sex, age, money }: Member) => {
+export const replceMember = ({ email, password, nickName, sex, age, money }: ReplaceMemberBody) => {
 	return client.put('/members/myinfo', { email, password, nickName, sex, age, money });
 };
 

@@ -19,7 +19,7 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, c
 		return 'active';
 	};
 	return (
-		<form className="  pc:rounded-[16px] pc:px-[40px] pc:bg-[#FAFAFA]" onSubmit={onSubmit}>
+		<form className="pc:rounded-[16px] pc:px-[40px] pc:bg-[#FAFAFA]" onSubmit={onSubmit}>
 			<div className="-mb-8 pc:mb-0" />
 			<TextInput
 				placeholder="제목을 작성해주세요"

@@ -96,9 +96,6 @@ export default function RouteModal({ title, alarmList = data, isOpen, setIsOpen 
 				} p-6 flex flex-col rounded-2xl border-2 text-left bg-white ${isOpen ? '' : 'hidden'}`}
 			>
 				<div className="font-[600] absolute">{title}</div>
-				{/* <div className="pc:my-auto overflow-auto pc:max-h-[270px] flex flex-col justify-center pc:min-h-[270px]">
-					{title === '알림' ? <AlarmPopup /> : <UserProfilePopUp handleLogout={handleLogout} />}
-				</div> */}
 				{title === '알림' ? (
 					<div className="pc:my-auto overflow-auto pc:max-h-[270px] flex flex-col justify-center pc:min-h-[270px]">
 						<AlarmPopup />

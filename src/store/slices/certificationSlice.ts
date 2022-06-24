@@ -1,8 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LoadCertListParam, LoadCertListResponse, LoadCertParam, PushCertResultParam } from 'api/certAPI';
+import { Goal, GoalsResponse } from 'types/goal';
+import {
+	CertFormState,
+	LoadCertListParam,
+	LoadCertListResponse,
+	LoadCertParam,
+	PushCertResultParam,
+} from 'api/certAPI';
 import { Certification } from 'types/certification';
-import { Goal } from 'types/goal';
 
 export interface InitialState {
 	goalList: Goal[];
@@ -25,6 +31,10 @@ export const certificationSlice = createSlice({
 			state.goalList = payload.goals;
 			state.maxPage = payload.maxPage;
 		},
+		submitCertGoal: (state, action: PayloadAction<CertFormState>) => {
+			console.log('start');
+		},
+		submitCertGoalSuccess: (state) => {},
 		loadCert: (state, action: PayloadAction<LoadCertParam>) => {},
 		loadCertSuccess: (state, { payload }: PayloadAction<Certification>) => {
 			state.certGoal = payload;

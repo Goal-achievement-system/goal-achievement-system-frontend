@@ -2,6 +2,24 @@ import { Certification } from 'types/certification';
 import { Goal } from 'types/goal';
 import client from './client';
 
+export interface SubmitCertGoalBody {
+	goalId: number;
+	content: string;
+	image: string;
+	requireSuccessCount: number;
+	successCount: number;
+	failCount: number;
+}
+
+export interface CertFormState {
+	goalId: number;
+	content: string;
+	image: string;
+	requireSuccessCount: number;
+	successCount: number;
+	failCount: number;
+}
+
 export interface LoadCertParam {
 	goalId: number;
 }
@@ -18,6 +36,10 @@ export interface PushCertResultParam {
 	goalId: number;
 	result: boolean;
 }
+
+export const submitCertGoal = (formData: SubmitCertGoalBody) => {
+	return client.post(`goals/cert/${formData.goalId}`, formData);
+};
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CertResponse extends Certification {}

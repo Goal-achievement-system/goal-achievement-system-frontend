@@ -6,11 +6,8 @@ export interface Option {
 }
 
 interface SelectProps {
-	// label: string;
-	// isRequired: boolean;
 	options: Option[];
-	value: string;
-	// onChange: Dispatch<SetStateAction<string>>;
+	value: string | null;
 	onChange: (curVar: string) => void;
 }
 // label, isRequired = false,
@@ -50,14 +47,6 @@ export default function Select({ options, value, onChange }: SelectProps) {
 
 	return (
 		<div>
-			{/* label && (
-				<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px]">
-					<label htmlFor={label} className="font-semibold text-[20px]">
-						{label}
-					</label>
-					{isRequired && <span className="font-semibold text-primaryOrange-200 ">*</span>}
-				</div>
-			) */}
 			<div className="dropdown w-[282px]" ref={optionRef}>
 				<div className="select w-full h-[70px] border-2 border-primaryBlack-100 rounded-xl ">
 					<button type="button" className="flex items-center justify-start w-full p-6" onClick={handleClick}>

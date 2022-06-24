@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChargeMoneyBody, GetMemberGoalsBody } from 'api/memberAPI';
+import { ChargeMoneyBody, GetMemberGoalsBody, ReplaceMemberBody } from 'api/memberAPI';
 import { Certification } from 'types/certification';
 import { Goal, GoalsResponse } from 'types/goal';
 import { Member } from 'types/member';
@@ -40,9 +40,13 @@ export const memberSlice = createSlice({
 		},
 		getMemberGoals: (state, { payload }: PayloadAction<GetMemberGoalsBody>) => {},
 		getMemberGoalsSuccess: (state, { payload }: PayloadAction<GoalsResponse>) => {
+			if (payload.maxPage === 0) {
+				state.memberGoals = initialState.memberGoals;
+				return;
+			}
 			state.memberGoals = { ...payload };
 		},
-		replaceMemberInfo: (state, { payload }: PayloadAction<Member>) => {},
+		replaceMemberInfo: (state, { payload }: PayloadAction<ReplaceMemberBody>) => {},
 		replaceMemberInfoSuccess: (state, { payload }: PayloadAction<Member>) => {
 			state.memberinfo = { ...state.memberinfo, ...payload };
 		},

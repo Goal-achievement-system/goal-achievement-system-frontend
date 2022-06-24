@@ -2,6 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { confirmOverlapEmail } from 'api/memberAPI';
 import { validateEmail, validatePassword } from '../../utils/common';
 
+enum Color {
+	primaryBlack100 = 'primaryBlack-100',
+	primaryBlack400 = 'primaryBlack-400',
+	primaryOrange100 = 'primaryOrange-100',
+	primaryOrange200 = 'primaryOrange-200',
+	buttonOrange200 = 'buttonOrange-200',
+	buttonBlack100 = 'buttonBlack-100',
+	borderGray = 'borderGray',
+}
+
 interface Props {
 	type: string;
 	placeholder: string;
@@ -12,16 +22,6 @@ interface Props {
 	value?: string;
 	onClick?: (type: string, value: string) => void;
 	onChange: (curVar: string) => void;
-}
-
-enum Color {
-	primaryBlack100 = 'primaryBlack-100',
-	primaryBlack400 = 'primaryBlack-400',
-	primaryOrange100 = 'primaryOrange-100',
-	primaryOrange200 = 'primaryOrange-200',
-	buttonOrange200 = 'buttonOrange-200',
-	buttonBlack100 = 'buttonBlack-100',
-	borderGray = 'borderGray',
 }
 
 export default function PerformInput({

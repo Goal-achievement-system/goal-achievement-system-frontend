@@ -55,7 +55,7 @@ function* getMemberGoalsSaga(action: PayloadAction<memberAPI.GetMemberGoalsBody>
 	yield put(finishLoading(action.type));
 }
 
-function* replaceMemberSaga(action: PayloadAction<Member>) {
+function* replaceMemberSaga(action: PayloadAction<memberAPI.ReplaceMemberBody>) {
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<Member> = yield call(memberAPI.replceMember, action.payload);

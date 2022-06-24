@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import BaseTemplate from 'components/BaseTemplate';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MenuBox from 'components/Box/MenuBox';
 import { AppDispatch } from 'store';
@@ -13,7 +13,8 @@ import Certifications from 'pages/Certifications/CertificationsContainer';
 import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
 import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
-import MyGoal from 'pages/MyGoal/MyGoalContainer';
+// import MyPage from 'pages/MyGoal/MyGoalContainer';
+import MyPage from 'pages/MyPage/MyPageContainer';
 import Inspection from 'pages/Admin/InspectionContainer';
 import Announcements from 'pages/Admin/AnnouncementsContainer';
 import ManageMenuBox from './Box/ManageMenuBox';
@@ -22,6 +23,7 @@ function Layout() {
 	const dispatch: AppDispatch = useDispatch();
 
 	const adminToken = localStorage.getItem('adminToken');
+	const goalKeeperToken = localStorage.getItem('goalKeeperToken');
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 
 	useEffect(() => {
@@ -34,16 +36,24 @@ function Layout() {
 				<div className="hidden pc:block mr-[30px]">
 					{adminToken ? <ManageMenuBox member={null} /> : <MenuBox member={memberinfo} />}
 				</div>
-				<Routes>
-					<Route path={Path.home} element={<Home />} />
-					<Route path={Path.notice} element={<Notice />} />
-					<Route path={Path.certifications} element={<Certifications />} />
-					<Route path={Path.moneyCharge} element={<MoneyCharge />} />
-					<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
-					<Route path={Path.myGoals} element={<MyGoal />} />
-					<Route path={Path.inspection} element={<Inspection />} />
-					<Route path={Path.announcements} element={<Announcements />} />
-				</Routes>
+				{goalKeeperToken ? (
+					<Routes>
+						<Route path={Path.home} element={<Home />} />
+						<Route path={Path.notice} element={<Notice />} />
+						<Route path={Path.certifications} element={<Certifications />} />
+						<Route path={Path.moneyCharge} element={<MoneyCharge />} />
+						<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
+						<Route path={Path.myGoals} element={<MyPage />} />
+						<Route path={Path.inspection} element={<Inspection />} />
+						<Route path={Path.announcements} element={<Announcements />} />
+					</Routes>
+				) : (
+					<Routes>
+						<Route path={Path.home} element={<Home />} />
+						<Route path={Path.notice} element={<Notice />} />
+						<Route path="*" element={<Navigate to="/login" replace />} />
+					</Routes>
+				)}
 			</div>
 		</BaseTemplate>
 	);

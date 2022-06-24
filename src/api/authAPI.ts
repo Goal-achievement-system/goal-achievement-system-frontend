@@ -1,4 +1,4 @@
-import { Sex } from 'types/member';
+import { SexEng } from 'types/member';
 import client from './client';
 // 로그인
 export interface LogInBody {
@@ -10,7 +10,7 @@ export interface SignUpBody {
 	email: string;
 	password: string;
 	nickName: string;
-	sex: Sex;
+	sex: SexEng;
 	age: number;
 }
 
