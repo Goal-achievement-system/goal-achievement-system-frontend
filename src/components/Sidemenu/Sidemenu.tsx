@@ -21,7 +21,7 @@ export default function SideMenu({ handleClickOfSideMenu }: Props) {
 		{ text: '목표머니 이체', to: Path.moneyTransfer },
 		{ text: '', to: '' },
 		{ text: '공지사항', to: Path.notice },
-		{ text: '설정', to: '' },
+		{ text: '설정', to: Path.setting },
 	];
 
 	return (
