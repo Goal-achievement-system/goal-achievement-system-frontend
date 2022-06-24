@@ -37,11 +37,6 @@ export default function Header() {
 			title: '내정보',
 			path: Path.myGoals,
 		},
-		{
-			id: 'setting',
-			title: '설정',
-			path: Path.setting,
-		},
 	];
 	const menus = menuList.map((menu: Menu): React.ReactElement => {
 		return (

@@ -8,9 +8,11 @@ import Certifications from 'pages/Certifications/CertificationsContainer';
 import Notice from 'pages/notice/NoticeContainer';
 import NotFound from 'pages/NotFound';
 import Layout from 'components/Layout';
+import Setting from 'pages/Setting/SettingContainer';
 
 /*
 routes
+
 home : "/"
 login : "/login"
 sign-up : "/sign-up"
@@ -24,6 +26,7 @@ function App() {
 				<Routes>
 					<Route path={Path.login} element={<Login />} />
 					<Route path={Path.signUp} element={<SignUp />} />
+					<Route path={Path.setting} element={<Setting />} />
 					<Route path="/*" element={<Layout />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
