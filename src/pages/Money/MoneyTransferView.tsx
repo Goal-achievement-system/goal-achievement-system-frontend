@@ -83,7 +83,15 @@ function MoneyTransferView({ formState, formDispatch, memberInfo, onSubmit }: Pr
 					</div>
 				</div>
 				<div className="mb-[16px] pc:mb-[30px] text-[14px] pc:text-[22px] leading-[16.8px] pc:leading-[20px] font-[500] pc:font-[700]">
-					충전 수단
+					비밀 번호
+				</div>
+				<div className="mb-[20px] pc:mb-[30px]">
+					<TextInput
+						placeholder="비밀번호"
+						isPassword
+						onChange={(curVar: string) => formDispatch({ type: 'password', payload: curVar })}
+						value={formState?.password}
+					/>
 				</div>
 				<button
 					type="button"

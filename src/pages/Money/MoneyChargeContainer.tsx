@@ -11,6 +11,7 @@ const initialState: ChargeFormState = {
 	chargeMoney: '',
 	chargeType: 1,
 	agree: false,
+	password: '',
 };
 function formReducer(state: ChargeFormState, action: ChargeFormReducerAction) {
 	if (action.type === 'init') {
@@ -37,7 +38,7 @@ function MoneyChargeContainer() {
 		dispatch(
 			memberSlice.actions.chargeMoney({
 				email: memberInfo.email,
-				password: 'cksdud12!', // 비밀번호 입력 UI 나올 때까지 임시 입력
+				password: formState.password, // 비밀번호 입력 UI 나올 때까지 임시 입력
 				money: Number(chargeMoney) * 10000,
 			})
 		);
