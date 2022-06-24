@@ -11,7 +11,7 @@ import CertDetailModalView from './CertDetailModalView';
 export default function CertDetailModalContainer() {
 	const { goal } = useSelector((state: RootState) => state.goal);
 	const { certGoal } = useSelector((state: RootState) => state.certification);
-	const { certImage } = useSelector((State: RootState) => State.certification);
+	// const { certImage } = useSelector((State: RootState) => State.certification);
 	const dispatch: AppDispatch = useDispatch();
 	const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
 	const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCert.type);
@@ -42,14 +42,11 @@ export default function CertDetailModalContainer() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchParams]);
 	useEffect(() => {
-		certInitResult();
 		goalInitResult();
-	}, [certInitResult, goalInitResult, goal, certGoal]);
-
+	}, [goalResult, goalInitResult]);
 	useEffect(() => {
-		dispatch(certificationSlice.actions.getCertImage({ certId: certGoal.image }));
-	}, [certGoal.image, dispatch]);
-
+		certInitResult();
+	}, [certResult, certInitResult]);
 	useEffect(() => {
 		if (!pushCertResultResult) return;
 		if (pushCertResultResult.isSuccess) {
@@ -62,11 +59,10 @@ export default function CertDetailModalContainer() {
 
 	return (
 		<CertDetailModalView
-			goalLoading={goalLoading}
-			certLoading={certLoading}
+			loading={+(searchParams?.get('goal') || -1) !== goal?.goalId}
 			goal={goal}
 			certGoal={certGoal}
-			certImage={certImage}
+			// certImage={certImage}
 			resultHandler={resultHandler}
 		/>
 	);
