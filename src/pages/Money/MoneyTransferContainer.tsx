@@ -12,6 +12,7 @@ const initialState: TransferFormState = {
 	bank: '',
 	accountNumber: '',
 	agree: false,
+	password: '',
 };
 function formReducer(state: TransferFormState, action: TransferFormReducerAction) {
 	if (action.type === 'init') {
@@ -49,7 +50,7 @@ function MoneyTransferContainer() {
 		dispatch(
 			memberSlice.actions.transferMoney({
 				email: memberInfo.email,
-				password: 'cksdud12!', // 비밀번호 입력 UI 나올 때까지 임시 입력
+				password: formState.password, // 비밀번호 입력 UI 나올 때까지 임시 입력
 				money: Number(transferMoney),
 			})
 		);
