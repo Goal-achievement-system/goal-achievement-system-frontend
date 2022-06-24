@@ -35,9 +35,11 @@ export default function CertDetailModalContainer() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchParams]);
 	useEffect(() => {
-		certInitResult();
 		goalInitResult();
-	}, [certInitResult, goalInitResult, goal, certGoal]);
+	}, [goalResult, goalInitResult]);
+	useEffect(() => {
+		certInitResult();
+	}, [certResult, certInitResult]);
 	useEffect(() => {
 		if (!pushCertResultResult) return;
 		if (pushCertResultResult.isSuccess) {
@@ -49,8 +51,7 @@ export default function CertDetailModalContainer() {
 	}, [pushCertResultInitResult, pushCertResultResult]);
 	return (
 		<CertDetailModalView
-			goalLoading={goalLoading}
-			certLoading={certLoading}
+			loading={+(searchParams?.get('goal') || -1) !== goal?.goalId}
 			goal={goal}
 			certGoal={certGoal}
 			resultHandler={resultHandler}
