@@ -7,8 +7,7 @@ import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import * as certAPI from 'api/certAPI';
 
-const { loadCertList, loadCertListSuccess, loadCert, loadCertSuccess, pushCertFail, pushCertSuccess } =
-	certificationSlice.actions;
+const { loadCertList, loadCertListSuccess, loadCert, loadCertSuccess, pushCertResult } = certificationSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
 
@@ -40,26 +39,12 @@ function* loadCertSaga(action: PayloadAction<certAPI.LoadCertParam>) {
 	yield put(finishLoading(action.type));
 }
 
-function* pushCertSuccessSaga(action: PayloadAction<certAPI.PushCertResultParam>) {
+function* pushCertResultSaga(action: PayloadAction<certAPI.PushCertResultParam>) {
 	const param = action.payload;
 	yield put(startLoading(action.type));
 	try {
-		const result: AxiosResponse = yield call(certAPI.putCertSuccess, param);
+		const result: AxiosResponse = yield call(certAPI.putCertResult, param);
 		console.log(result);
-		yield put(getResult({ isSuccess: true, actionType: action.type }));
-	} catch (error) {
-		const axiosError = error as AxiosError<any>;
-		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
-	}
-	yield put(finishLoading(action.type));
-}
-
-function* pushCertFailSaga(action: PayloadAction<certAPI.PushCertResultParam>) {
-	const param = action.payload;
-	yield put(startLoading(action.type));
-	try {
-		yield call(certAPI.putCertFail, param);
-
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
@@ -74,17 +59,10 @@ function* watchLoadCertListSaga() {
 function* watchLoadCertSaga() {
 	yield takeEvery(loadCert, loadCertSaga);
 }
-function* watchPushCertSuccessSaga() {
-	yield takeEvery(pushCertSuccess, pushCertSuccessSaga);
+function* watchPushCertResultSaga() {
+	yield takeEvery(pushCertResult, pushCertResultSaga);
 }
-function* watchPushCertFailSaga() {
-	yield takeEvery(pushCertSuccess, pushCertFailSaga);
-}
+
 export default function* certificationSaga() {
-	yield all([
-		fork(watchLoadCertListSaga),
-		fork(watchLoadCertSaga),
-		fork(watchPushCertSuccessSaga),
-		fork(watchPushCertFailSaga),
-	]);
+	yield all([fork(watchLoadCertListSaga), fork(watchLoadCertSaga), fork(watchPushCertResultSaga)]);
 }
