@@ -1,6 +1,6 @@
 import React, { BaseSyntheticEvent, Dispatch, SetStateAction } from 'react';
 import { VerificationResult, Goal } from 'types/goal';
-import { Notification } from 'types/notification';
+import { IPushNotice } from 'types/notification';
 
 import Main from 'components/Main';
 import FilterButton from 'components/Button/FilterButton';
@@ -12,11 +12,13 @@ import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
 import SubmitButton from 'components/Button/SubmitButton';
 import { OpenModalOnClick } from 'hooks/useModal';
 import { modalName } from 'utils/importModal';
+import { Link } from 'react-router-dom';
+import Path from 'utils/path';
 import { IReplaceMemeberForm, ReplaceMemberReducerAction } from './ReplaceMemberForm';
 
 interface Props {
 	goals: Goal[] | null;
-	notificationList: Notification[];
+	pushNoticeList: IPushNotice[];
 	formState: IReplaceMemeberForm | null;
 	formDispatch: React.Dispatch<ReplaceMemberReducerAction>;
 	currentPage: number;
@@ -32,7 +34,7 @@ interface Props {
 
 export default function MyPageView({
 	goals,
-	notificationList,
+	pushNoticeList,
 	formState,
 	formDispatch,
 	currentPage,
@@ -84,18 +86,18 @@ export default function MyPageView({
 					})}
 				</div>
 				<div className="goalbox-wrap pc:my-[30px] my-[16px]">
-					<ul className="grid pc:grid-cols-3 pc:gap-[30px] gap-[16px]">
-						<li className="max-w-[48%]">
+					<ul className="flex flex-wrap gap-x-[4%] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
+						<li className="w-[48%] pc:w-auto">
 							<SmallBox
 								onClick={() => {
 									alert('목표를 등록하러 갈게요!');
-									openModalOnClick({ certState: modalName.GoalRegModal });
+									openModalOnClick({ certState: 'register' });
 								}}
 							/>
 						</li>
 						{goals?.length
 							? goals.map((goal, index) => (
-									<li className="max-w-[48%]" key={goal.goalId}>
+									<li className="w-[48%] pc:w-auto" key={goal.goalId}>
 										<SmallBox
 											goal={goal}
 											onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
@@ -108,19 +110,34 @@ export default function MyPageView({
 				<div className="flex content-center pagination-wrap">
 					<Pagination curPage={currentPage} setCurPage={setCurrentPage} numOfPages={maxPage} numOfPageBtn={5} />
 				</div>
-				<div className="pc:mt-[30px]">
-					<Main title="알림">
-						<div className="relative">
-							<div className="flex flex-col pc:space-y-[16px]">
-								<span className="px-[24px] py-[20px] text-[22px] font-[600] rounded-[8px] bg-modalGray">
-									읽지 않은 알람 <span className="text-primaryOrange-200">{notificationList.length}개</span>
-								</span>
-							</div>
-						</div>
-					</Main>
-				</div>
 			</Main>
-			<div className="pc:mt-[30px]">
+			<div className="pc:mt-[60px] pc:block hidden">
+				<div className="flex justify-between items-center mb-[30px]">
+					<div
+						className="font-[800] text-[20px] leading-[24px] pc:font-[800] pc:text-[30px]
+				pc:leading-[36px]"
+					>
+						알림
+					</div>
+					<Link
+						to={Path.pushNotice}
+						type="button"
+						className="font-[800] text-[20px] leading-[24px] pc:font-[600] pc:text-[22px]
+						pc:leading-[30px] text-primaryBlack-200"
+					>
+						더보기
+					</Link>
+				</div>
+				<div className="relative">
+					<div className="flex flex-col pc:space-y-[16px]">
+						<span className="px-[24px] py-[20px] pc:text-[22px] font-[600] text-[12px] rounded-[8px] bg-modalGray">
+							읽지 않은 알람{' '}
+							<span className="text-primaryOrange-200 pc:text-[22px] text-[12px]">{pushNoticeList.length}개</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div className="pc:mt-[60px] pc:block hidden">
 				<Main title="개인정보 관리">
 					<form className="" onSubmit={handleSubmit}>
 						<div className="flex flex-col space-y-[40px]">

@@ -17,7 +17,7 @@ export default function MyPage() {
 	const memberInfo = useSelector((state: RootState) => state.member.memberinfo);
 	const { maxPage } = useSelector((state: RootState) => state.member.memberGoals);
 	const { goals } = useSelector((state: RootState) => state.member.memberGoals);
-	const { notificationList } = useSelector((state: RootState) => state.notifications);
+	const { pushNoticeList } = useSelector((state: RootState) => state.pushNotice);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [goalFilter, setGoalFilter] = useState<VerificationResult>('all');
 	const [isSelected, setIsSelected] = useState<string>('전체');
@@ -76,7 +76,7 @@ export default function MyPage() {
 	return (
 		<MyPageView
 			goals={goals}
-			notificationList={notificationList}
+			pushNoticeList={pushNoticeList}
 			formState={formState}
 			formDispatch={formDispatch}
 			currentPage={currentPage}

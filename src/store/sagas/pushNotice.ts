@@ -1,9 +1,9 @@
 import { all, fork, call, put, takeLatest } from 'redux-saga/effects';
-import notificationSlice from 'store/slices/notificationsSlice';
+import pushNoticeSilice from 'store/slices/pushNotice';
 import client from 'api/client';
 import * as MemberAPI from 'api/memberAPI';
 
-import { Notification } from 'types/notification';
+import { IPushNotice } from 'types/notification';
 import { AxiosError, AxiosResponse } from 'axios';
 import { PayloadAction } from '@reduxjs/toolkit';
 import resultSlice from 'store/slices/resultSlice';
@@ -11,12 +11,12 @@ import loadingSlice from 'store/slices/loadingSlice';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
-const { loadNotification, loadNotificationSuccess } = notificationSlice.actions;
+const { loadNotification, loadNotificationSuccess } = pushNoticeSilice.actions;
 
-export function* loadNotificationsSaga(action: PayloadAction) {
+export function* loadPushNoticeSaga(action: PayloadAction) {
 	yield put(startLoading(action.type));
 	try {
-		const result: AxiosResponse<Notification[]> = yield call(MemberAPI.getNotifications);
+		const result: AxiosResponse<IPushNotice[]> = yield call(MemberAPI.getNotifications);
 		yield put(loadNotificationSuccess(result.data));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
@@ -26,9 +26,9 @@ export function* loadNotificationsSaga(action: PayloadAction) {
 }
 
 export function* watchLoadNotificationsSaga() {
-	yield takeLatest(loadNotification, loadNotificationsSaga);
+	yield takeLatest(loadNotification, loadPushNoticeSaga);
 }
 
-export default function* notificationsSaga() {
+export default function* pushNoticeSaga() {
 	yield all([fork(watchLoadNotificationsSaga)]);
 }

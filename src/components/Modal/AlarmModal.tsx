@@ -2,13 +2,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
-import { Notification } from 'types/notification';
+import { IPushNotice } from 'types/notification';
 import { ReactComponent as DownArrow } from 'assets/icons/down-arrow.svg';
 
 export default function AlarmModal() {
-	const alarmList = useSelector((state: RootState) => state.notifications.notificationList);
+	const alarmList = useSelector((state: RootState) => state.pushNotice.pushNoticeList);
 
-	const alarms = alarmList.map((alarm: Notification) => {
+	const alarms = alarmList.map((alarm: IPushNotice) => {
 		return (
 			<div key={alarm.sendingTime} className="w-full max-h-[97px] p-3 mb-2 border-2 rounded-xl">
 				<div className="flex justify-between mb-3 alram-header ">

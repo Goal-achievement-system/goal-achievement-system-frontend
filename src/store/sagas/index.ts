@@ -3,7 +3,7 @@ import goalSaga from './goalSaga';
 import authSaga from './authSaga';
 import statisticsSaga from './statisticsSaga';
 import MemberSaga from './memberSaga';
-import notificationsSaga from './notificationsSaga';
+import pushNoticeSaga from './pushNotice';
 import certificationSaga from './certificationSaga';
 import adminSaga from './adminSaga';
 
@@ -13,7 +13,7 @@ export default function* rootSaga() {
 		fork(authSaga),
 		fork(statisticsSaga),
 		fork(MemberSaga),
-		fork(notificationsSaga),
+		fork(pushNoticeSaga),
 		fork(certificationSaga),
 		fork(adminSaga),
 	]);
