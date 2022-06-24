@@ -4,19 +4,28 @@ import SubmitButton from 'components/Button/SubmitButton';
 import FilterButton from 'components/Button/FilterButton';
 import { Goal } from 'types/goal';
 import { Certification } from 'types/certification';
+import { ReactComponent as DefaultGoal } from 'assets/icons/default-goal.svg';
 
 interface Props {
 	goalLoading?: boolean;
 	certLoading?: boolean;
 	goal: Goal;
 	certGoal: Certification;
+	certImage: any;
 	resultHandler: (isSuccess: boolean) => void;
 }
 
 // export default function GoalModal({ index }: Props) {
 // 	const goal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
 // 	const navigate = useNavigate();
-export default function CertDetailModalView({ goalLoading, certLoading, goal, certGoal, resultHandler }: Props) {
+export default function CertDetailModalView({
+	goalLoading,
+	certLoading,
+	goal,
+	certGoal,
+	certImage,
+	resultHandler,
+}: Props) {
 	const className = {
 		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
@@ -28,7 +37,12 @@ export default function CertDetailModalView({ goalLoading, certLoading, goal, ce
 		>
 			<div className="modal-tops pc:space-y-[72px] flex flex-col space-y-[20px]">
 				<div>
-					<img className="w-full" src="./image/modal/default-goal.svg" alt="default-goal-img" />
+					{certImage ? (
+						<img className="w-full" src={`${certImage}`} alt="default-goal-img" />
+					) : (
+						<DefaultGoal className="w-full" />
+					)}
+					{/* <img className="w-full" src=./image/modal/default-goal.svg" alt="default-goal-img" /> */}
 				</div>
 				<div className="flex justify-between">
 					<div>익명</div>
