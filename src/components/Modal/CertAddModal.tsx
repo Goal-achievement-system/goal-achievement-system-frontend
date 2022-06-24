@@ -14,14 +14,14 @@ import goalSlice from 'store/slices/goalSlice';
 import { useSearchParams } from 'react-router-dom';
 import { certFormReducer, initialState } from './SubmitCertForm';
 
-// interface Props {
-// 	index: number;
-// goal: Goal
-// }
+interface Props {
+	index: number;
+	// goal: Goal
+}
 
-export default function CertAddModal() {
-	const { goal } = useSelector((state: RootState) => state.goal);
-	const { certGoal } = useSelector((state: RootState) => state.certification);
+export default function CertAddModal({ index }: Props) {
+	// const { goal } = useSelector((state: RootState) => state.goal);
+	// const { certGoal } = useSelector((state: RootState) => state.certification);
 	const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
 	// const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCert.type);
 	// const [certResultLoading, certResultResult, certResultInitResult] = useGetActionState(
@@ -31,6 +31,7 @@ export default function CertAddModal() {
 	const dispatch = useDispatch();
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	const { goals } = useSelector((state: RootState) => state.member.memberGoals);
+	const goal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
 	const [curCategory, setCurCategory] = useState<CertCategoryType>('exercice');
 	const [checkedGoalID, setCheckedGoalID] = useState<number>(0);
 	const [ongoingGoals, setOnGoingGoals] = useState<Goal[]>([]);
@@ -58,9 +59,10 @@ export default function CertAddModal() {
 		dispatch(certificationSlice.actions.loadCert({ goalId: +goalId }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchParams]);
-	useEffect(() => {
-		goalInitResult();
-	}, [goalInitResult, goal, certGoal]);
+
+	// useEffect(() => {
+	// 	goalInitResult();
+	// }, [goalInitResult, goal, certGoal]);
 
 	const onSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
@@ -95,6 +97,8 @@ export default function CertAddModal() {
 		setCheckedGoalID(goal.goalId);
 		formDispatch({ type: 'goalId', payload: goal.goalId });
 	}, [goal, goals]);
+
+	console.log(ongoingGoals);
 
 	return (
 		<form

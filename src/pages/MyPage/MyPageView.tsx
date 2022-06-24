@@ -9,9 +9,9 @@ import Pagination from 'components/Pagination';
 import PerformInput from 'components/Input/PerformInput';
 import Select from 'components/Select/Select';
 import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
-// import { Member } from 'types/member';
 import SubmitButton from 'components/Button/SubmitButton';
 import { OpenModalOnClick } from 'hooks/useModal';
+import { modalName } from 'utils/importModal';
 import { IReplaceMemeberForm, ReplaceMemberReducerAction } from './ReplaceMemberForm';
 
 interface Props {
@@ -89,7 +89,7 @@ export default function MyPageView({
 							<SmallBox
 								onClick={() => {
 									alert('목표를 등록하러 갈게요!');
-									openModalOnClick({ certState: 'register' });
+									openModalOnClick({ certState: modalName.GoalRegModal });
 								}}
 							/>
 						</li>

@@ -19,10 +19,11 @@ export interface Props {
 	goal: Goal;
 }
 
-function SideBarButton({ onClick, isSelected, goal }: Props) {
+function CheckButton({ onClick, isSelected, goal }: Props) {
 	const getBgColor = useCallback(() => (isSelected ? BgColor.orange200 : BgColor.gray), [isSelected]);
 	const getTextColor = useCallback(() => (isSelected ? TextColor.white : TextColor.gray), [isSelected]);
 
+	console.log(goal);
 	return (
 		<button
 			type="button"
@@ -50,4 +51,4 @@ function SideBarButton({ onClick, isSelected, goal }: Props) {
 	);
 }
 
-export default React.memo(SideBarButton);
+export default React.memo(CheckButton);

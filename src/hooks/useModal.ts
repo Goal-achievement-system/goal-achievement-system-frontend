@@ -24,18 +24,17 @@ export default function useModal(): [OpenModalOnClick, any] {
 		dispatch(modalSlice.actions.open(payLoad));
 	};
 
-	const openModalOnClick = ({ certState, name }: OpenModalOnClickArgs) => {
+	const openModalOnClick = ({ certState, name, index }: OpenModalOnClickArgs) => {
 		// goalModal 제외한 모달 오픈
 		if (name) {
 			openModal({ name });
-			return;
 		}
 		if (certState === 'register') {
 			openModal({ name: modalName.GoalRegModal });
 			return;
 		}
-		if (certState === 'ongoing') {
-			openModal({ name: modalName.CertAddModal });
+		if (certState === 'ongoing' && index !== null && index !== undefined) {
+			openModal({ name: modalName.CertAddModal, props: { index } });
 			return;
 		}
 		openModal({ name: modalName.CertDetailModal });
