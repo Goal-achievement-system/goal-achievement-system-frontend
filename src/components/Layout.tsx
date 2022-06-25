@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect } from 'react';
 import BaseTemplate from 'components/BaseTemplate';
 import { Routes, Route, Navigate } from 'react-router-dom';
@@ -17,6 +18,7 @@ import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
 import MyPage from 'pages/MyPage/MyPageContainer';
 import Inspection from 'pages/Admin/InspectionContainer';
 import Announcements from 'pages/Admin/AnnouncementsContainer';
+import PushNotice from 'pages/PushNotice/PushNoticeContainer';
 import ManageMenuBox from './Box/ManageMenuBox';
 
 function Layout() {
@@ -36,7 +38,12 @@ function Layout() {
 				<div className="hidden pc:block mr-[30px]">
 					{adminToken ? <ManageMenuBox member={null} /> : <MenuBox member={memberinfo} />}
 				</div>
-				{goalKeeperToken ? (
+				{adminToken ? (
+					<Routes>
+						<Route path={Path.inspection} element={<Inspection />} />
+						<Route path={Path.announcements} element={<Announcements />} />
+					</Routes>
+				) : goalKeeperToken ? (
 					<Routes>
 						<Route path={Path.home} element={<Home />} />
 						<Route path={Path.notice} element={<Notice />} />
@@ -46,6 +53,7 @@ function Layout() {
 						<Route path={Path.myGoals} element={<MyPage />} />
 						<Route path={Path.inspection} element={<Inspection />} />
 						<Route path={Path.announcements} element={<Announcements />} />
+						<Route path={Path.pushNotice} element={<PushNotice />} />
 					</Routes>
 				) : (
 					<Routes>
@@ -60,13 +68,3 @@ function Layout() {
 }
 
 export default Layout;
-/*
-
-
-	<div className="flex-1">
-					<div className="mb-[16px] pc:mb-[30px] font-[800] text-[20px] leading-[24px] pc:font-[800] pc:text-[30px] pc:leading-[36px]">
-						{title}
-					</div>
-</div>
-
-          */

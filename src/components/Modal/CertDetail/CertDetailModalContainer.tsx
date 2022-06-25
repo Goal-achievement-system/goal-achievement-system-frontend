@@ -11,6 +11,7 @@ import CertDetailModalView from './CertDetailModalView';
 export default function CertDetailModalContainer() {
 	const { goal } = useSelector((state: RootState) => state.goal);
 	const { certGoal } = useSelector((state: RootState) => state.certification);
+	// const { certImage } = useSelector((State: RootState) => State.certification);
 	const dispatch: AppDispatch = useDispatch();
 	const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
 	const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCert.type);
@@ -25,6 +26,12 @@ export default function CertDetailModalContainer() {
 		if (!goalId) return;
 		dispatch(certificationSlice.actions.pushCertResult({ goalId: +goalId, result: isSuccess }));
 	};
+
+	useEffect(() => {
+		if (certResult) {
+			dispatch(certificationSlice.actions.getCertImage({ certId: certGoal.image }));
+		}
+	}, [certGoal.image, certResult, dispatch]);
 
 	useEffect(() => {
 		const goalId = searchParams.get('goal');
@@ -49,11 +56,13 @@ export default function CertDetailModalContainer() {
 		}
 		pushCertResultInitResult();
 	}, [pushCertResultInitResult, pushCertResultResult]);
+
 	return (
 		<CertDetailModalView
 			loading={+(searchParams?.get('goal') || -1) !== goal?.goalId}
 			goal={goal}
 			certGoal={certGoal}
+			// certImage={certImage}
 			resultHandler={resultHandler}
 		/>
 	);

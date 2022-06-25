@@ -3,7 +3,7 @@ import authSlice from 'store/slices/authSlice';
 import goalSlice from 'store/slices/goalSlice';
 import memberSlice from './memberSlice';
 import statisticsSlice from './statisticsSlice';
-import notificationsSlice from './notificationsSlice';
+import pushNoticeSlice from './pushNotice';
 import loadingSlice from './loadingSlice';
 import resultSlice from './resultSlice';
 import modalSlice from './modalSlice';
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 	auth: authSlice.reducer,
 	statistics: statisticsSlice.reducer,
 	member: memberSlice.reducer,
-	notifications: notificationsSlice.reducer,
+	pushNotice: pushNoticeSlice.reducer,
 	loading: loadingSlice.reducer,
 	result: resultSlice.reducer,
 	modal: modalSlice.reducer,

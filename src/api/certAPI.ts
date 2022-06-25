@@ -37,12 +37,16 @@ export interface PushCertResultParam {
 	result: boolean;
 }
 
-export const submitCertGoal = (formData: SubmitCertGoalBody) => {
-	return client.post(`goals/cert/${formData.goalId}`, formData);
-};
+export interface GetCertImageParam {
+	certId: string;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CertResponse extends Certification {}
+
+export const submitCertGoal = (formData: SubmitCertGoalBody) => {
+	return client.post(`goals/cert/${formData.goalId}`, formData);
+};
 
 export const getCert = ({ goalId }: LoadCertParam) => {
 	return client.get(`/goals/cert/${goalId}`);
@@ -56,4 +60,8 @@ export const getCertList = ({ category, page }: LoadCertListParam) => {
 export const putCertResult = async ({ goalId, result }: PushCertResultParam) => {
 	if (result) return client.put(`/goals/cert/success/${goalId}`);
 	return client.put(`/goals/cert/fail/${goalId}`);
+};
+
+export const getCertImage = ({ certId }: GetCertImageParam) => {
+	return client.get(`/image/${certId}`, { responseType: 'arraybuffer' });
 };

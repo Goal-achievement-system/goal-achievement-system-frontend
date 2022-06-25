@@ -4,17 +4,20 @@ import SubmitButton from 'components/Button/SubmitButton';
 import FilterButton from 'components/Button/FilterButton';
 import { Goal } from 'types/goal';
 import { Certification } from 'types/certification';
+import { ReactComponent as DefaultGoal } from 'assets/icons/default-goal.svg';
 
 interface Props {
 	loading?: boolean;
 	goal: Goal;
 	certGoal: Certification;
+	// certImage: any;
 	resultHandler: (isSuccess: boolean) => void;
 }
 
 // export default function GoalModal({ index }: Props) {
 // 	const goal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
 // 	const navigate = useNavigate();
+// export default function CertDetailModalView({ loading, goal, certGoal, certImage, resultHandler }: Props) {
 export default function CertDetailModalView({ loading, goal, certGoal, resultHandler }: Props) {
 	const className = {
 		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px]',

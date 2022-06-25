@@ -15,10 +15,10 @@ export default function SideMenu({ handleClickOfSideMenu }: Props) {
 	const { goalStatistics } = useSelector((state: RootState) => state.member);
 
 	const sideNavigates = [
-		{ text: '목표 등록', to: Path.goalRegister },
 		{ text: '목표 인증', to: Path.certifications },
 		{ text: '목표머니 충전', to: Path.moneyCharge },
 		{ text: '목표머니 이체', to: Path.moneyTransfer },
+		{ text: '내 목표', to: Path.myGoals },
 		{ text: '', to: '' },
 		{ text: '공지사항', to: Path.notice },
 		{ text: '설정', to: Path.setting },
@@ -33,8 +33,10 @@ export default function SideMenu({ handleClickOfSideMenu }: Props) {
 						<button type="button" onClick={handleClickOfSideMenu}>
 							<Union />
 						</button>
-						<button type="button" onClick={() => {}}>
-							<Alarm />
+						<button type="button" onClick={handleClickOfSideMenu}>
+							<Link to={Path.pushNotice}>
+								<Alarm />
+							</Link>
 						</button>
 					</div>
 					<div className="basis-[109px] flex flex-col items-center space-y-[20px]">

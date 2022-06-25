@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 // import { GoalsResponse } from 'types/goal';
 import { put, all, fork, takeEvery, call } from 'redux-saga/effects';
 import certificationSlice from 'store/slices/certificationSlice';
@@ -8,6 +8,7 @@ import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { CertResponse } from 'types/certification';
 import * as certAPI from 'api/certAPI';
+import { Buffer } from 'buffer';
 
 export interface LoadCertGoalParam {
 	category: string;
@@ -21,6 +22,8 @@ const {
 	loadCert,
 	loadCertSuccess,
 	pushCertResult,
+	getCertImage,
+	getCertImageSuccess,
 } = certificationSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -78,6 +81,22 @@ function* pushCertResultSaga(action: PayloadAction<certAPI.PushCertResultParam>)
 	yield put(finishLoading(action.type));
 }
 
+function* getCertImageSaga(action: PayloadAction<certAPI.GetCertImageParam>) {
+	const param = action.payload;
+	yield put(startLoading(action.type));
+	try {
+		const result: AxiosResponse = yield call(certAPI.getCertImage, param);
+		const stringifiedBuffer = Buffer.from(result?.data).toString('base64');
+		const base64Image = `data:${result?.headers['content-type']};base64,${stringifiedBuffer}`;
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+		yield put(getCertImageSuccess(base64Image));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
+
 // function* pushCertFailSaga(action: PayloadAction<certAPI.PushCertResultParam>) {
 // 	const param = action.payload;
 // 	yield put(startLoading(action.type));
@@ -105,11 +124,16 @@ function* watchPushCertResultSaga() {
 	yield takeEvery(pushCertResult, pushCertResultSaga);
 }
 
+function* watchGetCertImageSaga() {
+	yield takeEvery(getCertImage, getCertImageSaga);
+}
+
 export default function* certificationSaga() {
 	yield all([
 		fork(watchSubmitCertGoalSaga),
 		fork(watchLoadCertListSaga),
 		fork(watchLoadCertSaga),
 		fork(watchPushCertResultSaga),
+		fork(watchGetCertImageSaga),
 	]);
 }

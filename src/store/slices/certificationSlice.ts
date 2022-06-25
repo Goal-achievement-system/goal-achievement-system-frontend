@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Goal, GoalsResponse } from 'types/goal';
 import {
 	CertFormState,
+	GetCertImageParam,
 	LoadCertListParam,
 	LoadCertListResponse,
 	LoadCertParam,
@@ -13,12 +14,14 @@ import { Certification } from 'types/certification';
 export interface InitialState {
 	goalList: Goal[];
 	certGoal: Certification;
+	certImage: any;
 	maxPage: number;
 }
 
 const initialState: InitialState = {
 	goalList: [],
 	certGoal: {} as Certification,
+	certImage: null,
 	maxPage: 1,
 };
 
@@ -40,6 +43,11 @@ export const certificationSlice = createSlice({
 			state.certGoal = payload;
 		},
 		pushCertResult: (state, action: PayloadAction<PushCertResultParam>) => {},
+		getCertImage: (state, action: PayloadAction<GetCertImageParam>) => {},
+		getCertImageSuccess: (state, { payload }: PayloadAction<any>) => {
+			state.certImage = payload;
+			console.log(state.certImage);
+		},
 	},
 });
 
