@@ -22,8 +22,12 @@ export default function SettingView() {
 						<span className="text-primaryOrange-200">{memberinfo?.email}</span>
 					</li>
 					<li className={baseLiStyle}>내 정보 변경</li>
-					<li className={baseLiStyle}>
-						<button type="button" onClick={() => openLogoutModal({ name: modalName.LogoutModal })}>
+					<li className="py-[20px]">
+						<button
+							type="button"
+							onClick={() => openLogoutModal({ name: modalName.LogoutModal })}
+							className="font-[800] text-[14px]"
+						>
 							로그아웃
 						</button>
 					</li>
