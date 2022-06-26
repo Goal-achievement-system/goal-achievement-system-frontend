@@ -57,7 +57,7 @@ export default function CertDetailModalContainer() {
 			alert('인증을 할 수 있는 상태가 아니군요!');
 		}
 		pushCertResultInitResult();
-	}, [pushCertResultInitResult, pushCertResultResult]);
+	}, [dispatch, pushCertResultInitResult, pushCertResultResult, searchParams]);
 	// clean up
 	useEffect(() => {
 		return () => {
