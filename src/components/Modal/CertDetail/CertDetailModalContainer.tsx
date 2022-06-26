@@ -31,10 +31,8 @@ export default function CertDetailModalContainer() {
 
 	useEffect(() => {
 		const goalId = searchParams.get('goal');
-		if (!goalId) {
-			console.log('모달');
-			return;
-		}
+		if (!goalId) return;
+
 		dispatch(goalSlice.actions.loadGoal({ goalId: +goalId }));
 		dispatch(certificationSlice.actions.loadCert({ goalId: +goalId }));
 
@@ -68,19 +66,8 @@ export default function CertDetailModalContainer() {
 			dispatch(certificationSlice.actions.getCertImageSuccess(''));
 		};
 	}, [dispatch]);
-	console.log(certGoal.image, certGoal.image);
+
 	return (
 		<CertDetailModalView goal={goal} certGoal={certGoal} certImage={certImage ?? ''} resultHandler={resultHandler} />
 	);
 }
-/*
-
-
-	useEffect(() => {
-		if (certResult) {
-			dispatch(certificationSlice.actions.getCertImage({ certId: certGoal.image }));
-		}
-	}, [certGoal.image, certResult, dispatch]);
-
-
-	*/
