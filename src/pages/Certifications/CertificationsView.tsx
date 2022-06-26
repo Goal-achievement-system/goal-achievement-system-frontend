@@ -78,7 +78,7 @@ function CertificationsView({
 						</svg>
 					</button>
 				</div>
-				<div className="flex justify-between items-center mb-[17px] pc:mb-[30px] pc:visible invisible">
+				<div className="flex justify-between items-center -mt-[50px] mb-[17px] pc:mb-[30px] pc:visible invisible">
 					<ul className="flex gap-x-[6px] pc:gap-x-[8px] ">
 						<FilterButton
 							onClick={() => {
