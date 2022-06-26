@@ -58,7 +58,7 @@ function CertificationsView({
 							# 전체
 						</option>
 						{categories?.map((category) => (
-							<option value={category} selected={curCategory === category}>{`# ${category}`}</option>
+							<option key={category} value={category} selected={curCategory === category}>{`# ${category}`}</option>
 						))}
 					</select>
 					<button type="button" onClick={() => setIsOneColumnMode((prev) => !prev)}>
@@ -91,6 +91,7 @@ function CertificationsView({
 							// 카테고리 로딩 처리 나중에 하기
 							categories?.map((category) => (
 								<FilterButton
+									key={category}
 									onClick={() => {
 										setCurCategory(category);
 									}}
