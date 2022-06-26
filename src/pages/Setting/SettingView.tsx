@@ -10,8 +10,7 @@ import { modalName } from 'utils/importModal';
 const baseLiStyle = 'py-[20px] font-[800] text-[14px]';
 export default function SettingView() {
 	const { memberinfo } = useSelector((state: RootState) => state.member);
-	const [openLogoutModal] = useModal();
-	const [openWithdrawalModal] = useModal();
+	const [openModal] = useModal();
 
 	return (
 		<BaseTemplate>
@@ -25,13 +24,21 @@ export default function SettingView() {
 					<li className="py-[20px]">
 						<button
 							type="button"
-							onClick={() => openLogoutModal({ name: modalName.LogoutModal })}
+							onClick={() => openModal({ name: modalName.LogoutModal })}
 							className="font-[800] text-[14px]"
 						>
 							로그아웃
 						</button>
 					</li>
-					<li className={`${baseLiStyle} text-primaryBlack-300`}>서비스 탈퇴</li>
+					<li className="py-[20px]">
+						<button
+							type="button"
+							onClick={() => openModal({ name: modalName.WithdrawalModal })}
+							className="font-[800] text-[14px] text-primaryBlack-300"
+						>
+							서비스탈퇴
+						</button>
+					</li>
 				</ul>
 			</Main>
 		</BaseTemplate>

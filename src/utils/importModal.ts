@@ -15,6 +15,7 @@ export const modalName = {
 	AnnounceMentsEditModal: 'AnnounceMentsEditModal',
 	CertAdminModal: 'CertAdminModal',
 	LogoutModal: 'LogoutModal',
+	WithdrawalModal: 'WithdrawalModal',
 };
 
 const modalList: ModalIndex[] = [
@@ -45,6 +46,10 @@ const modalList: ModalIndex[] = [
 	{
 		name: modalName.LogoutModal,
 		component: lazy(() => import('components/Modal/LogoutModal')),
+	},
+	{
+		name: modalName.WithdrawalModal,
+		component: lazy(() => import('components/Modal/WithdrawalModal')),
 	},
 ];
 
