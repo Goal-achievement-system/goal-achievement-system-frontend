@@ -23,6 +23,7 @@ function CertificationsContainer() {
 		dispatch(goalSlice.actions.loadCategories());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch]);
+
 	useEffect(() => {
 		if (categoriesResult?.isSuccess) {
 			// success
@@ -36,7 +37,7 @@ function CertificationsContainer() {
 		if (![...categories, 'all'].includes(curCategory)) return;
 		dispatch(certificationSlice.actions.loadCertList({ category: curCategory, page: curPage }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, curCategory]);
+	}, [dispatch, curCategory, curPage]);
 
 	return (
 		<CertificationsView

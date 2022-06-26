@@ -26,6 +26,7 @@ export default function CertDetailModalContainer() {
 		if (pushCertResultLoading) return;
 		const goalId = searchParams.get('goal');
 		if (!goalId) return;
+
 		dispatch(certificationSlice.actions.pushCertResult({ goalId: +goalId, result: isSuccess }));
 	};
 

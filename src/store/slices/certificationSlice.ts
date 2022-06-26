@@ -43,10 +43,14 @@ export const certificationSlice = createSlice({
 			state.certGoal = payload;
 		},
 		pushCertResult: (state, action: PayloadAction<PushCertResultParam>) => {},
+		addSuccessCount: (state) => {
+			console.log('성공 인증');
+			state.certGoal = { ...state.certGoal, successCount: state.certGoal.successCount + 1 };
+			console.log('성공 인증');
+		},
 		getCertImage: (state, action: PayloadAction<GetCertImageParam>) => {},
 		getCertImageSuccess: (state, { payload }: PayloadAction<any>) => {
 			state.certImage = payload;
-			console.log(state.certImage);
 		},
 	},
 });

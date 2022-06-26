@@ -24,6 +24,7 @@ const {
 	pushCertResult,
 	getCertImage,
 	getCertImageSuccess,
+	addSuccessCount,
 } = certificationSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -72,9 +73,10 @@ function* pushCertResultSaga(action: PayloadAction<certAPI.PushCertResultParam>)
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse = yield call(certAPI.putCertResult, param);
-		console.log(result);
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
+		if (param.result) yield put(addSuccessCount());
 	} catch (error) {
+		console.log(error);
 		const axiosError = error as AxiosError<any>;
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
