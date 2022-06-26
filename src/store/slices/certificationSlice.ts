@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Goal, GoalsResponse } from 'types/goal';
+import { Goal } from 'types/goal';
 import {
 	CertFormState,
 	GetCertImageParam,
@@ -14,7 +14,7 @@ import { Certification } from 'types/certification';
 export interface InitialState {
 	goalList: Goal[];
 	certGoal: Certification;
-	certImage: any;
+	certImage: string | null;
 	maxPage: number;
 }
 

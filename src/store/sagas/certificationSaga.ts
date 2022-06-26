@@ -97,20 +97,6 @@ function* getCertImageSaga(action: PayloadAction<certAPI.GetCertImageParam>) {
 	yield put(finishLoading(action.type));
 }
 
-// function* pushCertFailSaga(action: PayloadAction<certAPI.PushCertResultParam>) {
-// 	const param = action.payload;
-// 	yield put(startLoading(action.type));
-// 	try {
-// 		yield call(certAPI.putCert, param);
-
-// 		yield put(getResult({ isSuccess: true, actionType: action.type }));
-// 	} catch (error) {
-// 		const axiosError = error as AxiosError<any>;
-// 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
-// 	}
-// 	yield put(finishLoading(action.type));
-// }
-
 function* watchSubmitCertGoalSaga() {
 	yield takeEvery(submitCertGoal, submitCertGoalSaga);
 }
