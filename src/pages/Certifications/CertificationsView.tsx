@@ -49,7 +49,36 @@ function CertificationsView({
 	return (
 		<Main title="목표인증">
 			<div className="mb-[30px]">
-				<div className="flex justify-between items-center mb-[17px] pc:mb-[30px]">
+				<div className="flex justify-between items-center  -mb-[34px] pc:mb-0 visible pc:invisible">
+					<select
+						onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setCurCategory(event.currentTarget.value)}
+						className="p-[10px] pc:p-[16px] rounded-[8px] text-white bg-primaryBlack-500"
+					>
+						<option value="all" onClick={() => setCurCategory('all')} selected={curCategory === 'all'}>
+							# 전체
+						</option>
+						{categories?.map((category) => (
+							<option value={category} selected={curCategory === category}>{`# ${category}`}</option>
+						))}
+					</select>
+					<button type="button" onClick={() => setIsOneColumnMode((prev) => !prev)}>
+						<svg
+							className="pc:w-12 w-8 pc:h-12 h-8"
+							fill="bg-primaryBlack"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
+								d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+							/>
+						</svg>
+					</button>
+				</div>
+				<div className="flex justify-between items-center mb-[17px] pc:mb-[30px] pc:visible invisible">
 					<ul className="flex gap-x-[6px] pc:gap-x-[8px] ">
 						<FilterButton
 							onClick={() => {
@@ -73,7 +102,7 @@ function CertificationsView({
 					</ul>
 					<button type="button" onClick={() => setIsOneColumnMode((prev) => !prev)}>
 						<svg
-							className="w-12 h-12"
+							className="pc:w-12 w-8 pc:h-12 h-8"
 							fill="bg-primaryBlack"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
