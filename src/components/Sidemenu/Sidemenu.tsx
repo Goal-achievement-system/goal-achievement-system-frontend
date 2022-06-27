@@ -40,7 +40,15 @@ export default function SideMenu({ handleClickOfSideMenu }: Props) {
 						</button>
 					</div>
 					<div className="basis-[109px] flex flex-col items-center space-y-[20px]">
-						<div className="w-full pt-[20px] text-[20px]">{memberinfo ? memberinfo.nickName : '로그인 해주세요'}</div>
+						<button
+							className="w-full pt-[20px] text-[20px] font-[600] text-left"
+							type="button"
+							onClick={handleClickOfSideMenu}
+						>
+							<Link className="side-menu-user-name" to={memberinfo ? Path.myGoals : Path.login}>
+								{memberinfo ? memberinfo.nickName : '로그인 해주세요'}
+							</Link>
+						</button>
 						<div className="flex-grow w-full">
 							<div>
 								<ul className="flex justify-between">
@@ -76,7 +84,7 @@ export default function SideMenu({ handleClickOfSideMenu }: Props) {
 						<ul className="">
 							{sideNavigates.map(({ text, to }) =>
 								!text && !to ? (
-									<div className="border-[1px]" />
+									<div className="border-b-[1px]" />
 								) : (
 									<li className="text-[16px] font-[600] w-full h-[59px]">
 										<Link className="leading-[59px]" to={to} onClick={handleClickOfSideMenu}>
