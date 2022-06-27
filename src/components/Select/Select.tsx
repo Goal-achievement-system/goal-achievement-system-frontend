@@ -5,15 +5,16 @@ export interface Option {
 	id: number;
 	value: string;
 }
-export type DefaultValue = string | number | readonly string[] | undefined;
+// export type DefaultValue = string | number | readonly string[] | undefined;
 
 interface SelectProps {
 	options: Option[];
 	value: string | null;
-	defaultValue: DefaultValue;
+	// defaultValue: DefaultValue;
 	onChange: (curVar: string) => void;
 }
-export default function Select({ options, value, defaultValue, onChange }: SelectProps) {
+// export default function Select({ options, value, defaultValue, onChange }: SelectProps) {
+export default function Select({ options, value, onChange }: SelectProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const optionRef = useRef<HTMLDivElement>(null);
 
@@ -27,19 +28,19 @@ export default function Select({ options, value, defaultValue, onChange }: Selec
 		[options]
 	);
 
-	const optionListMobile = useMemo(
-		() =>
-			options.map((option: Option) => (
-				<option
-					key={option.id}
-					value={option.value}
-					onChange={(e: React.BaseSyntheticEvent | MouseEvent) => onChange(e.target.innerText)}
-				>
-					{option.value}
-				</option>
-			)),
-		[onChange, options]
-	);
+	// const optionListMobile = useMemo(
+	// 	() =>
+	// 		options.map((option: Option) => (
+	// 			<option
+	// 				key={option.id}
+	// 				value={option.value}
+	// 				onChange={(e: React.BaseSyntheticEvent | MouseEvent) => onChange(e.target.innerText)}
+	// 			>
+	// 				{option.value}
+	// 			</option>
+	// 		)),
+	// 	[onChange, options]
+	// );
 
 	// isOpen 이 변경이 되면 return 된 함수가 실행이 된다.
 	useEffect(() => {
@@ -67,25 +68,26 @@ export default function Select({ options, value, defaultValue, onChange }: Selec
 
 	return (
 		<>
-			<div className="pc:block hidden w-full">
+			<div className=" w-full">
 				<div className="dropdown relative pc:w-[100%]" ref={optionRef}>
-					<div className="select w-full h-[70px] border-2 border-primaryBlack-100 rounded-xl ">
+					<div className="select w-full pc:h-[70px] h-[46px] pc:border-2 border-[1px] border-primaryBlack-100 rounded-xl ">
 						<button
 							type="button"
-							className="flex items-center justify-start w-full p-6 text-center flex-grow"
+							className="flex items-center justify-start w-full h-full pc:px-[24px] px-[12px] text-center flex-grow"
 							onClick={handleClick}
 						>
-							<div className="arrow">
+							<div className="arrow-icon-wrap">
 								<Polygon className="max-w-[13px] max-h-[13px]" />
 							</div>
-							<div className="selected w-full pl-4 whitespace-nowrap text-ellipsis overflow-hidden text-left">
-								{!value ? defaultValue : value}
+							<div className="selected w-full pl-[16px] whitespace-nowrap text-ellipsis overflow-hidden text-left flex items-center pc:leading-[70px] leading-[46px]">
+								{/* {!value ? defaultValue : value} */}
+								{value}
 							</div>
 						</button>
 					</div>
 					{options && (
 						<div
-							className={`absolute options w-[100%] border-2 border-primaryBlack-100 bg-primaryWhite rounded-xl mt-1 ${
+							className={`absolute options w-[100%] pc:border-2 border-[1px] border-primaryBlack-100 bg-primaryWhite rounded-xl mt-1 ${
 								isOpen ? '' : 'hidden'
 							} z-50`}
 						>
@@ -101,7 +103,7 @@ export default function Select({ options, value, defaultValue, onChange }: Selec
 					)}
 				</div>
 			</div>
-			<div className="relative w-[48%] flex items-center pc:hidden">
+			{/* <div className="relative w-[48%] flex items-center pc:hidden">
 				<Polygon className="absolute left-[16px]" />
 				<select
 					className="scrollbar appearance-none profile-option w-full pc:h-[70px] h-[46px] pc:border-2 border-primaryBlack-100 rounded-xl cursor-pointer text-center"
@@ -113,7 +115,7 @@ export default function Select({ options, value, defaultValue, onChange }: Selec
 					</option>
 					{optionListMobile}
 				</select>
-			</div>
+			</div> */}
 		</>
 	);
 }

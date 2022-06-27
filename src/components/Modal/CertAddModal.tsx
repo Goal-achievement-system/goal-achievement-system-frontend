@@ -22,11 +22,6 @@ interface Props {
 }
 
 export default function CertAddModal({ index }: Props) {
-	// const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
-	// const [submitLoading, submigResult, submitInitResult] = useGetActionState(
-	// 	certificationSlice.actions.submitCertGoal.type
-	// );
-	// const [searchParams] = useSearchParams();
 	const dispatch = useDispatch();
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	const { goals } = useSelector((state: RootState) => state.member.memberGoals);
