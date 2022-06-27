@@ -4,21 +4,19 @@ import Path from 'utils/path';
 import { useNavigate } from 'react-router-dom';
 import authSlice from 'store/slices/authSlice';
 import useGetActionState from 'hooks/useGetActionState';
-import adminSlice from 'store/slices/adminSlice';
 import LoginView from './LoginView';
 import { formReducer, initialState } from './FormStateMgt';
 
 function LoginContainer() {
 	const [formState, formDispatch] = useReducer(formReducer, initialState);
 	const [loading, result, initResult] = useGetActionState(authSlice.actions.login.type);
-	const [adminLoading, adminResult, initAdminResult] = useGetActionState(adminSlice.actions.login.type);
 	const [error, setError] = useState<string>('');
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const onSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
-		if (loading || adminLoading) return;
+		if (loading) return;
 		const { email, password } = formState;
 		if (!email.trim() || !password.trim()) return;
 
