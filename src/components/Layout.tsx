@@ -19,6 +19,7 @@ import MyPage from 'pages/MyPage/MyPageContainer';
 import Inspection from 'pages/Admin/InspectionContainer';
 import AdminAnnouncements from 'pages/Admin/AnnouncementsContainer';
 import PushNotice from 'pages/PushNotice/PushNoticeContainer';
+import AnnouncementsDetail from 'pages/Announcements/AnnouncementsDetail';
 import ManageMenuBox from './Box/ManageMenuBox';
 
 function Layout() {

@@ -1,7 +1,7 @@
 import useModal, { OpenModalOnClick } from 'hooks/useModal';
 import React, { useState } from 'react';
 import CountUp from 'react-countup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Goal } from 'types/goal';
 import { GoalCount } from 'types/statistics';
 import Path from 'utils/path';
@@ -16,6 +16,7 @@ export interface Props {
 }
 
 function HomeView({ member, goalCount, goalList }: Props) {
+	const navigate = useNavigate();
 	const images = [
 		{ url: 'image/announcements/announcements1.png' },
 		{ url: 'image/announcements/announcements2.png' },
@@ -29,6 +30,7 @@ function HomeView({ member, goalCount, goalList }: Props) {
 			<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] overflow-hidden">
 				<div>
 					<SimpleImageSlider
+						style={{ cursor: 'pointer' }}
 						width="100%"
 						height="100%"
 						images={images}
@@ -43,6 +45,7 @@ function HomeView({ member, goalCount, goalList }: Props) {
 							if (announcementsPage === 3) setAnnouncementsPage(1);
 							else setAnnouncementsPage(announcementsPage + 1);
 						}}
+						onClick={() => navigate(Path.announcementsDetail)}
 					/>
 				</div>
 				<Link

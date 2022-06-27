@@ -5,6 +5,7 @@ const Path = {
 	signUp: '/sign-up',
 	certifications: '/certifications',
 	announcements: '/Announcements',
+	announcementsDetail: '/AnnouncementsDetail',
 	moneyCharge: '/money/charge',
 	moneyTransfer: '/money/transfer',
 	myGoals: '/mypage',
