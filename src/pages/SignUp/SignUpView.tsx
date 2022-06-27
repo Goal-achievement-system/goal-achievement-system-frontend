@@ -80,13 +80,11 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 						<Select
 							options={GenderOption}
 							value={formState.sex}
-							// defaultValue="성별"
 							onChange={(curVar: string) => formDispatch({ type: 'sex', payload: curVar })}
 						/>
 						<Select
 							options={AgeOption}
 							value={formState.age}
-							// defaultValue="연령"
 							onChange={(curVar: string) => formDispatch({ type: 'age', payload: curVar })}
 						/>
 					</div>
