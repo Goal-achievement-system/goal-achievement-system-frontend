@@ -1,10 +1,11 @@
 import useModal, { OpenModalOnClick } from 'hooks/useModal';
-import React from 'react';
+import React, { useState } from 'react';
 import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
 import { Goal } from 'types/goal';
 import { GoalCount } from 'types/statistics';
 import Path from 'utils/path';
+import SimpleImageSlider from 'react-simple-image-slider';
 import SmallBox from '../../components/Box/SmallBox';
 import { Member } from '../../types/member';
 
@@ -15,15 +16,40 @@ export interface Props {
 }
 
 function HomeView({ member, goalCount, goalList }: Props) {
+	const images = [
+		{ url: 'image/announcements/announcements1.png' },
+		{ url: 'image/announcements/announcements2.png' },
+		{ url: 'image/announcements/announcements3.png' },
+	];
 	const [openCertDetailModal] = useModal();
+	const [announcementsPage, setAnnouncementsPage] = useState(1);
+
 	return (
 		<div className="flex-1">
-			<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] bg-primaryOrange-200">
+			<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] overflow-hidden">
+				<div>
+					<SimpleImageSlider
+						width="100%"
+						height="100%"
+						images={images}
+						showBullets={false}
+						showNavs
+						navSize={30}
+						navMargin={5}
+						loop
+						autoPlay
+						autoPlayDelay={5}
+						onCompleteSlide={() => {
+							if (announcementsPage === 3) setAnnouncementsPage(1);
+							else setAnnouncementsPage(announcementsPage + 1);
+						}}
+					/>
+				</div>
 				<Link
 					to={Path.notice}
 					className="absolute bottom-[8px] right-[8px] pc:bottom-[16px] pc:right-[16px] rounded-[8px] p-[8px] text-white text-[10px] pc:text-[16px] font-[600] leading-[12px] pc:leading-[19.2px] bg-opacity-[30%] bg-black inline-block"
 				>
-					1/3 전체보기
+					{announcementsPage}/3 전체보기
 				</Link>
 			</div>
 			{member ? (
