@@ -76,16 +76,18 @@ function MenuBox({ member }: Props) {
 				{menuGoals.map((goal, idx) => {
 					if (idx < 2) {
 						return (
-							<div key={goal.goalId} className="mb-[7px]">
-								<SideBarButton onClick={() => {}} bgColor="orange">
-									<div className="flex justify-between w-full">
-										<span className="flex-1 text-left truncate text-primaryWhite">{goal.goalName}</span>
-										<span className="text-primaryWhite ml-[10px]">
-											📅 {new Date(goal.limitDate).getMonth() + 1}. {new Date(goal.limitDate).getDate()}
-										</span>
-									</div>
-								</SideBarButton>
-							</div>
+							<Link key={goal.goalId} to={Path.myGoals}>
+								<div key={goal.goalId} className="mb-[7px]">
+									<SideBarButton onClick={() => {}} bgColor="orange">
+										<div className="flex justify-between w-full">
+											<span className="flex-1 text-left truncate text-primaryWhite">{goal.goalName}</span>
+											<span className="text-primaryWhite ml-[10px]">
+												📅 {new Date(goal.limitDate).getMonth() + 1}. {new Date(goal.limitDate).getDate()}
+											</span>
+										</div>
+									</SideBarButton>
+								</div>
+							</Link>
 						);
 					}
 					return null;
@@ -101,14 +103,18 @@ function MenuBox({ member }: Props) {
 				{member && menuCerts?.length > 0 ? (
 					menuCerts.map((cert, idx) => {
 						if (idx < 2) {
-							<SideBarButton key={cert.certId} onClick={() => {}} bgColor="black">
-								<div className="flex justify-between w-full">
-									<span className="flex-1 text-left truncate text-primaryWhite">목표 인증</span>
-									<span className="text-primaryWhite ml-[10px]">
-										{cert.successCount} / {cert.requireSuccessCount}회
-									</span>
-								</div>
-							</SideBarButton>;
+							return (
+								<Link key={cert.goalId} to={Path.myGoals}>
+									<div className="mb-[7px]">
+										<SideBarButton onClick={() => {}} bgColor="black">
+											<div className="flex justify-between w-full">
+												<span className="flex-1 text-left truncate text-primaryWhite">{cert.goalName}</span>
+												<span className="text-primaryWhite ml-[10px]"># {cert.category}</span>
+											</div>
+										</SideBarButton>
+									</div>
+								</Link>
+							);
 						}
 						return null;
 					})
