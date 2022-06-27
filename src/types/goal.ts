@@ -1,6 +1,5 @@
 export type VerificationResult = 'all' | 'success' | 'fail' | 'ongoing' | 'hold' | 'oncertification';
 
-// all, ongoing, success, fail, hold, oncertification
 export interface Goal {
 	goalId: number;
 	memberEmail: string;

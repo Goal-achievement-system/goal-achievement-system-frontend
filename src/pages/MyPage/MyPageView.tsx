@@ -98,10 +98,12 @@ export default function MyPageView({
 						{goals?.length
 							? goals.map((goal, index) => (
 									<li className="w-[48%] pc:w-auto" key={goal.goalId}>
-										<SmallBox
-											goal={goal}
-											onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
-										/>
+										<Link to={`${Path.myGoals}?goal=${goal.goalId}`}>
+											<SmallBox
+												goal={goal}
+												onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
+											/>
+										</Link>
 									</li>
 							  ))
 							: null}

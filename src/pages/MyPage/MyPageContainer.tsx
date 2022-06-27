@@ -29,8 +29,8 @@ export default function MyPage() {
 	const [replaceMemberLoading, replaceMemberResult, replaceMemberInitResult] = useGetActionState(
 		memberSlice.actions.replaceMemberInfo.type
 	);
-	const dispatch: AppDispatch = useDispatch();
 
+	const dispatch: AppDispatch = useDispatch();
 	// eslint-disable-next-line consistent-return
 	const handleSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
