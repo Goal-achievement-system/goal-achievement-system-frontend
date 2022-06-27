@@ -42,10 +42,12 @@ function HomeView({ member, goalCount, goalList, openModalOnClick }: Props) {
 						{goalList &&
 							goalList.map((goal, index) => (
 								<li key={goal.goalId} className="w-[48%] pc:w-auto">
-									<SmallBox
-										goal={goal}
-										onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
-									/>
+									<Link to={`${Path.certifications}?goal=${goal.goalId}`}>
+										<SmallBox
+											goal={goal}
+											onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
+										/>
+									</Link>
 								</li>
 							))}
 					</ul>
