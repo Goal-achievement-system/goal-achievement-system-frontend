@@ -8,7 +8,7 @@ export interface IReplaceMemeberForm {
 	password: string;
 	passwordCheck: string;
 	nickName: string;
-	sex: SexKr;
+	sex: SexKr | string;
 	age: string;
 	money: number;
 }
@@ -18,8 +18,8 @@ export const replaceMemberInitialState: IReplaceMemeberForm = {
 	password: '',
 	passwordCheck: '',
 	nickName: '',
-	sex: '없음',
-	age: '0',
+	sex: '',
+	age: '',
 	money: 0,
 };
 

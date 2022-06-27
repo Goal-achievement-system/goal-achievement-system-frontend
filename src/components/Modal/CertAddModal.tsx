@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import OptionButton from 'components/Button/OptionButton';
-import TextInput from 'components/Input/TextInput';
-import SubmitButton from 'components/Button/SubmitButton';
 import { CertCategories, CertCategoryKrType, CertCategoryType } from 'types/certification';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
+import { useSearchParams } from 'react-router-dom';
 import { getGoalCategoryEng } from 'utils/common';
 import { Goal } from 'types/goal';
-import CheckButton from 'components/Button/CheckButton';
 import certificationSlice from 'store/slices/certificationSlice';
-import useGetActionState from 'hooks/useGetActionState';
 import goalSlice from 'store/slices/goalSlice';
-import { useSearchParams } from 'react-router-dom';
+import OptionButton from 'components/Button/OptionButton';
+import TextInput from 'components/Input/TextInput';
+import SubmitButton from 'components/Button/SubmitButton';
+import CheckButton from 'components/Button/CheckButton';
+import useGetActionState from 'hooks/useGetActionState';
 import useModal from 'hooks/useModal';
+import { ReactComponent as CameraIcon } from 'assets/icons/camera.svg';
 import { certFormReducer, initialState } from './SubmitCertForm';
 
 interface Props {
@@ -21,11 +22,11 @@ interface Props {
 }
 
 export default function CertAddModal({ index }: Props) {
-	const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
-	const [submitLoading, submigResult, submitInitResult] = useGetActionState(
-		certificationSlice.actions.submitCertGoal.type
-	);
-	const [searchParams] = useSearchParams();
+	// const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
+	// const [submitLoading, submigResult, submitInitResult] = useGetActionState(
+	// 	certificationSlice.actions.submitCertGoal.type
+	// );
+	// const [searchParams] = useSearchParams();
 	const dispatch = useDispatch();
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	const { goals } = useSelector((state: RootState) => state.member.memberGoals);
@@ -35,35 +36,12 @@ export default function CertAddModal({ index }: Props) {
 	const [ongoingGoals, setOnGoingGoals] = useState<Goal[]>([]);
 
 	const [formState, formDispatch] = useReducer(certFormReducer, initialState);
-	const [openModal, closeModal] = useModal();
+	// const [openModal, closeModal] = useModal();
 
 	const className = {
 		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px] max-w-[90vw]',
 		translate: '-translate-y-1/2 -translate-x-1/2',
 	};
-
-	// const resultHandler = (isSuccess: boolean) => {
-	// 	if (certResultLoading) return;
-	// 	const goalId = searchParams.get('goal');
-	// 	if (!goalId) return;
-	// 	if (isSuccess) dispatch(certificationSlice.actions.pushCertSuccess({ goalId: +goalId }));
-	// 	else dispatch(certificationSlice.actions.pushCertFail({ goalId: +goalId }));
-	// };
-
-	console.log(submigResult);
-
-	// useEffect(() => {
-	// 	const goalId = searchParams.get('goal');
-	// 	if (!goalId) return;
-	// 	if (goalLoading) return;
-	// 	dispatch(goalSlice.actions.loadGoal({ goalId: +goalId }));
-	// 	dispatch(certificationSlice.actions.loadCert({ goalId: +goalId }));
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [searchParams]);
-
-	// useEffect(() => {
-	// 	goalInitResult();
-	// }, [goalInitResult, goal, certGoal]);
 
 	const onSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
@@ -111,7 +89,7 @@ export default function CertAddModal({ index }: Props) {
 					className="pc:w-[230px] pc:h-[150px] w-[108px] h-[90px] border-2 rounded-xl flex items-center p-0 bg-primaryWhite"
 				>
 					<label htmlFor="profile_image" className="flex items-center w-full h-full cursor-pointer">
-						<img className="m-auto max-w-[25px]" src="./image/icon/camera.svg" alt="img-camera" />
+						<CameraIcon className="m-auto max-w-[25px]" />
 						<input id="profile_image" type="file" className="hidden" onChange={onChange} />
 					</label>
 				</button>
