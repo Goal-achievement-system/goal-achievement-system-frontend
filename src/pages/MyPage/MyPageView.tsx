@@ -197,13 +197,11 @@ export default function MyPageView({
 									<Select
 										options={GenderOption}
 										value={formState ? formState.sex : null}
-										defaultValue="성별"
 										onChange={(curVal: string) => formDispatch({ type: 'sex', payload: curVal })}
 									/>
 									<Select
 										options={AgeOption}
 										value={formState ? formState.age.toString() : null}
-										defaultValue="연령"
 										onChange={(curVal: string) => formDispatch({ type: 'age', payload: curVal })}
 									/>
 								</div>

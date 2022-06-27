@@ -76,17 +76,15 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 					<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px]">
 						<span className="font-semibold text-[20px]">선택사항</span>
 					</div>
-					<div className="flex justify-between w-full">
+					<div className="flex justify-between w-full space-x-[2%]">
 						<Select
 							options={GenderOption}
 							value={formState.sex}
-							defaultValue="성별"
 							onChange={(curVar: string) => formDispatch({ type: 'sex', payload: curVar })}
 						/>
 						<Select
 							options={AgeOption}
 							value={formState.age}
-							defaultValue="연령"
 							onChange={(curVar: string) => formDispatch({ type: 'age', payload: curVar })}
 						/>
 					</div>
