@@ -102,15 +102,15 @@ function* getMemberMenuInfosSaga(action: PayloadAction) {
 			state: 'ongoing',
 			page: 1,
 		});
-		// const menuCerts: AxiosResponse<Cert[]> = yield call(memberAPI.getMemberCerts, {
-		// 	state: 'ongoing',
-		// 	page: 1,
-		// });
+		const menuCerts: AxiosResponse<GoalsResponse> = yield call(memberAPI.getMemberGoals, {
+			state: 'oncertification',
+			page: 1,
+		});
 		yield put(
 			getMemberMenuInfosSuccess({
 				goalStatistics: goalStatistics.data,
 				menuGoals: menuGoals.data.goals,
-				menuCerts: [],
+				menuCerts: menuCerts.data.goals,
 			})
 		);
 		yield put(getResult({ isSuccess: true, actionType: action.type }));

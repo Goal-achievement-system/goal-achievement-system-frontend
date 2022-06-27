@@ -24,8 +24,6 @@ function HomeContainer() {
 		}
 	}, [dispatch, memberinfo, goalCount]);
 
-	console.log(goalList);
-
 	if (loading) return null;
 	return <HomeView member={memberinfo} goalCount={goalCount} goalList={goalList} />;
 }
