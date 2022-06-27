@@ -4,14 +4,15 @@ const Path = {
 	login: '/login',
 	signUp: '/sign-up',
 	certifications: '/certifications',
-	notice: '/notice',
+	announcements: '/Announcements',
+	announcementsDetail: '/AnnouncementsDetail',
 	moneyCharge: '/money/charge',
 	moneyTransfer: '/money/transfer',
 	myGoals: '/mypage',
 	pushNotice: '/mypage/push-notice',
 	goalRegister: '/goals/register',
 	inspection: '/admin/inspection',
-	announcements: '/admin/announcements',
+	adminAnnouncements: '/admin/announcements',
 	setting: '/setting',
 };
 

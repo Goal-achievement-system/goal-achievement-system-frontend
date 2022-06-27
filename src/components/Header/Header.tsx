@@ -20,7 +20,7 @@ export default function Header() {
 		{
 			id: 'notice',
 			title: '공지사항',
-			path: Path.notice,
+			path: Path.announcements,
 		},
 		{
 			id: 'certifications',

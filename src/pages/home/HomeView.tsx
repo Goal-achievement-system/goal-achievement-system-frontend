@@ -1,10 +1,11 @@
-import { OpenModalOnClick } from 'hooks/useModal';
-import React from 'react';
+import useModal, { OpenModalOnClick } from 'hooks/useModal';
+import React, { useState } from 'react';
 import CountUp from 'react-countup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Goal } from 'types/goal';
 import { GoalCount } from 'types/statistics';
 import Path from 'utils/path';
+import SimpleImageSlider from 'react-simple-image-slider';
 import SmallBox from '../../components/Box/SmallBox';
 import { Member } from '../../types/member';
 
@@ -12,18 +13,46 @@ export interface Props {
 	member: Member | null;
 	goalCount: GoalCount | null;
 	goalList: Goal[];
-	openModalOnClick: OpenModalOnClick;
 }
 
-function HomeView({ member, goalCount, goalList, openModalOnClick }: Props) {
+function HomeView({ member, goalCount, goalList }: Props) {
+	const navigate = useNavigate();
+	const images = [
+		{ url: 'image/announcements/announcements1.png' },
+		{ url: 'image/announcements/announcements2.png' },
+		{ url: 'image/announcements/announcements3.png' },
+	];
+	const [openCertDetailModal] = useModal();
+	const [announcementsPage, setAnnouncementsPage] = useState(1);
+
 	return (
 		<div className="flex-1">
-			<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] bg-primaryOrange-200">
+			<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] overflow-hidden">
+				<div>
+					<SimpleImageSlider
+						style={{ cursor: 'pointer' }}
+						width="100%"
+						height="100%"
+						images={images}
+						showBullets={false}
+						showNavs
+						navSize={30}
+						navMargin={5}
+						loop
+						autoPlay
+						autoPlayDelay={5}
+						onCompleteSlide={() => {
+							if (announcementsPage === 3) setAnnouncementsPage(1);
+							else setAnnouncementsPage(announcementsPage + 1);
+						}}
+						onClick={() => navigate(Path.announcementsDetail)}
+					/>
+				</div>
 				<Link
-					to={Path.notice}
+					to={Path.announcements}
 					className="absolute bottom-[8px] right-[8px] pc:bottom-[16px] pc:right-[16px] rounded-[8px] p-[8px] text-white text-[10px] pc:text-[16px] font-[600] leading-[12px] pc:leading-[19.2px] bg-opacity-[30%] bg-black inline-block"
 				>
-					1/3 전체보기
+					{announcementsPage}/3 전체보기
 				</Link>
 			</div>
 			{member ? (
@@ -40,13 +69,10 @@ function HomeView({ member, goalCount, goalList, openModalOnClick }: Props) {
 					</div>
 					<ul className="flex flex-wrap gap-x-[4%] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
 						{goalList &&
-							goalList.map((goal, index) => (
+							goalList.map((goal) => (
 								<li key={goal.goalId} className="w-[48%] pc:w-auto">
-									<Link to={`${Path.certifications}?goal=${goal.goalId}`}>
-										<SmallBox
-											goal={goal}
-											onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
-										/>
+									<Link to={`${Path.home}?goal=${goal.goalId}`}>
+										<SmallBox goal={goal} onClick={() => openCertDetailModal({ certState: goal.verificationResult })} />
 									</Link>
 								</li>
 							))}

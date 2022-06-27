@@ -8,13 +8,36 @@ export interface Props {
 }
 
 function LargeBox({ goal, onClick }: Props) {
+	const findImage = () => {
+		if (!goal) return 'image/thumbnail/largeBox_default_thumbnail.jpg';
+		switch (goal.category) {
+			case '공부':
+				return 'image/thumbnail/study_thumbnail.jpg';
+			case '습관':
+				return 'image/thumbnail/habit_thumbnail.jpg';
+			case '취미':
+				return 'image/thumbnail/hobby_thumbnail.jpg';
+			case '운동':
+				return 'image/thumbnail/exercise_thumbnail.jpg';
+			case '기타':
+				return 'image/thumbnail/etc_thumbnail.jpg';
+			default:
+				return 'image/thumbnail/largeBox_default_thumbnail.jpg';
+		}
+	};
 	return (
 		<button
 			type="button"
 			onClick={onClick}
 			className="flex rounded-[8px] pc:rounded-[16px] w-[100%] pc:w-[891px] h-[96px] pc:h-[177px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden bg-white text-left"
 		>
-			<div className="bg-buttonBlack-100 rounded-[8px] w-[135px] pc:w-[325px] h-[100%] mr-[16px] pc:mr-[32px] overflow-hidden" />
+			<div className="bg-buttonBlack-100 rounded-[8px] w-[135px] pc:w-[325px] h-[100%] mr-[16px] pc:mr-[32px] overflow-hidden relative">
+				<img
+					className="absolute left-0 top-0 w-full h-full object-cover object-center"
+					alt="goal_thumbnail"
+					src={findImage()}
+				/>
+			</div>
 			<div className="h-[100%] flex-1 flex justify-between flex-col">
 				<div>
 					<div className="flex justify-between items-start mb-[8px] pc:mb-[12px]">

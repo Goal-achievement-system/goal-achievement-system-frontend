@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import Notice from './NoticeView';
+import Notice from './AnnouncementsView';
 
 export default {
 	title: 'Pages/Notice',
