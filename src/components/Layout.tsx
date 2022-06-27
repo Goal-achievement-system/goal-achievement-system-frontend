@@ -9,7 +9,7 @@ import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
 import isLoggedIn from 'utils/isLoggedIn';
 import Path from 'utils/path';
-import Notice from 'pages/notice/NoticeContainer';
+import Announcements from 'pages/Announcements/AnnouncementsContainer';
 import Certifications from 'pages/Certifications/CertificationsContainer';
 import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
@@ -17,7 +17,7 @@ import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
 // import MyPage from 'pages/MyGoal/MyGoalContainer';
 import MyPage from 'pages/MyPage/MyPageContainer';
 import Inspection from 'pages/Admin/InspectionContainer';
-import Announcements from 'pages/Admin/AnnouncementsContainer';
+import AdminAnnouncements from 'pages/Admin/AnnouncementsContainer';
 import PushNotice from 'pages/PushNotice/PushNoticeContainer';
 import ManageMenuBox from './Box/ManageMenuBox';
 
@@ -46,19 +46,19 @@ function Layout() {
 				) : goalKeeperToken ? (
 					<Routes>
 						<Route path={Path.home} element={<Home />} />
-						<Route path={Path.notice} element={<Notice />} />
+						<Route path={Path.announcements} element={<Announcements />} />
 						<Route path={Path.certifications} element={<Certifications />} />
 						<Route path={Path.moneyCharge} element={<MoneyCharge />} />
 						<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
 						<Route path={Path.myGoals} element={<MyPage />} />
 						<Route path={Path.inspection} element={<Inspection />} />
-						<Route path={Path.announcements} element={<Announcements />} />
+						<Route path={Path.announcements} element={<AdminAnnouncements />} />
 						<Route path={Path.pushNotice} element={<PushNotice />} />
 					</Routes>
 				) : (
 					<Routes>
 						<Route path={Path.home} element={<Home />} />
-						<Route path={Path.notice} element={<Notice />} />
+						<Route path={Path.announcements} element={<Announcements />} />
 						<Route path="*" element={<Navigate to="/login" replace />} />
 					</Routes>
 				)}

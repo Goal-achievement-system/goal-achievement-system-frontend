@@ -46,7 +46,7 @@ function HomeView({ member, goalCount, goalList }: Props) {
 					/>
 				</div>
 				<Link
-					to={Path.notice}
+					to={Path.announcements}
 					className="absolute bottom-[8px] right-[8px] pc:bottom-[16px] pc:right-[16px] rounded-[8px] p-[8px] text-white text-[10px] pc:text-[16px] font-[600] leading-[12px] pc:leading-[19.2px] bg-opacity-[30%] bg-black inline-block"
 				>
 					{announcementsPage}/3 전체보기

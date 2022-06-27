@@ -20,7 +20,7 @@ export default function SideMenu({ handleClickOfSideMenu }: Props) {
 		{ text: '목표머니 이체', to: Path.moneyTransfer },
 		{ text: '내 목표', to: Path.myGoals },
 		{ text: '', to: '' },
-		{ text: '공지사항', to: Path.notice },
+		{ text: '공지사항', to: Path.announcements },
 		{ text: '설정', to: Path.setting },
 	];
 
