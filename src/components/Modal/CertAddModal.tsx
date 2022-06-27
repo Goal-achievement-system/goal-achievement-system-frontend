@@ -12,6 +12,7 @@ import certificationSlice from 'store/slices/certificationSlice';
 import useGetActionState from 'hooks/useGetActionState';
 import goalSlice from 'store/slices/goalSlice';
 import { useSearchParams } from 'react-router-dom';
+import { ReactComponent as CameraIcon } from 'assets/icons/camera.svg';
 import { certFormReducer, initialState } from './SubmitCertForm';
 
 interface Props {
@@ -112,7 +113,7 @@ export default function CertAddModal({ index }: Props) {
 					className="pc:w-[230px] pc:h-[150px] w-[108px] h-[90px] border-2 rounded-xl flex items-center p-0 bg-primaryWhite"
 				>
 					<label htmlFor="profile_image" className="flex items-center w-full h-full cursor-pointer">
-						<img className="m-auto max-w-[25px]" src="./image/icon/camera.svg" alt="img-camera" />
+						<CameraIcon className="m-auto max-w-[25px]" />
 						<input id="profile_image" type="file" className="hidden" onChange={onChange} />
 					</label>
 				</button>

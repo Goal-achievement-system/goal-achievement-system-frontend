@@ -7,6 +7,7 @@ import { VerificationResult } from 'types/goal';
 import useModal from 'hooks/useModal';
 import { sexTransKrToEng, validatePassword } from 'utils/common';
 import useGetActionState from 'hooks/useGetActionState';
+import { SexKr } from 'types/member';
 import { replaceMemberformReducer, replaceMemberInitialState } from './ReplaceMemberForm';
 import MyPageView from './MyPageView';
 
@@ -42,7 +43,7 @@ export default function MyPage() {
 		if (!validatePassword(formState.password)) return alert('비밀번호는 8자리 이상이어야 해요!');
 		// Eng Kr 변환
 		// eslint-disable-next-line no-nested-ternary
-		const sexTrans = sexTransKrToEng(sex);
+		const sexTrans = sexTransKrToEng(sex as SexKr);
 		const ageTrans = Number(age.substring(0, age.length - 1));
 		dispatch(memberSlice.actions.replaceMemberInfo({ ...replaceMemberForm, sex: sexTrans, age: ageTrans }));
 	};
