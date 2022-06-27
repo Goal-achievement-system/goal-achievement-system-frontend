@@ -1,4 +1,4 @@
-import { OpenModalOnClick } from 'hooks/useModal';
+import useModal, { OpenModalOnClick } from 'hooks/useModal';
 import React from 'react';
 import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
@@ -12,10 +12,10 @@ export interface Props {
 	member: Member | null;
 	goalCount: GoalCount | null;
 	goalList: Goal[];
-	openModalOnClick: OpenModalOnClick;
 }
 
-function HomeView({ member, goalCount, goalList, openModalOnClick }: Props) {
+function HomeView({ member, goalCount, goalList }: Props) {
+	const [openCertDetailModal] = useModal();
 	return (
 		<div className="flex-1">
 			<div className="relative rounded-[16px] w-full h-[147px] pc:h-[270px] mb-[30px] bg-primaryOrange-200">
@@ -40,12 +40,11 @@ function HomeView({ member, goalCount, goalList, openModalOnClick }: Props) {
 					</div>
 					<ul className="flex flex-wrap gap-x-[4%] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
 						{goalList &&
-							goalList.map((goal, index) => (
+							goalList.map((goal) => (
 								<li key={goal.goalId} className="w-[48%] pc:w-auto">
-									<SmallBox
-										goal={goal}
-										onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
-									/>
+									<Link to={`${Path.home}?goal=${goal.goalId}`}>
+										<SmallBox goal={goal} onClick={() => openCertDetailModal({ certState: goal.verificationResult })} />
+									</Link>
 								</li>
 							))}
 					</ul>
