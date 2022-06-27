@@ -12,6 +12,7 @@ import certificationSlice from 'store/slices/certificationSlice';
 import useGetActionState from 'hooks/useGetActionState';
 import goalSlice from 'store/slices/goalSlice';
 import { useSearchParams } from 'react-router-dom';
+import useModal from 'hooks/useModal';
 import { certFormReducer, initialState } from './SubmitCertForm';
 
 interface Props {
@@ -20,23 +21,21 @@ interface Props {
 }
 
 export default function CertAddModal({ index }: Props) {
-	// const { goal } = useSelector((state: RootState) => state.goal);
-	// const { certGoal } = useSelector((state: RootState) => state.certification);
 	const [goalLoading, goalResult, goalInitResult] = useGetActionState(goalSlice.actions.loadGoal.type);
-	// const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCert.type);
-	// const [certResultLoading, certResultResult, certResultInitResult] = useGetActionState(
-	// certificationSlice.actions.loadCert.type
-	// );
+	const [submitLoading, submigResult, submitInitResult] = useGetActionState(
+		certificationSlice.actions.submitCertGoal.type
+	);
 	const [searchParams] = useSearchParams();
 	const dispatch = useDispatch();
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	const { goals } = useSelector((state: RootState) => state.member.memberGoals);
-	const goal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
+	const curGoal = useSelector((state: RootState) => state.member.memberGoals.goals[index]);
 	const [curCategory, setCurCategory] = useState<CertCategoryType>('exercice');
 	const [checkedGoalID, setCheckedGoalID] = useState<number>(0);
 	const [ongoingGoals, setOnGoingGoals] = useState<Goal[]>([]);
 
 	const [formState, formDispatch] = useReducer(certFormReducer, initialState);
+	const [openModal, closeModal] = useModal();
 
 	const className = {
 		size: 'pc:w-[750px] w-[320px] pc:max-w-[750px] pc:h-[750px] pc:max-h-[80vh] max-h-[424px] max-w-[90vw]',
@@ -51,14 +50,16 @@ export default function CertAddModal({ index }: Props) {
 	// 	else dispatch(certificationSlice.actions.pushCertFail({ goalId: +goalId }));
 	// };
 
-	useEffect(() => {
-		const goalId = searchParams.get('goal');
-		if (!goalId) return;
-		if (goalLoading) return;
-		dispatch(goalSlice.actions.loadGoal({ goalId: +goalId }));
-		dispatch(certificationSlice.actions.loadCert({ goalId: +goalId }));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchParams]);
+	console.log(submigResult);
+
+	// useEffect(() => {
+	// 	const goalId = searchParams.get('goal');
+	// 	if (!goalId) return;
+	// 	if (goalLoading) return;
+	// 	dispatch(goalSlice.actions.loadGoal({ goalId: +goalId }));
+	// 	dispatch(certificationSlice.actions.loadCert({ goalId: +goalId }));
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [searchParams]);
 
 	// useEffect(() => {
 	// 	goalInitResult();
@@ -89,16 +90,14 @@ export default function CertAddModal({ index }: Props) {
 	};
 
 	useEffect(() => {
-		const goalCategoryEng = getGoalCategoryEng(goal.category as CertCategoryKrType);
+		const goalCategoryEng = getGoalCategoryEng(curGoal.category as CertCategoryKrType);
 		setCurCategory(goalCategoryEng as CertCategoryType);
 
 		const filterResult = goals.filter(({ verificationResult }) => verificationResult === 'ongoing');
 		setOnGoingGoals(() => [...filterResult]);
-		setCheckedGoalID(goal.goalId);
-		formDispatch({ type: 'goalId', payload: goal.goalId });
-	}, [goal, goals]);
-
-	console.log(ongoingGoals);
+		setCheckedGoalID(curGoal.goalId);
+		formDispatch({ type: 'goalId', payload: curGoal.goalId });
+	}, [curGoal, goals]);
 
 	return (
 		<form
@@ -138,11 +137,19 @@ export default function CertAddModal({ index }: Props) {
 				<div className="pc:mb-[30px] mb-[8px] font-[600]">목표 선택</div>
 				<div className="option-wrap">
 					<ul className="flex space-x-[16px] overflow-auto">
-						{ongoingGoals.map(({ goalId }) => (
-							<li className="pc:max-w-[250px] pc:w-[250px] w-[160px]">
+						{ongoingGoals.map((goal) => (
+							<li className="pc:max-w-[260px] pc:w-[260px] w-[160px]">
 								<CheckButton
-									onClick={() => setCheckedGoalID(goalId)}
-									isSelected={checkedGoalID === goalId}
+									onClick={() => {
+										const categoryEng: CertCategoryType | null = getGoalCategoryEng(
+											goal.category as CertCategoryKrType
+										);
+										if (!categoryEng) return;
+
+										setCheckedGoalID(goal.goalId);
+										setCurCategory(categoryEng);
+									}}
+									isSelected={checkedGoalID === goal.goalId}
 									goal={goal}
 								/>
 							</li>

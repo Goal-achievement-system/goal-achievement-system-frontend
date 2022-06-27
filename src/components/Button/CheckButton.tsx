@@ -23,7 +23,6 @@ function CheckButton({ onClick, isSelected, goal }: Props) {
 	const getBgColor = useCallback(() => (isSelected ? BgColor.orange200 : BgColor.gray), [isSelected]);
 	const getTextColor = useCallback(() => (isSelected ? TextColor.white : TextColor.gray), [isSelected]);
 
-	console.log(goal);
 	return (
 		<button
 			type="button"
