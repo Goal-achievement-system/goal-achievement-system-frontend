@@ -141,7 +141,7 @@ export default function MyPageView({
 			</div>
 			<div className="pc:mt-[60px] pc:block hidden">
 				<Main title="개인정보 관리">
-					<form className="" onSubmit={handleSubmit}>
+					<form className="pc:mb-[70px]" onSubmit={handleSubmit}>
 						<div className="flex flex-col space-y-[40px]">
 							<div className="email-wrap">
 								<PerformInput
@@ -193,20 +193,22 @@ export default function MyPageView({
 								<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[10px] mb-[8px]">
 									<span className="font-semibold text-[20px]">선택사항</span>
 								</div>
-								<div className="flex justify-between w-full">
+								<div className="flex justify-between w-full space-x-[2%]">
 									<Select
 										options={GenderOption}
 										value={formState ? formState.sex : null}
+										defaultValue="성별"
 										onChange={(curVal: string) => formDispatch({ type: 'sex', payload: curVal })}
 									/>
 									<Select
 										options={AgeOption}
 										value={formState ? formState.age.toString() : null}
+										defaultValue="연령"
 										onChange={(curVal: string) => formDispatch({ type: 'age', payload: curVal })}
 									/>
 								</div>
 							</div>
-							<div className="submitbutton-wrap">
+							<div className="submitbutton-wrap pc:mt-[60px]">
 								<SubmitButton label="변경하기" btnState="active" />
 							</div>
 						</div>
