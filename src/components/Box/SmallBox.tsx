@@ -13,18 +13,40 @@ function SmallBox({ goal, onClick }: Props) {
 		if (checkArr.includes(verificationResult)) return true;
 		return false;
 	};
+	const findImage = () => {
+		if (!goal) return 'image/thumbnail/smallBox_default_thumbnail.jpg';
+		switch (goal.category) {
+			case '공부':
+				return 'image/thumbnail/study_thumbnail.jpg';
+			case '습관':
+				return 'image/thumbnail/habit_thumbnail.jpg';
+			case '취미':
+				return 'image/thumbnail/hobby_thumbnail.jpg';
+			case '운동':
+				return 'image/thumbnail/exercise_thumbnail.jpg';
+			case '기타':
+				return 'image/thumbnail/etc_thumbnail.jpg';
+			default:
+				return 'image/thumbnail/smallBox_default_thumbnail.jpg';
+		}
+	};
 	return (
 		<button
 			type="button"
 			onClick={onClick}
 			className="cursor-pointer rounded-[8px] pc:rounded-[16px] w-[100%] pc:w-[277px] h-[150px] pc:h-[277px] p-[8px] pc:p-[16px] border-[1px] border-borderGray overflow-hidden bg-white text-left"
 		>
-			<div className="bg-buttonBlack-100 rounded-[8px] h-[68px] pc:h-[125px] mb-[8px] pc:mb-[16px] overflow-hidden">
+			<div className="bg-buttonBlack-100 rounded-[8px] h-[68px] pc:h-[125px] mb-[8px] pc:mb-[16px] overflow-hidden relative">
 				{goal && checkDrawBox(goal.verificationResult) && (
 					<div className="bg-[#000] bg-opacity-[80%] text-white text-[10px] pc:text-[16px] leading-[12px] pc:leading-[19px] font-[500] p-[5px] pc:p-[8px]">
 						{getGoalState(goal.verificationResult)}
 					</div>
 				)}
+				<img
+					className="absolute left-0 top-0 w-full h-full object-cover object-center"
+					alt="goal_thumbnail"
+					src={findImage()}
+				/>
 			</div>
 			<div className="flex justify-between items-center mb-[8px] pc:mb-[16px] text-[10px] pc:text-[16px] font-[600] leading-[12px] pc:leading-[19px]">
 				<div className="flex">
