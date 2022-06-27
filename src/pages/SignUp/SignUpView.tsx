@@ -1,7 +1,8 @@
 import React from 'react';
 import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import PerformInput from 'components/Input/PerformInput';
-import Select, { Option } from 'components/Select/Select';
+// import Select, { Option } from 'components/Select/Select';
+import Select from 'react-select';
 import BaseTemplate from 'components/BaseTemplate';
 import AuthLayout from 'components/AuthLayout';
 import { IForm, Action } from './FormStateMgt';
@@ -13,19 +14,32 @@ interface Props {
 	error: string;
 }
 
+// export const GenderOption = [
+// 	{ id: 1, value: '남자' },
+// 	{ id: 2, value: '여자' },
+// 	{ id: 3, value: '없음' },
+// ] as Option[];
 export const GenderOption = [
-	{ id: 1, value: '남자' },
-	{ id: 2, value: '여자' },
-	{ id: 3, value: '없음' },
-] as Option[];
+	{ value: 1, label: '남자' },
+	{ value: 2, label: '여자' },
+	{ value: 3, label: '없음' },
+];
+// export const AgeOption = [
+// 	{ id: 10, value: '10대' },
+// 	{ id: 20, value: '20대' },
+// 	{ id: 30, value: '30대' },
+// 	{ id: 40, value: '40대' },
+// 	{ id: 50, value: '50대' },
+// 	{ id: 60, value: '60대' },
+// ] as Option[];
 export const AgeOption = [
-	{ id: 10, value: '10대' },
-	{ id: 20, value: '20대' },
-	{ id: 30, value: '30대' },
-	{ id: 40, value: '40대' },
-	{ id: 50, value: '50대' },
-	{ id: 60, value: '60대' },
-] as Option[];
+	{ value: 10, label: '10대' },
+	{ value: 20, label: '20대' },
+	{ value: 30, label: '30대' },
+	{ value: 40, label: '40대' },
+	{ value: 50, label: '50대' },
+	{ value: 60, label: '60대' },
+];
 
 function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 	const getBtnState = (): BtnStates => {
@@ -77,18 +91,20 @@ function SignUpView({ error, onSubmit, formState, formDispatch }: Props) {
 						<span className="font-semibold text-[20px]">선택사항</span>
 					</div>
 					<div className="flex justify-between w-full">
-						<Select
+						{/* <Select
 							options={GenderOption}
 							value={formState.sex}
 							defaultValue="성별"
 							onChange={(curVar: string) => formDispatch({ type: 'sex', payload: curVar })}
-						/>
-						<Select
+						/> */}
+						{/* <Select
 							options={AgeOption}
 							value={formState.age}
 							defaultValue="연령"
 							onChange={(curVar: string) => formDispatch({ type: 'age', payload: curVar })}
-						/>
+						/> */}
+						<Select className="w-full h-[30px]" options={GenderOption} />
+						<Select className="w-full h-[50px]" options={AgeOption} />
 					</div>
 					<div className="mt-[7px]">
 						<span className={` ${error ? 'text-red-400' : 'text-white'}`}>{error || 'errorZone'}</span>

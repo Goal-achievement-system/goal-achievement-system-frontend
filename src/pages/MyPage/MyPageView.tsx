@@ -7,7 +7,8 @@ import FilterButton from 'components/Button/FilterButton';
 import SmallBox from 'components/Box/SmallBox';
 import Pagination from 'components/Pagination';
 import PerformInput from 'components/Input/PerformInput';
-import Select from 'components/Select/Select';
+// import Select from 'components/Select/Select';
+import Select from 'react-select';
 import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
 import SubmitButton from 'components/Button/SubmitButton';
 import { OpenModalOnClick } from 'hooks/useModal';
@@ -194,7 +195,7 @@ export default function MyPageView({
 									<span className="font-semibold text-[20px]">선택사항</span>
 								</div>
 								<div className="flex justify-between w-full space-x-[2%]">
-									<Select
+									{/* <Select
 										options={GenderOption}
 										value={formState ? formState.sex : null}
 										defaultValue="성별"
@@ -205,7 +206,10 @@ export default function MyPageView({
 										value={formState ? formState.age.toString() : null}
 										defaultValue="연령"
 										onChange={(curVal: string) => formDispatch({ type: 'age', payload: curVal })}
-									/>
+									/> */}
+
+									<Select className="w-full h-[30px]" options={GenderOption} />
+									<Select className="w-full h-[50px]" options={AgeOption} />
 								</div>
 							</div>
 							<div className="submitbutton-wrap pc:mt-[60px]">
