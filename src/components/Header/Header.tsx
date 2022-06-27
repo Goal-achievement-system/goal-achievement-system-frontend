@@ -35,7 +35,7 @@ export default function Header() {
 	];
 	const menus = menuList.map((menu: Menu): React.ReactElement => {
 		return (
-			<li key={menu.id} className="font-[600]">
+			<li key={menu.id} className="font-[600] pc:min-w-[65px]">
 				<Link to={menu.path}>{menu.title}</Link>
 			</li>
 		);
@@ -54,9 +54,9 @@ export default function Header() {
 	const handleClickOfSideMenu = () => setIsOpenSideMenu(!isOpenSideMenu);
 
 	return (
-		<header className="pc:max-w-[1200px] h-[86px] flex mx-auto  justify-between items-center">
+		<header className="pc:max-w-[1200px] h-[86px] flex mx-auto justify-between items-center">
 			<div className="pc:basis-[312px] h-full flex items-center">
-				<Link className="" to="/">
+				<Link className="logo-link" to={Path.home}>
 					<img
 						className="pc:max-w-[157px] max-w-[112px]"
 						src={`${process.env.PUBLIC_URL}/image/icon/logo.svg`}
@@ -65,7 +65,7 @@ export default function Header() {
 				</Link>
 			</div>
 			<nav className="hidden mr-auto pc:block">
-				<ul className="flex space-x-[39px]">{menus}</ul>
+				<ul className="flex space-x-[35px]">{menus}</ul>
 			</nav>
 			<div className="hidden header-sub-menus pc:flex z-[1]" aria-hidden ref={dropDownRef}>
 				<div className="relative">
