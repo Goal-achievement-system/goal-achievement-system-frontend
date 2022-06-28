@@ -47,12 +47,14 @@ function* submitCertGoalSaga(action: PayloadAction<certAPI.CertFormState>) {
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<CertResponse> = yield call(certAPI.submitCertGoal, action.payload);
-		// yield put(submitCertGoalSuccess(result?.data))
+		console.log(result);
+		// yield put(submitCertGoalSuccess(result?.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
+	yield put(finishLoading(action.type));
 }
 
 function* loadCertSaga(action: PayloadAction<certAPI.LoadCertParam>) {
