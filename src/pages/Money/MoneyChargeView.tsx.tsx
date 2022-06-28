@@ -5,6 +5,7 @@ import Main from 'components/Main';
 import React, { useState } from 'react';
 import { Member } from 'types/member';
 import { addComma, deleteComma } from 'utils/common';
+import { applyMoneyUnit } from 'utils/applyMoneyUnit';
 import { ChargeFormState, ChargeFormReducerAction } from './MoneyType';
 
 interface Props {
@@ -15,12 +16,6 @@ interface Props {
 }
 
 function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Props) {
-	const changeInputTextValue = (text: string): string => {
-		const regex = /[^0-9]/g;
-		const number = Number(text.replace(regex, ''));
-		if (number > 1000) return '1000';
-		return number.toString();
-	};
 	const getBtnState = (): BtnStates => {
 		const { chargeMoney, agree } = formState;
 		if (!(agree && deleteComma(chargeMoney) > 0)) return 'inactive';
@@ -36,7 +31,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 				<div className="mb-[20px] pc:mb-[30px]">
 					<TextInput
 						placeholder="1만원 (단위 만원)"
-						onChange={(curVar: string) => formDispatch({ type: 'chargeMoney', payload: changeInputTextValue(curVar) })}
+						onChange={(curVar: string) => formDispatch({ type: 'chargeMoney', payload: applyMoneyUnit(curVar) })}
 						value={formState?.chargeMoney}
 					/>
 				</div>

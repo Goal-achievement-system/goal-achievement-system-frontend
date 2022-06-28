@@ -37,10 +37,10 @@ export const isFormValid = (formState: IForm, categories: string[], remainingMon
 	// money range 확인
 	// isFinite -> 문자열이 숫자로 변환가능한지 , 내 머니 내에 있는지
 	// eslint-disable-next-line no-restricted-globals
-	if (!isFinite(+money) || +money < 0 || +money > remainingMoney) return false;
+	if (!isFinite(+money) || +money < 0 || +money * 10000 > remainingMoney) return false;
 	console.log('pass');
 	// 만원에서  백만원 사이인지
-	// if (+money >= 10000 || +money <= 1000000) return false;
+	if (+money < 1 || +money > 100) return false;
 	console.log('pass');
 	// !! 날짜가 오늘 이후인지 검토 필요
 	// 일단은 날짜가 제대로 들어왔다고 가정.

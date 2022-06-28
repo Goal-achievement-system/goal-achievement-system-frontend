@@ -2,6 +2,7 @@ import OptionButton from 'components/Button/OptionButton';
 import SubmitButton, { BtnStates } from 'components/Button/SubmitButton';
 import TextInput from 'components/Input/TextInput';
 import React from 'react';
+import { applyMoneyUnit } from 'utils/applyMoneyUnit';
 import { IForm, Action, isFormValid } from './FormStateMgt';
 
 interface Props {
@@ -18,6 +19,7 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, c
 
 		return 'active';
 	};
+
 	return (
 		<form className="pc:rounded-[16px] pc:px-[40px] pc:bg-[#FAFAFA]" onSubmit={onSubmit}>
 			<div className="-mb-8 pc:mb-0" />
@@ -51,11 +53,11 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, c
 			</div>
 
 			<TextInput
-				placeholder="10000"
-				onChange={(curVar: string) => formDispatch({ type: 'money', payload: curVar })}
+				placeholder="5"
+				onChange={(curVar: string) => formDispatch({ type: 'money', payload: applyMoneyUnit(curVar) })}
 				value={formState?.money}
 				isRequired
-				label="보증금 선택 (단위 원)"
+				label="보증금 선택 (단위 만원)"
 			/>
 			<span className="text-red-500">*보증금은 만원부터 백만원까지 선택할 수 있어요</span>
 

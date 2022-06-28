@@ -37,7 +37,7 @@ function GoalRegModalContainer() {
 				memberEmail: memberInfo.email,
 				goalName,
 				content,
-				money: +money,
+				money: +money * 10000,
 				limitDate: date,
 				reward: reward as 'high' | 'low',
 				category,
