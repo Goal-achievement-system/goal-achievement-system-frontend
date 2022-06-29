@@ -7,7 +7,7 @@ interface Props {
 	index: number;
 }
 
-export default function AnnounceMentsEditModal({ index }: Props) {
+export default function AnnouncementsEditModal({ index }: Props) {
 	const announceMents = useSelector((state: RootState) => state.admin.announcementsList?.announcements[index]);
 	const className = {
 		size: 'pc:w-[890px] max-w-[90vw] pc:max-h-[80vh] w-[320px] max-h-[424px]',

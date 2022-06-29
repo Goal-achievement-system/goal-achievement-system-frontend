@@ -16,6 +16,8 @@ function AnnouncementsContainer() {
 		dispatch(adminSlice.actions.loadAnnouncementsList({ page: 1 }));
 	}, [dispatch]);
 
+	console.log(announcementsList);
+
 	return (
 		<AnnouncementsView
 			openAnnounceMentsAddModal={openAnnounceMentsAddModal}

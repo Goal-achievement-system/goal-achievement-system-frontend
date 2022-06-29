@@ -27,11 +27,11 @@ const modalList: ModalIndex[] = [
 	},
 	{
 		name: modalName.AnnounceMentsAddModal,
-		component: lazy(() => import('components/Modal/AnnounceMents/AnnounceMentsAddModal')),
+		component: lazy(() => import('components/Modal/AnnounceMents/AnnouncementsAddModal')),
 	},
 	{
 		name: modalName.AnnounceMentsEditModal,
-		component: lazy(() => import('components/Modal/AnnounceMents/AnnounceMentsEditModal')),
+		component: lazy(() => import('components/Modal/AnnounceMents/AnnouncementsEditModal')),
 	},
 	{
 		name: modalName.CertAdminModal,
