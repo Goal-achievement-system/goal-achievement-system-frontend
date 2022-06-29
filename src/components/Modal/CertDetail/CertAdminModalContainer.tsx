@@ -44,6 +44,7 @@ export default function CertAdminModalContainer({ index }: Props) {
 			certGoal={inspectionData.certification}
 			resultHandler={resultHandler}
 			certImage=""
+			isLoading={inspectionData.goal.goalId !== inspectionData.certification.goalId}
 		/>
 	);
 }

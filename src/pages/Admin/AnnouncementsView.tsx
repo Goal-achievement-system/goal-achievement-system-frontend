@@ -36,13 +36,23 @@ function AnnouncementsView({ openAnnounceMentsAddModal, openAnnounceMentsEditMod
 								<div className="w-[10%]">{item.announcementId}</div>
 								<div className="w-[75%]">{item.title}</div>
 								<div className="w-[15%]">
-									<button
-										onClick={() => openAnnounceMentsEditModal(idx)}
-										type="button"
-										className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-buttonBlack-100 text-[#999999] border-[1px] border-buttonBlack-100"
-									>
-										비활성 중
-									</button>
+									{item.activation ? (
+										<button
+											onClick={() => openAnnounceMentsEditModal(idx)}
+											type="button"
+											className="rounded-[8px] w-[90px] p-[8px] text-[16px] font-[600] bg-primaryOrange-200 text-white border-[1px] border-buttonBlack-100"
+										>
+											활성 중
+										</button>
+									) : (
+										<button
+											onClick={() => openAnnounceMentsEditModal(idx)}
+											type="button"
+											className="rounded-[8px] w-[90px] p-[8px] text-[16px] font-[600] bg-buttonBlack-100 text-[#999999] border-[1px] border-buttonBlack-100"
+										>
+											비활성 중
+										</button>
+									)}
 								</div>
 							</li>
 						);
