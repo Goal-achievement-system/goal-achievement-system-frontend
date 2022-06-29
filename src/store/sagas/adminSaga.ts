@@ -7,6 +7,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import loadingSlice from 'store/slices/loadingSlice';
 import adminSlice from 'store/slices/adminSlice';
 import { Announcements } from 'types/announcements';
+import { Buffer } from 'buffer';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -19,6 +20,8 @@ const {
 	inspectCertification,
 	registAnnouncements,
 	registAnnouncementsSuccess,
+	loadAnnouncementsInfo,
+	loadAnnouncementsInfoSuccess,
 } = adminSlice.actions;
 
 function* loginSaga(action: PayloadAction<adminPAI.LogInBody>) {
@@ -69,12 +72,40 @@ function* loadAnnouncementsListSaga(action: PayloadAction<adminPAI.LoadAnnouncem
 	yield put(finishLoading(action.type));
 }
 
+function* loadAnnouncementsInfoSaga(action: PayloadAction<Announcements>) {
+	yield put(startLoading(action.type));
+	const body = action.payload;
+	try {
+		const image: AxiosResponse<ArrayBuffer> = yield call(adminPAI.loadAnnouncementsImage, { id: body.announcementId });
+		const bannerImage: AxiosResponse<ArrayBuffer> = yield call(adminPAI.loadAnnouncementsBannerImage, {
+			id: body.announcementId,
+		});
+
+		console.log(typeof image?.data);
+
+		const formatImage = (result: AxiosResponse<ArrayBuffer>): string => {
+			const stringifiedBuffer = Buffer.from(result.data).toString('base64');
+			const base64Image = `data:${result?.headers['content-type']};base64,${stringifiedBuffer}`;
+
+			return base64Image;
+		};
+
+		const announcementsWithImage = { ...body, image: formatImage(image), bannerImage: formatImage(bannerImage) };
+
+		yield put(loadAnnouncementsInfoSuccess(announcementsWithImage));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
+
 function* registAnnouncementsSaga(action: PayloadAction<adminPAI.RegistAnnouncementsBody>) {
 	yield put(startLoading(action.type));
 	const body = action.payload;
 	try {
 		const result: AxiosResponse<Announcements> = yield call(adminPAI.registAnnouncements, body);
-		console.log(result?.data, 'result?.data');
 		yield put(registAnnouncementsSuccess(result?.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
@@ -117,6 +148,10 @@ function* watchInspectCertificationSaga() {
 	yield takeLatest(inspectCertification, inspectCertificationSaga);
 }
 
+function* watchLoadAnnouncementsInfoSaga() {
+	yield takeLatest(loadAnnouncementsInfo, loadAnnouncementsInfoSaga);
+}
+
 export default function* adminSaga() {
 	yield all([
 		fork(watchLoginSaga),
@@ -124,5 +159,6 @@ export default function* adminSaga() {
 		fork(watchLoadAnnouncementsListSaga),
 		fork(watchInspectCertificationSaga),
 		fork(watchRegistAnnouncementsSaga),
+		fork(watchLoadAnnouncementsInfoSaga),
 	]);
 }

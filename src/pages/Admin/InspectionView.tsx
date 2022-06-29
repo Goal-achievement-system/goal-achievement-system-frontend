@@ -50,7 +50,7 @@ function InspectionView({ inspectionList, openCertAdminModal }: Props) {
 											<button
 												type="button"
 												className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-primaryOrange-100 text-primaryOrange-200 border-[1px] border-primaryOrange-200"
-												onClick={() => openCertAdminModal(idx)}
+												onClick={() => {}}
 											>
 												검토 하기
 											</button>

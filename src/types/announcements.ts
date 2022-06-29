@@ -4,4 +4,6 @@ export interface Announcements {
 	description: string;
 	date: Date;
 	activation: boolean;
+	image?: string;
+	bannerImage?: string;
 }

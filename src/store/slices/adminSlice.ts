@@ -14,12 +14,14 @@ export interface InitialState {
 	inspectionList: LoadInspectionResponse;
 	announcementsList: LoadAnnouncementsListResponse | null;
 	isAdmin: string | null;
+	announcementsInfo: Announcements | null;
 }
 
 const initialState: InitialState = {
 	isAdmin: null,
 	inspectionList: [],
 	announcementsList: null,
+	announcementsInfo: null,
 };
 
 export const adminSlice = createSlice({
@@ -37,6 +39,10 @@ export const adminSlice = createSlice({
 		loadAnnouncementsList: (state, action: PayloadAction<LoadAnnouncementsListBody>) => {},
 		loadAnnouncementsListSuccess: (state, { payload }: PayloadAction<LoadAnnouncementsListResponse>) => {
 			state.announcementsList = payload;
+		},
+		loadAnnouncementsInfo: (state, action: PayloadAction<Announcements>) => {},
+		loadAnnouncementsInfoSuccess: (state, { payload }: PayloadAction<Announcements>) => {
+			state.announcementsInfo = payload;
 		},
 		registAnnouncements: (state, action: PayloadAction<RegistAnnouncementsBody>) => {},
 		registAnnouncementsSuccess: (state, { payload }: PayloadAction<Announcements>) => {

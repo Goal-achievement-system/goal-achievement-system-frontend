@@ -16,6 +16,10 @@ export interface LoadAnnouncementsListBody {
 	page: number;
 }
 
+export interface LoadAnnouncementsInfoBody {
+	id: number;
+}
+
 export interface InspectCertificationBody {
 	state: 'success' | 'fail';
 	goalId: number;
@@ -43,6 +47,7 @@ export interface RegistAnnouncementsBody {
 	bannerImage: string;
 	activation: boolean;
 }
+
 const checkAdmin = () => {
 	const token = localStorage.getItem('adminToken');
 	if (token) client.defaults.headers.common.Authorization = token;
@@ -61,6 +66,16 @@ export const loadInspection = ({ page }: LoadInspectionBody) => {
 export const loadAnnouncementsList = ({ page }: LoadAnnouncementsListBody) => {
 	checkAdmin();
 	return client.get(`/announcements/list/${page}`);
+};
+
+export const loadAnnouncementsImage = ({ id }: LoadAnnouncementsInfoBody) => {
+	checkAdmin();
+	return client.get(`image/announcement/${id}`, { responseType: 'arraybuffer' });
+};
+
+export const loadAnnouncementsBannerImage = ({ id }: LoadAnnouncementsInfoBody) => {
+	checkAdmin();
+	return client.get(`image/announcement/banner/${id}`, { responseType: 'arraybuffer' });
 };
 
 export const registAnnouncements = async ({ title, image, bannerImage, activation }: RegistAnnouncementsBody) => {
