@@ -1,14 +1,23 @@
 import { LoadAnnouncementsListResponse } from 'api/adminAPI';
 import Main from 'components/Main';
+import Pagination from 'components/Pagination';
 import React from 'react';
 
 interface Props {
 	openAnnounceMentsAddModal: () => void;
 	openAnnounceMentsEditModal: (index: number) => void;
 	announcementsList: LoadAnnouncementsListResponse | null;
+	curPage: number;
+	setCurPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function AnnouncementsView({ openAnnounceMentsAddModal, openAnnounceMentsEditModal, announcementsList }: Props) {
+function AnnouncementsView({
+	openAnnounceMentsAddModal,
+	openAnnounceMentsEditModal,
+	announcementsList,
+	curPage,
+	setCurPage,
+}: Props) {
 	return (
 		<Main title="공지사항">
 			<div className="flex justify-end mb-[30px]">
@@ -59,6 +68,12 @@ function AnnouncementsView({ openAnnounceMentsAddModal, openAnnounceMentsEditMod
 					})}
 				</ul>
 			</div>
+			<Pagination
+				curPage={curPage}
+				setCurPage={setCurPage}
+				numOfPages={announcementsList?.maxPage || 1}
+				numOfPageBtn={3}
+			/>
 		</Main>
 	);
 }
