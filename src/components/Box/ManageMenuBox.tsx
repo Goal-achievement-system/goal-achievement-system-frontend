@@ -26,10 +26,10 @@ function ManageMenuBox({ member }: Props) {
 				</li>
 				<li
 					className={`text-[16px] font-[600] leading-[19px] mb-[29px] ${
-						pathname === Path.announcements ? 'text-black' : 'text-primaryBlack-300'
+						pathname === Path.adminAnnouncements ? 'text-black' : 'text-primaryBlack-300'
 					}`}
 				>
-					<Link to={Path.announcements}>공지사항</Link>
+					<Link to={Path.adminAnnouncements}>공지사항</Link>
 				</li>
 			</ul>
 		</div>

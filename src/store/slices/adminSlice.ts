@@ -11,9 +11,11 @@ import { LogInBody } from 'api/authAPI';
 export interface InitialState {
 	inspectionList: LoadInspectionResponse;
 	announcementsList: LoadAnnouncementsListResponse | null;
+	isAdmin: string | null;
 }
 
 const initialState: InitialState = {
+	isAdmin: null,
 	inspectionList: [],
 	announcementsList: null,
 };
@@ -23,6 +25,9 @@ export const adminSlice = createSlice({
 	initialState,
 	reducers: {
 		login: (state, action: PayloadAction<LogInBody>) => {},
+		checkLogin: (state) => {
+			state.isAdmin = localStorage.getItem('adminToken');
+		},
 		loadInspection: (state, action: PayloadAction<LoadInspectionBody>) => {},
 		loadInspectionSuccess: (state, { payload }: PayloadAction<LoadInspectionResponse>) => {
 			state.inspectionList = payload;

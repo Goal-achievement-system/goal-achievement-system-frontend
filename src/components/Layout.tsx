@@ -7,6 +7,7 @@ import MenuBox from 'components/Box/MenuBox';
 import { AppDispatch } from 'store';
 import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
+import adminSlice from 'store/slices/adminSlice';
 import isLoggedIn from 'utils/isLoggedIn';
 import Path from 'utils/path';
 import Announcements from 'pages/Announcements/AnnouncementsContainer';
@@ -19,7 +20,6 @@ import MyPage from 'pages/MyPage/MyPageContainer';
 import Inspection from 'pages/Admin/InspectionContainer';
 import AdminAnnouncements from 'pages/Admin/AnnouncementsContainer';
 import PushNotice from 'pages/PushNotice/PushNoticeContainer';
-import AnnouncementsDetail from 'pages/Announcements/AnnouncementsDetail';
 import ManageMenuBox from './Box/ManageMenuBox';
 
 function Layout() {
@@ -28,13 +28,15 @@ function Layout() {
 	const adminToken = localStorage.getItem('adminToken');
 	const goalKeeperToken = localStorage.getItem('goalKeeperToken');
 	const { memberinfo } = useSelector((state: RootState) => state.member);
+	const { isAdmin } = useSelector((state: RootState) => state.admin);
 
 	useEffect(() => {
+		if (!isAdmin) dispatch(adminSlice.actions.checkLogin());
 		if (!memberinfo && isLoggedIn()) dispatch(memberSlice.actions.loadMemberInfo());
-	}, [dispatch, memberinfo]);
+	}, [dispatch, memberinfo, isAdmin]);
 
 	return (
-		<BaseTemplate>
+		<BaseTemplate isAdmin={isAdmin}>
 			<div className=" pc:w-[1200px] pc:flex mt-[0] pc:mt-[40px] pb-[50px] mx-auto pc:box-content">
 				<div className="hidden pc:block mr-[30px]">
 					{adminToken ? <ManageMenuBox member={null} /> : <MenuBox member={memberinfo} />}
@@ -43,6 +45,7 @@ function Layout() {
 					<Routes>
 						<Route path={Path.inspection} element={<Inspection />} />
 						<Route path={Path.announcements} element={<Announcements />} />
+						<Route path={Path.adminAnnouncements} element={<AdminAnnouncements />} />
 					</Routes>
 				) : goalKeeperToken ? (
 					<Routes>
