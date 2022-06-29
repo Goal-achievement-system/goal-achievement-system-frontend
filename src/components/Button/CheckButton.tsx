@@ -24,10 +24,10 @@ function CheckButton({ onClick, isSelected, goal }: Props) {
 	const getTextColor = useCallback(() => (isSelected ? TextColor.white : TextColor.gray), [isSelected]);
 
 	return (
-		<button
-			type="button"
-			onClick={onClick}
+		<div
 			className={`flex justify-center items-center rounded-[8px] w-full pc:p-[16px] p-[10px] ${getBgColor()}`}
+			onClick={onClick}
+			aria-hidden
 		>
 			<div className="flex justify-between w-full">
 				<button type="button" onClick={() => {}} className="flex items-center cursor-pointer">
@@ -46,7 +46,7 @@ function CheckButton({ onClick, isSelected, goal }: Props) {
 					📅 {new Date(goal.limitDate).getMonth() + 1}. {new Date(goal.limitDate).getDate()}
 				</span>
 			</div>
-		</button>
+		</div>
 	);
 }
 

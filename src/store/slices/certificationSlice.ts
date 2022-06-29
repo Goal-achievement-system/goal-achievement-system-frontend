@@ -34,9 +34,7 @@ export const certificationSlice = createSlice({
 			state.goalList = payload.goals;
 			state.maxPage = payload.maxPage;
 		},
-		submitCertGoal: (state, action: PayloadAction<CertFormState>) => {
-			console.log('start');
-		},
+		submitCertGoal: (state, action: PayloadAction<CertFormState>) => {},
 		submitCertGoalSuccess: (state) => {},
 		loadCert: (state, action: PayloadAction<LoadCertParam>) => {},
 		loadCertSuccess: (state, { payload }: PayloadAction<Certification>) => {
