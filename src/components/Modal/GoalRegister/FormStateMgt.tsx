@@ -43,8 +43,17 @@ export const isFormValid = (formState: IForm, categories: string[], remainingMon
 	if (+money < 1 || +money > 100) return false;
 	console.log('pass');
 	// !! 날짜가 오늘 이후인지 검토 필요
-	// 일단은 날짜가 제대로 들어왔다고 가정.
-	if (!limitDate.trim()) return false;
+	// 올바른 날짜 형식인지,오늘 이후의 날짜 인지
+
+	const today = new Date();
+	const todayParse = Date.parse(`${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`);
+	if (
+		!limitDate.trim() ||
+		// eslint-disable-next-line no-restricted-globals
+		isNaN(Date.parse(limitDate)) ||
+		todayParse > Date.parse(limitDate)
+	)
+		return false;
 	console.log('pass');
 	if (reward === null) return false;
 	console.log('pass');

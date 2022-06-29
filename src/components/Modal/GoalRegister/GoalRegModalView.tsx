@@ -68,7 +68,6 @@ function GoalRegisterView({ onSubmit, formState, formDispatch, remainingMoney, c
 				isRequired
 				label="목표 마감일 선택"
 			/>
-
 			<div className="flex pc:space-x-[8px] space-x-[4px] pc:mb-[16px] mb-[8px] mt-[30px] ">
 				<span className="font-semibold pc:text-[20px] text-[14px]">달성 시 추가금 방식</span>
 				<span className="font-semibold text-primaryOrange-200 ">*</span>

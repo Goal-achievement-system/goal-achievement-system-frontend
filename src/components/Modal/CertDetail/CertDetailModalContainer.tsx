@@ -69,6 +69,12 @@ export default function CertDetailModalContainer() {
 	}, [dispatch]);
 
 	return (
-		<CertDetailModalView goal={goal} certGoal={certGoal} certImage={certImage ?? ''} resultHandler={resultHandler} />
+		<CertDetailModalView
+			goal={goal}
+			certGoal={certGoal}
+			certImage={certImage ?? ''}
+			resultHandler={resultHandler}
+			isLoading={goal.goalId !== certGoal.goalId}
+		/>
 	);
 }
