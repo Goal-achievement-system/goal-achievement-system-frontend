@@ -5,3 +5,9 @@ export default function handleLogout() {
 	window.history.pushState(null, '', Path.login);
 	window.location.reload();
 }
+
+export function handleAdminLogout() {
+	localStorage.removeItem('adminToken');
+	window.history.pushState(null, '', Path.home);
+	window.location.reload();
+}

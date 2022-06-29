@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from 'store/slices';
-import handleLogout from 'utils/handleLogout';
+import handleLogout, { handleAdminLogout } from 'utils/handleLogout';
 import AlarmPopup from './AlarmModal';
 import UserProfilePopUp from './UserProfileModal';
 
@@ -50,6 +50,7 @@ const data = [
 ];
 
 export default function RouteModal({ title, alarmList = data, isOpen, setIsOpen }: Props) {
+	const { isAdmin } = useSelector((state: RootState) => state.admin);
 	const { memberinfo } = useSelector((state: RootState) => state.member);
 	// eslint-disable-next-line consistent-return
 	const closePopUp = () => {
@@ -59,6 +60,32 @@ export default function RouteModal({ title, alarmList = data, isOpen, setIsOpen 
 			return newIsOpen;
 		});
 	};
+
+	if (isAdmin) {
+		return (
+			<div className="absolute right-0 z-50">
+				<div
+					className={`w-[380px] h-[286px] p-6 flex flex-col rounded-2xl border-2 text-left bg-white ${
+						isOpen ? '' : 'hidden'
+					}`}
+				>
+					<div className="font-[600]">{title}</div>
+					<div className="pc:my-auto max-h-[270px] flex flex-col space-y-[40px] justify-center items-center">
+						<div className=" text-primaryOrange-200">관리자 로그인 중입니다.</div>
+					</div>
+					<div className="w-full">
+						<button
+							type="button"
+							className="w-full border-2 rounded-[8px] border-borderGray pc:px-[29px] pc:py-[15px] text-primaryBlack-300"
+							onClick={handleAdminLogout}
+						>
+							로그아웃
+						</button>
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	if (!memberinfo) {
 		return (

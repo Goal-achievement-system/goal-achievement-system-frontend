@@ -1,14 +1,24 @@
 import { LoadAnnouncementsListResponse } from 'api/adminAPI';
 import Main from 'components/Main';
+import Pagination from 'components/Pagination';
 import React from 'react';
+import { Announcements } from 'types/announcements';
 
 interface Props {
 	openAnnounceMentsAddModal: () => void;
-	openAnnounceMentsEditModal: (index: number) => void;
+	openAnnounceMentsDetailModal: (announcements: Announcements) => void;
 	announcementsList: LoadAnnouncementsListResponse | null;
+	curPage: number;
+	setCurPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function AnnouncementsView({ openAnnounceMentsAddModal, openAnnounceMentsEditModal, announcementsList }: Props) {
+function AnnouncementsView({
+	openAnnounceMentsAddModal,
+	openAnnounceMentsDetailModal,
+	announcementsList,
+	curPage,
+	setCurPage,
+}: Props) {
 	return (
 		<Main title="공지사항">
 			<div className="flex justify-end mb-[30px]">
@@ -34,21 +44,43 @@ function AnnouncementsView({ openAnnounceMentsAddModal, openAnnounceMentsEditMod
 								key={item.announcementId}
 							>
 								<div className="w-[10%]">{item.announcementId}</div>
-								<div className="w-[75%]">{item.title}</div>
-								<div className="w-[15%]">
+								<div className="w-[75%]">
 									<button
-										onClick={() => openAnnounceMentsEditModal(idx)}
+										className="font-[600] text-[16px]"
 										type="button"
-										className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-buttonBlack-100 text-[#999999] border-[1px] border-buttonBlack-100"
+										onClick={() => openAnnounceMentsDetailModal(item)}
 									>
-										비활성 중
+										{item.title}
 									</button>
+								</div>
+								<div className="w-[15%]">
+									{item.activation ? (
+										<button
+											type="button"
+											className="rounded-[8px] w-[90px] p-[8px] text-[16px] font-[600] bg-primaryOrange-200 text-white border-[1px] border-buttonBlack-100"
+										>
+											활성 중
+										</button>
+									) : (
+										<button
+											type="button"
+											className="rounded-[8px] w-[90px] p-[8px] text-[16px] font-[600] bg-buttonBlack-100 text-[#999999] border-[1px] border-buttonBlack-100"
+										>
+											비활성 중
+										</button>
+									)}
 								</div>
 							</li>
 						);
 					})}
 				</ul>
 			</div>
+			<Pagination
+				curPage={curPage}
+				setCurPage={setCurPage}
+				numOfPages={announcementsList?.maxPage || 1}
+				numOfPageBtn={3}
+			/>
 		</Main>
 	);
 }

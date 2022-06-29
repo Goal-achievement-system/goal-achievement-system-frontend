@@ -5,8 +5,8 @@ export const modalName = {
 	GoalRegModal: 'GoalRegModal',
 	CertDetailModal: 'CertDetailModal',
 	CertAddModal: 'certAddModal',
-	AnnounceMentsAddModal: 'AnnounceMentsAddModal',
-	AnnounceMentsEditModal: 'AnnounceMentsEditModal',
+	AnnouncementsAddModal: 'AnnouncementsAddModal',
+	AnnouncementsDetailModal: 'AnnouncementsDetailModal',
 	CertAdminModal: 'CertAdminModal',
 	LogoutModal: 'LogoutModal',
 	WithdrawalModal: 'WithdrawalModal',
@@ -26,12 +26,12 @@ const modalList: ModalIndex[] = [
 		component: lazy(() => import('components/Modal/GoalRegister/GoalRegModalContainer')),
 	},
 	{
-		name: modalName.AnnounceMentsAddModal,
+		name: modalName.AnnouncementsAddModal,
 		component: lazy(() => import('components/Modal/AnnounceMents/AnnounceMentsAddModal')),
 	},
 	{
-		name: modalName.AnnounceMentsEditModal,
-		component: lazy(() => import('components/Modal/AnnounceMents/AnnounceMentsEditModal')),
+		name: modalName.AnnouncementsDetailModal,
+		component: lazy(() => import('components/Modal/AnnounceMents/AnnounceMentsDetailModal')),
 	},
 	{
 		name: modalName.CertAdminModal,
