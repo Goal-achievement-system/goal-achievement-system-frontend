@@ -6,6 +6,7 @@ import resultSlice from 'store/slices/resultSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import loadingSlice from 'store/slices/loadingSlice';
 import adminSlice from 'store/slices/adminSlice';
+import { Announcements } from 'types/announcements';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
@@ -16,6 +17,8 @@ const {
 	loadAnnouncementsList,
 	loadAnnouncementsListSuccess,
 	inspectCertification,
+	registAnnouncements,
+	registAnnouncementsSuccess,
 } = adminSlice.actions;
 
 function* loginSaga(action: PayloadAction<adminPAI.LogInBody>) {
@@ -29,7 +32,6 @@ function* loginSaga(action: PayloadAction<adminPAI.LogInBody>) {
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
-
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
@@ -44,7 +46,6 @@ function* loadInspectionSaga(action: PayloadAction<adminPAI.LoadInspectionBody>)
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
-
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
@@ -58,11 +59,26 @@ function* loadAnnouncementsListSaga(action: PayloadAction<adminPAI.LoadAnnouncem
 			adminPAI.loadAnnouncementsList,
 			body
 		);
+		console.log(result?.data, 'result');
 		yield put(loadAnnouncementsListSuccess(result?.data));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
 
+function* registAnnouncementsSaga(action: PayloadAction<adminPAI.RegistAnnouncementsBody>) {
+	yield put(startLoading(action.type));
+	const body = action.payload;
+	try {
+		const result: AxiosResponse<Announcements> = yield call(adminPAI.registAnnouncements, body);
+		console.log(result?.data, 'result?.data');
+		yield put(registAnnouncementsSuccess(result?.data));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
@@ -76,7 +92,6 @@ function* inspectCertificationSaga(action: PayloadAction<adminPAI.InspectCertifi
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
-
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));
@@ -94,6 +109,10 @@ function* watchLoadAnnouncementsListSaga() {
 	yield takeLatest(loadAnnouncementsList, loadAnnouncementsListSaga);
 }
 
+function* watchRegistAnnouncementsSaga() {
+	yield takeLatest(registAnnouncements, registAnnouncementsSaga);
+}
+
 function* watchInspectCertificationSaga() {
 	yield takeLatest(inspectCertification, inspectCertificationSaga);
 }
@@ -104,5 +123,6 @@ export default function* adminSaga() {
 		fork(watchLoadInspectionSaga),
 		fork(watchLoadAnnouncementsListSaga),
 		fork(watchInspectCertificationSaga),
+		fork(watchRegistAnnouncementsSaga),
 	]);
 }

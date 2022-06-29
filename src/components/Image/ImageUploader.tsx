@@ -5,8 +5,8 @@ import { ReactComponent as Camera } from 'assets/icons/camera.svg';
 import { ReactComponent as Union } from 'assets/icons/union.svg';
 
 interface Props {
-	image: string | null;
-	setImage: React.Dispatch<React.SetStateAction<string | null>>;
+	image: Blob | null;
+	setImage: React.Dispatch<React.SetStateAction<Blob | null>>;
 	width?: number;
 	height: number;
 	alt: string;
@@ -17,8 +17,7 @@ const fileTypes = ['JPG', 'PNG'];
 function ImageUploader({ image, setImage, width, height, alt }: Props) {
 	const [isDrag, setIsDrag] = useState<boolean>(false);
 	const handleChange = (file: File) => {
-		const blobURL = URL.createObjectURL(file);
-		setImage(blobURL);
+		setImage(file);
 	};
 
 	if (image) {
@@ -34,7 +33,7 @@ function ImageUploader({ image, setImage, width, height, alt }: Props) {
 						style={width ? { width: `${width}px`, height: `${height}px` } : { height: `${height}px` }}
 						className="bg-gray-200 w-full"
 					>
-						<img alt={alt} src={image} className="w-full h-full object-contain object-center" />
+						<img alt={alt} src={URL.createObjectURL(image)} className="w-full h-full object-contain object-center" />
 					</div>
 				</FileUploader>
 				<Union

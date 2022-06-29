@@ -37,6 +37,12 @@ export interface LoadAnnouncementsListResponse {
 	announcements: Announcements[];
 }
 
+export interface RegistAnnouncementsBody {
+	title: string;
+	image: string;
+	bannerImage: string;
+	activation: boolean;
+}
 const checkAdmin = () => {
 	const token = localStorage.getItem('adminToken');
 	if (token) client.defaults.headers.common.Authorization = token;
@@ -55,6 +61,21 @@ export const loadInspection = ({ page }: LoadInspectionBody) => {
 export const loadAnnouncementsList = ({ page }: LoadAnnouncementsListBody) => {
 	checkAdmin();
 	return client.get(`/announcements/list/${page}`);
+};
+
+export const registAnnouncements = async ({ title, image, bannerImage, activation }: RegistAnnouncementsBody) => {
+	checkAdmin();
+	return client
+		.post(`/admin/announcement`, {
+			title,
+			description: '',
+			image,
+			bannerImage,
+			activation,
+		})
+		.then((announcement) => {
+			return announcement;
+		});
 };
 
 export const inspectCertification = ({ state, goalId }: InspectCertificationBody) => {

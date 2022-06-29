@@ -5,8 +5,10 @@ import {
 	LoadAnnouncementsListResponse,
 	LoadInspectionBody,
 	LoadInspectionResponse,
+	RegistAnnouncementsBody,
 } from 'api/adminAPI';
 import { LogInBody } from 'api/authAPI';
+import { Announcements } from 'types/announcements';
 
 export interface InitialState {
 	inspectionList: LoadInspectionResponse;
@@ -35,6 +37,13 @@ export const adminSlice = createSlice({
 		loadAnnouncementsList: (state, action: PayloadAction<LoadAnnouncementsListBody>) => {},
 		loadAnnouncementsListSuccess: (state, { payload }: PayloadAction<LoadAnnouncementsListResponse>) => {
 			state.announcementsList = payload;
+		},
+		registAnnouncements: (state, action: PayloadAction<RegistAnnouncementsBody>) => {},
+		registAnnouncementsSuccess: (state, { payload }: PayloadAction<Announcements>) => {
+			state.announcementsList =
+				state.announcementsList && state.announcementsList.announcements?.length < 6
+					? { ...state.announcementsList, announcements: state.announcementsList.announcements.concat(payload) }
+					: state.announcementsList;
 		},
 		inspectCertification: (state, action: PayloadAction<InspectCertificationBody>) => {},
 	},
