@@ -11,7 +11,7 @@ import { LogInBody } from 'api/authAPI';
 import { Announcements } from 'types/announcements';
 
 export interface InitialState {
-	inspectionList: LoadInspectionResponse;
+	inspectionList: LoadInspectionResponse | null;
 	announcementsList: LoadAnnouncementsListResponse | null;
 	isAdmin: string | null;
 	announcementsInfo: Announcements | null;
@@ -19,7 +19,7 @@ export interface InitialState {
 
 const initialState: InitialState = {
 	isAdmin: null,
-	inspectionList: [],
+	inspectionList: null,
 	announcementsList: null,
 	announcementsInfo: null,
 };

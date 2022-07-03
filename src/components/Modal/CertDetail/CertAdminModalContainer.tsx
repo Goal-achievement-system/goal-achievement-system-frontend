@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default function CertAdminModalContainer({ index }: Props) {
-	const inspectionData = useSelector((state: RootState) => state.admin.inspectionList[index]);
+	const inspectionData = useSelector((state: RootState) => state.admin.inspectionList?.results[index])!;
 	const dispatch: AppDispatch = useDispatch();
 	const [certResultLoading, certResultResult, certResultInitResult] = useGetActionState(
 		adminSlice.actions.inspectCertification.type

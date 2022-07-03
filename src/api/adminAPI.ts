@@ -34,7 +34,10 @@ interface InspectionData {
 	certification: Certification;
 }
 
-export type LoadInspectionResponse = InspectionData[];
+export interface LoadInspectionResponse {
+	maxPage: number;
+	results: InspectionData[];
+}
 
 export interface LoadAnnouncementsListResponse {
 	maxPage: number;

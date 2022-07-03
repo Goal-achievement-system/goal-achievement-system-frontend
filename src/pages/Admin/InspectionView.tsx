@@ -1,13 +1,16 @@
 import { LoadInspectionResponse } from 'api/adminAPI';
 import Main from 'components/Main';
+import Pagination from 'components/Pagination';
 import React from 'react';
 
 interface Props {
-	inspectionList: LoadInspectionResponse;
+	inspectionList: LoadInspectionResponse | null;
 	openCertAdminModal: (index: number) => void;
+	curPage: number;
+	setCurPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function InspectionView({ inspectionList, openCertAdminModal }: Props) {
+function InspectionView({ inspectionList, openCertAdminModal, curPage, setCurPage }: Props) {
 	return (
 		<Main title="목표 검토">
 			<div className="rounded-[16px] p-[72px] bg-modalGray font-[600] text-[16px] mb-[30px]">
@@ -20,7 +23,7 @@ function InspectionView({ inspectionList, openCertAdminModal }: Props) {
 					<div className="w-[12%]">검토 상태</div>
 				</div>
 				<ul>
-					{inspectionList.map((item, idx) => {
+					{inspectionList?.results?.map((item, idx) => {
 						return (
 							<li
 								className="w-full flex items-center text-[16px] py-[16px] border-t-[1px] border-[#E4E4E4]"
@@ -69,6 +72,12 @@ function InspectionView({ inspectionList, openCertAdminModal }: Props) {
 					})}
 				</ul>
 			</div>
+			<Pagination
+				curPage={curPage}
+				setCurPage={setCurPage}
+				numOfPages={inspectionList?.maxPage || 1}
+				numOfPageBtn={3}
+			/>
 		</Main>
 	);
 }
