@@ -6,9 +6,7 @@ import certificationSlice from 'store/slices/certificationSlice';
 import useGetActionState from 'hooks/useGetActionState';
 import useModal from 'hooks/useModal';
 import Path from 'utils/path';
-import { getGoalCategoryEng } from 'utils/common';
 import { Goal } from 'types/goal';
-import { CertCategoryKrType, CertCategoryType } from 'types/certification';
 import { certFormReducer, initialState } from '../SubmitCertForm';
 import CertAddView from './CertAddModalView';
 
@@ -23,8 +21,6 @@ export default function CertAddModal({ index }: Props) {
 	const [submitCertLoading, submitCertResult, submitCertResultInit] = useGetActionState(
 		certificationSlice.actions.submitCertGoal.type
 	);
-	const [curCategory, setCurCategory] = useState<CertCategoryType>('exercice');
-	const [checkedGoalID, setCheckedGoalID] = useState<number>(0);
 	const [ongoingGoals, setOnGoingGoals] = useState<Goal[]>([]);
 	const [formState, formDispatch] = useReducer(certFormReducer, initialState);
 	const [openModal, closeModal] = useModal();
@@ -69,12 +65,8 @@ export default function CertAddModal({ index }: Props) {
 	};
 
 	useEffect(() => {
-		const goalCategoryEng = getGoalCategoryEng(curGoal.category as CertCategoryKrType);
-		setCurCategory(goalCategoryEng as CertCategoryType);
-
 		const filterResult = goals.filter(({ verificationResult }) => verificationResult === 'ongoing');
 		setOnGoingGoals(() => [...filterResult]);
-		setCheckedGoalID(curGoal.goalId);
 		formDispatch({ type: 'goalId', payload: curGoal.goalId });
 	}, [curGoal, goals]);
 
@@ -83,10 +75,6 @@ export default function CertAddModal({ index }: Props) {
 			formState={formState}
 			formDispatch={formDispatch}
 			ongoingGoals={ongoingGoals}
-			curCategory={curCategory}
-			checkedGoalID={checkedGoalID}
-			setCurCategory={setCurCategory}
-			setCheckedGoalID={setCheckedGoalID}
 			onChange={onChange}
 			onSubmit={onSubmit}
 		/>
