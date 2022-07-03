@@ -22,6 +22,8 @@ const {
 	registAnnouncementsSuccess,
 	loadAnnouncementsInfo,
 	loadAnnouncementsInfoSuccess,
+	setInspectionDetailInfo,
+	setInspectionDetailInfoSuccess,
 } = adminSlice.actions;
 
 function* loginSaga(action: PayloadAction<adminPAI.LogInBody>) {
@@ -128,6 +130,22 @@ function* inspectCertificationSaga(action: PayloadAction<adminPAI.InspectCertifi
 	yield put(finishLoading(action.type));
 }
 
+function* setInspectionDetailInfoSaga(action: PayloadAction<adminPAI.InspectionData>) {
+	yield put(startLoading(action.type));
+	const body = action.payload;
+	try {
+		const result: AxiosResponse<string> = yield call(adminPAI.getCertImage, String(body.goal.goalId));
+		const stringifiedBuffer = Buffer.from(result?.data).toString('base64');
+		const base64Image = `data:${result?.headers['content-type']};base64,${stringifiedBuffer}`;
+		yield put(setInspectionDetailInfoSuccess(base64Image));
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
+
 function* watchLoginSaga() {
 	yield takeLatest(login, loginSaga);
 }
@@ -152,6 +170,10 @@ function* watchLoadAnnouncementsInfoSaga() {
 	yield takeLatest(loadAnnouncementsInfo, loadAnnouncementsInfoSaga);
 }
 
+function* watchSetInspectionDetailInfoSaga() {
+	yield takeLatest(setInspectionDetailInfo, setInspectionDetailInfoSaga);
+}
+
 export default function* adminSaga() {
 	yield all([
 		fork(watchLoginSaga),
@@ -160,5 +182,6 @@ export default function* adminSaga() {
 		fork(watchInspectCertificationSaga),
 		fork(watchRegistAnnouncementsSaga),
 		fork(watchLoadAnnouncementsInfoSaga),
+		fork(watchSetInspectionDetailInfoSaga),
 	]);
 }

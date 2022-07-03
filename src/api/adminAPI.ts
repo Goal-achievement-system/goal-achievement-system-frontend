@@ -29,12 +29,15 @@ export interface LoginResponse {
 	Authorization: string;
 }
 
-interface InspectionData {
+export interface InspectionData {
 	goal: Goal;
 	certification: Certification;
 }
 
-export type LoadInspectionResponse = InspectionData[];
+export interface LoadInspectionResponse {
+	maxPage: number;
+	results: InspectionData[];
+}
 
 export interface LoadAnnouncementsListResponse {
 	maxPage: number;
@@ -96,4 +99,9 @@ export const registAnnouncements = async ({ title, image, bannerImage, activatio
 export const inspectCertification = ({ state, goalId }: InspectCertificationBody) => {
 	checkAdmin();
 	return client.put(`/admin/goals/cert/${state}/${goalId}`);
+};
+
+export const getCertImage = (goalId: string) => {
+	checkAdmin();
+	return client.get(`/image/cert/${goalId}`, { responseType: 'arraybuffer' });
 };
