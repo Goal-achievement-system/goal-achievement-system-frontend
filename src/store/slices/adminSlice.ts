@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
 	InspectCertificationBody,
+	InspectionData,
 	LoadAnnouncementsListBody,
 	LoadAnnouncementsListResponse,
 	LoadInspectionBody,
@@ -15,6 +16,8 @@ export interface InitialState {
 	announcementsList: LoadAnnouncementsListResponse | null;
 	isAdmin: string | null;
 	announcementsInfo: Announcements | null;
+	inspectionDetailInfo: InspectionData | null;
+	certImage: string;
 }
 
 const initialState: InitialState = {
@@ -22,6 +25,8 @@ const initialState: InitialState = {
 	inspectionList: null,
 	announcementsList: null,
 	announcementsInfo: null,
+	inspectionDetailInfo: null,
+	certImage: '',
 };
 
 export const adminSlice = createSlice({
@@ -52,6 +57,13 @@ export const adminSlice = createSlice({
 					: state.announcementsList;
 		},
 		inspectCertification: (state, action: PayloadAction<InspectCertificationBody>) => {},
+		setInspectionDetailInfo: (state, { payload }: PayloadAction<InspectionData>) => {
+			state.inspectionDetailInfo = payload;
+			state.certImage = '';
+		},
+		setInspectionDetailInfoSuccess: (state, { payload }: PayloadAction<string>) => {
+			state.certImage = payload;
+		},
 	},
 });
 

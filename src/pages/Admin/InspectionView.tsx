@@ -1,11 +1,11 @@
-import { LoadInspectionResponse } from 'api/adminAPI';
+import { InspectionData, LoadInspectionResponse } from 'api/adminAPI';
 import Main from 'components/Main';
 import Pagination from 'components/Pagination';
 import React from 'react';
 
 interface Props {
 	inspectionList: LoadInspectionResponse | null;
-	openCertAdminModal: (index: number) => void;
+	openCertAdminModal: (index: InspectionData) => void;
 	curPage: number;
 	setCurPage: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -40,32 +40,13 @@ function InspectionView({ inspectionList, openCertAdminModal, curPage, setCurPag
 									[실패] {item.certification.successCount}/{item.certification.requireSuccessCount}
 								</div>
 								<div className="w-[12%]">
-									{
-										/* eslint-disable no-nested-ternary */
-										item.goal.verificationResult === 'success' ? (
-											<button
-												type="button"
-												className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-primaryOrange-200 text-primaryWhite border-[1px] border-primaryOrange-200;"
-											>
-												성공 처리
-											</button>
-										) : item.goal.verificationResult === 'hold' ? (
-											<button
-												type="button"
-												className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-primaryOrange-100 text-primaryOrange-200 border-[1px] border-primaryOrange-200"
-												onClick={() => {}}
-											>
-												검토 하기
-											</button>
-										) : (
-											<button
-												type="button"
-												className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-buttonBlack-100 text-[#999999] border-[1px] border-buttonBlack-100"
-											>
-												실패 처리
-											</button>
-										)
-									}
+									<button
+										type="button"
+										className="rounded-[8px] p-[8px] text-[16px] font-[600] bg-primaryOrange-100 text-primaryOrange-200 border-[1px] border-primaryOrange-200"
+										onClick={() => openCertAdminModal(item)}
+									>
+										검토 하기
+									</button>
 								</div>
 							</li>
 						);

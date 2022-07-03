@@ -1,3 +1,4 @@
+import { InspectionData } from 'api/adminAPI';
 import useModal from 'hooks/useModal';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +11,10 @@ function InspectionContainer() {
 	const dispatch = useDispatch();
 	const [openModal, closeModal] = useModal();
 	const [curPage, setCurPage] = useState<number>(1);
-	const openCertAdminModal = (index: number) => openModal({ name: modalName.CertAdminModal, index });
+	const openCertAdminModal = (data: InspectionData) => {
+		dispatch(adminSlice.actions.setInspectionDetailInfo(data));
+		openModal({ name: modalName.CertAdminModal });
+	};
 	const inspectionList = useSelector((state: RootState) => state.admin.inspectionList);
 	useEffect(() => {
 		dispatch(adminSlice.actions.loadInspection({ page: curPage }));
