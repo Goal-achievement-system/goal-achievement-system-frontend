@@ -3,13 +3,15 @@ import { RootState } from 'store/slices';
 import modalSlice, { ModalComponentState } from 'store/slices/modalSlice';
 import React, { useEffect, useRef, Suspense } from 'react';
 import modalList from 'utils/importModal';
-import { Router, useNavigate, useSearchParams } from 'react-router-dom';
+import { Router, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import Path from 'utils/path';
 
 export default function ModalSection() {
 	const modalRef = useRef<HTMLDivElement>(null);
 	const { openList, isOpenModal } = useSelector((state: RootState) => state.modal);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { pathname } = useLocation();
 	const [searchParams] = useSearchParams();
 	useEffect(() => {
 		if (isOpenModal) {
@@ -29,6 +31,12 @@ export default function ModalSection() {
 		const { target } = e;
 
 		if (current !== null && (!current.contains(target) || current === target)) {
+			if (pathname === Path.myGoals) {
+				dispatch(modalSlice.actions.close());
+				navigate(Path.myGoals);
+				document.body.style.cssText = '';
+				return;
+			}
 			if (searchParams.get('goal')) navigate(-1);
 			dispatch(modalSlice.actions.close());
 			document.body.style.cssText = '';
