@@ -10,6 +10,7 @@ import CertificationsView from './CertificationsView';
 
 function CertificationsContainer() {
 	const dispatch: AppDispatch = useDispatch();
+	const memberInfo = useSelector((state: RootState) => state.member.memberinfo);
 	const { goalList, maxPage } = useSelector((state: RootState) => state.certification);
 	const [certLoading, certResult, certInitResult] = useGetActionState(certificationSlice.actions.loadCertList.type);
 	const [categoriesLoading, categoriesResult, categoriesInitResult] = useGetActionState(
@@ -19,10 +20,8 @@ function CertificationsContainer() {
 	const [curCategory, setCurCategory] = useState<string>('all');
 	const [curPage, setCurPage] = useState<number>(1);
 	useEffect(() => {
-		if (categoriesLoading) return;
-		dispatch(goalSlice.actions.loadCategories());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch]);
+		if (memberInfo) dispatch(goalSlice.actions.loadCategories());
+	}, [dispatch, memberInfo]);
 
 	useEffect(() => {
 		if (categoriesResult?.isSuccess) {
@@ -33,11 +32,13 @@ function CertificationsContainer() {
 		categoriesInitResult();
 	}, [categoriesResult, categoriesInitResult]);
 	useEffect(() => {
-		if (certLoading) return;
-		if (![...categories, 'all'].includes(curCategory)) return;
+		if (![...categories, 'all'].includes(curCategory) || !memberInfo) return;
 		dispatch(certificationSlice.actions.loadCertList({ category: curCategory, page: curPage }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, curCategory, curPage]);
+	}, [dispatch, curCategory, curPage, memberInfo]);
+	useEffect(() => {
+		certInitResult();
+	}, [certInitResult]);
 
 	return (
 		<CertificationsView
