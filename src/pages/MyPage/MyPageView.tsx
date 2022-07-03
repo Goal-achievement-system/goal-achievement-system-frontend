@@ -87,18 +87,18 @@ export default function MyPageView({
 				</div>
 				<div className="goalbox-wrap pc:my-[30px] my-[16px]">
 					<ul className="flex flex-wrap gap-x-[4%] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
-						<li className="w-[48%] pc:w-auto">
+						{/* <li className="w-[48%] pc:w-auto">
 							<SmallBox
 								onClick={() => {
 									alert('목표를 등록하러 갈게요!');
 									openModalOnClick({ certState: 'register' });
 								}}
 							/>
-						</li>
+						</li> */}
 						{goals?.length
 							? goals.map((goal, index) => (
 									<li className="w-[48%] pc:w-auto" key={goal.goalId}>
-										<Link to={`${Path.myGoals}?goal=${goal.goalId}`}>
+										<Link className="w-full pc:w-auto" to={`${Path.myGoals}?goal=${goal.goalId}`}>
 											<SmallBox
 												goal={goal}
 												onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}
