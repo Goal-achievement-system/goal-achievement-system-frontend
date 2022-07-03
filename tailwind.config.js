@@ -52,5 +52,5 @@ module.exports = {
 		},
 	},
 	/* eslint-disable global-require */
-	plugins: [require('@tailwindcss/line-clamp')],
+	plugins: [require('@tailwindcss/line-clamp'), require('tailwind-scrollbar-hide')],
 };
