@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import useModal from 'hooks/useModal';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -27,10 +26,9 @@ export interface Props {
 
 function CheckButton({ goal, onClick }: Props) {
 	const [isSelected, setIsSelected] = useState<boolean>(false);
-	const getBgColor = useCallback(() => (isSelected ? BgColor.orange200 : BgColor.gray), []);
-	const getTextColor = useCallback(() => (isSelected ? TextColor.white : TextColor.gray), []);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const getUnderlineColor = useCallback(() => (isSelected ? BorderColor.white : BorderColor.gray), []);
+	const getBgColor = useCallback(() => (isSelected ? BgColor.orange200 : BgColor.gray), [isSelected]);
+	const getTextColor = useCallback(() => (isSelected ? TextColor.white : TextColor.gray), [isSelected]);
+	const getUnderlineColor = useCallback(() => (isSelected ? BorderColor.white : BorderColor.gray), [isSelected]);
 	// const [openModal, closeModal] = useModal();
 
 	const [searchParams, setSearchParams] = useSearchParams();
