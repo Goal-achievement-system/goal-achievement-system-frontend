@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
+import handleLogout, { handleAdminLogout } from 'utils/handleLogout';
+import Path from 'utils/path';
 
 export interface SagaResultProps {
 	isSuccess: boolean;
@@ -69,6 +71,11 @@ export const resultSlice = createSlice({
 			state.result[actionType] = null;
 		},
 		getResult: (state, { payload }: PayloadAction<IResult>) => {
+			if (payload.error && payload.error.response?.status === 401) {
+				alert('세션이 만료되어 로그아웃 합니다.');
+				handleAdminLogout();
+				handleLogout();
+			}
 			state.result[payload.actionType] = {
 				isSuccess: payload.isSuccess,
 				errorStatus: payload.error ? payload.error.response?.status : null,
