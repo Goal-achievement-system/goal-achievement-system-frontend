@@ -68,7 +68,7 @@ function* loadCategoriesSaga(action: PayloadAction) {
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
-
+		console.log(axiosError);
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
 	}
 	yield put(finishLoading(action.type));

@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import { ReactComponent as Camera } from 'assets/icons/camera.svg';
 import { ReactComponent as Union } from 'assets/icons/union.svg';
+import { blobToBase64 } from 'utils/common';
 
 interface Props {
-	image: Blob | null;
-	setImage: React.Dispatch<React.SetStateAction<Blob | null>>;
+	image: string | null;
+	setImage: React.Dispatch<React.SetStateAction<string | null>>;
 	width?: number;
 	height: number;
 	alt: string;
@@ -16,8 +17,14 @@ const fileTypes = ['JPG', 'PNG'];
 
 function ImageUploader({ image, setImage, width, height, alt }: Props) {
 	const [isDrag, setIsDrag] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
 	const handleChange = (file: File) => {
-		setImage(file);
+		if (loading) return;
+		setLoading(true);
+		blobToBase64(file).then((base64BannerImage) => {
+			setImage(base64BannerImage);
+			setLoading(false);
+		});
 	};
 
 	if (image) {
@@ -33,7 +40,7 @@ function ImageUploader({ image, setImage, width, height, alt }: Props) {
 						style={width ? { width: `${width}px`, height: `${height}px` } : { height: `${height}px` }}
 						className="bg-gray-200 w-full"
 					>
-						<img alt={alt} src={URL.createObjectURL(image)} className="w-full h-full object-contain object-center" />
+						<img alt={alt} src={image} className="w-full h-full object-contain object-center" />
 					</div>
 				</FileUploader>
 				<Union
@@ -56,11 +63,15 @@ function ImageUploader({ image, setImage, width, height, alt }: Props) {
 				style={width ? { width: `${width}px`, height: `${height}px` } : { height: `${height}px` }}
 				className="cursor-pointer border-[3px] border-[#E7E7E7] w-full rounded-[8px] flex justify-center flex-col items-center bg-primaryWhite border-dashed text-[#A6A6A6] text-[16px]"
 			>
-				{!isDrag && (
-					<>
-						<Camera />
-						<div className="mt-[12px]">이미지를 추가해주세요.</div>
-					</>
+				{loading ? (
+					<div>이미지 등록중입니다..</div>
+				) : (
+					!isDrag && (
+						<>
+							<Camera />
+							<div className="mt-[12px]">이미지를 추가해주세요.</div>
+						</>
+					)
 				)}
 			</div>
 		</FileUploader>

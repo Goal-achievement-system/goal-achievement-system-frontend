@@ -74,7 +74,7 @@ export default function Header({ isAdmin }: Props) {
 	return (
 		<header className="pc:max-w-[1200px] h-[86px] flex mx-auto justify-between items-center">
 			<div className="pc:basis-[312px] h-full flex items-center">
-				<Link className="logo-link" to={Path.home}>
+				<Link className="logo-link" to={isAdmin ? Path.inspection : Path.home}>
 					<img
 						className="pc:max-w-[157px] max-w-[112px]"
 						src={`${process.env.PUBLIC_URL}/image/icon/logo.svg`}

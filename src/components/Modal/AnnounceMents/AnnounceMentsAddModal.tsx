@@ -15,8 +15,8 @@ export default function AnnouncementsAddModal() {
 	const [openModal, closeModal] = useModal();
 	const [title, setTitle] = useState<string>('');
 	const [isActive, setIsActive] = useState<boolean>(false);
-	const [bannerImage, setBannerImage] = useState<Blob | null>(null);
-	const [contentImage, setContentImage] = useState<Blob | null>(null);
+	const [bannerImage, setBannerImage] = useState<string | null>(null);
+	const [contentImage, setContentImage] = useState<string | null>(null);
 	const [registAnnouncementsLoading, registAnnouncementsResult, registAnnouncementsInitResult] = useGetActionState(
 		adminSlice.actions.registAnnouncements.type
 	);
@@ -26,18 +26,14 @@ export default function AnnouncementsAddModal() {
 	};
 	const registAnnouncement = () => {
 		if (!bannerImage || !contentImage || title.length === 0 || registAnnouncementsLoading) return;
-		blobToBase64(contentImage).then((base64Image) => {
-			blobToBase64(bannerImage).then((base64BannerImage) => {
-				dispatch(
-					adminSlice.actions.registAnnouncements({
-						title,
-						activation: isActive,
-						bannerImage: base64BannerImage,
-						image: base64Image,
-					})
-				);
-			});
-		});
+		dispatch(
+			adminSlice.actions.registAnnouncements({
+				title,
+				activation: isActive,
+				bannerImage,
+				image: contentImage,
+			})
+		);
 	};
 
 	useEffect(() => {
