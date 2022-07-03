@@ -1,4 +1,5 @@
-export type VerificationResult = 'all' | 'success' | 'fail' | 'ongoing' | 'hold' | 'oncertification';
+export type VerificationResultEng = 'all' | 'success' | 'fail' | 'ongoing' | 'hold' | 'oncertification';
+export type VerificationResultKr = '전체' | '진행 중' | '인증 중' | '성공' | '실패' | '보류';
 
 export interface Goal {
 	goalId: number;
@@ -9,7 +10,7 @@ export interface Goal {
 	limitDate: Date;
 	money: number;
 	reward: string;
-	verificationResult: VerificationResult;
+	verificationResult: VerificationResultEng;
 }
 
 export interface GoalsResponse {

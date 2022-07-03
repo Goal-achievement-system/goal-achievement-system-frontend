@@ -1,5 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import React, { BaseSyntheticEvent, Dispatch, SetStateAction } from 'react';
-import { VerificationResult, Goal } from 'types/goal';
+import { VerificationResultEng, VerificationResultKr, Goal } from 'types/goal';
 import { IPushNotice } from 'types/notification';
 
 import Main from 'components/Main';
@@ -11,9 +12,9 @@ import Select from 'components/Select/Select';
 import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
 import SubmitButton from 'components/Button/SubmitButton';
 import { OpenModalOnClick } from 'hooks/useModal';
-import { modalName } from 'utils/importModal';
 import { Link } from 'react-router-dom';
 import Path from 'utils/path';
+import { getFilterStateKr } from 'utils/common';
 import { IReplaceMemeberForm, ReplaceMemberReducerAction } from './ReplaceMemberForm';
 
 interface Props {
@@ -23,8 +24,8 @@ interface Props {
 	formDispatch: React.Dispatch<ReplaceMemberReducerAction>;
 	currentPage: number;
 	setCurrentPage: Dispatch<SetStateAction<number>>;
-	goalFilter: VerificationResult;
-	setGoalFilter: Dispatch<SetStateAction<VerificationResult>>;
+	goalFilter: VerificationResultEng;
+	setGoalFilter: Dispatch<SetStateAction<VerificationResultEng>>;
 	isSelected: string;
 	setIsSelected: Dispatch<SetStateAction<string>>;
 	maxPage: number;
@@ -48,7 +49,8 @@ export default function MyPageView({
 	handleSubmit,
 }: Props) {
 	// 버튼에 해당하는 현재 state
-	const getFilterState = (key: string) => {
+	const filterList = ['전체', '진행 중', '인증 중', '성공', '실패', '보류'];
+	const getFilterState = (key: string): VerificationResultEng => {
 		const filterMap = new Map([
 			['전체', 'all'],
 			['진행 중', 'ongoing'],
@@ -58,10 +60,8 @@ export default function MyPageView({
 			['보류', 'hold'],
 		]);
 
-		return filterMap.get(key) || 'all';
+		return (filterMap.get(key) as VerificationResultEng) || 'all';
 	};
-
-	const filterList = ['전체', '진행 중', '인증 중', '성공', '실패', '보류'];
 
 	return (
 		<div className="flex-1 overflow-auto">
@@ -73,7 +73,7 @@ export default function MyPageView({
 						const { innerText } = e.target;
 
 						const filterText = getFilterState(innerText);
-						if (filterText) setGoalFilter(filterText as VerificationResult);
+						if (filterText) setGoalFilter(filterText as VerificationResultEng);
 					}}
 					aria-hidden
 				>
@@ -87,18 +87,24 @@ export default function MyPageView({
 				</div>
 				<div className="goalbox-wrap pc:my-[30px] my-[16px]">
 					<ul className="flex flex-wrap gap-x-[4%] pc:gap-x-[30px] gap-y-[16px] pc:gap-y-[30px]">
-						<li className="w-[48%] pc:w-auto">
-							<SmallBox
-								onClick={() => {
-									alert('목표를 등록하러 갈게요!');
-									openModalOnClick({ certState: 'register' });
-								}}
-							/>
-						</li>
+						{!goals?.length && goalFilter === 'all' ? (
+							<li className="w-[48%] pc:w-auto">
+								<SmallBox
+									onClick={() => {
+										alert('목표를 등록하러 갈게요!');
+										openModalOnClick({ certState: 'register' });
+									}}
+								/>
+							</li>
+						) : !goals?.length ? (
+							<div className="w-full text-center p-[30px] text-primaryBlack-400">
+								<b>{getFilterStateKr(goalFilter)}</b> 상태인 목표가 없어요!
+							</div>
+						) : null}
 						{goals?.length
 							? goals.map((goal, index) => (
 									<li className="w-[48%] pc:w-auto" key={goal.goalId}>
-										<Link to={`${Path.myGoals}?goal=${goal.goalId}`}>
+										<Link className="w-full pc:w-auto" to={`${Path.myGoals}?goal=${goal.goalId}`}>
 											<SmallBox
 												goal={goal}
 												onClick={() => openModalOnClick({ certState: goal.verificationResult, index })}

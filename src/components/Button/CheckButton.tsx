@@ -1,4 +1,6 @@
-import React, { useCallback } from 'react';
+import useModal from 'hooks/useModal';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Goal } from 'types/goal';
 
 enum BgColor {
@@ -13,36 +15,55 @@ enum TextColor {
 	white = 'text-primaryWhite',
 }
 
+enum BorderColor {
+	gray = 'underline-buttonGray-200',
+	white = 'underline-primaryWhite',
+}
 export interface Props {
-	isSelected: boolean;
-	onClick: () => void;
 	goal: Goal;
+	onClick: () => void;
 }
 
-function CheckButton({ onClick, isSelected, goal }: Props) {
+function CheckButton({ goal, onClick }: Props) {
+	const [isSelected, setIsSelected] = useState<boolean>(false);
 	const getBgColor = useCallback(() => (isSelected ? BgColor.orange200 : BgColor.gray), [isSelected]);
 	const getTextColor = useCallback(() => (isSelected ? TextColor.white : TextColor.gray), [isSelected]);
+	const getUnderlineColor = useCallback(() => (isSelected ? BorderColor.white : BorderColor.gray), [isSelected]);
+	// const [openModal, closeModal] = useModal();
 
+	const [searchParams, setSearchParams] = useSearchParams();
+	useEffect(() => {
+		const currentGoalID = Number(searchParams.get('goal'));
+		setIsSelected(currentGoalID === goal.goalId);
+	}, [searchParams, goal]);
+
+	console.log(getBgColor);
 	return (
 		<div
-			className={`flex justify-center items-center rounded-[8px] w-full pc:p-[16px] p-[10px] ${getBgColor()}`}
+			className={`flex flex-row justify-center items-center rounded-[8px] w-full pc:p-[18px] p-[16px] ${getBgColor()}`}
 			onClick={onClick}
 			aria-hidden
 		>
-			<div className="flex justify-between w-full">
-				<button type="button" onClick={() => {}} className="flex items-center cursor-pointer">
+			<div className="flex w-full pc:w-full">
+				<span className="flex items-center overflow-hidden cursor-pointer">
 					<input
 						type="checkbox"
-						className="pc:w-[20px] pc:h-[20px] w-[12px] h-[12px] cursor-pointer"
-						value=""
+						className="pc:min-w-[20px] pc:min-h-[20px] w-[12px] h-[12px] cursor-pointer"
 						checked={isSelected}
+						onClick={() => Number(searchParams.get('goal')) === goal.goalId}
 						readOnly
 					/>
-					<span className={`ml-[8px] text-primaryWhite truncate flex-1 text-left ${getTextColor()} font-[500]`}>
+					<span
+						className={`ml-[8px] text-left pc:truncate truncate ${getTextColor()} underline  ${getUnderlineColor()} hover:font-[500]`}
+						// onClick={() => {
+						// 	openModal(goal?.verificationResult);
+						// }}
+						// aria-hidden
+					>
 						{goal.goalName}
 					</span>
-				</button>
-				<span className={`ml-[10px] ${getTextColor()} font-[500]`}>
+				</span>
+				<span className={`ml-[5px] ${getTextColor()} whitespace-nowrap font-[500]`}>
 					📅 {new Date(goal.limitDate).getMonth() + 1}. {new Date(goal.limitDate).getDate()}
 				</span>
 			</div>
@@ -51,3 +72,4 @@ function CheckButton({ onClick, isSelected, goal }: Props) {
 }
 
 export default React.memo(CheckButton);
+// export default CheckButton;
