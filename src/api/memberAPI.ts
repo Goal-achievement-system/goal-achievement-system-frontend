@@ -1,5 +1,5 @@
 import { SexEng } from 'types/member';
-import { VerificationResult } from 'types/goal';
+import { VerificationResultEng } from 'types/goal';
 import client from './client';
 
 export interface ChargeMoneyBody {
@@ -9,12 +9,12 @@ export interface ChargeMoneyBody {
 }
 
 export interface GetMemberGoalsBody {
-	state: VerificationResult;
+	state: VerificationResultEng;
 	page: number;
 }
 
 export interface GetMemberCertsBody {
-	state: VerificationResult;
+	state: VerificationResultEng;
 	page: number;
 }
 

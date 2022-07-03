@@ -3,6 +3,7 @@
 // tailwind 함수 사용할 때 클래스 네임들 이어주는 함수
 
 import { CertCategoryKrType, CertCategoryType } from 'types/certification';
+import { VerificationResultEng, VerificationResultKr } from 'types/goal';
 import { SexEng, SexKr } from 'types/member';
 
 // 사용 예시 <div className={classNames(state==="ok"?"text-green-50":"text-red-50","bg-black","flex")}> Hello </div>
@@ -82,6 +83,23 @@ export const getGoalCategoryEng = (goalCategory: CertCategoryKrType): CertCatego
 			return 'hobby';
 		case '기타':
 			return 'etc';
+		default:
+			return null;
+	}
+};
+
+export const getFilterStateKr = (filterText: VerificationResultEng): VerificationResultKr | null => {
+	switch (filterText) {
+		case 'ongoing':
+			return '진행 중';
+		case 'oncertification':
+			return '인증 중';
+		case 'success':
+			return '성공';
+		case 'fail':
+			return '실패';
+		case 'hold':
+			return '보류';
 		default:
 			return null;
 	}

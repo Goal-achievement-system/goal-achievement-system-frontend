@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from 'store';
 import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
-import { VerificationResult } from 'types/goal';
+import { VerificationResultEng } from 'types/goal';
 import useModal from 'hooks/useModal';
 import { sexTransKrToEng, validatePassword } from 'utils/common';
 import useGetActionState from 'hooks/useGetActionState';
@@ -20,7 +20,7 @@ export default function MyPage() {
 	const { goals } = useSelector((state: RootState) => state.member.memberGoals);
 	const { pushNoticeList } = useSelector((state: RootState) => state.pushNotice);
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [goalFilter, setGoalFilter] = useState<VerificationResult>('all');
+	const [goalFilter, setGoalFilter] = useState<VerificationResultEng>('all');
 	const [isSelected, setIsSelected] = useState<string>('전체');
 
 	const [formState, formDispatch] = useReducer(replaceMemberformReducer, replaceMemberInitialState);
