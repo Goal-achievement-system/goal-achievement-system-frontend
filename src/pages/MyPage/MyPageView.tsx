@@ -155,6 +155,7 @@ export default function MyPageView({
 									placeholder="이메일이 표시되지 않으면 재접속해주세요!"
 									label="이메일"
 									value={formState?.email}
+									disabled
 									onChange={() => {}}
 								/>
 							</div>
