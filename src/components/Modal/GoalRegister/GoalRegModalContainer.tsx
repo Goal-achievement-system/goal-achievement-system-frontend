@@ -65,7 +65,7 @@ function GoalRegModalContainer() {
 			formDispatch({ type: 'init' });
 		}
 		goalRegInitResult();
-	}, [goalRegResult, goalRegInitResult, dispatch]);
+	}, [goalRegResult, goalRegInitResult]);
 
 	const className = {
 		// size: 'pc:max-w-[890px] pc:max-h-[90vh] max-w-[320px] max-h-[470px]',
