@@ -9,7 +9,7 @@ export interface Props {
 
 function SmallBox({ goal, onClick }: Props) {
 	const checkDrawBox = (verificationResult: string) => {
-		const checkArr = ['success', 'fail', 'hold'];
+		const checkArr = ['success', 'fail', 'hold', 'ongoing'];
 		if (checkArr.includes(verificationResult)) return true;
 		return false;
 	};
@@ -38,15 +38,11 @@ function SmallBox({ goal, onClick }: Props) {
 		>
 			<div className="bg-buttonBlack-100 rounded-[8px] h-[68px] pc:h-[125px] mb-[8px] pc:mb-[16px] overflow-hidden relative">
 				{goal && checkDrawBox(goal.verificationResult) && (
-					<div className="bg-[#000] bg-opacity-[80%] text-white text-[10px] pc:text-[16px] leading-[12px] pc:leading-[19px] font-[500] p-[5px] pc:p-[8px]">
+					<div className="bg-[#000] bg-opacity-[80%] text-white text-[10px] pc:text-[16px] leading-[12px] pc:leading-[19px] font-[500] p-[5px] pc:p-[8px] absolute top-0 right-0 left-0">
 						{getGoalState(goal.verificationResult)}
 					</div>
 				)}
-				<img
-					className="absolute left-0 top-0 w-full h-full object-cover object-center"
-					alt="goal_thumbnail"
-					src={findImage()}
-				/>
+				<img className="w-full h-full object-cover object-center z-[1]" alt="goal_thumbnail" src={findImage()} />
 			</div>
 			<div className="flex justify-between items-center mb-[8px] pc:mb-[16px] text-[10px] pc:text-[16px] font-[600] leading-[12px] pc:leading-[19px]">
 				<div className="flex">

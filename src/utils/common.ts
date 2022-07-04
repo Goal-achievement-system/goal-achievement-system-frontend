@@ -65,6 +65,8 @@ export const getGoalState = (verificationResult: string): string => {
 			return '😱 보상금 지급 실패';
 		case 'hold':
 			return '💡 검토 요청';
+		case 'ongoing':
+			return '😊 목표 인증을 해주세요.';
 		default:
 			return '';
 	}
