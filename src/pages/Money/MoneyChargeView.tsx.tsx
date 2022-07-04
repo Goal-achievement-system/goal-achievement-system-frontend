@@ -13,9 +13,10 @@ interface Props {
 	formState: ChargeFormState;
 	formDispatch: React.Dispatch<ChargeFormReducerAction>;
 	memberInfo: Member | null;
+	chargeMoneyLoading: boolean;
 }
 
-function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Props) {
+function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo, chargeMoneyLoading }: Props) {
 	const getBtnState = (): BtnStates => {
 		const { chargeMoney, agree } = formState;
 		if (!(agree && deleteComma(chargeMoney) > 0)) return 'inactive';
@@ -113,6 +114,7 @@ function MoneyChargeView({ onSubmit, formState, formDispatch, memberInfo }: Prop
 					<div>(필수) 개인정보 제3자 제공에 동의합니다.</div>
 				</button>
 				<SubmitButton
+					isLoading={chargeMoneyLoading}
 					label={`${addComma(deleteComma(formState.chargeMoney) * 10000)}원 충전하기`}
 					btnState={getBtnState()}
 				/>

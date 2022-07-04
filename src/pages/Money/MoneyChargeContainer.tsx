@@ -56,7 +56,13 @@ function MoneyChargeContainer() {
 	}, [initChangeMoneyResult, changeMoneyResult]);
 
 	return (
-		<MoneyChargeView onSubmit={onSubmit} formState={formState} formDispatch={formDispatch} memberInfo={memberInfo} />
+		<MoneyChargeView
+			onSubmit={onSubmit}
+			formState={formState}
+			formDispatch={formDispatch}
+			memberInfo={memberInfo}
+			chargeMoneyLoading={chargeMoneyLoading}
+		/>
 	);
 }
 

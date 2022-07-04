@@ -96,6 +96,7 @@ export default function AnnouncementsAddModal() {
 					</div>
 				</div>
 				<SubmitButton
+					isLoading={registAnnouncementsLoading}
 					btnState={bannerImage && contentImage && title.length > 0 ? 'active' : 'inactive'}
 					label="등록하기"
 				/>

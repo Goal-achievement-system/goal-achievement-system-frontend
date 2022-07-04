@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
+import BeatLoader from 'react-spinners/BeatLoader';
 
 export type BtnStates = 'active' | 'inactive' | 'pressed';
 
 enum BgColor {
 	orange200 = 'bg-primaryOrange-200',
 	orange300 = 'bg-primaryOrange-300',
-
 	gray100 = 'bg-primaryGray-100',
 }
 enum TextColor {
@@ -18,8 +18,9 @@ export interface Props {
 	label: string;
 	onClick?: () => void;
 	btnState: BtnStates;
+	isLoading?: boolean;
 }
-function SubmitButton({ label, onClick, btnState }: Props) {
+function SubmitButton({ label, onClick, btnState, isLoading }: Props) {
 	const getBgColor = useCallback((state: BtnStates): BgColor => {
 		if (state === 'active') return BgColor.orange200;
 		if (state === 'pressed') return BgColor.orange300;
@@ -29,6 +30,14 @@ function SubmitButton({ label, onClick, btnState }: Props) {
 		if (state === 'inactive') return TextColor.gray200;
 		return TextColor.white;
 	}, []);
+
+	if (isLoading) {
+		return (
+			<div className="flex justify-center py-[20px] pc:py-[24px]">
+				<BeatLoader color="#FF8A00" size={15} speedMultiplier={0.5} />
+			</div>
+		);
+	}
 
 	return (
 		<button

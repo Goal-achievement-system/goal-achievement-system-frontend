@@ -68,7 +68,13 @@ function MoneyTransferContainer() {
 	}, [initTransferMoneyResult, transferMoneyResult]);
 
 	return (
-		<MoneyTransferView formState={formState} formDispatch={formDispatch} memberInfo={memberInfo} onSubmit={onSubmit} />
+		<MoneyTransferView
+			formState={formState}
+			formDispatch={formDispatch}
+			memberInfo={memberInfo}
+			onSubmit={onSubmit}
+			transferMoneyLoading={transferMoneyLoading}
+		/>
 	);
 }
 

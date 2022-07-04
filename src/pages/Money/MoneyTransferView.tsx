@@ -11,9 +11,10 @@ interface Props {
 	formState: TransferFormState;
 	formDispatch: React.Dispatch<TransferFormReducerAction>;
 	memberInfo: Member | null;
+	transferMoneyLoading: boolean;
 }
 
-function MoneyTransferView({ formState, formDispatch, memberInfo, onSubmit }: Props) {
+function MoneyTransferView({ formState, formDispatch, memberInfo, onSubmit, transferMoneyLoading }: Props) {
 	const changeInputTextValue = (text: string): string => {
 		if (!memberInfo) return '0';
 		const regex = /[^0-9]/g;
@@ -106,7 +107,11 @@ function MoneyTransferView({ formState, formDispatch, memberInfo, onSubmit }: Pr
 					/>
 					<div>(필수) 개인정보 제3자 제공에 동의합니다.</div>
 				</button>
-				<SubmitButton label={`${addComma(deleteComma(formState.transferMoney))}원 이체하기`} btnState={getBtnState()} />
+				<SubmitButton
+					isLoading={transferMoneyLoading}
+					label={`${addComma(deleteComma(formState.transferMoney))}원 이체하기`}
+					btnState={getBtnState()}
+				/>
 			</form>
 		</Main>
 	);
