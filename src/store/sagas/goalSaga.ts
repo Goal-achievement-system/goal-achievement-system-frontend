@@ -6,6 +6,7 @@ import goalSlice from 'store/slices/goalSlice';
 import resultSlice from 'store/slices/resultSlice';
 import loadingSlice from 'store/slices/loadingSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
+import memberSlice from 'store/slices/memberSlice';
 import * as goalAPI from '../../api/goalAPI';
 
 const {
@@ -17,6 +18,7 @@ const {
 	loadCategories,
 	loadCategoriesSuccess,
 } = goalSlice.actions;
+const { goalRegSuccess } = memberSlice.actions;
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
 
@@ -37,6 +39,7 @@ function* loadGoalSaga(action: PayloadAction<goalAPI.LoadGoalParam>) {
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<goalAPI.LoadGoalResponse> = yield call(goalAPI.getGoal, param);
+
 		yield put(loadGoalSuccess(result.data));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
@@ -47,10 +50,11 @@ function* loadGoalSaga(action: PayloadAction<goalAPI.LoadGoalParam>) {
 
 function* registerGoalSaga(action: PayloadAction<goalAPI.RegisterGoalBody>) {
 	const param = action.payload;
+
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse = yield call(goalAPI.postGoal, param);
-
+		yield put(goalRegSuccess(param.money));
 		yield put(getResult({ isSuccess: true, actionType: action.type }));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
