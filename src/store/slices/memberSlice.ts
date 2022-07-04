@@ -69,6 +69,18 @@ export const memberSlice = createSlice({
 			state.menuGoals = payload.menuGoals;
 			state.menuCerts = payload.menuCerts;
 		},
+		goalRegSuccess: (state, { payload: money }: PayloadAction<number>) => {
+			state.memberinfo = {
+				...state.memberinfo!,
+				money: state.memberinfo!.money! - money,
+			};
+			if (state.goalStatistics)
+				state.goalStatistics = {
+					...state.goalStatistics,
+					totalGoalCount: (state.goalStatistics?.totalGoalCount ?? 0) + 1,
+					totalOngoingGoalCount: (state.goalStatistics?.totalOngoingGoalCount ?? 0) + 1,
+				};
+		},
 	},
 });
 
