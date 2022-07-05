@@ -22,7 +22,7 @@ function HomeContainer() {
 		} else {
 			dispatch(certificationSlice.actions.loadCertList({ category: 'all', page: 1 }));
 		}
-	}, [dispatch, memberinfo, goalCount]);
+	}, [dispatch, memberinfo]);
 
 	if (loading) return null;
 	return <HomeView member={memberinfo} goalCount={goalCount} goalList={goalList} />;
