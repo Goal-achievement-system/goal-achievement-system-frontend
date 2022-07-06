@@ -11,13 +11,13 @@
 
 <table>
   <tr>
-    <td align="center" style="width: 230px; height: auto;">
+    <td width="230px">
         <img src="./public/image/readme/main.gif" style="width: 100%; height: auto;" alt="통계 기능"/>
     </td>
-    <td align="center" style="width: 230px; height: auto;">
+    <td width="230px">
         <img src="./public/image/readme/goalRegist.gif" style="width: 100%; height: auto;" alt=""/>
     </td>
-    <td align="center" style="width: 230px; height: auto;">
+    <td width="230px">
         <img src="./public/image/readme/certRegist.gif" style="width: 100%; height: auto;" alt=""/>
     </td>
   </tr>
@@ -33,13 +33,13 @@
     </td>
   </tr>
   <tr>
-    <td align="center" style="width: 230px; height: auto;">
+    <td width="230px">
         <img src="./public/image/readme/certDetail.gif" style="width: 100%; height: auto;" alt=""/>
     </td>
-    <td align="center" style="width: 230px; height: auto;">
+    <td width="230px">
         <img src="./public/image/readme/chargeMoney.gif" style="width: 100%; height: auto;" alt=""/>
     </td>
-    <td align="center" style="width: 230px; height: auto;">
+    <td width="230px">
     </td>
   </tr>
   <tr>
