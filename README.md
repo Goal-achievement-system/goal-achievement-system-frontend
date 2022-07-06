@@ -9,16 +9,16 @@
 [골키퍼 체험하기 >](https://tourmaline-churros-3e62da.netlify.app/)
 
 
-<table style="width: 100%">
+<table>
   <tr>
     <td align="center">
-        <img src="" width="100px;" alt=""/><br />
+        <img src="./public/image/readme/main.gif" style="width: auto; height: 250px" alt="통계 기능"/><br />
     </td>
     <td align="center">
-        <img src="" width="100px;" alt=""/><br />
+        <img src="./public/image/readme/goalRegist.gif" style="width: auto; height: 250px" alt=""/><br />
     </td>
     <td align="center">
-        <img src="" width="100px;" alt=""/>
+        <img src="./public/image/readme/certRegist.gif" style="width: auto; height: 250px" alt=""/>
         <br />
     </td>
   </tr>
@@ -30,30 +30,25 @@
         <b>목표 등록</b>
     </td>
     <td rowspan="1" align="center">
-        <b>목표 인증</b>
+        <b>목표 인증 등록</b>
     </td>
   </tr>
   <tr>
     <td align="center">
-        <img src="" width="100px;" alt=""/><br />
+        <img src="./public/image/readme/certDetail.gif" style="width: auto; height: 250px" alt=""/>
+        <br />
     </td>
     <td align="center">
-        <img src="" width="100px;" alt=""/><br />
-      </a><br />
-    </td>
-    <td align="center">
-        <img src="" width="100px;" alt=""/>
+        <img src="./public/image/readme/chargeMoney.gif" style="width: auto; height: 250px" alt=""/>
+        <br />
     </td>
   </tr>
   <tr>
     <td rowspan="1" align="center">
-        <b>인증 디테일</b>
+        <b>목표 인증</b>
     </td>
     <td rowspan="1" align="center">
         <b>가상머니 충전/이체 </b>
-    </td>
-    <td rowspan="1" align="center">
-        <b>관리자 검증 기능</b>
     </td>
   </tr>
 </table>
