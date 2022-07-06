@@ -71,10 +71,12 @@ export const resultSlice = createSlice({
 			state.result[actionType] = null;
 		},
 		getResult: (state, { payload }: PayloadAction<IResult>) => {
-			if (payload.error && payload.error.response?.status === 401) {
+			if (payload.error && payload.error.response?.data.errorCode === 3) {
 				alert('세션이 만료되어 로그아웃 합니다.');
-				handleAdminLogout();
-				handleLogout();
+				localStorage.removeItem('goalKeeperToken');
+				localStorage.removeItem('adminToken');
+				window.history.pushState(null, '', Path.login);
+				window.location.reload();
 			}
 			state.result[payload.actionType] = {
 				isSuccess: payload.isSuccess,
