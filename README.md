@@ -12,14 +12,13 @@
 <table>
   <tr>
     <td align="center">
-        <img src="./public/image/readme/main.gif" style="width: auto; height: 250px" alt="통계 기능"/><br />
+        <img src="./public/image/readme/main.gif" style="width: 230px; height: auto;" alt="통계 기능"/><br />
     </td>
     <td align="center">
-        <img src="./public/image/readme/goalRegist.gif" style="width: auto; height: 250px" alt=""/><br />
+        <img src="./public/image/readme/goalRegist.gif" style="width: 230px; height: auto;" alt=""/><br />
     </td>
     <td align="center">
-        <img src="./public/image/readme/certRegist.gif" style="width: auto; height: 250px" alt=""/>
-        <br />
+        <img src="./public/image/readme/certRegist.gif" style="width: 230px; height: auto;" alt=""/>
     </td>
   </tr>
   <tr>
@@ -35,12 +34,12 @@
   </tr>
   <tr>
     <td align="center">
-        <img src="./public/image/readme/certDetail.gif" style="width: auto; height: 250px" alt=""/>
-        <br />
+        <img src="./public/image/readme/certDetail.gif" style="width: 230px; height: auto;" alt=""/>
     </td>
     <td align="center">
-        <img src="./public/image/readme/chargeMoney.gif" style="width: auto; height: 250px" alt=""/>
-        <br />
+        <img src="./public/image/readme/chargeMoney.gif" style="width: 230px; height: auto;" alt=""/>
+    </td>
+    <td align="center">
     </td>
   </tr>
   <tr>
@@ -48,7 +47,9 @@
         <b>목표 인증</b>
     </td>
     <td rowspan="1" align="center">
-        <b>가상머니 충전/이체 </b>
+        <b>목표머니 충전 </b>
+    </td>
+    <td rowspan="1" align="center">
     </td>
   </tr>
 </table>
