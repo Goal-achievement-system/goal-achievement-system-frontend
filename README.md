@@ -6,9 +6,6 @@
 
 ## 🖥 프로젝트 미리보기
 
-[골키퍼 체험하기 >](https://tourmaline-churros-3e62da.netlify.app/)
-
-
 <table>
   <tr>
     <td width="230px">
