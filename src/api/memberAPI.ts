@@ -40,7 +40,7 @@ export const confirmOverlapEmail = (email: string | undefined) => {
 };
 
 export const getNotifications = () => {
-	return client.get('/myinfo/notifications');
+	return client.get('members/myinfo/notifications');
 };
 
 export const chargeMoney = ({ email, password, money }: ChargeMoneyBody) => {

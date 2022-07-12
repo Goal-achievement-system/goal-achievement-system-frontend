@@ -15,11 +15,12 @@ import Certifications from 'pages/Certifications/CertificationsContainer';
 import Home from 'pages/home/HomeContainer';
 import MoneyCharge from 'pages/Money/MoneyChargeContainer';
 import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
-// import MyPage from 'pages/MyGoal/MyGoalContainer';
 import MyPage from 'pages/MyPage/MyPageContainer';
 import Inspection from 'pages/Admin/InspectionContainer';
 import AdminAnnouncements from 'pages/Admin/AnnouncementsContainer';
 import PushNotice from 'pages/PushNotice/PushNoticeContainer';
+
+import pushNoticeSlice from 'store/slices/pushNotice';
 import ManageMenuBox from './Box/ManageMenuBox';
 
 function Layout() {
@@ -31,10 +32,11 @@ function Layout() {
 	const { isAdmin } = useSelector((state: RootState) => state.admin);
 
 	useEffect(() => {
-		if (!isAdmin) dispatch(adminSlice.actions.checkLogin());
-		if (!memberinfo && isLoggedIn()) dispatch(memberSlice.actions.loadMemberInfo());
-	}, [dispatch, memberinfo, isAdmin]);
-
+		if (!memberinfo && isLoggedIn()) {
+			dispatch(memberSlice.actions.loadMemberInfo());
+			dispatch(pushNoticeSlice.actions.loadNotification());
+		}
+	}, [dispatch, memberinfo]);
 	return (
 		<BaseTemplate isAdmin={isAdmin}>
 			<div className=" pc:w-[1200px] pc:flex mt-[0] pc:mt-[40px] pb-[50px] mx-auto pc:box-content">

@@ -1,9 +1,8 @@
 import { all, fork, call, put, takeLatest } from 'redux-saga/effects';
 import pushNoticeSilice from 'store/slices/pushNotice';
-import client from 'api/client';
 import * as MemberAPI from 'api/memberAPI';
 
-import { IPushNotice } from 'types/notification';
+import { IPushNotice, IPushNoticeView } from 'types/notification';
 import { AxiosError, AxiosResponse } from 'axios';
 import { PayloadAction } from '@reduxjs/toolkit';
 import resultSlice from 'store/slices/resultSlice';
@@ -17,7 +16,12 @@ export function* loadPushNoticeSaga(action: PayloadAction) {
 	yield put(startLoading(action.type));
 	try {
 		const result: AxiosResponse<IPushNotice[]> = yield call(MemberAPI.getNotifications);
-		yield put(loadNotificationSuccess(result.data));
+		const pushNoticeList = result.data.map((pushNotice: IPushNotice): IPushNoticeView => {
+			const [fullCategory, content] = pushNotice.content.split(';').map((ele) => ele.trim());
+			const category = fullCategory.split(':')[1];
+			return { ...pushNotice, content, category };
+		});
+		yield put(loadNotificationSuccess(pushNoticeList));
 	} catch (error) {
 		const axiosError = error as AxiosError<any>;
 		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
