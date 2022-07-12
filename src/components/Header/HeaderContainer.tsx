@@ -1,14 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useDetectClose from 'hooks/useDetectClose';
-import { Link } from 'react-router-dom';
 import Path from 'utils/path';
 import HeaderView from './HeaderView';
-
-// type Menu = {
-// 	id: string;
-// 	title: string;
-// 	path: string;
-// };
 
 interface Props {
 	isAdmin?: string | null;
@@ -48,14 +41,6 @@ export default function Header({ isAdmin }: Props) {
 					path: Path.myGoals,
 				},
 		  ];
-
-	// const menus = menuList.map((menu: Menu): React.ReactElement => {
-	// 	return (
-	// 		<li key={menu.id} className="font-[600] pc:min-w-[65px]">
-	// 			<Link to={menu.path}>{menu.title}</Link>
-	// 		</li>
-	// 	);
-	// });
 
 	const handleClick = (e: React.MouseEvent<HTMLImageElement>, index: number) => {
 		if (e.target === e.currentTarget) {

@@ -85,7 +85,7 @@ export default function PerformInput({
 
 	// 이메일의 경우 이메일 중복검사를 추가로 실행
 	// 이메일이 아닌 경우에는 props로 전단받은 onClick(type, value) 함수를 실행
-	const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleClick = async () => {
 		if (isCorrect === false) return;
 		if (type === 'email') {
 			const confirmResult = await confirmOverlapEmail(value);

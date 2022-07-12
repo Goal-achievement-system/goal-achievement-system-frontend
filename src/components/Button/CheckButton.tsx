@@ -1,4 +1,3 @@
-import useModal from 'hooks/useModal';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Goal } from 'types/goal';
@@ -29,15 +28,13 @@ function CheckButton({ goal, onClick }: Props) {
 	const getBgColor = useCallback(() => (isSelected ? BgColor.orange200 : BgColor.gray), [isSelected]);
 	const getTextColor = useCallback(() => (isSelected ? TextColor.white : TextColor.gray), [isSelected]);
 	const getUnderlineColor = useCallback(() => (isSelected ? BorderColor.white : BorderColor.gray), [isSelected]);
-	// const [openModal, closeModal] = useModal();
 
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	useEffect(() => {
 		const currentGoalID = Number(searchParams.get('goal'));
 		setIsSelected(currentGoalID === goal.goalId);
 	}, [searchParams, goal]);
 
-	console.log(getBgColor);
 	return (
 		<div
 			className={`flex flex-row justify-center items-center rounded-[8px] w-full pc:p-[18px] p-[16px] ${getBgColor()}`}
@@ -54,11 +51,7 @@ function CheckButton({ goal, onClick }: Props) {
 						readOnly
 					/>
 					<span
-						className={`ml-[8px] text-left pc:truncate truncate ${getTextColor()} underline  ${getUnderlineColor()} hover:font-[500]`}
-						// onClick={() => {
-						// 	openModal(goal?.verificationResult);
-						// }}
-						// aria-hidden
+						className={`ml-[8px] text-left pc:truncate truncate ${getTextColor()} underline ${getUnderlineColor()} hover:font-[500]`}
 					>
 						{goal.goalName}
 					</span>

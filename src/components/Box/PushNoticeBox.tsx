@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IPushNotice, IPushNoticeView } from 'types/notification';
+import { IPushNoticeView } from 'types/notification';
 import { getPushDay } from 'utils/common';
 
 export interface Props {

@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { BaseSyntheticEvent, Dispatch, SetStateAction } from 'react';
-import { VerificationResultEng, VerificationResultKr, Goal } from 'types/goal';
+import { VerificationResultEng, Goal } from 'types/goal';
 import { IPushNotice } from 'types/notification';
 
 import Main from 'components/Main';
