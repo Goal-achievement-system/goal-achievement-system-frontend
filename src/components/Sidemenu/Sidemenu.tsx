@@ -84,9 +84,9 @@ export default function SideMenu({ handleClickOfSideMenu }: Props) {
 						<ul className="">
 							{sideNavigates.map(({ text, to }) =>
 								!text && !to ? (
-									<div className="border-b-[1px]" />
+									<div key={to} className="border-b-[1px]" />
 								) : (
-									<li className="text-[16px] font-[600] w-full h-[59px]">
+									<li key={to} className="text-[16px] font-[600] w-full h-[59px]">
 										<Link className="leading-[59px]" to={to} onClick={handleClickOfSideMenu}>
 											{text}
 										</Link>
