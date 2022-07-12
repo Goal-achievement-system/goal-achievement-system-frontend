@@ -19,6 +19,27 @@ export function getDday(targetDate: Date) {
 	return dDay;
 }
 
+export function getPushDay(targetDate: Date): string {
+	const gap = (new Date().getTime() - new Date(targetDate).getTime()) / 1000 / 60;
+
+	if (gap < 1) return '방금전';
+	if (gap < 60) {
+		return `${gap}분전`;
+	}
+	const gapHour = Math.floor(gap / 60);
+	if (gapHour < 24) {
+		return `${gapHour}시간전`;
+	}
+	const gapDay = Math.floor(gapHour / 24);
+	if (gapDay < 30) {
+		return `${gapDay}일전`;
+	}
+	if (gapDay < 365) {
+		return `${Math.floor(gapDay / 30)}개월전`;
+	}
+	return `${Math.floor(gapDay / 365)}년전`;
+}
+
 export const validateEmail = (target: string): boolean => {
 	// [알파벳, 숫자, -_] @ [알파벳]] . [알파벳] 2개이상 3개이하로 끝남
 	const emailReg = /^[\w-]*@[a-zA-Z]*\.[a-zA-Z]{2,3}$/i;
