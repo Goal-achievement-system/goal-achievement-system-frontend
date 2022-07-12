@@ -88,9 +88,13 @@ export default function RouteModal({ title, isOpen, setIsOpen }: Props) {
 			>
 				<div className="font-[600] flex justify-between">
 					<div>{title}</div>
-					<div className="text-primaryBlack-300">
-						<Link to={Path.pushNotice}>더보기</Link>
-					</div>
+					{title === '알림' && (
+						<div className="text-primaryBlack-300">
+							<Link to={Path.pushNotice} onClick={() => closePopUp()}>
+								더보기
+							</Link>
+						</div>
+					)}
 				</div>
 				{title === '알림' ? (
 					<div className="pc:my-auto overflow-auto pc:mt-[10px] pc:max-h-[290px] h-full justify-center pc:min-h-[290px]">
