@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import Header from 'components/Header/Header';
+import Header from 'components/Header/HeaderContainer';
 import ModalSection from 'components/Modal/ModalSection';
 
 interface TemplateProps {
