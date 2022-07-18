@@ -8,14 +8,14 @@ export default {
 	component: PushNoticeCountBox,
 } as ComponentMeta<typeof PushNoticeCountBox>;
 
-// const Template: ComponentStory<typeof PushNoticeCountBox> = function (args) {
-// 	/* eslint-disable-next-line react/jsx-props-no-spreading */
-// 	return <PushNoticeCountBox />;
-// };
+const Template: ComponentStory<typeof PushNoticeCountBox> = function () {
+	/* eslint-disable-next-line react/jsx-props-no-spreading */
+	return <PushNoticeCountBox />;
+};
 
-// export const Have = Template.bind({});
+export const Have = Template.bind({});
 
-// Have.args = {};
+Have.args = {};
 
-// export const NotHave = Template.bind({});
-// NotHave.args = {};
+export const NotHave = Template.bind({});
+NotHave.args = {};

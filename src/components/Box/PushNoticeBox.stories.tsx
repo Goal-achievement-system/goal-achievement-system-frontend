@@ -1,15 +1,18 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable func-names */
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { withRouter } from 'storybook-addon-react-router-v6';
 import PushNoticeBox, { Props } from './PushNoticeBox';
 
 export default {
 	title: 'Component/Box/PushNoticeBox',
 	component: PushNoticeBox,
+	decorators: [withRouter],
 } as ComponentMeta<typeof PushNoticeBox>;
 
 const Template: ComponentStory<typeof PushNoticeBox> = function (args: Props) {
-	/* eslint-disable-next-line react/jsx-props-no-spreading */
 	return <PushNoticeBox {...args} />;
 };
 

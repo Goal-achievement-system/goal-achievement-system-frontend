@@ -1,3 +1,5 @@
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
 module.exports = {
 	stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
 	addons: [
@@ -5,6 +7,7 @@ module.exports = {
 		'@storybook/addon-essentials',
 		'@storybook/addon-interactions',
 		'@storybook/preset-create-react-app',
+		'@storybook-addon-react-router-v6',
 		{
 			name: '@storybook/addon-postcss',
 			options: {
@@ -18,6 +21,13 @@ module.exports = {
 	core: {
 		builder: '@storybook/builder-webpack5',
 	},
+	webpackFinal: async (config) => ({
+		...config,
+		resolve: {
+			...config.resolve,
+			...config.resolve.plugins.push(new TsconfigPathsPlugin({})),
+		},
+	}),
 };
 //	'../src/stories/**/*.stories.mdx',
 // '../src/stories/**/*.stories.@(js|jsx|ts|tsx)',
