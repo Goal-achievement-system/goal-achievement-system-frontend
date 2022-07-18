@@ -43,6 +43,10 @@ export const getNotifications = () => {
 	return client.get('members/myinfo/notifications');
 };
 
+export const processReadNotifications = (notificationID: number) => {
+	return client.put(`members/myinfo/notifications/${notificationID}`);
+};
+
 export const chargeMoney = ({ email, password, money }: ChargeMoneyBody) => {
 	return client.put('/members/myinfo/charge', { email, password, money });
 };

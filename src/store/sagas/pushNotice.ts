@@ -10,7 +10,8 @@ import loadingSlice from 'store/slices/loadingSlice';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
-const { loadNotification, loadNotificationSuccess } = pushNoticeSilice.actions;
+const { loadNotification, loadNotificationSuccess, processReadNotification, processReadNotificationSuccess } =
+	pushNoticeSilice.actions;
 
 export function* loadPushNoticeSaga(action: PayloadAction) {
 	yield put(startLoading(action.type));
@@ -29,10 +30,25 @@ export function* loadPushNoticeSaga(action: PayloadAction) {
 	yield put(finishLoading(action.type));
 }
 
+export function* processReadNotificationSaga(action: PayloadAction<number>) {
+	yield put(startLoading(action.type));
+	try {
+		const result: AxiosResponse<any> = yield call(MemberAPI.processReadNotifications, action.payload);
+		yield put(processReadNotificationSuccess(result.status));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
 export function* watchLoadNotificationsSaga() {
 	yield takeLatest(loadNotification, loadPushNoticeSaga);
 }
 
+export function* watchProcessReadNotificationSaga() {
+	yield takeLatest(processReadNotification, processReadNotificationSaga);
+}
+
 export default function* pushNoticeSaga() {
-	yield all([fork(watchLoadNotificationsSaga)]);
+	yield all([fork(watchLoadNotificationsSaga), fork(watchProcessReadNotificationSaga)]);
 }

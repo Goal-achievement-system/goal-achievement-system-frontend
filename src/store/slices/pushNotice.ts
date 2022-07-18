@@ -16,6 +16,8 @@ export const pushNoticeSlice = createSlice({
 		loadNotificationSuccess: (state, { payload: pushNoticeList }: PayloadAction<IPushNoticeView[]>) => {
 			state.pushNoticeList = [...state.pushNoticeList, ...pushNoticeList];
 		},
+		processReadNotification: (state, payload: PayloadAction<number>) => {},
+		processReadNotificationSuccess: (state, payload: PayloadAction<any>) => {},
 	},
 });
 
