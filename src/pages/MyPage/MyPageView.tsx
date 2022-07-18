@@ -1,25 +1,24 @@
 /* eslint-disable no-nested-ternary */
 import React, { BaseSyntheticEvent, Dispatch, SetStateAction } from 'react';
 import { VerificationResultEng, Goal } from 'types/goal';
-import { IPushNotice } from 'types/notification';
+import { Link } from 'react-router-dom';
+import Path from 'utils/path';
+import { getFilterStateKr } from 'utils/common';
+import { OpenModalOnClick } from 'hooks/useModal';
 
+import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
 import Main from 'components/Main';
 import FilterButton from 'components/Button/FilterButton';
 import SmallBox from 'components/Box/SmallBox';
 import Pagination from 'components/Pagination';
 import PerformInput from 'components/Input/PerformInput';
 import Select from 'components/Select/Select';
-import { AgeOption, GenderOption } from 'pages/SignUp/SignUpView';
 import SubmitButton from 'components/Button/SubmitButton';
-import { OpenModalOnClick } from 'hooks/useModal';
-import { Link } from 'react-router-dom';
-import Path from 'utils/path';
-import { getFilterStateKr } from 'utils/common';
+import PushNoticeCountBox from 'components/Box/PushNoticeCountBox';
 import { IReplaceMemeberForm, ReplaceMemberReducerAction } from './ReplaceMemberForm';
 
 interface Props {
 	goals: Goal[] | null;
-	pushNoticeList: IPushNotice[];
 	formState: IReplaceMemeberForm | null;
 	formDispatch: React.Dispatch<ReplaceMemberReducerAction>;
 	currentPage: number;
@@ -35,7 +34,6 @@ interface Props {
 
 export default function MyPageView({
 	goals,
-	pushNoticeList,
 	formState,
 	formDispatch,
 	currentPage,
@@ -138,10 +136,7 @@ export default function MyPageView({
 				</div>
 				<div className="relative">
 					<div className="flex flex-col pc:space-y-[16px]">
-						<span className="px-[24px] py-[20px] pc:text-[22px] font-[600] text-[12px] rounded-[8px] bg-modalGray">
-							읽지 않은 알람{' '}
-							<span className="text-primaryOrange-200 pc:text-[22px] text-[12px]">{pushNoticeList.length}개</span>
-						</span>
+						<PushNoticeCountBox />
 					</div>
 				</div>
 			</div>

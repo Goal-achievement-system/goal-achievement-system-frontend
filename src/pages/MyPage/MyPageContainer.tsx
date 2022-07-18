@@ -18,13 +18,13 @@ export default function MyPage() {
 	const memberInfo = useSelector((state: RootState) => state.member.memberinfo);
 	const { maxPage } = useSelector((state: RootState) => state.member.memberGoals);
 	const { goals } = useSelector((state: RootState) => state.member.memberGoals);
-	const { pushNoticeList } = useSelector((state: RootState) => state.pushNotice);
+
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [goalFilter, setGoalFilter] = useState<VerificationResultEng>('all');
 	const [isSelected, setIsSelected] = useState<string>('전체');
 
 	const [formState, formDispatch] = useReducer(replaceMemberformReducer, replaceMemberInitialState);
-	const [openModalonClick, closeModal] = useModal();
+	const [openModalonClick] = useModal();
 
 	const [replaceMemberLoading, replaceMemberResult, replaceMemberInitResult] = useGetActionState(
 		memberSlice.actions.replaceMemberInfo.type
@@ -77,7 +77,6 @@ export default function MyPage() {
 	return (
 		<MyPageView
 			goals={goals}
-			pushNoticeList={pushNoticeList}
 			formState={formState}
 			formDispatch={formDispatch}
 			currentPage={currentPage}
