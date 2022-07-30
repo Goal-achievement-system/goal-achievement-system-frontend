@@ -9,7 +9,7 @@ import loadingSlice from 'store/slices/loadingSlice';
 
 const { getResult } = resultSlice.actions;
 const { startLoading, finishLoading } = loadingSlice.actions;
-const { login, signUp } = authSlice.actions;
+const { login, signUp, withdrawal } = authSlice.actions;
 
 function* loginSaga(action: PayloadAction<authAPI.LogInBody>) {
 	yield put(startLoading(action.type));
@@ -42,6 +42,19 @@ function* signUpSaga(action: PayloadAction<authAPI.SignUpBody>) {
 	}
 	yield put(finishLoading(action.type));
 }
+function* withdrawalSaga(action: PayloadAction<string>) {
+	const password = action.payload;
+	yield put(startLoading(action.type));
+	try {
+		yield call(authAPI.withdrawal, password);
+		yield put(getResult({ isSuccess: true, actionType: action.type }));
+	} catch (error) {
+		const axiosError = error as AxiosError<any>;
+		console.log(axiosError);
+		yield put(getResult({ isSuccess: false, actionType: action.type, error: axiosError }));
+	}
+	yield put(finishLoading(action.type));
+}
 
 function* watchLoginSaga() {
 	yield takeLatest(login, loginSaga);
@@ -49,7 +62,10 @@ function* watchLoginSaga() {
 function* watchSignUpSaga() {
 	yield takeLatest(signUp, signUpSaga);
 }
+function* watchWithdrawalSaga() {
+	yield takeLatest(withdrawal, withdrawalSaga);
+}
 
 export default function* authSaga() {
-	yield all([fork(watchLoginSaga), fork(watchSignUpSaga)]);
+	yield all([fork(watchLoginSaga), fork(watchSignUpSaga), fork(watchWithdrawalSaga)]);
 }

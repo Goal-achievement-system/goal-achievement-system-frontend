@@ -24,21 +24,18 @@ function CertificationsContainer() {
 	}, [dispatch, memberInfo]);
 
 	useEffect(() => {
-		if (categoriesResult?.isSuccess) {
-			// success
-		} else {
-			// fail
-		}
-		categoriesInitResult();
-	}, [categoriesResult, categoriesInitResult]);
-	useEffect(() => {
 		if (![...categories, 'all'].includes(curCategory) || !memberInfo) return;
 		dispatch(certificationSlice.actions.loadCertList({ category: curCategory, page: curPage }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, curCategory, curPage, memberInfo]);
 	useEffect(() => {
+		if (!categoriesResult) return;
+		categoriesInitResult();
+	}, [categoriesResult]);
+	useEffect(() => {
+		if (!certResult) return;
 		certInitResult();
-	}, [certInitResult]);
+	}, [certResult]);
 
 	return (
 		<CertificationsView

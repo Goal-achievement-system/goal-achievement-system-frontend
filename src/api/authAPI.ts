@@ -27,9 +27,6 @@ export const signUp = (body: SignUpBody) => {
 	return client.post('/members', { ...body });
 };
 
-interface Config extends AxiosRequestConfig {
-	password: string;
-}
 export const withdrawal = (password: string) => {
-	return client.delete('/members/myinfo/withdrawal', { password } as Config);
+	return client.delete('/members/myinfo/withdrawal', { headers: { passowrd: 'password' } });
 };

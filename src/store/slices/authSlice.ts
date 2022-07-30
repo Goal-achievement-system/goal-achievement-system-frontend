@@ -7,8 +7,8 @@ export const authSlice = createSlice({
 	initialState: null,
 	reducers: {
 		login: (state, action: PayloadAction<LogInBody>) => {},
-
 		signUp: (state, action: PayloadAction<SignUpBody>) => {},
+		withdrawal: (state, action: PayloadAction<string>) => {},
 	},
 });
 

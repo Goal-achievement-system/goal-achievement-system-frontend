@@ -20,7 +20,9 @@
         "endOfLine":"auto"
       }
     ],
-    "@typescript-eslint/no-var-requires": "error"
+    "@typescript-eslint/no-var-requires": "error",
+    "no-alert":"off",
+    "react-hooks/exhaustive-deps":"off"
   }
  
 }
