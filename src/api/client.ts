@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 // 모든 요청에 설정을 하지 않기 위해 instance생성
 const client = axios.create();
