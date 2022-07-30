@@ -31,11 +31,11 @@ function CertificationsContainer() {
 	useEffect(() => {
 		if (!categoriesResult) return;
 		categoriesInitResult();
-	}, [categoriesResult]);
+	}, [categoriesResult, categoriesInitResult]);
 	useEffect(() => {
 		if (!certResult) return;
 		certInitResult();
-	}, [certResult]);
+	}, [certResult, certInitResult]);
 
 	return (
 		<CertificationsView
