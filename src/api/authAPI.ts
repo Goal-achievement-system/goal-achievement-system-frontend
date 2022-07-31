@@ -28,5 +28,6 @@ export const signUp = (body: SignUpBody) => {
 };
 
 export const withdrawal = (password: string) => {
-	return client.delete('/members/myinfo/withdrawal', { headers: { passowrd: 'password' } });
+	client.defaults.headers.common.password = 'password'; // 임시
+	return client.delete('/members/myinfo/withdrawal');
 };
