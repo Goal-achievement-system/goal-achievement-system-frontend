@@ -60,7 +60,7 @@ function LoginView({ error, onSubmit, formState, formDispatch, userLogin, setUse
 									회원이 아직 아니신가요? <Link to={Path.signUp}>회원가입</Link>
 								</span>
 							</div>
-							<div className="invisible pc:visible mt-[17px]">
+							<div className=" mt-[17px]">
 								<span className={` ${error ? 'text-red-400' : 'text-white'}`}>{error || 'errorZone'}</span>
 							</div>
 						</>
