@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect } from 'react';
 import BaseTemplate from 'components/BaseTemplate';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,20 +7,21 @@ import MenuBox from 'components/Box/MenuBox';
 import { AppDispatch } from 'store';
 import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
+import adminSlice from 'store/slices/adminSlice';
 import isLoggedIn from 'utils/isLoggedIn';
 import Path from 'utils/path';
+import Announcements from 'pages/Announcements/AnnouncementsContainer';
+import Certifications from 'pages/Certifications/CertificationsContainer';
+import Home from 'pages/home/HomeContainer';
+import MoneyCharge from 'pages/Money/MoneyChargeContainer';
+import MoneyTransfer from 'pages/Money/MoneyTransferContainer';
+import MyPage from 'pages/MyPage/MyPageContainer';
+import Inspection from 'pages/Admin/InspectionContainer';
+import AdminAnnouncements from 'pages/Admin/AnnouncementsContainer';
+import PushNotice from 'pages/PushNotice/PushNoticeContainer';
+
 import pushNoticeSlice from 'store/slices/pushNotice';
 import ManageMenuBox from './Box/ManageMenuBox';
-
-const Home = lazy(() => import('pages/home/HomeContainer'));
-const Announcements = lazy(() => import('pages/Announcements/AnnouncementsContainer'));
-const Certifications = lazy(() => import('pages/Certifications/CertificationsContainer'));
-const MoneyCharge = lazy(() => import('pages/Money/MoneyChargeContainer'));
-const MoneyTransfer = lazy(() => import('pages/Money/MoneyTransferContainer'));
-const MyPage = lazy(() => import('pages/MyPage/MyPageContainer'));
-const Inspection = lazy(() => import('pages/Admin/InspectionContainer'));
-const AdminAnnouncements = lazy(() => import('pages/Admin/AnnouncementsContainer'));
-const PushNotice = lazy(() => import('pages/PushNotice/PushNoticeContainer'));
 
 function Layout() {
 	const dispatch: AppDispatch = useDispatch();
@@ -42,33 +43,31 @@ function Layout() {
 				<div className="hidden pc:block mr-[30px]">
 					{adminToken ? <ManageMenuBox member={null} /> : <MenuBox member={memberinfo} />}
 				</div>
-				<Suspense fallback={<div>Loading...</div>}>
-					{adminToken ? (
-						<Routes>
-							<Route path={Path.inspection} element={<Inspection />} />
-							<Route path={Path.announcements} element={<Announcements />} />
-							<Route path={Path.adminAnnouncements} element={<AdminAnnouncements />} />
-						</Routes>
-					) : goalKeeperToken ? (
-						<Routes>
-							<Route path={Path.home} element={<Home />} />
-							<Route path={Path.announcements} element={<Announcements />} />
-							<Route path={Path.certifications} element={<Certifications />} />
-							<Route path={Path.moneyCharge} element={<MoneyCharge />} />
-							<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
-							<Route path={Path.myGoals} element={<MyPage />} />
-							<Route path={Path.inspection} element={<Inspection />} />
-							<Route path={Path.announcements} element={<AdminAnnouncements />} />
-							<Route path={Path.pushNotice} element={<PushNotice />} />
-						</Routes>
-					) : (
-						<Routes>
-							<Route path={Path.home} element={<Home />} />
-							<Route path={Path.announcements} element={<Announcements />} />
-							<Route path="*" element={<Navigate to="/login" replace />} />
-						</Routes>
-					)}
-				</Suspense>
+				{adminToken ? (
+					<Routes>
+						<Route path={Path.inspection} element={<Inspection />} />
+						<Route path={Path.announcements} element={<Announcements />} />
+						<Route path={Path.adminAnnouncements} element={<AdminAnnouncements />} />
+					</Routes>
+				) : goalKeeperToken ? (
+					<Routes>
+						<Route path={Path.home} element={<Home />} />
+						<Route path={Path.announcements} element={<Announcements />} />
+						<Route path={Path.certifications} element={<Certifications />} />
+						<Route path={Path.moneyCharge} element={<MoneyCharge />} />
+						<Route path={Path.moneyTransfer} element={<MoneyTransfer />} />
+						<Route path={Path.myGoals} element={<MyPage />} />
+						<Route path={Path.inspection} element={<Inspection />} />
+						<Route path={Path.announcements} element={<AdminAnnouncements />} />
+						<Route path={Path.pushNotice} element={<PushNotice />} />
+					</Routes>
+				) : (
+					<Routes>
+						<Route path={Path.home} element={<Home />} />
+						<Route path={Path.announcements} element={<Announcements />} />
+						<Route path="*" element={<Navigate to="/login" replace />} />
+					</Routes>
+				)}
 			</div>
 		</BaseTemplate>
 	);
