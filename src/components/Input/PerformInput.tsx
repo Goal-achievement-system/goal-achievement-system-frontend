@@ -20,6 +20,7 @@ interface Props {
 	buttonTitle?: string;
 	subButtonTitle?: string;
 	value?: string;
+	disabled?: boolean;
 	onClick?: (type: string, value: string) => void;
 	onChange: (curVar: string) => void;
 }
@@ -32,6 +33,7 @@ export default function PerformInput({
 	buttonTitle,
 	subButtonTitle,
 	value,
+	disabled,
 	onClick,
 	onChange,
 }: Props) {
@@ -137,6 +139,7 @@ export default function PerformInput({
 					className={`w-full pc:p-[24px] p-[16px] pc:max-h-[95px] max-h-[46px] pc:border-[2px] border-[1px] rounded-xl focus:outline-none ${getFocusColor()}
 					`}
 					value={value}
+					disabled={disabled}
 					onChange={handleChange}
 					onFocus={handleFocus}
 					onBlur={handleBlur}

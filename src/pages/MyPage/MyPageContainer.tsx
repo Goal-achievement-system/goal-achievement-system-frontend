@@ -5,7 +5,7 @@ import { RootState } from 'store/slices';
 import memberSlice from 'store/slices/memberSlice';
 import { VerificationResultEng } from 'types/goal';
 import useModal from 'hooks/useModal';
-import { sexTransKrToEng, validatePassword } from 'utils/common';
+import { sexTransKrToEng } from 'utils/common';
 import useGetActionState from 'hooks/useGetActionState';
 import { SexKr } from 'types/member';
 import { replaceMemberformReducer, replaceMemberInitialState } from './ReplaceMemberForm';
@@ -24,7 +24,7 @@ export default function MyPage() {
 	const [isSelected, setIsSelected] = useState<string>('전체');
 
 	const [formState, formDispatch] = useReducer(replaceMemberformReducer, replaceMemberInitialState);
-	const [openModalonClick, closeModal] = useModal();
+	const [openModalonClick] = useModal();
 
 	const [replaceMemberLoading, replaceMemberResult, replaceMemberInitResult] = useGetActionState(
 		memberSlice.actions.replaceMemberInfo.type
@@ -34,13 +34,10 @@ export default function MyPage() {
 	// eslint-disable-next-line consistent-return
 	const handleSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
-		const { passwordCheck, sex, age, ...replaceMemberForm } = formState;
+		const { sex, age, ...replaceMemberForm } = formState;
 
 		if (!memberInfo || !formState) return alert('재접속 후 다시 시도해주세요!');
-		if (formState.password !== passwordCheck) return alert('비밀번호가 일치하지 않아요!');
-		if (!formState.password.trim() || !passwordCheck.trim() || !formState.nickName.trim())
-			return alert('비어있는 값이 존재해요!');
-		if (!validatePassword(formState.password)) return alert('비밀번호는 8자리 이상이어야 해요!');
+		if (!memberInfo.password) return alert('정보 변경시 비밀번호를 입력해야해요!');
 		// Eng Kr 변환
 		// eslint-disable-next-line no-nested-ternary
 		const sexTrans = sexTransKrToEng(sex as SexKr);
@@ -49,12 +46,13 @@ export default function MyPage() {
 	};
 
 	useEffect(() => {
-		// 여기서 return 해줘야함
 		if (!replaceMemberResult) return;
 		if (replaceMemberResult?.isSuccess) {
 			// success
 			alert('회원정보 변경이 완료되었어요!');
 		} else {
+			// 이 부분을 추가
+			alert('비밀번호를 다시 한번 확인해주세요!');
 			console.log(replaceMemberResult?.errorMsg);
 		}
 		replaceMemberInitResult();
