@@ -6,7 +6,7 @@ import { sexTransEngToKr } from 'utils/common';
 export interface IReplaceMemeberForm {
 	email: string;
 	password: string;
-	passwordCheck: string;
+	// passwordCheck: string;
 	nickName: string;
 	sex: SexKr | string;
 	age: string;
@@ -16,7 +16,7 @@ export interface IReplaceMemeberForm {
 export const replaceMemberInitialState: IReplaceMemeberForm = {
 	email: '',
 	password: '',
-	passwordCheck: '',
+	// passwordCheck: '',
 	nickName: '',
 	sex: '',
 	age: '',
@@ -25,7 +25,7 @@ export const replaceMemberInitialState: IReplaceMemeberForm = {
 
 export interface ReplaceMemberReducerAction {
 	// type: 'email' | 'password' | 'changePassword' | 'changePasswordCheck' | 'nickName' | 'sex' | 'age' | 'init';
-	type: 'email' | 'password' | 'passwordCheck' | 'nickName' | 'sex' | 'age' | 'money' | 'init';
+	type: 'email' | 'password' | 'nickName' | 'sex' | 'age' | 'money' | 'init';
 	payload?: string | number | Member;
 }
 

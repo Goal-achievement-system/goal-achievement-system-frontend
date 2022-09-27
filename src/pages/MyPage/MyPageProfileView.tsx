@@ -11,7 +11,7 @@ interface Props {
 	handleSubmit: (event: React.SyntheticEvent) => void;
 }
 
-export default function MyPageProfile({ formState, formDispatch, handleSubmit }: Props) {
+export default function MyPageProfileView({ formState, formDispatch, handleSubmit }: Props) {
 	return (
 		<form className="pc:mb-[70px]" onSubmit={handleSubmit}>
 			<div className="flex flex-col space-y-[40px]">

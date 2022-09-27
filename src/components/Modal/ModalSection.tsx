@@ -13,6 +13,7 @@ export default function ModalSection() {
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 	const [searchParams] = useSearchParams();
+
 	useEffect(() => {
 		if (isOpenModal) {
 			document.body.style.cssText = `

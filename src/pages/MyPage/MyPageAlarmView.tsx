@@ -6,7 +6,7 @@ import Path from 'utils/path';
 interface Props {
 	pushNoticeList: IPushNotice[];
 }
-export default function MyPageAlarm({ pushNoticeList }: Props) {
+export default function MyPageAlarmView({ pushNoticeList }: Props) {
 	return (
 		<div className="pc:mt-[60px] pc:block hidden">
 			<div className="flex justify-between items-center mb-[30px]">

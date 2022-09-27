@@ -7,8 +7,8 @@ import Main from 'components/Main';
 import { OpenModalOnClick } from 'hooks/useModal';
 import { IReplaceMemeberForm, ReplaceMemberReducerAction } from './ReplaceMemberForm';
 import MyPageGoalsView from './MyPageGoalsView';
-import MyPageProfile from './MyPageProfile';
-import MyPageAlarm from './MyPageAlarmView';
+import MyPageProfileView from './MyPageProfileView';
+import MyPageAlarmView from './MyPageAlarmView';
 
 interface Props {
 	goals: Goal[] | null;
@@ -56,10 +56,10 @@ export default function MyPageView({
 					setIsSelected={setIsSelected}
 				/>
 			</Main>
-			<MyPageAlarm pushNoticeList={pushNoticeList} />
+			<MyPageAlarmView pushNoticeList={pushNoticeList} />
 			<div className="pc:mt-[60px] pc:block hidden">
 				<Main title="개인정보 관리">
-					<MyPageProfile formState={formState} formDispatch={formDispatch} handleSubmit={handleSubmit} />
+					<MyPageProfileView formState={formState} formDispatch={formDispatch} handleSubmit={handleSubmit} />
 				</Main>
 			</div>
 		</div>
