@@ -37,7 +37,7 @@ export default function MyPage() {
 		const { sex, age, ...replaceMemberForm } = formState;
 
 		if (!memberInfo || !formState) return alert('재접속 후 다시 시도해주세요!');
-		if (!memberInfo.password) return alert('정보 변경시 비밀번호를 입력해야해요!');
+		if (!formState.password) return alert('회원 정보 변경 시 비밀번호를 입력해주세요!');
 		// Eng Kr 변환
 		// eslint-disable-next-line no-nested-ternary
 		const sexTrans = sexTransKrToEng(sex as SexKr);
@@ -53,7 +53,6 @@ export default function MyPage() {
 		} else {
 			// 이 부분을 추가
 			alert('비밀번호를 다시 한번 확인해주세요!');
-			console.log(replaceMemberResult?.errorMsg);
 		}
 		replaceMemberInitResult();
 	}, [memberInfo, replaceMemberInitResult, replaceMemberLoading, replaceMemberResult]);
@@ -62,15 +61,14 @@ export default function MyPage() {
 	useEffect(() => {
 		setCurrentPage(1);
 	}, [goalFilter]);
-
-	useEffect(() => {
-		if (memberInfo) formDispatch({ type: 'init', payload: memberInfo });
-	}, [memberInfo]);
-
 	// 필터와 페이지가 바뀔 때마다 API 요청을 보냄
 	useEffect(() => {
 		if (memberInfo) dispatch(memberSlice.actions.getMemberGoals({ state: goalFilter, page: currentPage }));
 	}, [goalFilter, currentPage, dispatch, memberInfo]);
+
+	useEffect(() => {
+		if (memberInfo) formDispatch({ type: 'init', payload: memberInfo });
+	}, [memberInfo]);
 
 	return (
 		<MyPageView
