@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/slices';
 import modalSlice, { ModalComponentState } from 'store/slices/modalSlice';
@@ -31,7 +32,6 @@ export default function ModalSection() {
 	const handleModalClick = (e: React.BaseSyntheticEvent | MouseEvent) => {
 		const { target } = e;
 
-		// if (current !== null && (!current.contains(target) || current === target)) {
 		if (modalRef.current === target || bodyRef.current === target) {
 			if (pathname === Path.myGoals) {
 				dispatch(modalSlice.actions.close());
@@ -45,8 +45,6 @@ export default function ModalSection() {
 				document.body.style.cssText = '';
 			}
 		}
-
-		// }
 	};
 
 	return (
@@ -62,7 +60,6 @@ export default function ModalSection() {
 						const config = modalList.find((ele) => ele.name === name);
 						if (!config || !config.component) return null;
 						const ModalComponent = config.component;
-						// eslint-disable-next-line react/jsx-props-no-spreading
 						return <ModalComponent {...props} key={name} />;
 					})}
 				</div>
