@@ -33,17 +33,13 @@ export default function ModalSection() {
 		const { target } = e;
 
 		if (modalRef.current === target || bodyRef.current === target) {
-			if (pathname === Path.myGoals) {
-				dispatch(modalSlice.actions.close());
-				navigate(Path.myGoals);
-				document.body.style.cssText = '';
-				return;
-			}
 			if (searchParams.get('goal')) {
 				navigate(-1);
 				dispatch(modalSlice.actions.close());
 				document.body.style.cssText = '';
+				return;
 			}
+			dispatch(modalSlice.actions.close());
 		}
 	};
 
