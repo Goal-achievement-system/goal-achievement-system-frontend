@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import { getDday } from 'utils/common';
 import SubmitButton from 'components/Button/SubmitButton';
@@ -20,18 +21,18 @@ export default function CertDetailModalView({ goal, certGoal, resultHandler, cer
 	};
 
 	return (
-		<div>
+		<>
 			{!isLoading && (
 				<div
 					className={`scrollbar ${className.size} ${className.translate} text-left pc:p-[72px] p-[24px] border-borderGray rounded-2xl relativ bg-modalGray overflow-auto`}
 				>
 					<div className="modal-tops pc:space-y-[20px] flex flex-col space-y-[10px]">
 						<div className="rounded">
-							<img className=" w-full rounded-lg object-contain  " src={certImage} alt="goal-img" />
+							<img className="object-contain w-full rounded-lg " src={certImage} alt="goal-img" />
 						</div>
-						<div className="flex justify-between items-end">
-							<div className="pc:text-xl text-sm">⏰ D-{getDday(goal.limitDate)}</div>
-							<div className="space-x-2 flex items-center">
+						<div className="flex items-end justify-between">
+							<div className="text-sm pc:text-xl">⏰ D-{getDday(goal.limitDate)}</div>
+							<div className="flex items-center space-x-2">
 								<div className="p-[4px] pc:p-[16px]  bg-[#f3f3f3] rounded-[4px] pc:rounded-[8px]  flex items-center">
 									{`# ${goal.category || ''}`}
 								</div>
@@ -44,7 +45,7 @@ export default function CertDetailModalView({ goal, certGoal, resultHandler, cer
 					</div>
 					<div className="modal-middle border-b-2 border-b-borderGray  pc:mb-[30px] my-[10px]" />
 					<div className="flex flex-col modal-bottom pc:space-y-[35px] space-y-[21px]">
-						<div className="flex   items-center justify-between">
+						<div className="flex items-center justify-between">
 							<div className="line-clamp-1">
 								<h2 className="pc:text-[30px] text-[20px]">{goal?.goalName}</h2>
 							</div>
@@ -57,6 +58,6 @@ export default function CertDetailModalView({ goal, certGoal, resultHandler, cer
 					</div>
 				</div>
 			)}
-		</div>
+		</>
 	);
 }
