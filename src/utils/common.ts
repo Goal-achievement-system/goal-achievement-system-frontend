@@ -40,12 +40,6 @@ export function getPushDay(targetDate: Date): string {
 	return `${Math.floor(gapDay / 365)}년전`;
 }
 
-export const validateEmail = (target: string): boolean => {
-	// [알파벳, 숫자, -_] @ [알파벳]] . [알파벳] 2개이상 3개이하로 끝남
-	const emailReg = /^[\w-]*@[a-zA-Z]*\.[a-zA-Z]{2,3}$/i;
-	return emailReg.test(target);
-};
-
 export const validatePassword = (target: string): boolean => {
 	// (?=.*[a-zA-Z])                 // 영문
 	// (?=.*?[A-Z])                   // 최소 한개의 대문자 영문

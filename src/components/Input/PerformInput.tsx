@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { isEmail } from '@teteu/utils';
 import { confirmOverlapEmail } from 'api/memberAPI';
-import { validateEmail, validatePassword } from '../../utils/common';
+import { validatePassword } from '../../utils/common';
 
 enum Color {
 	primaryBlack100 = 'primaryBlack-100',
@@ -100,7 +101,7 @@ export default function PerformInput({
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		onChange(e?.currentTarget.value);
 
-		if (type === 'email') setIsCorrect(validateEmail(e?.currentTarget.value));
+		if (type === 'email') setIsCorrect(isEmail(e?.currentTarget.value));
 		if (type === 'password') setIsCorrect(validatePassword(e?.currentTarget.value));
 
 		setIsConfirm(false);
